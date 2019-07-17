@@ -31,6 +31,44 @@
             width:30%;
         }
     </style>
+
+    <script type="text/javascript">
+        function loginCheck() {
+            var oUser_id =document.getElementById("user_id");
+            var oVerify = document.getElementById("verify");
+            var oVerificationCode = document.getElementById("verificationCode");
+            var oError = document.getElementById("error_box");
+            if(oUser_id.value.length == 0){
+                oError.innerHTML ="请输入用户名。";
+                return false;
+            }
+            else if (oUser_id.value.length < 6) {
+                oError.innerHTML ="用户名不存在。";
+                return false;
+            }
+            else if (oUser_id.value.length > 32) {
+                oError.innerHTML = "用户名不存在。";
+                return false;
+            }
+            else if (oVerify.value.length == 0) {
+                oError.innerHTML = "请输入密码。";
+                return false;
+            }
+            else if (oVerify.value.length < 6) {
+                oError.innerHTML = "密码错误。";
+                return false;
+            }
+            else if (oVerify.value.length > 16) {
+                oError.innerHTML = "密码错误。";
+                return false;
+            }
+            else if(oVerificationCode.value.length == 0){
+                oError.innerHTML = "请输入验证码。";
+                return false;
+            }
+            return true;
+        }
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,32 +88,26 @@
     <div class="login-box-body">
         <p class="login-box-msg" style="color:orangered">${msg}</p>
 
-        <form action="${pageContext.request.contextPath}/login" method="post">
-            <%--用户名--%>
+        <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return loginCheck()">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="用户名" name="user_id">
+                <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                <a class="login-box-msg" style="color:orangered">${name_msg}</a>
             </div>
-            <%--密码--%>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码" name="verify">
+                <input id="verify" type="password" class="form-control" maxlength=16 placeholder="密码" name="verify">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                <a class="login-box-msg" style="color:orangered">${password_msg}</a>
             </div>
-            <%--验证码--%>
             <div class="form-group has-feedback">
                 <div id="leftDiv">
-                    <input type="text" class="form-control" placeholder="验证码" name="verificationCode">
-                    <a class="login-box-msg" style="color:orangered">${verifi_msg}</a>
+                    <input id="verificationCode" type="text" class="form-control" placeholder="验证码" name="verificationCode">
                 </div>
                 <div id="rightDiv">
                     此处放图片
                 </div>
                 <br><br>
             </div>
-            <%--登录--%>
             <div class="row">
+
                 <!-- /.col -->
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">登陆</button>
@@ -85,7 +117,8 @@
         </form>
         <!-- /.social-auth-links -->
         <br>
-        <%--忘记密码、注册--%>
+        <div id="error_box"><br></div>
+        <br>
         <a href="${pageContext.request.contextPath}/page/forgetPassword">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="${pageContext.request.contextPath}/page/register" class="text-center">注册</a>
 
