@@ -2,7 +2,7 @@ package com.demo.mms.common.domain;
 
 public class ShoppingCart {
     private Integer id;
-    private Integer commodity;
+    private Integer good;
 
     public Integer getId() {
         return id;
@@ -13,10 +13,10 @@ public class ShoppingCart {
     }
 
     public Integer getCommodity() {
-        return commodity;
+        return good;
     }
 
     public void setCommodity(Integer commodity) {
-        this.commodity = commodity;
+        this.good = commodity;
     }
 }

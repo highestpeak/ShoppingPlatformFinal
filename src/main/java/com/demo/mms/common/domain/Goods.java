@@ -1,6 +1,6 @@
 package com.demo.mms.common.domain;
 
-public class goods {
+public class Goods {
     private String goods_id;
     private String store_id;
     private String pic_url;
