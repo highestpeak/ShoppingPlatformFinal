@@ -1,13 +1,14 @@
 package com.demo.mms.service;
 
 import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.vo.GoodsWithClassifyVO;
 import com.demo.mms.dao.GoodsOperateMapper;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Service
 public class GoodsServiceImpl implements GoodsService{
@@ -15,13 +16,19 @@ public class GoodsServiceImpl implements GoodsService{
     GoodsOperateMapper goodsOperateMapper;
     @Override
     public Map<String, Object> getStoreGoodsClassify(Store store, ArrayList classifyList) {
-        ResultMap resultMap=null;
+        Map<String,Object> rs = new HashMap<>();
+        ArrayList<GoodsWithClassifyVO> classifyOwnList=null;
         try{
-            resultMap=goodsOperateMapper.queryGoodsWithClassify("store_id",store.getStore_id());
+            classifyOwnList=goodsOperateMapper.queryGoodsWithClassify(store.getStore_id());
         }catch (Exception e){
             System.out.println(e);
+            rs.put("querry error",true);
         }
-        System.out.println(resultMap);
-        return null;
+        for (GoodsWithClassifyVO classifyOwn:classifyOwnList){
+            classifyList.add(new ArrayList<>(Arrays.asList(classifyOwn.getClassify_id(),
+                                            classifyOwn.getClassify_name(),
+                                            classifyOwn.getTop_level_classify_id())));
+        }
+        return rs;
     }
 }
