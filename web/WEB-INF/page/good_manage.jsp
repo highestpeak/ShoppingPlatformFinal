@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +65,6 @@
 
 
     <div class="content-wrapper" style="min-height: auto;" id="content">
-
         <div id="tree"></div>
 
     </div>
@@ -76,23 +75,6 @@
 <script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../localLib/bootstrap-treeview.min.js"></script>
 <script>
-    function getTree() {
-        // Some logic to retrieve, or generate tree structure
-        var data = {"classifyList":[["1","clothes","0"],["2","food","0"],["3","shoes","1"],["4","Nike","3"]],"success":true}
-        var list = data.classifyList;
-        var obj = [];
-        for(var i=0; i<list.length; i++){
-            var item = {
-                text: list[i][1],
-                id: list[i][0],
-                pid: list[i][2]
-            }
-            obj.push(item);
-        }
-        var result = listToTree(obj, 0);
-        return result;
-    }
-
     function listToTree(data, pid) {
         var result = [], temp;
         for (var i = 0; i < data.length; i++) {
@@ -108,8 +90,35 @@
         return result;
     }
 
+    function getTree() {
+        var result;
+        $.ajax({
+            type:"post",
+            url:"http://localhost:8080/goods/classifyOfStore",
+            data:{"store_id":"0000"},
+            dataType:'json',
+            async: false,//禁止异步请求，变为同步请求
+            success:function(data) {
+                var list=data.classifyList;
+                var obj = [];
+                for(var i=0; i<list.length; i++){
+                    var item = {
+                        text: list[i][1],
+                        id: list[i][0],
+                        pid:list[i][2]
+                    }
+                    obj.push(item);
+                }
+                result= listToTree(obj, 0);
+            }
+        });
+        return result;
+    }
+
+    // getTree();
+    var re=getTree();
     $('#tree').treeview({
-        data: getTree(),
+        data: re,
         showCheckbox: true
     });
 </script>

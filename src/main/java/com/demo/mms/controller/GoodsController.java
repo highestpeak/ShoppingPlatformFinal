@@ -42,5 +42,20 @@ public class GoodsController {
         rs.put("classifyList",classifyList);
         return rs;
     }
-
+    //页面请求
+    @RequestMapping("/manageClassify")
+    public String toManageClassify(Store store){
+        System.out.println("in toManageClassify");
+//        Map<String,Object> rs = new HashMap<>();
+//        rs.put("success",true);
+//        Map<String,Object> rsGetClassify=(Map<String,Object>)getClassify(store);
+//        if(!((boolean)rsGetClassify.get("success"))){//含有错误信息
+//            rs.putAll(rsGetClassify);
+//            modelMap.put("rsMap",rs);
+//            return "404";
+//        }
+//        modelMap.put("classifyList",rsGetClassify.get("classifyList"));
+//        modelMap.put("rsMap",rs);
+        return "good_manage";
+    }
 }
