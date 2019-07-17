@@ -22,7 +22,7 @@
         #leftDiv
         {
             float:left;
-            width:40%;
+            width:50%;
         }
         #rightDiv
         {
@@ -30,6 +30,81 @@
             width:30%;
         }
     </style>
+
+    <script type="text/javascript">
+        function registerCheck() {
+            var oUser_id =document.getElementById("user_id");
+            var oVerify = document.getElementById("verify");
+            var oPasswordCheck = document.getElementById("passwordCheck");
+            var oEmail = document.getElementById("email");
+            var oVerificationCode = document.getElementById("verificationCode");
+            var oError = document.getElementById("error_box");
+            if(oUser_id.value.length == 0){
+                oError.innerHTML ="请输入用户名。";
+                return false;
+            }
+            else if (oUser_id.value.length < 6) {
+                oError.innerHTML ="用户名至少6位。";
+                return false;
+            }
+            else if (oUser_id.value.length > 32) {
+                oError.innerHTML = "用户名必须少于32位。";
+                return false;
+            }
+            else if (oVerify.value.length == 0) {
+                oError.innerHTML = "请输入密码。";
+                return false;
+            }
+            else if (oVerify.value.length < 6) {
+                oError.innerHTML = "密码至少6位。";
+                return false;
+            }
+            else if (oVerify.value.length > 16) {
+                oError.innerHTML = "密码必须少于16位。";
+                return false;
+            }else if(oPasswordCheck.value.length == 0)
+            {
+                oError.innerHTML = "请确认密码。";
+                return false;
+            }
+            else if(oPasswordCheck.value != oVerify.value){
+                oError.innerHTML = "两次输入的密码不同。";
+                return false;
+            }
+            else if(oEmail.value.length == 0){
+                oError.innerHTML = "请输入邮箱。";
+                return false;
+            }
+            else if(!isEmail(oEmail.value)){
+                oError.innerHTML = "邮箱格式错误。";
+                return false;
+            }
+            else if(isEmail(oEmail.value) && oEmail.value.length != 0){
+                if(oVerificationCode.value.length == 0){
+                    oError.innerHTML = "请输入验证码。"
+                    return false;
+                }
+            }
+            return true
+        }
+        function isEmail(strEmail) {
+
+            var reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            console.log(strEmail);
+            if(strEmail == ''){
+                // document.getElementById("test_user").innerHTML = "";
+                return true;
+            }
+            else if (strEmail != null &&strEmail.search(reg) != -1) {
+                // document.getElementById("test_user").innerHTML = "√邮箱格式正确！";
+                return true
+            }
+            else {
+                // document.getElementById("test_user").innerHTML = "邮箱格式错误！";
+                return false;
+            }
+        }
+    </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,26 +125,38 @@
     <div class="login-box-body">
         <p class="login-box-msg" style="color:orangered">${msg}</p>
 
-        <form action="${pageContext.request.contextPath}/register" method="post">
+        <form  action="${pageContext.request.contextPath}/register" method="post" onsubmit="return registerCheck()">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="用户名" name="name">
+                <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名（必填）" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码" name="password">
+                <input id="verify" type="password" class="form-control" maxlength=16 placeholder="密码（必填）" name="verify">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="确认密码" name="passwordCheck">
+                <input id="passwordCheck" type="text" class="form-control" maxlength=16 placeholder="确认密码（必填）" name="passwordCheck">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder=邮箱 name="email">
+                <input type="text" class="form-control" placeholder="性别" maxlength=1 name="sex">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="姓名" name="name">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="identity" name="identity">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input id="email" type="text" class="form-control" placeholder=邮箱（必填） name="email" onclick="email.value=''" >
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <div id="leftDiv">
-                    <input type="password" class="form-control" placeholder=验证码 name="verificationCode">
+                    <input id="verificationCode" type="password" class="form-control" placeholder=验证码(必填) name="verificationCode">
                 </div>
                 <div id="rightDiv">
                     <button type="button" class="btn btn-default btn-lrg ajax" >获取验证码</button>
@@ -81,10 +168,14 @@
 
                 <!-- /.col -->
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="return registerCheck" >注册</button>
                 </div>
                 <!-- /.col -->
             </div>
+            <br>
+            <div id="error_box"><br></div>
+            <%--<br>--%>
+            <%--<div id="test_user"><br></div>--%>
         </form>
         <!-- /.social-auth-links -->
         <br>
