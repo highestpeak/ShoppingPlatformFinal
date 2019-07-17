@@ -1,10 +1,11 @@
 package com.demo.mms.common.domain;
 
-public class Admin extends User{
-
+public class Buyer extends User{
     private String avator_url;
 
-    private String note;
+    private String nickname;
+
+    private String bank_card;
 
     private String create_time;
 
@@ -18,12 +19,20 @@ public class Admin extends User{
         this.avator_url = avator_url;
     }
 
-    public String getNote() {
-        return note;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getBank_card() {
+        return bank_card;
+    }
+
+    public void setBank_card(String bank_card) {
+        this.bank_card = bank_card;
     }
 
     @Override

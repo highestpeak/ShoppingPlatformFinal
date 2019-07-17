@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mms.dao.UserOperateMapper">
+  <insert id="insertUser" parameterType="com.demo.mms.common.domain.User">
+    insert into user (user_id,verify,sex,name,email,identity,create_time,update_time)
+    values   (#{user_id}, #{verify}, #{sex}, #{name},#{email},#{identity},#{create_time},#{update_time})
+  </insert>
+
+  <insert id="insertBuyer" parameterType="com.demo.mms.common.domain.Buyer">
+    insert into buyer (user_id,nickname,avator_url,bank_card,create_time,update_time)
+    values   (#{user_id}, #{nickname}, #{avator_url}, #{bank_card},#{create_time},#{update_time})
+  </insert>
+
+  <insert id="insertSeller" parameterType="com.demo.mms.common.domain.Seller">
+    insert into seller (user_id,nickname,avator_url,bank_card,create_time,update_time)
+    values   (#{user_id}, #{nickname}, #{avator_url}, #{bank_card},#{create_time},#{update_time})
+  </insert>
+
+  <insert id="insertAdmin" parameterType="com.demo.mms.common.domain.Admin">
+    insert into admin (user_id,avator_url,note,create_time,update_time)
+    values   (#{user_id}, #{avator_url}, #{note},#{create_time},#{update_time})
+  </insert>
+</mapper>
