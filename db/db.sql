@@ -67,71 +67,134 @@ DROP TABLE IF EXISTS `store`; --
 DROP TABLE IF EXISTS `goods`; --
 DROP TABLE IF EXISTS `goods_classify`;
 DROP TABLE IF EXISTS `belongsTo`;
-CREATE TABLE `store` (
-  `store_id` varchar(36) NOT NULL PRIMARY KEY,-- 32+4多四位
-  `note` TEXT,
-  `store_pic_url` TEXT,-- 16位以下,6位以上
-  `store_classify` varchar(36),-- classify的name
 
-  `level` varchar(36),--
-  `certification` varchar(36),-- classify的name
-  `create_time` varchar(19) NOT NULL, -- 20191212-110211
-  `update_time` varchar(19) NOT NULL
-);
+CREATE TABLE goods_classify
+(
+  classify_id           VARCHAR(36) NOT NULL
+    PRIMARY KEY,
+  top_level_classify_id VARCHAR(36) NOT NULL,
+  classify_name         VARCHAR(36) NULL,
+  create_time           VARCHAR(19) NOT NULL,
+  update_time           VARCHAR(19) NOT NULL
+)
+  ENGINE = InnoDB;
 
-CREATE TABLE `goods` (
-  `goods_id` varchar(36) NOT NULL PRIMARY KEY,-- 32+4多四位
-  `store_id` varchar(36) NOT NULL,-- 16位以下,6位以上
-  `pic_url` TEXT,
-  `classify_id` varchar(36),-- classify的name
-  `classify_name` varchar(36),-- classify的name
+CREATE TABLE store
+(
+  store_id       VARCHAR(36) NOT NULL
+    PRIMARY KEY,
+  note           TEXT        NULL,
+  store_pic_url  TEXT        NULL,
+  store_classify VARCHAR(36) NULL,
+  level          VARCHAR(36) NULL,
+  certification  VARCHAR(36) NULL,
+  create_time    VARCHAR(19) NOT NULL,
+  update_time    VARCHAR(19) NOT NULL,
+  CONSTRAINT store_goods_classify_classify_id_fk
+  FOREIGN KEY (store_classify) REFERENCES goods_classify (classify_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  ENGINE = InnoDB;
 
-  `status` varchar(20),
-  `old_level` varchar(20),
-  `create_time` varchar(19) NOT NULL, -- 20191212-110211
-  `update_time` varchar(19) NOT NULL
-);
+CREATE INDEX store_goods_classify_classify_id_fk
+  ON store (store_classify);
 
-CREATE TABLE `goods_classify` (
-  `classify_id` varchar(36) NOT NULL PRIMARY KEY,-- 32+4多四位
-  `top_level_classify_id` varchar(36) NOT NULL,-- 16位以下,6位以上
-  `classify_name` varchar(36),
-  `create_time` varchar(19) NOT NULL, -- 20191212-110211
-  `update_time` varchar(19) NOT NULL
-);
+CREATE TABLE store_sell_classify
+(
+  id          VARCHAR(36) NOT NULL
+    PRIMARY KEY,
+  store_id    VARCHAR(36) NULL,
+  classify_id VARCHAR(36) NULL,
+  CONSTRAINT store_sell_classify_store_store_id_fk
+  FOREIGN KEY (store_id) REFERENCES store (store_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT store_sell_classify_goods_classify_classify_id_fk
+  FOREIGN KEY (classify_id) REFERENCES goods_classify (classify_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  ENGINE = InnoDB;
 
-CREATE TABLE `belongsTo` (
-  `id` varchar(36) NOT NULL PRIMARY KEY,-- 32+4多四位
-  `goods_id` varchar(36) NOT NULL,-- 16位以下,6位以上
-  `classify_id` varchar(36),
-  `create_time` varchar(19) NOT NULL, -- 20191212-110211
-  `update_time` varchar(19) NOT NULL
-);
-insert INTO store VALUES('0000','first store','https://www.google.com/','1','5','fastExpress',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-insert INTO store VALUES('0001','second store','https://www.google.com/','4','1','fastExpress',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
+CREATE INDEX store_sell_classify_store_store_id_fk
+  ON store_sell_classify (store_id);
 
-insert INTO goods VALUES('001','0000','https://www.google.com/','1','food','selling','new',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-insert INTO goods VALUES('002','0000','https://www.google.com/','2','food','selling','new',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-insert INTO goods VALUES('003','0000','https://www.google.com/','3','clothes', 'selling','new',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-insert INTO goods VALUES('101','0001','https://www.google.com/','4','clothes','selling','new',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-insert INTO goods VALUES('102','0001','https://www.google.com/','5','playstation','selling','new',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-insert INTO goods VALUES('103','0001','https://www.google.com/','6','playstation','selling','new',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
+CREATE INDEX store_sell_classify_goods_classify_classify_id_fk
+  ON store_sell_classify (classify_id);
 
-INSERT INTO goods_classify VALUES('1', '0', '食品', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO goods_classify VALUES('2', '0', '服饰', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO goods_classify VALUES('3', '1', '方便面', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO goods_classify VALUES('4', '1', '冰红茶', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO goods_classify VALUES('5', '3', '汤达人', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO goods_classify VALUES('6', '2', '耐克', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO goods_classify VALUES('7', '2', '阿迪达斯', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO goods_classify VALUES('8', '5', 'AJ球鞋', date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
+CREATE TABLE goods
+(
+  goods_id    VARCHAR(36) NOT NULL
+    PRIMARY KEY,
+  store_id    VARCHAR(36) NOT NULL,
+  pic_url     TEXT        NULL,
+  status      VARCHAR(20) NULL,
+  old_level   VARCHAR(20) NULL,
+  create_time VARCHAR(19) NOT NULL,
+  update_time VARCHAR(19) NOT NULL,
+  CONSTRAINT goods_store_store_id_fk
+  FOREIGN KEY (store_id) REFERENCES store (store_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  ENGINE = InnoDB;
 
-INSERT INTO belongsTo VALUES('1','001','1',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO belongsTo VALUES('2','002','2',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO belongsTo VALUES('3','003','3',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO belongsTo VALUES('4','101','4',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO belongsTo VALUES('5','102','5',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
-INSERT INTO belongsTo VALUES('6','103','6',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
+CREATE INDEX goods_store_store_id_fk
+  ON goods (store_id);
+
+CREATE TABLE classify_of_goods
+(
+  id          VARCHAR(36) NOT NULL
+    PRIMARY KEY,
+  classify_id VARCHAR(36) NULL,
+  goods_id    VARCHAR(36) NULL,
+  CONSTRAINT classify_of_goods_store_sell_classify_id_fk
+  FOREIGN KEY (classify_id) REFERENCES store_sell_classify (id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT classify_of_goods_goods_goods_id_fk
+  FOREIGN KEY (goods_id) REFERENCES goods (goods_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  ENGINE = InnoDB;
+
+CREATE INDEX classify_of_goods_store_sell_classify_id_fk
+  ON classify_of_goods (classify_id);
+
+CREATE INDEX classify_of_goods_goods_goods_id_fk
+  ON classify_of_goods (goods_id);
+
+
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('1', '0', '食品', '20190718-134138', '20190718-134138');
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('2', '0', '服饰', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('3', '1', '方便面', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('4', '1', '冰红茶', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('5', '3', '汤达人', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('6', '2', '耐克', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('7', '2', '阿迪达斯', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) VALUES ('8', '5', 'AJ球鞋', '20190718-111541', '20190718-111541');
+
+INSERT INTO shopping_platform.store (store_id, note, store_pic_url, store_classify, level, certification, create_time, update_time) VALUES ('0000', 'first store', 'https://www.google.com/', '3', '5', 'fastExpress', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.store (store_id, note, store_pic_url, store_classify, level, certification, create_time, update_time) VALUES ('0001', 'second store', 'https://www.google.com/', '4', '1', 'fastExpress', '20190718-111541', '20190718-111541');
+
+INSERT INTO shopping_platform.store_sell_classify (id, store_id, classify_id) VALUES ('0', '0000', '2');
+INSERT INTO shopping_platform.store_sell_classify (id, store_id, classify_id) VALUES ('1', '0000', '3');
+INSERT INTO shopping_platform.store_sell_classify (id, store_id, classify_id) VALUES ('2', '0000', '4');
+INSERT INTO shopping_platform.store_sell_classify (id, store_id, classify_id) VALUES ('3', '0001', '5');
+
+INSERT INTO shopping_platform.goods (goods_id, store_id, pic_url, status, old_level, create_time, update_time) VALUES ('001', '0000', 'https://www.google.com/', 'selling', 'new', '20190718-134040', '20190718-134040');
+INSERT INTO shopping_platform.goods (goods_id, store_id, pic_url, status, old_level, create_time, update_time) VALUES ('002', '0000', 'https://www.google.com/', 'selling', 'new', '20190718-134040', '20190718-134040');
+INSERT INTO shopping_platform.goods (goods_id, store_id, pic_url, status, old_level, create_time, update_time) VALUES ('003', '0000', 'https://www.google.com/', 'selling', 'new', '20190718-134040', '20190718-134040');
+INSERT INTO shopping_platform.goods (goods_id, store_id, pic_url, status, old_level, create_time, update_time) VALUES ('101', '0001', 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods (goods_id, store_id, pic_url, status, old_level, create_time, update_time) VALUES ('102', '0001', 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
+INSERT INTO shopping_platform.goods (goods_id, store_id, pic_url, status, old_level, create_time, update_time) VALUES ('103', '0001', 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
+
+INSERT INTO shopping_platform.classify_of_goods (id, classify_id, goods_id) VALUES ('0', '0', '001');
+INSERT INTO shopping_platform.classify_of_goods (id, classify_id, goods_id) VALUES ('1', '1', '002');
+INSERT INTO shopping_platform.classify_of_goods (id, classify_id, goods_id) VALUES ('2', '2', '003');
+INSERT INTO shopping_platform.classify_of_goods (id, classify_id, goods_id) VALUES ('3', '3', '101');
 
 -- 商品基本信息 end
 
