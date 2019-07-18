@@ -115,8 +115,8 @@
                     var item = {
                         text: list[i][1],
                         id: list[i][0],
-                        pid:list[i][2]
-                        href: "/classify/" + list[i][0]
+                        pid:list[i][2],
+                        href: "/haha/classify/" + list[i][0]
                     }
                     obj.push(item);
                 }
