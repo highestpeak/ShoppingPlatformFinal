@@ -1,26 +1,19 @@
 package com.demo.mms.dao;
 
 
-import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
-import com.demo.mms.common.domain.StoreSellClassify;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
 
 public interface GoodsOperateMapper {
-//    @Select("select goods_id,Goods.classify_id as classify_id,Goods.classify_name as classify_name,top_level_classify_id,status,old_level " +
-//            "from Goods inner join goods_classify on Goods.classify_id = goods_classify.classify_id " +
-
-    //            "where ${column} = #{value}")
     @Select("select * from store where ${column} = #{value}")
     Store queryStore(
                      @Param("column") String column,
                      @Param("value") String value);
 
-    //    ResultMap queryGoodsWithClassify(@Param("column") String column,@Param("value") String value);
     ArrayList<StoreSelledClassifyVO> queryGoodsWithClassify(String store_id);
 
     @Select("select * from store_sell_classify NATURAL JOIN goods_classify where ${column} = #{value} and store_id = #{store_id}")
@@ -57,21 +50,4 @@ public interface GoodsOperateMapper {
                              @Param("valueModify") String valueModify,
                              @Param("columnKey") String columnKey,
                              @Param("valueKey") String valueKey);
-
-//    @Update("")
-//    void updateClassifyOfStore();
-
-    @Update("update goods SET ${columnModify} = #{valueModify} " +
-            "where ${columnKey} = #{valueKey}")
-    void updateGood(@Param("columnModify") String columnModify,
-                   @Param("valueModify") String valueModify,
-                   @Param("columnKey") String columnKey,
-                   @Param("valueKey") String valueKey);
-
-    ArrayList<Goods> queryGoods(String store_id);
-
-//    @Select("select * from ${table} where ${column} = #{value}")
-//    HashMap queryTable(@Param("table") String user_table,
-//                   @Param("column") String column,
-//                   @Param("value") String value);
 }

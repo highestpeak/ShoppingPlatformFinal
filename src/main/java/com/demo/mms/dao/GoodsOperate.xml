@@ -13,22 +13,21 @@
         where store_id = #{store_id}
     </select>
 
-    <resultMap id="Goods" type="com.demo.mms.common.domain.Goods">
-    </resultMap>
-    <select id="queryGoods" parameterType="String" resultMap="Goods" >
-        select
-            goods_id,
-            classify_id
-        from Goods where Goods.store_id = #{store_id}
-    </select>
+    <!--<resultMap id="Goods" type="com.demo.mms.common.domain.Goods">-->
+    <!--</resultMap>-->
+    <!--<select id="queryGoods" parameterType="String" resultMap="Goods" >-->
+        <!--select-->
+            <!--goods_id,-->
+            <!--classify_id-->
+        <!--from Goods where Goods.store_id = #{store_id}-->
+    <!--</select>-->
 
-    <resultMap id="Goods" type="com.demo.mms.common.domain.Goods">
-    </resultMap>
-    <select id="queryClassifyOfStore" parameterType="String" resultMap="Goods" >
-        select
-        goods_id,
-        classify_id
-        from store_sell_classify NATURAL JOIN goods_classify
-        where store_id = #{store_id}
-    </select>
+
+    <!--<select id="queryClassifyOfStore" parameterType="String" resultMap="tempGoodsWithClassifyVO" >-->
+        <!--select-->
+        <!--goods_id,-->
+        <!--classify_id-->
+        <!--from store_sell_classify NATURAL JOIN goods_classify-->
+        <!--where store_id = #{store_id}-->
+    <!--</select>-->
 </mapper>

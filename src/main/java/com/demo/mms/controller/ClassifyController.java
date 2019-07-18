@@ -16,12 +16,7 @@ import java.util.Map;
 
 @RequestMapping("/goods")
 @Controller
-public class GoodsController {
-    /*
-
-     */
-
-
+public class ClassifyController {
     @Autowired
     private GoodsService goodsService;
     //数据请求
