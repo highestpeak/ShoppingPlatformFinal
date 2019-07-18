@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mms.dao.GoodsOperateMapper">
+    <resultMap id="tempGoodsWithClassifyVO" type="com.demo.mms.common.vo.GoodsWithClassifyVO">
+    </resultMap>
+
+    <select id="queryGoodsWithClassify" parameterType="String" resultMap="tempGoodsWithClassifyVO" >
+        select
+            DISTINCT (Goods.classify_id) as classify_id,
+            Goods.classify_name as classify_name,
+            top_level_classify_id
+        from Goods inner join goods_classify on Goods.classify_id = goods_classify.classify_id
+        where Goods.store_id = #{store_id}
+    </select>
+</mapper>

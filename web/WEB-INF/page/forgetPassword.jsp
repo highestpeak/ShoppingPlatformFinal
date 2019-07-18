@@ -31,6 +31,69 @@
             width:30%;
         }
     </style>
+    <script type="text/javascript">
+        function forgetPasswordCheck() {
+            var oUser_id =document.getElementById("user_id");
+            var oVerify = document.getElementById("verify");
+            var oEmail = document.getElementById("email");
+            var oVerificationCode = document.getElementById("verificationCode");
+            var oError = document.getElementById("error_box");
+            if(oUser_id.value.length == 0){
+                oError.innerHTML ="请输入用户名。";
+                return false;
+            }
+            else if (oUser_id.value.length < 6) {
+                oError.innerHTML ="用户名不存在。";
+                return false;
+            }
+            else if (oUser_id.value.length > 32) {
+                oError.innerHTML = "用户名不存在。";
+                return false;
+            }
+            else if (oVerify.value.length == 0) {
+                oError.innerHTML = "请输入新密码。";
+                return false;
+            }
+            else if (oVerify.value.length < 6) {
+                oError.innerHTML = "密码至少6位。";
+                return false;
+            }
+            else if (oVerify.value.length > 16) {
+                oError.innerHTML = "密码必须少于16位。";
+                return false;
+            }
+            else if(oEmail.value.length == 0){
+                oError.innerHTML = "请输入邮箱。";
+                return false;
+            }
+            else if(!isEmail(oEmail.value)){
+                oError.innerHTML = "邮箱格式错误。";
+                return false;
+            }
+            else if(oVerificationCode.value.length == 0){
+                oError.innerHTML = "请输入验证码。"
+                return false;
+            }
+            return true
+        }
+        function isEmail(strEmail) {
+
+            var reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            console.log(strEmail);
+            if(strEmail == ''){
+                // document.getElementById("test_user").innerHTML = "";
+                return true;
+            }
+            else if (strEmail != null &&strEmail.search(reg) != -1) {
+                // document.getElementById("test_user").innerHTML = "√邮箱格式正确！";
+                return true
+            }
+            else {
+                // document.getElementById("test_user").innerHTML = "邮箱格式错误！";
+                return false;
+            }
+        }
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,22 +113,22 @@
     <div class="login-box-body">
         <p class="login-box-msg" style="color:orangered">${msg}</p>
 
-        <form action="${pageContext.request.contextPath}/forgetPassword" method="post">
+        <form action="${pageContext.request.contextPath}/forgetPassword" method="post" onsubmit="return forgetPasswordCheck()">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="用户名" name="name">
+                <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder=新密码 name="password">
+                <input id="verify" type="password" class="form-control" maxlength=16 placeholder=新密码 name="verify">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder=邮箱 name="email">
+                <input id="email" type="text" class="form-control" placeholder=邮箱 name="email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <div id="leftDiv">
-                    <input type="password" class="form-control" placeholder=验证码 name="verificationCode">
+                    <input id="verificationCode" type="text" class="form-control" placeholder=验证码 name="verificationCode">
                 </div>
                 <div id="rightDiv">
                     <button type="button" class="btn btn-default btn-lrg ajax" >获取验证码</button>
@@ -80,6 +143,8 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <br>
+            <div id="error_box"><br></div>
         </form>
         <!-- /.social-auth-links -->
         <br>
