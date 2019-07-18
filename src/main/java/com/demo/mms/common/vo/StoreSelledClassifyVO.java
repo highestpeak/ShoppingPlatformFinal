@@ -1,6 +1,6 @@
 package com.demo.mms.common.vo;
 
-public class GoodsWithClassifyVO {
+public class StoreSelledClassifyVO {
     private String classify_id;
     private String classify_name;
     private String top_level_classify_id;
@@ -27,5 +27,11 @@ public class GoodsWithClassifyVO {
 
     public void setTop_level_classify_id(String top_level_classify_id) {
         this.top_level_classify_id = top_level_classify_id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        StoreSelledClassifyVO tempVo=(StoreSelledClassifyVO)obj;
+        return this.getClassify_id().equals(tempVo.getClassify_id());
     }
 }

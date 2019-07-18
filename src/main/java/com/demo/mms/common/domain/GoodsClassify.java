@@ -3,6 +3,7 @@ package com.demo.mms.common.domain;
 public class GoodsClassify {
     private String classify_id;
     private String top_level_classify_id;
+    private String parent_id;
     private String classify_name;
     private String create_time;
     private String update_time;
@@ -45,5 +46,13 @@ public class GoodsClassify {
 
     public void setUpdate_time(String update_time) {
         this.update_time = update_time;
+    }
+
+    public String getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(String parent_id) {
+        this.parent_id = parent_id;
     }
 }
