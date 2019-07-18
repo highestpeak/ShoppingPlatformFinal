@@ -68,13 +68,22 @@
 
         <div id="tree"></div>
 
+        <div>
+            <input id="delete" style="float:right; margin-right:10px; background:red; color:white" class="btn" type="button" style="float:right" value="删除" />
+        </div>
+
+        <div>
+            <input id="modify" style="float:right; margin-right:10px; background:yellow; color:white" class="btn" type="button" style="float:right" value="修改" />
+        </div>
+
+        <div>
+            <input id="add" style="float:right; margin-right:10px; background:greenyellow; color:white" class="btn" type="button" style="float:right" value="添加" />
+        </div>
+
     </div>
 
 </div>
 
-<script src="../../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../localLib/bootstrap-treeview.min.js"></script>
 <script>
     function getTree() {
         // Some logic to retrieve, or generate tree structure
@@ -85,7 +94,8 @@
             var item = {
                 text: list[i][1],
                 id: list[i][0],
-                pid: list[i][2]
+                pid: list[i][2],
+                href: "/classify/" + list[i][0]
             }
             obj.push(item);
         }
@@ -110,10 +120,89 @@
 
     $('#tree').treeview({
         data: getTree(),
-        showCheckbox: true
+        showCheckbox: true,
+        enableLinks: true
     });
+
+    $("#delete").click(function(){
+        arr=$("#tree").treeview("getChecked");
+        if(arr.length ==0){
+            alert("请勾选!");
+            return;
+        }
+        var ids=[];
+        for(var i=0; i<arr.length; i++){
+            ids.push(arr[i].id);
+        }
+
+        // 向deleteClassify功能发送要删除的分类的id的数组，[1,2,3,4]
+        if(confirm("确认删除？")){
+            $.ajax({
+                type:"post",
+                url:"/deleteClassify",
+                data: {ids:ids},
+                success:function(data,status){
+                    alert("删除“"+data+"”成功！(status:"+status+".)");
+                    $('#tree').treeview('removeNode', [ arr, { silent: true } ]);
+                }
+            });
+        }else{
+            return;
+        }
+    })
+
+    $("#modify").click(function(){
+        var id = prompt("id","");
+        var name = prompt("name","");
+        var pid = prompt("pid","");
+        var temp = {
+            text: name,
+            id: id,
+            pid: pid
+        }
+        arr = $("#tree").treeview("getChecked");
+        if(temp){
+            $.ajax({
+                type: "post",
+                url: "/modifyClassify",
+                data: temp,
+                success: function(data, status){
+                    alert("编辑成功！(status:"+status+".)");
+                    $("#tree").treeview("updateNode", [arr, data, {silent: true}]);
+                }
+            });
+        }
+    })
+
+    $("add").click(function(){
+        var id = prompt("id","");
+        var name = prompt("name","");
+        var pid = prompt("pid","");
+        var temp = {
+            text: name,
+            id: id,
+            pid: pid
+        }
+        arr = $("#tree").treeview("getChecked");
+        if(temp){
+            $.ajax({
+                type: "post",
+                url: "/addClassify",
+                data: temp,
+                success: function(data, status){
+                    alert("添加“"+data+"”成功！(status:"+status+".)");
+                    $("#tree").treeview("addNode", [data,arr]);
+                }
+            });
+        }
+    })
+
+
 </script>
 
+<script src="../../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../localLib/bootstrap-treeview.min.js"></script>
 <script src="../../adminlte/plugins/iCheck/icheck.min.js"></script>
 <script src="../../adminlte/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="../../adminlte/dist/js/adminlte.min.js"></script>
