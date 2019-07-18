@@ -14,6 +14,8 @@
 
     <delete id="deleteEntryById">DELETE FROM in_cart_of WHERE id = #{id};</delete>
 
+    <delete id="deleteEntryByUserAndGoodsId">DELETE FROM in_cart_of WHERE buyer_id = #{userId} AND good_id = #{goodsId};</delete>
+
     <insert id="insertEntry">INSERT INTO in_cart_of (id, buyer_id, good_id, good_num) VALUES (#{id}, #{buyerId}, #{goodId}, #{num});</insert>
 
     <update id="updateEntryByRelationId">UPDATE in_cart_of SET good_num = #{newNum} WHERE id = #{id};</update>
