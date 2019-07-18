@@ -134,3 +134,22 @@ INSERT INTO belongsTo VALUES('5','102','5',date_format(NOW(),'%Y%m%d-%H%i%s'),da
 INSERT INTO belongsTo VALUES('6','103','6',date_format(NOW(),'%Y%m%d-%H%i%s'),date_format(NOW(),'%Y%m%d-%H%i%s'));
 
 -- 商品基本信息 end
+
+-- Shopping Cart
+DROP TABLE IF EXISTS in_cart_of;
+
+create table in_cart_of
+(
+    id       varchar(36)   not null
+        primary key,
+    buyer_id varchar(36)   not null,
+    good_id  varchar(36)   not null,
+    good_num int default 1 not null,
+    constraint in_cart_of_buyer_user_id_fk
+        foreign key (buyer_id) references buyer (user_id)
+            on update cascade on delete cascade,
+    constraint in_cart_of_goods_goods_id_fk
+        foreign key (good_id) references goods (goods_id)
+            on update cascade on delete cascade
+);
+-- Shopping Cart Ends
