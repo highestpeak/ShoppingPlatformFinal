@@ -5,20 +5,22 @@ import com.demo.mms.common.domain.InCartOf;
 import com.demo.mms.common.domain.User;
 
 import java.util.Collection;
+import java.util.Map;
 
 
 public interface ShoppingCartService {
-    Object getInCartOfRelationshipById(Integer id);
+    Object getInCartOfRelationshipById(String id);
     Collection<Object> getAllInCartOfRelationships();
     Collection<Object> getShoppingCartGoodsOfUser(User user);
-    Collection<Object> getShoppingCartGoodsOfUserByUserId(Integer user);
+    Collection<Object> getShoppingCartGoodsOfUserByUserId(String user);
 
-    void insertGoodsToShoppingCartOfUser(Goods goods, User user);
-    void insertGoodsToShoppingCartOfUser(Iterable<Goods> goods, User user);
+    void insertGoodsToShoppingCartOfUser(Goods goods, User user, Integer num);
 
-    void modifyGoodNumber(Integer id, Integer newNumber);
+    void modifyGoodNumber(String relationId, Integer newNumber);
     void modifyGoodNumber(InCartOf inCartOf, Integer newNumber);
+    void modifyGoodNumber(User user, Goods goods, Integer newNumber);
+    void modifyGoodNumber(String userId, String goodsId, Integer newNumber);
 
-    void deleteGoodFromCart(Integer id);
+    void deleteGoodFromCart(String id);
     void deleteGoodFromCart(InCartOf inCartOf);
 }

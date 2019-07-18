@@ -1,32 +1,32 @@
 package com.demo.mms.common.domain;
 
 public class InCartOf {
-    private Integer id;
-    private Integer user;
-    private Integer good;
+    private String id;
+    private String user;
+    private String good;
     private Integer number;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(Integer user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
-    public Integer getGood() {
+    public String getGood() {
         return good;
     }
 
-    public void setGood(Integer good) {
+    public void setGood(String good) {
         this.good = good;
     }
 
