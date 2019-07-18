@@ -1,5 +1,6 @@
 package com.demo.mms.controller;
 
+import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
     //数据请求
+    //查询商店分类
     @RequestMapping("/classifyOfStore")
     @ResponseBody
     public Object getClassify(Store store){
@@ -42,6 +44,83 @@ public class GoodsController {
         rs.put("classifyList",classifyList);
         return rs;
     }
+
+    //删除商店分类
+    @RequestMapping("/deleteClassifyOfStore")
+    @ResponseBody
+    public Object deleteClassifyOfStore(Store store, ArrayList<GoodsClassify> classifiesToDel){
+        System.out.println("in deleteClassifyOfStore");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+
+        ArrayList classifyList=new ArrayList();
+        Map<String,Object> rsService=goodsService.getStoreGoodsClassify(store,classifyList);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+//        modelMap.put("classifyList",classifyList);
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.put("classifyList",classifyList);
+        return rs;
+    }
+    //增加商店分类
+    @RequestMapping("/addClassifyOfStore")
+    @ResponseBody
+    public Object addClassifyOfStore(Store store, GoodsClassify classifiesToAdd){
+        System.out.println("in getClassify");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+
+        ArrayList classifyList=new ArrayList();
+        Map<String,Object> rsService=goodsService.getStoreGoodsClassify(store,classifyList);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+//        modelMap.put("classifyList",classifyList);
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.put("classifyList",classifyList);
+        return rs;
+    }
+    //更改商店分类信息
+    @RequestMapping("/modifyClassifyOfStore")
+    @ResponseBody
+    public Object modifyClassifyOfStore(Store store, GoodsClassify classifiesToModify){
+        System.out.println("in getClassify");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+
+        ArrayList classifyList=new ArrayList();
+        Map<String,Object> rsService=goodsService.getStoreGoodsClassify(store,classifyList);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+//        modelMap.put("classifyList",classifyList);
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.put("classifyList",classifyList);
+        return rs;
+    }
+
     //页面请求
     @RequestMapping("/manageClassify")
     public String toManageClassify(Store store){
