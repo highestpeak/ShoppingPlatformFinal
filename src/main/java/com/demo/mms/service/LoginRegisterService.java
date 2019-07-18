@@ -20,4 +20,6 @@ public interface LoginRegisterService {
     boolean isAlreadyLogin(String user_id, HttpServletRequest request);
 
     Map<String,Object> newVerify(String user_id, String email, String newVerify);
+
+    Map<String,Object> updateUser(User userOld, User userNew);
 }

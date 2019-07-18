@@ -13,7 +13,7 @@ CREATE TABLE `user` (
   `user_id` varchar(36) NOT NULL PRIMARY KEY,-- 32+4多四位
   `verify` varchar(16) NOT NULL CHECK(length(verify)>=6),-- 16位以下,6位以上
   `sex` BOOLEAN,
-  `name` varchar(36),
+  `realname` varchar(36),
   `email` varchar(320) NOT NULL,
   `identity` varchar(20),
   `create_time` varchar(19) NOT NULL, -- 20191212-110211
@@ -22,7 +22,7 @@ CREATE TABLE `user` (
 
 CREATE TABLE `admin` (
   `user_id` varchar(36) NOT NULL PRIMARY KEY,
-  `avator_url` TEXT,
+  `permission` TEXT,
   `note` varchar(260),
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL
@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
 CREATE TABLE `buyer` (
   `user_id` varchar(36) NOT NULL PRIMARY KEY,
   `nickname`varchar(36),
-  `avator_url` TEXT,
+  `permission` TEXT,
   `bank_card` varchar(36),
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL
@@ -40,7 +40,7 @@ CREATE TABLE `buyer` (
 CREATE TABLE `seller` (
   `user_id` varchar(36) NOT NULL PRIMARY KEY,
   `nickname`varchar(36),
-  `avator_url` TEXT,
+  `permission` TEXT,
   `bank_card` varchar(36),
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL

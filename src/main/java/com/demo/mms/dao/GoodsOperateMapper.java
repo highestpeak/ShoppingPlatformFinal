@@ -1,6 +1,7 @@
 package com.demo.mms.dao;
 
 
+import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
@@ -50,4 +51,37 @@ public interface GoodsOperateMapper {
                              @Param("valueModify") String valueModify,
                              @Param("columnKey") String columnKey,
                              @Param("valueKey") String valueKey);
+
+
+    ArrayList<Goods> queryAllGoodsOfStore(String store_id);
+
+    @Select("select * from goods where store_id = #{store_id} and ${column} = #{value}")
+    Goods queryGoodsOfStore(@Param("store_id") String store_id,
+                            @Param("column") String column,
+                            @Param("value") String value);
+
+    @Update("update goods SET ${columnModify} = #{valueModify} " +
+            "where  store_id = #{store_id} and ${columnKey} = #{valueKey}")
+    void updateGoods(@Param("store_id") String store_id,
+                     @Param("columnModify") String columnModify,
+                     @Param("valueModify") String valueModify,
+                     @Param("columnKey") String columnKey,
+                     @Param("valueKey") String valueKey);
+
+    @Insert("INSERT INTO goods (goods_id, store_id, goods_name, description, pic_url, status, old_level, create_time, update_time) " +
+            "VALUES (#{goods_id}, #{store_id}, #{goods_name}, #{description}, #{pic_url}, #{status}, #{old_level}, #{create_time}, #{update_time})")
+    void insertGoods(@Param("goods_id") String goods_id,
+                     @Param("store_id") String store_id,
+                     @Param("goods_name") String goods_name,
+                     @Param("description") String description,
+                     @Param("pic_url") String pic_url,
+                     @Param("status") String status,
+                     @Param("old_level") String old_level,
+                     @Param("create_time") String create_time,
+                     @Param("update_time") String update_time);
+
+    @Delete("Delete from goods where store_id=#{store_id} and ${column}=#{value}")
+    void deleteGoods(@Param("store_id") String store_id,
+                     @Param("column") String column,
+                     @Param("value") String value);
 }

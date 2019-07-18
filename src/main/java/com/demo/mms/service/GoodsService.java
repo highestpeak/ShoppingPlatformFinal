@@ -1,5 +1,6 @@
 package com.demo.mms.service;
 
+import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 
@@ -27,4 +28,13 @@ public interface GoodsService {
     classifiesToAdd 包含所有需要添加的分类
      */
     Map<String,Object> updateStoreGoodsClassify(Store store, GoodsClassify oldClassify,GoodsClassify newClassify);
+
+
+    Map<String,Object> getStoreGoods(Store store, ArrayList goodsList);
+
+    Map<String,Object> updateStoreGoods(Store store, Goods oldGoods, Goods newGoods);
+
+    Map<String,Object> delStoreGoods(Store store, Goods goodsToDel);
+
+    Map<String,Object> addStoreGoods(Store store, Goods goodsToAdd);
 }

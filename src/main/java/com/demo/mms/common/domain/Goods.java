@@ -3,12 +3,10 @@ package com.demo.mms.common.domain;
 public class Goods {
     private String goods_id;
     private String store_id;
+    private String goods_name;
+    private String description;
     private String pic_url;
 
-
-
-    private String classify_id;
-    private String classify_name;
     private String status;
     private String old_level;
     private String create_time;
@@ -69,19 +67,20 @@ public class Goods {
     public void setUpdate_time(String update_time) {
         this.update_time = update_time;
     }
-    public String getClassify_id() {
-        return classify_id;
+
+    public String getGoods_name() {
+        return goods_name;
     }
 
-    public void setClassify_id(String classify_id) {
-        this.classify_id = classify_id;
+    public void setGoods_name(String goods_name) {
+        this.goods_name = goods_name;
     }
 
-    public String getClassify_name() {
-        return classify_name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setClassify_name(String classify_name) {
-        this.classify_name = classify_name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
