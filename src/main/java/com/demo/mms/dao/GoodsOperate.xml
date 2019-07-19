@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mms.dao.GoodsOperateMapper">
+    <resultMap id="tempGoodsWithClassifyVO" type="com.demo.mms.common.vo.StoreSelledClassifyVO">
+    </resultMap>
+
+    <select id="queryGoodsWithClassify" parameterType="String" resultMap="tempGoodsWithClassifyVO" >
+        select DISTINCT
+            classify_id,
+            classify_name,
+            top_level_classify_id
+        from store_sell_classify NATURAL JOIN goods_classify
+        where store_id = #{store_id}
+    </select>
+
+    <select id="queryGoodsOfStore" parameterType="String" resultMap="com.demo.mms.common.domain.Goods">
+        select *
+        FROM goods
+        WHERE store_id=#{store_id}
+    </select>
+    
+    
+    <!--<resultMap id="Goods" type="com.demo.mms.common.domain.Goods">-->
+    <!--</resultMap>-->
+    <!--<select id="queryGoods" parameterType="String" resultMap="Goods" >-->
+        <!--select-->
+            <!--goods_id,-->
+            <!--classify_id-->
+        <!--from Goods where Goods.store_id = #{store_id}-->
+    <!--</select>-->
+
+
+    <!--<select id="queryClassifyOfStore" parameterType="String" resultMap="tempGoodsWithClassifyVO" >-->
+        <!--select-->
+        <!--goods_id,-->
+        <!--classify_id-->
+        <!--from store_sell_classify NATURAL JOIN goods_classify-->
+        <!--where store_id = #{store_id}-->
+    <!--</select>-->
+</mapper>

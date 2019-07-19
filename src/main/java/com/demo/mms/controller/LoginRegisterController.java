@@ -2,6 +2,7 @@ package com.demo.mms.controller;
 
 import com.demo.mms.common.domain.Admin;
 import com.demo.mms.common.domain.Buyer;
+import com.demo.mms.common.domain.User;
 import com.demo.mms.service.LoginRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -131,12 +132,17 @@ public class LoginRegisterController {
     @RequestMapping("/newVerify")
     @ResponseBody
     public Object newVerify(String user_id,
-                               String email,
-                               String newVerify){
+                            String email,
+                            String newVerify){
         System.out.println("in forgetVerify");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsEdit=loginRegisterService.newVerify(user_id,email,newVerify);
+        User userOld=new User();
+        User userNew=new User();
+        userOld.setUser_id(user_id);
+        userOld.setEmail(email);
+        userNew.setVerify(newVerify);
+        Map<String,Object> rsEdit=loginRegisterService.updateUser(userOld,userNew);
         if(rsEdit!=null && !rsEdit.isEmpty()){//含有错误信息
             rs.putAll(rsEdit);
             rs.put("success",false);
@@ -145,6 +151,42 @@ public class LoginRegisterController {
         if(rs.size()>1){
             rs.put("success",false);
         }
+        return rs;
+    }
+
+    @RequestMapping("/modifyUser")
+    @ResponseBody
+    public Object updateUserInfo(User userOld,User userNew){
+        System.out.println("in updateUserInfo");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=loginRegisterService.updateUser(userOld,userNew);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    @RequestMapping("/checkPassword")
+    @ResponseBody
+    public Object checkPassword(String user_id,String password){
+        //返回 password的 true和false
+        //这个函数可以在验证用户的时候使用，比如支付的时候需要输入一下
+        return null;
+    }
+
+    @RequestMapping("/checkIfLogin")
+    @ResponseBody
+    public Object checkIfLogin(User user,HttpServletRequest request){
+        System.out.println("in checkIfLogin");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("already login",loginRegisterService.isAlreadyLogin(user.getUser_id(),request));
+        rs.put("success",true);
         return rs;
     }
 
@@ -170,9 +212,6 @@ public class LoginRegisterController {
 
     //重定位到具体页面
     //如何在前端直接跳转页面??
-//    ModelMap modelMap;
-//    modelMap.put("msg","asdas");
-//    ${msg}
     @RequestMapping("/toLogin")
     public String  toLogin(){
         return "login";

@@ -2,28 +2,18 @@ package com.demo.mms.common.domain;
 
 public class Admin extends User{
 
-    private String avator_url;
-
-    private String note;
+    private String permission;
 
     private String create_time;
 
     private String update_time;
 
-    public String getAvator_url() {
-        return avator_url;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setAvator_url(String avator_url) {
-        this.avator_url = avator_url;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 
     @Override

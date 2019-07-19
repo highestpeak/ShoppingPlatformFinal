@@ -1,5 +1,8 @@
 package com.demo.mms.common.utils;
 
+import com.demo.mms.common.domain.Admin;
+import com.demo.mms.common.domain.Buyer;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -7,7 +10,7 @@ import java.util.*;
 
 public class ProjectFactory {
     public static final String DATE_FORMAT_ALL = "yyyyMMdd-HHmmss";
-    private static SimpleDateFormat ft = new SimpleDateFormat (DATE_FORMAT_ALL);
+    public static SimpleDateFormat ft = new SimpleDateFormat (DATE_FORMAT_ALL);
     public static String getPorjectStrDate(Date date){
         return ft.format(date);
     }

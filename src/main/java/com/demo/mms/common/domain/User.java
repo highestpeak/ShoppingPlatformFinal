@@ -3,10 +3,13 @@ package com.demo.mms.common.domain;
 public class User {
     private String user_id;
     private String verify;
+    private String realname;
+    private String nickname;
+    private String avator_url;
     private Boolean sex;
-    private String name;
     private String email;
     private String identity;
+    private String note;
     private String create_time;
     private String update_time;
 
@@ -34,12 +37,12 @@ public class User {
         this.sex = sex;
     }
 
-    public String getName() {
-        return name;
+    public String getRealname() {
+        return realname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     public String getEmail() {
@@ -75,6 +78,31 @@ public class User {
     }
 
     public String getType(){
-        return this.getClass().getName();
+        String fullClassNameWithPath=this.getClass().getName();
+        return fullClassNameWithPath.substring(fullClassNameWithPath.lastIndexOf(".")+1);
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAvator_url() {
+        return avator_url;
+    }
+
+    public void setAvator_url(String avator_url) {
+        this.avator_url = avator_url;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

@@ -169,4 +169,139 @@ public class LoginRegisterServiceImpl implements LoginRegisterService{
         return rs;
     }
 
+    @Override
+    public Map<String, Object> updateUser(User userOld, User userNew) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",userOld.getUser_id());
+        if(userFind==null){//不存在user
+            rs.put("user existed",false);
+            return rs;
+        }
+        //存在User
+        if(ProjectFactory.userTypeTable.contains(userOld.getType())){
+            rs.putAll(updateUserHelp(userOld,userNew));
+        }
+        //处理user更新
+        switch (userOld.getType()){
+            case "User":
+                break;
+            case "Admin":
+                rs.putAll(updateAdminHelp((Admin)userOld,(Admin)userNew));
+                break;
+            case "Buyer":
+                rs.putAll(updateBuyerHelp((Buyer)userOld,(Buyer)userNew));
+                break;
+            case "Seller":
+                rs.putAll(updateSellerHelp((Seller)userOld,(Seller)userNew));
+                break;
+            default:
+                rs.put("type "+userOld.getType()+" find",false);
+                break;
+        }
+        return rs;
+    }
+
+    private Map<String, Object> updateUserHelp(User userOld, User userNew) {
+        Map<String,Object> rs=new HashMap<>();
+        Map<String,String> modifyList=new HashMap<>();
+        if(!userOld.getVerify().equals(userNew.getVerify())){
+            rs.putAll(newVerify(userOld.getUser_id(),userOld.getEmail(),userNew.getVerify()));
+        }
+        if(!userOld.getRealname().equals(userNew.getRealname())){
+            modifyList.put("realname",userNew.getRealname());
+        }
+        if(!userOld.getNickname().equals(userNew.getNickname())){
+            modifyList.put("nickname",userNew.getNickname());
+        }
+        if(!userOld.getAvator_url().equals(userNew.getAvator_url())){
+            modifyList.put("avator_url",userNew.getAvator_url());
+        }
+        if(!userOld.getSex().equals(userNew.getSex())){
+            modifyList.put("sex",userNew.getSex().toString());
+        }
+        if(!userOld.getEmail().equals(userNew.getEmail())){
+            modifyList.put("email",userNew.getEmail());
+        }
+        if(!userOld.getNote().equals(userNew.getNote())){
+            modifyList.put("note",userNew.getNote());
+        }
+        for (Map.Entry<String ,String> entry:modifyList.entrySet()){
+            try {
+                userOperateMapper.updateUser("user_id",userOld.getUser_id(),
+                                            entry.getKey(),entry.getValue());
+            }catch (Exception e){
+                rs.put("update "+entry.getKey(),"error");
+            }
+        }
+        try {
+            userOperateMapper.updateUser("user_id",userOld.getUser_id(),"update_time",ProjectFactory.getPorjectStrDate(new Date()));
+        }catch (Exception e){
+            rs.put("update update_time","error");
+        }
+        return rs;
+    }
+    private Map<String, Object> updateAdminHelp(Admin adminOld, Admin adminNew) {
+        Map<String,Object> rs=new HashMap<>();
+        Map<String,String> modifyList=new HashMap<>();
+        if(!adminOld.getPermission().equals(adminNew.getPermission())){
+            modifyList.put("permission",adminNew.getPermission());
+        }
+        for (Map.Entry<String ,String> entry:modifyList.entrySet()){
+            try {
+                userOperateMapper.updateUser("user_id",adminOld.getUser_id(),
+                        entry.getKey(),entry.getValue());
+            }catch (Exception e){
+                rs.put("update "+entry.getKey(),"error");
+            }
+        }
+        try {
+            userOperateMapper.updateUser("user_id",adminOld.getUser_id(),"update_time",ProjectFactory.getPorjectStrDate(new Date()));
+        }catch (Exception e){
+            rs.put("update update_time","error");
+        }
+        return rs;
+    }
+    private Map<String, Object> updateBuyerHelp(Buyer buyerOld, Buyer buyerNew) {
+        Map<String,Object> rs=new HashMap<>();
+        Map<String,String> modifyList=new HashMap<>();
+        if(!buyerOld.getBank_card().equals(buyerNew.getBank_card())){
+            modifyList.put("bank_card",buyerNew.getBank_card());
+        }
+        for (Map.Entry<String ,String> entry:modifyList.entrySet()){
+            try {
+                userOperateMapper.updateUser("user_id",buyerOld.getUser_id(),
+                        entry.getKey(),entry.getValue());
+            }catch (Exception e){
+                rs.put("update "+entry.getKey(),"error");
+            }
+        }
+        try {
+            userOperateMapper.updateUser("user_id",buyerOld.getUser_id(),"update_time",ProjectFactory.getPorjectStrDate(new Date()));
+        }catch (Exception e){
+            rs.put("update update_time","error");
+        }
+        return rs;
+    }
+    private Map<String, Object> updateSellerHelp(Seller sellerOld, Seller sellerNew) {
+        Map<String,Object> rs=new HashMap<>();
+        Map<String,String> modifyList=new HashMap<>();
+        if(!sellerOld.getBank_card().equals(sellerNew.getBank_card())){
+            modifyList.put("bank_card",sellerNew.getBank_card());
+        }
+        for (Map.Entry<String ,String> entry:modifyList.entrySet()){
+            try {
+                userOperateMapper.updateUser("user_id",sellerOld.getUser_id(),
+                        entry.getKey(),entry.getValue());
+            }catch (Exception e){
+                rs.put("update "+entry.getKey(),"error");
+            }
+        }
+        try {
+            userOperateMapper.updateUser("user_id",sellerOld.getUser_id(),"update_time",ProjectFactory.getPorjectStrDate(new Date()));
+        }catch (Exception e){
+            rs.put("update update_time","error");
+        }
+        return rs;
+    }
+
 }
