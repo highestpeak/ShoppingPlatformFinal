@@ -62,8 +62,8 @@
             document.form1.action="${pageContext.request.contextPath}/page/login";
             document.form1.submit();
         }
-        function updateTrolley(update_id){
-            document.getElementById("update_id").value=update_id;
+        function updateTrolley(){
+            // document.getElementById("update_id").value=update_id;
             // document.getElementById("quantity").value=value;
             document.form1.action="${pageContext.request.contextPath}/updateTrolley"
             document.form1.submit();
@@ -246,7 +246,7 @@
                                     <td data-title="Quantity" class="product-quantity">
                                         <div class="prd-quantity" data-title="Quantity">
                                             <input value="-" class="qtyminus btn" data-field="quantity1" type="button">
-                                            <input id="quantity${cou.count}" name="quantity${cou.count}" value="0" class="qty" type="text" onblur="updateTrolley(${cou.count})">
+                                            <input id="quantity${cou.count}" name="quantity${cou.count}" value="0" class="qty" type="text" >
                                             <input value="+" class="qtyplus btn" data-field="quantity1" type="button">
                                         </div>
                                     </td>
@@ -256,32 +256,32 @@
                                 </tr>
                             </c:forEach>
 
-                            <%--<c:forEach var="x" begin="1" end="5">--%>
-                            <%--<tr class="cart_item">--%>
+                                <%--<c:forEach var="x" begin="1" end="5">--%>
+                                <%--<tr class="cart_item">--%>
                                 <%--<td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>--%>
                                 <%--<td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>--%>
                                 <%--<td data-title="Quantity" class="product-quantity">--%>
-                                     <%--<div class="prd-quantity" data-title="Quantity">--%>
-                                         <%--<input value="-" class="qtyminus btn" data-field="quantity1" type="button">--%>
-                                         <%--<input name="quantity1" value="0" class="qty" type="text">--%>
-                                          <%--<input value="+" class="qtyplus btn" data-field="quantity1" type="button">--%>
-                                     <%--</div>--%>
+                                <%--<div class="prd-quantity" data-title="Quantity">--%>
+                                <%--<input value="-" class="qtyminus btn" data-field="quantity1" type="button">--%>
+                                <%--<input name="quantity1" value="0" class="qty" type="text">--%>
+                                <%--<input value="+" class="qtyplus btn" data-field="quantity1" type="button">--%>
+                                <%--</div>--%>
                                 <%--</td>--%>
                                 <%--<td data-title="Unit Price" class="product-unit-price">$550</td>--%>
                                 <%--<td data-title="Total" class="product-subtotal">$550</td>--%>
                                 <%--<td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>--%>
-                            <%--</tr>--%>
-                            <%--</c:forEach>--%>
+                                <%--</tr>--%>
+                                <%--</c:forEach>--%>
                             <tr>
                                 <td class="action" colspan="6">
                                     <a href="javascript:void(0);"  title="Continue shopping" onclick="toMain()">Continue shopping</a>
                                     <a href="javascript:void(0);" title="Save" onclick="updateTrolley()">Save</a>
                                 </td>
                             </tr>
-                        </c:if>
-                        <c:if test="${empty(list)}">
-                            对不起，您还没有购买任何商品！
-                        </c:if>
+                            </c:if>
+                            <c:if test="${empty(list)}">
+                                对不起，您还没有购买任何商品！
+                            </c:if>
 
                             </tbody>
                         </table>
