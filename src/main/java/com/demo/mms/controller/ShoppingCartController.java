@@ -5,38 +5,18 @@ import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.service.ShoppingCartService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.demo.mms.common.utils.ControllerUtility;
+
 
 @RequestMapping("/shoppingCart")
 @Controller
 public class ShoppingCartController {
-    private static void insertErrorMessageAndFailFlag(Map<String, Object> map, String errorMessage) {
-        insertFailFlag(map);
-        map.put("error_message", errorMessage);
-    }
-
-    private static void insertErrorMessageAndFailFlag(Map<String, Object> map, Exception exception) {
-        insertFailFlag(map);
-        map.put("error_message", exception.getMessage());
-    }
-
-    private static void insertQueryResultAndSuccessFlag(Map<String, Object> map, Object result) {
-        insertSuccessFlag(map);
-        map.put("result", result);
-    }
-
-    private static void insertFailFlag(Map<String, Object> map) {
-        map.replace("success", false);
-    }
-    private static void insertSuccessFlag(Map<String, Object> map) {
-        map.replace("success", true);
-    }
 
     private final ShoppingCartService shoppingCartService;
 
@@ -55,7 +35,7 @@ public class ShoppingCartController {
     }
 
 
-    @RequestMapping("/")
+    @GetMapping("/")
     @ResponseBody
     public Object getUserShoppingCart(Buyer buyer) {
         Map<String, Object> result = new HashMap<>();
@@ -63,58 +43,58 @@ public class ShoppingCartController {
         try {
             relations = shoppingCartService.getShoppingCartGoodsOfUser(buyer);
         } catch (Exception e) {
-            insertErrorMessageAndFailFlag(result, e);
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
         }
-        insertQueryResultAndSuccessFlag(result, relations);
+        ControllerUtility.insertQueryResultAndSuccessFlag(result, relations);
         return result;
     }
 
 
-    @RequestMapping("/addGoods")
+    @PostMapping("/")
     @ResponseBody
     public Object getGoods(Buyer buyer, Goods goods, Integer num) {
         Map<String, Object> result = new HashMap<>();
         try {
             shoppingCartService.insertGoodsToShoppingCartOfUser(goods, buyer, num);
         } catch (Exception e) {
-            insertErrorMessageAndFailFlag(result, e);
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
         }
-        result.put("success", true);
+        ControllerUtility.insertSuccessFlag(result);
         return result;
     }
 
 
-    @RequestMapping("/updateGoodsNum")
+    @PutMapping("/")
     @ResponseBody
     public Object updateGoodsNum(Buyer buyer, Goods goods, Integer newNum) {
         Map<String, Object> result = new HashMap<>();
         if (newNum <= 0) {
-            insertErrorMessageAndFailFlag(result, "assertion failed: newNum > 0");
+            ControllerUtility.insertErrorMessageAndFailFlag(result, "assertion failed: newNum > 0");
         }
         try {
             shoppingCartService.modifyGoodNumber(buyer, goods, newNum);
         } catch (Exception e) {
-            insertErrorMessageAndFailFlag(result, e);
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
         }
-        result.put("success", true);
+        ControllerUtility.insertSuccessFlag(result);
         return result;
     }
 
 
-    @RequestMapping("/deleteGoods")
+    @DeleteMapping("/")
     @ResponseBody
     public Object deleteGoods(Buyer buyer, Goods goods) {
         Map<String, Object> result = new HashMap<>();
         try {
             shoppingCartService.deleteGoodFromCart(buyer, goods);
         } catch (Exception e) {
-            insertErrorMessageAndFailFlag(result, e);
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
         }
-        result.put("success", true);
+        ControllerUtility.insertSuccessFlag(result);
         return result;
     }
 }
