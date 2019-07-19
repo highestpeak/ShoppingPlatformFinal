@@ -79,23 +79,17 @@ public class LoginRegisterServiceImpl implements LoginRegisterService{
             return rs;
         }
         //所有种类均需要此步user表判断
+        //end
+        //加入具体种类的用户
+        //具体种类用户逻辑均为:
+        //首先判断是否在user表内
+        //再判断是否在具体类别表单中
         Map<String,Object> rsTemp=addUser(user);
         if(rsTemp!=null && !rsTemp.isEmpty()){
             rs.putAll(rsTemp);
             return rs;
         }
         if(type.equals("User")){
-            return rs;
-        }
-        //end
-        //加入具体种类的用户
-        //具体种类用户逻辑均为:
-        //首先判断是否在user表内
-        //再判断是否在具体类别表单中
-        User userFind=null;
-        userFind= userOperateMapper.queryUser(type,"user_id",user.getUser_id());
-        if(userFind!=null){//已经存在具体种类user
-            rs.put(type+" existed",true);
             return rs;
         }
         //type类别user不存在，可以新建
@@ -131,7 +125,13 @@ public class LoginRegisterServiceImpl implements LoginRegisterService{
     private Map<String,Object> addUser(User user){
         //处理校验
         Map<String,Object> rs=new HashMap<>();
-        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        User userFind=null;
+        try {
+            userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+//        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
         if(userFind!=null){//已经存在user
             rs.put("user existed",true);
             return rs;

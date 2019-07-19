@@ -163,7 +163,7 @@
 
     $("#modify").click(function(){
         var id = prompt("id","");
-        var name = prompt("name","");
+        var name = prompt("realname","");
         var pid = prompt("pid","");
         var temp = {
             text: name,
@@ -186,7 +186,7 @@
 
     $("add").click(function(){
         var id = prompt("id","");
-        var name = prompt("name","");
+        var name = prompt("realname","");
         var pid = prompt("pid","");
         var temp = {
             text: name,

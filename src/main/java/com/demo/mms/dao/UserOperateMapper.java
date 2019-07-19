@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 //所有传到mapper的数据全部都是正确的
 public interface UserOperateMapper {
     @Select("select * from ${table} where ${column} = #{value}")
-    User queryUser(@Param("table") String user_table,
+    User queryUser(@Param("table") String table,
                    @Param("column") String column,
                    @Param("value") String value);
 

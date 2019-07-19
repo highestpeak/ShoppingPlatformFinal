@@ -1,3 +1,6 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -11,34 +14,34 @@
     <title>Myorder</title>
 
     <!-- Standard Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../images//favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/localLib/images//favicon.ico" />
 
     <!-- For iPhone 4 Retina display: -->
-    <link rel="apple-touch-icon-precomposed" href="../../images//apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-114x114-precomposed.png">
 
     <!-- For iPad: -->
-    <link rel="apple-touch-icon-precomposed" href="../../images//apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-72x72-precomposed.png">
 
     <!-- For iPhone: -->
-    <link rel="apple-touch-icon-precomposed" href="../../images//apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-57x57-precomposed.png">
 
     <!-- Library - Google Font Familys
     <link href="https://fonts.googleapis.com/css?family=Arizonia|Crimson+Text:400,400i,600,600i,700,700i|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
     -->
-    <link rel="stylesheet" type="text/css" href="../../revolution/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/settings.css">
 
     <!-- RS5.0 Layers and Navigation Styles -->
-    <link rel="stylesheet" type="text/css" href="../../revolution/css/layers.css">
-    <link rel="stylesheet" type="text/css" href="../../revolution/css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/navigation.css">
 
     <!-- Library - Bootstrap v3.3.5 -->
-    <link rel="stylesheet" type="text/css" href="../../libraries/lib.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/libraries/lib.css">
 
     <!-- Custom - Common CSS -->
-    <link rel="stylesheet" type="text/css" href="../../css/plugins.css">
-    <link rel="stylesheet" type="text/css" href="../../css/navigation-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../css/shortcode.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/plugins.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/localLib/HomeStyle.css">
 
 
 </head>
@@ -72,7 +75,7 @@
             <div class="container">
                 <!-- Logo Block -->
                 <div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-                    <a href="Home.html" class="navbar-brand">汤 <span>达人</span></a>
+                    <a href="front_home.jsp" class="navbar-brand">汤 <span>达人</span></a>
                 </div><!-- Logo Block /- -->
                 <!-- Search Block -->
                 <div class="col-md-5 col-sm-6 col-xs-6 search-block">
@@ -92,14 +95,14 @@
                                 <li class="mini_cart_item">
                                     <a title="Remove this item" class="remove" href="#">&#215;</a>
                                     <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="../../images/product-wishlist-1.jpg">Flying Ninja
+                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-1.jpg">Flying Ninja
                                     </a>
                                     <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
                                 </li>
                                 <li class="mini_cart_item">
                                     <a title="Remove this item" class="remove" href="#">&#215;</a>
                                     <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="../../images/product-wishlist-2.jpg">Flying Ninja
+                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-2.jpg">Flying Ninja
                                     </a>
                                     <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
                                 </li>
@@ -127,15 +130,15 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="Home.html" class="navbar-brand">汤 <span>达人</span></a>
+                        <a href="front_home.jsp" class="navbar-brand">汤 <span>达人</span></a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="Personalcenter.html"><i class="icon icon-User"></i>个人资料</a></li>
-                            <li><a href="Track.html"><i class="fa fa-vimeo"></i>游览历史</a></li>
-                            <li><a href="Myorder.html"><i class="icon icon-Heart"></i>我的订单</a></li>
-                            <li><a href="Myevaluation.html"><i class="fa fa-tumblr"></i>我的评价</a></li>
-                            <li><a href="Systemnotice.html"><i class="fa fa-twitter"></i>系统通知</a></li>
+                            <li><a href="front_My_Personalcenter.jsp"><i class="icon icon-User"></i>个人资料</a></li>
+                            <li><a href="front_history.jsp"><i class="fa fa-vimeo"></i>游览历史</a></li>
+                            <li><a href="front_My_order.jsp"><i class="icon icon-Heart"></i>我的订单</a></li>
+                            <li><a href="front_My_evaluation.html"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="front_SystemNotice.jsp"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </nav><!-- nav /- -->
@@ -165,7 +168,7 @@
                     <!-- Section Header -->
                     <div class="section-header">
                         <h3>我的订单</h3>
-                        <img src="../../images/section-seprator.png" alt="section-seprator">
+                        <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator">
                     </div><!-- Section Header /- -->
                     <ul id="filters" class="products-categories no-left-padding">
                         <li><a data-filter=".video" href="#" class="">全部订单<i class="fa fa-angle-down"></i></a></li>
@@ -185,12 +188,12 @@
                         <!-- Product -->
                         <li class="product design" id="order1" style="position: absolute; left: 15px; top: 0px;">
                             <a href="#">
-                                <img src="../../images/product-1.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-1.jpg" alt="Product">
                                 <h5>Stylish Chair</h5>
                                 <span class="price">￥139 数量 1 <strong>￥139</strong></span>
                             </a>
                             <!--<a href="index.html" title="update">操作</a>
-                            <a href="Track.html" title="del">删除</a> -->
+                            <a href="front_history.jsp" title="del">删除</a> -->
                             <a class="btn btn-xs btn-info btn_update_order">修改</a>
                             <a class="btn btn-xs btn-danger btn_del_order">删除</a></td>
 
@@ -199,7 +202,7 @@
                         <!-- Product -->
                         <li class="product video" id="order2" style="position: absolute; left: 260px; top: 0px;">
                             <a href="#">
-                                <img src="../../images/product-2.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-2.jpg" alt="Product">
                                 <h5>men's casual shoes</h5>
                                 <span class="price">￥85 数量 2 <strong>￥170</strong></span>
                             </a>
@@ -208,7 +211,7 @@
                         <!-- Product -->
                         <li class="product photography" id="order3" style="position: absolute; left: 505px; top: 0px;">
                             <a href="#">
-                                <img src="../../images/product-3.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-3.jpg" alt="Product">
                                 <h5>Sun glass</h5>
                                 <span class="price">￥39 数量 1 <strong>￥39</strong></span>
                             </a>
@@ -217,7 +220,7 @@
                         <!-- Product -->
                         <li class="product web" id="order4" style="position: absolute; left: 15px; top: 396px;">
                             <a href="#">
-                                <img src="../../images/product-4.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-4.jpg" alt="Product">
                                 <h5>tourist bags</h5>
                                 <span class="price">￥239 数量 1 <strong>￥239</strong></span>
                             </a>
@@ -226,7 +229,7 @@
                         <!-- Product -->
                         <li class="product design" id="order5" style="position: absolute; left: 260px; top: 396px;">
                             <a href="#">
-                                <img src="../../images/product-5.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-5.jpg" alt="Product">
                                 <h5>mobile phone</h5>
                                 <span class="price">￥339 数量 1 <strong>￥339</strong></span>
                             </a>
@@ -235,7 +238,7 @@
                         <!-- Product -->
                         <li class="product video" id="order6" style="position: absolute; left: 505px; top: 396px;">
                             <a href="#">
-                                <img src="../../images/product-6.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-6.jpg" alt="Product">
                                 <h5>men's winter coat</h5>
                                 <span class="price">￥129 数量 2 <strong>￥258</strong></span>
                             </a>
@@ -244,7 +247,7 @@
                         <!-- Product -->
                         <li class="product photography" id="order7" style="position: absolute; left: 15px; top: 792px;">
                             <a href="#">
-                                <img src="../../images/product-7.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-7.jpg" alt="Product">
                                 <h5>Model x12 computer</h5>
                                 <span class="price">￥550 数量 1 <strong>￥550</strong></span>
                             </a>
@@ -253,7 +256,7 @@
                         <!-- Product -->
                         <li class="product web" id="order8" style="position: absolute; left: 260px; top: 792px;">
                             <a href="#">
-                                <img src="../../images/product-8.jpg" alt="Product">
+                                <img src="${pageContext.request.contextPath}/localLib/images/product-8.jpg" alt="Product">
                                 <h5>Stylish headset</h5>
                                 <span class="price">￥39 数量 4 <strong>￥156</strong></span>
                             </a>
@@ -281,7 +284,7 @@
 
             <!-- Widget About -->
             <aside class="col-md-12 col-sm-12 col-xs-12 ftr-widget widget_about">
-                <a href="Home.html" title="汤 达人">汤 <span>达人</span></a>
+                <a href="front_home.jsp" title="汤 达人">汤 <span>达人</span></a>
                 <p>On the most sensational inspirational celbrational Muppetational... This is what we call Show. I have always wanted to have a neighbor just like you.</p>
 
             </aside>
@@ -297,27 +300,27 @@
 </div>
 
 <!-- JQuery v1.12.4 -->
-<script src="../../js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/jquery.min.js"></script>
 
 <!-- Library - Js -->
-<script src="../../libraries/lib.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/libraries/lib.js"></script>
 
-<script src="../../libraries/jquery.countdown.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/libraries/jquery.countdown.min.js"></script>
 
 <!-- RS5.0 Core JS Files -->
-<script type="text/javascript" src="../../revolution/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
-<script type="text/javascript" src="../../revolution/js/jquery.themepunch.revolution.min.js?rev=5.0"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.video.min.js"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/jquery.themepunch.revolution.min.js?rev=5.0"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 
 <!-- Library - Google Map API -->
 <!---<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>--->
 
 <!-- Library - Theme JS -->
-<script src="../../js/functions.js">
-<script src="../../adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/adminlte/bower_components/layer/layer.js"></script>
 
 <script>
     $(function () {

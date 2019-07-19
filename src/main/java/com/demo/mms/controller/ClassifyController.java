@@ -130,6 +130,6 @@ public class ClassifyController {
 //        }
 //        modelMap.put("classifyList",rsGetClassify.get("classifyList"));
 //        modelMap.put("rsMap",rs);
-        return "good_manage";
+        return "admin_clasiifyManage";
     }
 }

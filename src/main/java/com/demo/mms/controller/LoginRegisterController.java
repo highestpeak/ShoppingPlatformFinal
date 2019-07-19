@@ -107,6 +107,9 @@ public class LoginRegisterController {
             rs.put("success",false);
         }
         return rs;
+        //不返回列表，返回页面
+        //buyer返回index
+        //admin返回admin page
     }
 
     @RequestMapping("/logout")
@@ -214,14 +217,14 @@ public class LoginRegisterController {
     //如何在前端直接跳转页面??
     @RequestMapping("/toLogin")
     public String  toLogin(){
-        return "login";
+        return "login_login";
     }
     @RequestMapping("/toRegister")
     public Object toRegister(){
-        return "register";
+        return "login_register";
     }
     @RequestMapping("/toNewPassword")
     public Object toNewPassword(){
-        return "forgetPassword";
+        return "login_forgetPassword";
     }
 }
