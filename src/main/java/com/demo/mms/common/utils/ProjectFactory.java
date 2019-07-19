@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class ProjectFactory {
+public abstract class ProjectFactory {
     public static final String DATE_FORMAT_ALL = "yyyyMMdd-HHmmss";
     public static SimpleDateFormat ft = new SimpleDateFormat (DATE_FORMAT_ALL);
     public static String getPorjectStrDate(Date date){
@@ -27,6 +27,7 @@ public class ProjectFactory {
             return null;
         }
     }
+
     private  static Map<String,Cookie> ReadCookieMap(HttpServletRequest request){
         Map<String,Cookie> cookieMap = new HashMap<String,Cookie>();
         Cookie[] cookies = request.getCookies();
@@ -37,5 +38,4 @@ public class ProjectFactory {
         }
         return cookieMap;
     }
-
 }

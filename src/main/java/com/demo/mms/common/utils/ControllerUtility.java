@@ -4,9 +4,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.Map;
 
-public class ControllerUtility {
-    protected ControllerUtility() {}
-
+public abstract class ControllerUtility {
     public static void insertErrorMessageAndFailFlag(Map<String, Object> map, String errorMessage) {
         insertFailFlag(map);
         map.put("error_message", errorMessage);
