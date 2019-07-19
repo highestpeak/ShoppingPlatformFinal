@@ -46,5 +46,16 @@ public class FrontPageController {
         return "front_My_Personalcenter";
     }
 
+    @RequestMapping("/myEvaluation")
+    public String myEvaluationGet(){
+        System.out.println("in myEvaluation");
+        return "front_My_evaluation";
+    }
+
+    @RequestMapping("/cart")
+    public String cartGet(){
+        System.out.println("in myEvaluation");
+        return "front_cart";
+    }
 
 }
