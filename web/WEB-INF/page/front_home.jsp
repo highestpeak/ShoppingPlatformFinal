@@ -670,6 +670,7 @@
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 
 <script>
+
     $(function () {
         $(".content").on("click", ".btn_login", function () {
             layer.open({
