@@ -1,9 +1,6 @@
 package com.demo.mms.controller;
 
-import com.demo.mms.common.domain.Buyer;
-import com.demo.mms.common.domain.Goods;
-import com.demo.mms.common.domain.Order;
-import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.ControllerUtility;
 import com.demo.mms.service.OrderService;
 import org.springframework.web.bind.annotation.*;
@@ -60,19 +57,25 @@ public class OrderController {
 
     @PostMapping("/")
     @ResponseBody
-    public Map<String, Object> insertOrder(Order order) {
+    public Map<String, Object> insertOrder(String buyerId, Map<String, Integer> entries, MailingInfo mailingInfo) {
         return null;
     }
 
-    @PutMapping("/")
+    @PutMapping("/entry/pay")
     @ResponseBody
-    public Map<String, Object> updateOrder(Order order) {
+    public Map<String, Object> payForOrder(String orderEntryId) {
         return null;
     }
 
-    @DeleteMapping("/")
+    @PutMapping("/entry/express")
     @ResponseBody
-    public Map<String, Object> deleteOrder(Order order) {
+    public Map<String, Object> updateExpressInfo(String orderEntryId, String expressCompany, String expressCode) {
+        return null;
+    }
+
+    @PutMapping("/entry/signed")
+    @ResponseBody
+    public Map<String, Object> sign(String orderEntryId) {
         return null;
     }
 }

@@ -53,7 +53,7 @@ public class ShoppingCartController {
 
     @PostMapping("/")
     @ResponseBody
-    public Object getGoods(Buyer buyer, Goods goods, Integer num) {
+    public Object insertGoods(Buyer buyer, Goods goods, Integer num) {
         Map<String, Object> result = new HashMap<>();
         try {
             shoppingCartService.insertGoodsToShoppingCartOfUser(goods, buyer, num);
