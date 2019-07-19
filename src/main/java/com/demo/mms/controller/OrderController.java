@@ -1,17 +1,12 @@
 package com.demo.mms.controller;
 
-
 import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.common.domain.Goods;
-import com.demo.mms.common.domain.Seller;
+import com.demo.mms.common.domain.Order;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.utils.ControllerUtility;
 import com.demo.mms.service.OrderService;
-import org.apache.shiro.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -65,7 +60,19 @@ public class OrderController {
 
     @PostMapping("/")
     @ResponseBody
-    public Map<String, Object> insertOrder(Buyer buyer, Goods goods, Integer num) {
+    public Map<String, Object> insertOrder(Order order) {
+        return null;
+    }
+
+    @PutMapping("/")
+    @ResponseBody
+    public Map<String, Object> updateOrder(Order order) {
+        return null;
+    }
+
+    @DeleteMapping("/")
+    @ResponseBody
+    public Map<String, Object> deleteOrder(Order order) {
         return null;
     }
 }
