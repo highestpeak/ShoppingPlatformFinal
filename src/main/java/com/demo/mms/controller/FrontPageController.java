@@ -52,4 +52,10 @@ public class FrontPageController {
         return "front_My_evaluation";
     }
 
+    @RequestMapping("/cart")
+    public String cartGet(){
+        System.out.println("in myEvaluation");
+        return "front_cart";
+    }
+
 }
