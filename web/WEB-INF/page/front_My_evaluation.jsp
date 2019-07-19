@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -11,34 +13,34 @@
     <title>Myevaluation</title>
 
     <!-- Standard Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../images//favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/localLib/images/favicon.ico" />
 
     <!-- For iPhone 4 Retina display: -->
-    <link rel="apple-touch-icon-precomposed" href="../../images//apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images/apple-touch-icon-114x114-precomposed.png">
 
     <!-- For iPad: -->
-    <link rel="apple-touch-icon-precomposed" href="../../images//apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images/apple-touch-icon-72x72-precomposed.png">
 
     <!-- For iPhone: -->
-    <link rel="apple-touch-icon-precomposed" href="../../images//apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images/apple-touch-icon-57x57-precomposed.png">
 
     <!-- Library - Google Font Familys
     <link href="https://fonts.googleapis.com/css?family=Arizonia|Crimson+Text:400,400i,600,600i,700,700i|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
     -->
-    <link rel="stylesheet" type="text/css" href="../../revolution/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/settings.css">
 
     <!-- RS5.0 Layers and Navigation Styles -->
-    <link rel="stylesheet" type="text/css" href="../../revolution/css/layers.css">
-    <link rel="stylesheet" type="text/css" href="../../revolution/css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/navigation.css">
 
     <!-- Library - Bootstrap v3.3.5 -->
-    <link rel="stylesheet" type="text/css" href="../../libraries/lib.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/libraries/lib.css">
 
     <!-- Custom - Common CSS -->
-    <link rel="stylesheet" type="text/css" href="../../css/plugins.css">
-    <link rel="stylesheet" type="text/css" href="../../css/navigation-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../css/shortcode.css">
-    <link rel="stylesheet" type="text/css" href="../../localLib/HomeStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/plugins.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/localLib/HomeStyle.css">
 
 
 </head>
@@ -92,14 +94,14 @@
                                 <li class="mini_cart_item">
                                     <a title="Remove this item" class="remove" href="#">&#215;</a>
                                     <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="../../images/product-wishlist-1.jpg">Flying Ninja
+                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/imagesproduct-wishlist-1.jpg">Flying Ninja
                                     </a>
                                     <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
                                 </li>
                                 <li class="mini_cart_item">
                                     <a title="Remove this item" class="remove" href="#">&#215;</a>
                                     <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="../../images/product-wishlist-2.jpg">Flying Ninja
+                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/imagesproduct-wishlist-2.jpg">Flying Ninja
                                     </a>
                                     <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
                                 </li>
@@ -134,7 +136,7 @@
                             <li><a href="front_My_Personalcenter.jsp"><i class="icon icon-User"></i>个人资料</a></li>
                             <li><a href="front_history.jsp"><i class="fa fa-vimeo"></i>游览历史</a></li>
                             <li><a href="front_My_order.jsp"><i class="icon icon-Heart"></i>我的订单</a></li>
-                            <li><a href="front_My_evaluation.html"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="front_My_evaluation.jsp"><i class="fa fa-tumblr"></i>我的评价</a></li>
                             <li><a href="front_SystemNotice.jsp"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -164,7 +166,7 @@
                 <!-- Section Header -->
                 <div class="section-header">
                     <h3>我的评价</h3>
-                    <img src="../../images/section-seprator.png" alt="section-seprator">
+                    <img src="${pageContext.request.contextPath}/localLib/images/imagessection-seprator.png" alt="section-seprator">
                 </div><!-- Section Header /- -->
                 <!-- Main Carousel -->
                 <div id="main-carousel1" class="carousel slide carousel-fade" data-ride="carousel">
@@ -176,7 +178,7 @@
                     <div role="listbox" class="carousel-inner">
                         <div class="item active">
                             <div class="testimonial-content">
-                                <a href="xxx.html"><img src="../../images/testi-1.png" alt="testi"></a>
+                                <a href="xxx.html"><img src="${pageContext.request.contextPath}/localLib/imagestesti-1.png" alt="testi"></a>
                                 <i class="fa fa-quote-left" aria-hidden="true"></i>
                                 <p>The final frontier. These are the voyages of the Starship Enterprise? As long as we live its you and me baby. There ain't nothin'  Beats all you've ever saw been in trouble with the law since the day. </p>
 
@@ -184,14 +186,14 @@
                         </div>
                         <div class="item">
                             <div class="testimonial-content">
-                                <a href="xxx.html"><img src="../../images/testi-1.png" alt="testi"></a>
+                                <a href="xxx.html"><img src="${pageContext.request.contextPath}/localLib/imagestesti-1.png" alt="testi"></a>
                                 <i class="fa fa-quote-left" aria-hidden="true"></i>
                                 <p>The final frontier. These are the voyages of the Starship Enterprise? As long as we live its you and me baby. There ain't nothin'  Beats all you've ever saw been in trouble with the law since the day. </p>
                             </div>
                         </div>
                         <div class="item">
                             <div class="testimonial-content">
-                                <a href="xxx.html"><img src="../../images/testi-1.png" alt="testi"></a>
+                                <a href="xxx.html"><img src="${pageContext.request.contextPath}/localLib/imagestesti-1.png" alt="testi"></a>
                                 <i class="fa fa-quote-left" aria-hidden="true"></i>
                                 <p>The final frontier. These are the voyages of the Starship Enterprise? As long as we live its you and me baby. There ain't nothin'  Beats all you've ever saw been in trouble with the law since the day. </p>
 
@@ -228,26 +230,26 @@
 </div>
 
 <!-- JQuery v1.12.4 -->
-<script src="../../js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/jquery.min.js"></script>
 
 <!-- Library - Js -->
-<script src="../../libraries/lib.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/libraries/lib.js"></script>
 
-<script src="../../libraries/jquery.countdown.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/libraries/jquery.countdown.min.js"></script>
 
 <!-- RS5.0 Core JS Files -->
-<script type="text/javascript" src="../../revolution/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
-<script type="text/javascript" src="../../revolution/js/jquery.themepunch.revolution.min.js?rev=5.0"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.video.min.js"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="../../revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/jquery.themepunch.revolution.min.js?rev=5.0"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 
 <!-- Library - Google Map API -->
 <!---<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>--->
 
 <!-- Library - Theme JS -->
-<script src="../../js/functions.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
 
 </body>
 </html>

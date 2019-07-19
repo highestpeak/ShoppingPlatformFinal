@@ -136,7 +136,7 @@
                             <li><a href="front_My_Personalcenter.jsp"><i class="icon icon-User"></i>个人资料</a></li>
                             <li><a href="front_history.jsp"><i class="fa fa-vimeo"></i>游览历史</a></li>
                             <li><a href="front_My_order.jsp"><i class="icon icon-Heart"></i>我的订单</a></li>
-                            <li><a href="front_My_evaluation.html"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="front_My_evaluation.jsp"><i class="fa fa-tumblr"></i>我的评价</a></li>
                             <li><a href="front_SystemNotice.jsp"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->

@@ -135,6 +135,7 @@
                             <li><a href="cart.html">购物车</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/history">游览历史</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/order">我的订单</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/myEvaluation">我的评价</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/sysNotice">系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
