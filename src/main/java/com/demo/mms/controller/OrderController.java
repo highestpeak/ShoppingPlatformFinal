@@ -5,6 +5,7 @@ import com.demo.mms.common.utils.ControllerUtility;
 import com.demo.mms.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,6 +38,43 @@ public class OrderController {
         return result;
     }
 
+    private static Map<String, Object> invoke(OrderService orderService, String methodName, Object... args) {
+        Map<String, Object> result = new HashMap<>();
+        Object serviceResult;
+        Method method;
+        try {
+            method = OrderService.class.getMethod(methodName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        if (method.getReturnType() == Void.class) {
+            try {
+                method.invoke(orderService, args);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IllegalArgumentException e) {
+                ControllerUtility.insertErrorMessageAndFailFlag(result, e);
+                return result;
+            }
+            ControllerUtility.insertSuccessFlag(result);
+            return result;
+        } else {
+            try {
+                serviceResult = method.invoke(orderService, args);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IllegalArgumentException e) {
+                ControllerUtility.insertErrorMessageAndFailFlag(result, e);
+                return result;
+            }
+            ControllerUtility.insertQueryResultAndSuccessFlag(result, serviceResult);
+            return result;
+        }
+    }
+
     @GetMapping("/")
     @ResponseBody
     public Map<String, Object> getAll() {
@@ -51,31 +89,47 @@ public class OrderController {
 
     @GetMapping("/store")
     @ResponseBody
-    public Map<String, Object> getAllOfSeller(Store store) {
+    public Map<String, Object> getAllOfStore(Store store) {
         return getAllOf(orderService, "Store", store);
     }
 
     @PostMapping("/")
     @ResponseBody
-    public Map<String, Object> insertOrder(String buyerId, Map<String, Integer> entries, MailingInfo mailingInfo) {
-        return null;
+    public Map<String, Object> insertOrder(String buyerId, Map<String, Integer> entries, MailingInfo mailingInfo, String note) {
+        Map<String, Object> result = invoke(orderService, "createOrder", buyerId, entries, mailingInfo, note);
+        if (result == null) {
+            System.exit(1);
+        }
+        return result;
     }
 
     @PutMapping("/entry/pay")
     @ResponseBody
     public Map<String, Object> payForOrder(String orderEntryId) {
-        return null;
+        Map<String, Object> result = invoke(orderService, "makePaid", orderEntryId);
+        if (result == null) {
+            System.exit(1);
+        }
+        return result;
     }
 
     @PutMapping("/entry/express")
     @ResponseBody
-    public Map<String, Object> updateExpressInfo(String orderEntryId, String expressCompany, String expressCode) {
-        return null;
+    public Map<String, Object> updateExpressInfo(String orderEntryId, String expressCompanyId, String expressCode) {
+        Map<String, Object> result = invoke(orderService, "setExpressCompany", expressCompanyId, expressCode);
+        if (result == null) {
+            System.exit(1);
+        }
+        return result;
     }
 
     @PutMapping("/entry/signed")
     @ResponseBody
     public Map<String, Object> sign(String orderEntryId) {
-        return null;
+        Map<String, Object> result = invoke(orderService, "makeSigned", orderEntryId);
+        if (result == null) {
+            System.exit(1);
+        }
+        return result;
     }
 }
