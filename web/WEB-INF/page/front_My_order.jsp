@@ -43,6 +43,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/HomeStyle.css">
 
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -139,9 +141,9 @@
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
                             <li><a href="cart.html"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
-                            <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/order"><i class="icon icon-Heart"></i>我的订单</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/myEvaluation"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/sysNotice"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -189,8 +191,8 @@
                             <td data-title="Pre Price" class="product-pre-price">$550</td>
                             <td data-title="Now Price" class="product-now-price">$350</td>
                             <td data-title="Number" class="product-unit-num">1</td>
-                            <td data-title="Operate" class="product-operate"><a href="#"><i class="icon icon-Truck"></i></a></td>
-                            <td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>
+                            <td data-title="Operate" class="product-operate" rowspan="3"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
+                            <td data-title="Remove" class="product-remove"rowspan="3"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
                         </tr>
                         <tr class="cart_item">
                             <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
@@ -198,8 +200,6 @@
                             <td data-title="Pre Price" class="product-pre-price">$550</td>
                             <td data-title="Now Price" class="product-now-price">$350</td>
                             <td data-title="Number" class="product-unit-num">1</td>
-                            <td data-title="Operate" class="product-operate"><a href="#"><i class="icon icon-Truck"></i></a></td>
-                            <td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>
                         </tr>
                         <tr class="cart_item">
                             <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
@@ -207,8 +207,6 @@
                             <td data-title="Pre Price" class="product-pre-price">$550</td>
                             <td data-title="Now Price" class="product-now-price">$350</td>
                             <td data-title="Number" class="product-unit-num">1</td>
-                            <td data-title="Operate" class="product-operate"><a href="#"><i class="icon icon-Truck"></i></a></td>
-                            <td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -220,7 +218,7 @@
                             <th class="product-unit-price" style="width: 10%">原价</th>
                             <th class="product-unit-price" style="width: 10%">现价</th>
                             <th class="product-unit-price" style="width: 10%">数量</th>
-                            <th class="product-remove" style="width: 10%">操作</th>
+                            <th class="product-remove" style="width: 10%" colspan="2">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -230,7 +228,8 @@
                             <td data-title="Pre Price" class="product-pre-price">$550</td>
                             <td data-title="Now Price" class="product-now-price">$350</td>
                             <td data-title="Number" class="product-unit-num">1</td>
-                            <td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>
+                            <td data-title="Operate" class="product-operate" rowspan="3"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
+                            <td data-title="Remove" class="product-remove"rowspan="3"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
                         </tr>
                         <tr class="cart_item">
                             <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
@@ -238,7 +237,6 @@
                             <td data-title="Pre Price" class="product-pre-price">$550</td>
                             <td data-title="Now Price" class="product-now-price">$350</td>
                             <td data-title="Number" class="product-unit-num">1</td>
-                            <td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>
                         </tr>
                         <tr class="cart_item">
                             <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
@@ -246,17 +244,43 @@
                             <td data-title="Pre Price" class="product-pre-price">$550</td>
                             <td data-title="Now Price" class="product-now-price">$350</td>
                             <td data-title="Number" class="product-unit-num">1</td>
-                            <td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>
                         </tr>
                         </tbody>
                     </table>
                     <table class="table table-bordered table-responsive">
-                        <tbody>
+                        <thead>
                         <tr>
-                            <td class="action" colspan="6">
-                                <a href="/front/home" title="Continue shopping">去购物</a>
-                                <a href="/front/order" title="update shopping cart">刷新</a>
-                            </td>
+                            <th class="product-thumbnail" style="width: 20%">商品实物图</th>
+                            <th class="product-name" style="width: 20%">商品名称</th>
+                            <th class="product-unit-price" style="width: 10%">原价</th>
+                            <th class="product-unit-price" style="width: 10%">现价</th>
+                            <th class="product-unit-price" style="width: 10%">数量</th>
+                            <th class="product-remove" style="width: 10%" colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                            <td data-title="Operate" class="product-operate" rowspan="3"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
+                            <td data-title="Remove" class="product-remove"rowspan="3"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
                         </tr>
                         </tbody>
                     </table>
@@ -319,19 +343,28 @@
 <!-- Library - Theme JS -->
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+<!-- layer -->
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
 
 <script>
     $(function () {
-        $('order').on('click','order1',function(){
-            layer.confirm('是否删除该订单:', {icon: 3, title: '提示'}, function (index) {
-            $(this).remove();
+        $(".container").on("click", ".btn_del_order", function () {
+            var $table = $(this).parents("table");
+            //var name = $tr.find("td:eq(1)").html();
+            layer.confirm('是否删除该订单', {icon: 3, title: '提示'}, function (index) {
+                $table.remove();
                 layer.close(index);
             })
         });
-        $(".container").on("click", ".btn_update_order", function () {
+
+
+
+        $(".container").on("click", ".btn_operate", function () {
             layer.open({
                 type: 2,
-                title: '修改用户信息',
+                title: '订单情况',
                 shadeClose: true,
                 shade: 0.8,
                 area: ['500px', '600px'],
