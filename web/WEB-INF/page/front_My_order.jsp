@@ -41,8 +41,9 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/plugins.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/localLib/HomeStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/HomeStyle.css">
 
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
 </head>
 
@@ -58,65 +59,16 @@
     </div><!-- Loader /- -->
 
     <!-- Header -->
-    <header class="header-section header-section-1 container-fluid no-padding">
+    <header class="header-section container-fluid no-padding">
         <!-- Top Header -->
-        <div class="top-header top-header1 container-fluid no-padding">
-            <!-- Container -->
-            <div class="container">
-                <div class="col-md-7 col-sm-7 col-xs-7 dropdown-bar">
-                    <h5>Welcome To Tang Shop</h5>
-                </div>
-            </div><!-- Container /- -->
-        </div><!-- Top Header /- -->
-
-        <!-- Middel Header -->
-        <div class="middel-header">
-            <!-- Container -->
-            <div class="container">
-                <!-- Logo Block -->
-                <div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-                    <a href="front_home.jsp" class="navbar-brand">汤 <span>达人</span></a>
-                </div><!-- Logo Block /- -->
-                <!-- Search Block -->
-                <div class="col-md-5 col-sm-6 col-xs-6 search-block">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="搜索 . . ." type="text">
-                        <span class="input-group-btn">
-								<button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-                    </div>
-                </div><!-- Search Block /- -->
-                <!-- Menu Icon -->
-                <div class="col-md-3 col-sm-6 col-xs-6 menu-icon">
-                    <ul class="cart">
-                        <li>
-                            <a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>
-                            <ul class="dropdown-menu no-padding">
-                                <li class="mini_cart_item">
-                                    <a title="Remove this item" class="remove" href="#">&#215;</a>
-                                    <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-1.jpg">Flying Ninja
-                                    </a>
-                                    <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-                                </li>
-                                <li class="mini_cart_item">
-                                    <a title="Remove this item" class="remove" href="#">&#215;</a>
-                                    <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-2.jpg">Flying Ninja
-                                    </a>
-                                    <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-                                </li>
-                                <li class="button">
-                                    <a href="#" title="View Cart">View Cart</a>
-                                    <a href="#" title="Check Out">Check out</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- Menu Icon /- -->
-            </div><!-- Container /- -->
-        </div><!-- Middel Header /- -->
-
+        <!--<div class="top-header top-header1 container-fluid no-padding">-->
+        <!--&lt;!&ndash; Container &ndash;&gt;-->
+        <!--<div class="container">-->
+        <!--<div class="col-md-7 col-sm-7 col-xs-7 dropdown-bar">-->
+        <!--<h5>Welcome To Tang Shop</h5>-->
+        <!--</div>-->
+        <!--</div>&lt;!&ndash; Container /- &ndash;&gt;-->
+        <!--</div>&lt;!&ndash; Top Header /- &ndash;&gt;-->
         <!-- Menu Block -->
         <div class="container-fluid no-padding menu-block">
             <!-- Container -->
@@ -130,173 +82,243 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="front_home.jsp" class="navbar-brand">汤 <span>达人</span></a>
+                        <a href="${pageContext.request.contextPath}/front/home" class="navbar-brand">汤 <span>达人</span></a>
                     </div>
-                    <div class="navbar-collapse collapse" id="navbar">
+                    <!-- Menu Icon -->
+                    <div class="menu-icon">
+                        <div class="search">
+                            <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
+                        </div>
+                        <ul class="cart">
+                            <%--<li>--%>
+                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
+                            <%--<ul class="dropdown-menu no-padding">--%>
+                            <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
+                            <%--<li class="mini_cart_item">--%>
+                            <%--<a title="Remove this item" class="remove" href="#">&#215;</a>--%>
+                            <%--<a href="#" class="shop-thumbnail">--%>
+                            <%--<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-1.jpg">Flying Ninja--%>
+                            <%--</a>--%>
+                            <%--<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>--%>
+                            <%--</li>--%>
+
+                            <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
+                            <%--<li class="mini_cart_item">--%>
+                            <%--<a title="Remove this item" class="remove" href="#">&#215;</a>--%>
+                            <%--<a href="#" class="shop-thumbnail">--%>
+                            <%--<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-2.jpg">Flying Ninja--%>
+                            <%--</a>--%>
+                            <%--<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>--%>
+                            <%--</li>--%>
+
+                            <%--&lt;%&ndash;购物车提交按钮&ndash;%&gt;--%>
+                            <%--<li class="button">--%>
+                            <%--<a href="#" title="View Cart">查看购物车</a>--%>
+                            <%--<a href="#" title="Check Out">刷新购物车</a>--%>
+                            <%--<a href="#" title="Check Out">购买</a>--%>
+                            <%--</li>--%>
+                            <%--</ul>--%>
+                            <%--</li>--%>
+                        </ul>
+                        <div>
+                            <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a>
+                        </div>
+                        <c:if test="${isLogin==false}">
+                            <div>
+                                <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${isLogin==true}">
+                            <div>
+                                <a title="User" class="btn_login"><i class="icon icon-User"></i></a>
+                            </div>
+                        </c:if>
+
+                    </div>
+                    <!-- Menu Icon /- -->
+                    <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="front_My_Personalcenter.jsp"><i class="icon icon-User"></i>个人资料</a></li>
-                            <li><a href="front_history.jsp"><i class="fa fa-vimeo"></i>游览历史</a></li>
-                            <li><a href="front_My_order.jsp"><i class="icon icon-Heart"></i>我的订单</a></li>
-                            <li><a href="front_My_evaluation.jsp"><i class="fa fa-tumblr"></i>我的评价</a></li>
-                            <li><a href="front_SystemNotice.jsp"><i class="fa fa-twitter"></i>系统通知</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
+                            <li><a href="cart.html"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/order"><i class="icon icon-Heart"></i>我的订单</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/myEvaluation"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/sysNotice"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </nav><!-- nav /- -->
+                <!-- Search Box -->
+                <div class="search-box">
+                    <span><i class="icon_close"></i></span>
+                    <form><input type="text" class="form-control" placeholder="输入关键词……" /></form>
+                </div><!-- Search Box /- -->
             </div><!-- Container /- -->
         </div><!-- Menu Block /- -->
     </header><!-- Header /- -->
+    <<main>
+    <div class="page-banner container-fluid no-padding">
+        <!-- Container -->
+        <div class="container">
+            <div class="section-header">
+                <h3>我的订单</h3>
+                <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator">
+            </div>
+        </div><!-- Container /- -->
+    </div>
 
-    <main>
-        <!-- Page Banner -->
-        <div class="page-banner container-fluid no-padding">
-            <!-- Container -->
-            <div class="container">
-                <div class="banner-content">
-                    <h3>个人中心</h3>
-                </div>
-                <ol class="breadcrumb">
-                    <li><a href="index.html" title="Home">首页</a></li>
-                    <li class="active">个人中心</li>
-                </ol>
-            </div><!-- Container /- -->
-        </div><!-- Page Banner /- -->
+    <div class="woocommerce-cart container-fluid no-left-padding no-right-padding">
+        <!-- Container -->
+        <div class="container">
+            <!-- Cart Table -->
+            <div class="col-md-12 col-sm-12 col-xs-12 cart-table">
+                <form>
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                        <tr>
+                            <th class="product-thumbnail" style="width: 20%">商品实物图</th>
+                            <th class="product-name" style="width: 20%">商品名称</th>
+                            <th class="product-unit-price" style="width: 10%">原价</th>
+                            <th class="product-unit-price" style="width: 10%">现价</th>
+                            <th class="product-unit-price" style="width: 10%">数量</th>
+                            <th class="product-remove" style="width: 10%" colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                            <td data-title="Operate" class="product-operate" rowspan="3"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
+                            <td data-title="Remove" class="product-remove"rowspan="3"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                        <tr>
+                            <th class="product-thumbnail" style="width: 20%">商品实物图</th>
+                            <th class="product-name" style="width: 20%">商品名称</th>
+                            <th class="product-unit-price" style="width: 10%">原价</th>
+                            <th class="product-unit-price" style="width: 10%">现价</th>
+                            <th class="product-unit-price" style="width: 10%">数量</th>
+                            <th class="product-remove" style="width: 10%" colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                            <td data-title="Operate" class="product-operate" rowspan="3"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
+                            <td data-title="Remove" class="product-remove"rowspan="3"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                        <tr>
+                            <th class="product-thumbnail" style="width: 20%">商品实物图</th>
+                            <th class="product-name" style="width: 20%">商品名称</th>
+                            <th class="product-unit-price" style="width: 10%">原价</th>
+                            <th class="product-unit-price" style="width: 10%">现价</th>
+                            <th class="product-unit-price" style="width: 10%">数量</th>
+                            <th class="product-remove" style="width: 10%" colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                            <td data-title="Operate" class="product-operate" rowspan="3"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
+                            <td data-title="Remove" class="product-remove"rowspan="3"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td data-title="Item" class="product-thumbnail"><a href="#"><img src="/localLib/images/product-item.jpg" alt="Product"></a></td>
+                            <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                            <td data-title="Pre Price" class="product-pre-price">$550</td>
+                            <td data-title="Now Price" class="product-now-price">$350</td>
+                            <td data-title="Number" class="product-unit-num">1</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-        <div id="product-section" class="product-section container-fluid no-padding">
-            <!-- Container -->
-            <div class="container">
-                <div class="row">
-                    <!-- Section Header -->
-                    <div class="section-header">
-                        <h3>我的订单</h3>
-                        <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator">
-                    </div><!-- Section Header /- -->
-                    <ul id="filters" class="products-categories no-left-padding">
-                        <li><a data-filter=".video" href="#" class="">全部订单<i class="fa fa-angle-down"></i></a></li>
-                        <li><a data-filter=".design" href="#" class="">待付款</a></li>
-                        <li><a data-filter=".video" href="#" class="">待发货</a></li>
-                        <li><a data-filter=".photography" href="#" class="">待收货</a></li>
-                        <li><a data-filter=".web" href="#" class="">退款/售后</a></li>
-                    </ul>
-                    <div class="input-group">
-                        <input class="form-control" placeholder="搜索" type="text">
-                        <span class="input-group-btn">
-								<button class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-                    </div>
-                    <!-- Products -->
-                    <ul class="products" id="order" style="position: relative; height: 1188px;">
-                        <!-- Product -->
-                        <li class="product design" id="order1" style="position: absolute; left: 15px; top: 0px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-1.jpg" alt="Product">
-                                <h5>Stylish Chair</h5>
-                                <span class="price">￥139 数量 1 <strong>￥139</strong></span>
-                            </a>
-                            <!--<a href="index.html" title="update">操作</a>
-                            <a href="front_history.jsp" title="del">删除</a> -->
-                            <a class="btn btn-xs btn-info btn_update_order">修改</a>
-                            <a class="btn btn-xs btn-danger btn_del_order">删除</a></td>
 
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product video" id="order2" style="position: absolute; left: 260px; top: 0px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-2.jpg" alt="Product">
-                                <h5>men's casual shoes</h5>
-                                <span class="price">￥85 数量 2 <strong>￥170</strong></span>
-                            </a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product photography" id="order3" style="position: absolute; left: 505px; top: 0px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-3.jpg" alt="Product">
-                                <h5>Sun glass</h5>
-                                <span class="price">￥39 数量 1 <strong>￥39</strong></span>
-                            </a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product web" id="order4" style="position: absolute; left: 15px; top: 396px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-4.jpg" alt="Product">
-                                <h5>tourist bags</h5>
-                                <span class="price">￥239 数量 1 <strong>￥239</strong></span>
-                            </a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product design" id="order5" style="position: absolute; left: 260px; top: 396px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-5.jpg" alt="Product">
-                                <h5>mobile phone</h5>
-                                <span class="price">￥339 数量 1 <strong>￥339</strong></span>
-                            </a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product video" id="order6" style="position: absolute; left: 505px; top: 396px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-6.jpg" alt="Product">
-                                <h5>men's winter coat</h5>
-                                <span class="price">￥129 数量 2 <strong>￥258</strong></span>
-                            </a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product photography" id="order7" style="position: absolute; left: 15px; top: 792px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-7.jpg" alt="Product">
-                                <h5>Model x12 computer</h5>
-                                <span class="price">￥550 数量 1 <strong>￥550</strong></span>
-                            </a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product web" id="order8" style="position: absolute; left: 260px; top: 792px;">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-8.jpg" alt="Product">
-                                <h5>Stylish headset</h5>
-                                <span class="price">￥39 数量 4 <strong>￥156</strong></span>
-                            </a>
-                        </li><!-- Product /- -->
-                    </ul><!-- Products /- -->
-                </div><!-- Row /- -->
-                <nav class="ow-pagination">
-                    <ul class="pager">
-                        <li class="load-more"><a href="#">更多</a></li>
-                        <li class="previous"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        <li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    </ul>
-                </nav>
-            </div><!-- Container /- -->
-        </div>
-        <!-- Container /- -->
+                </form>
+            </div>
+            <!-- Cart Table /- -->
+        </div><!-- Container /- -->
         <div class="map container-fluid no-padding">
             <div class="map-canvas" id="map-canvas-contact" data-lat="-32.559356" data-lng="149.564237" data-string="Max Shop, 65 Huge Street Melbourne,  2850 Australia." data-zoom="12"></div>
             <a href="#">Tang <span>Shop</span></a>
         </div>
+    </div>
     </main>
-    <footer id="footer-main" class="footer-main footer-main-1 services-section container-fluid">
+    <footer id="footer-main" class="footer-main container-fluid">
         <!-- Container -->
         <div class="container">
+            <div class="row">
+                <!-- Widget About -->
+                <aside class="col-md-12 col-sm-12 col-xs-12 ftr-widget widget_about">
+                    <a href="/front/home" title="Max Shop">汤 <span>达人</span></a>
+                    <p>On the most sensational inspirational celbrational Muppetational... This is what we call Show. I have always wanted to have a neighbor just like you.</p>
 
-            <!-- Widget About -->
-            <aside class="col-md-12 col-sm-12 col-xs-12 ftr-widget widget_about">
-                <a href="front_home.jsp" title="汤 达人">汤 <span>达人</span></a>
-                <p>On the most sensational inspirational celbrational Muppetational... This is what we call Show. I have always wanted to have a neighbor just like you.</p>
+                    <div class="info">
+                        <p><i class="icon icon-Phone2"></i><a href="tel:(11)1234567890" title="Phone" class="phone">(11) 123 456 7890</a></p>
+                        <p><i class="icon icon-Imbox"></i><a href="mailto:info@maxshop.com" title="info@maxshop.com">info@maxshop.com</a></p>
+                    </div>
 
-            </aside>
+                </aside><!-- Widget About /- -->
+            </div>
             <div class="copyright-section">
                 <div class="coyright-content">
                     <p>Copyright © 2017.Tang Shop All rights reserved.</p>
                 </div>
-
             </div>
         </div><!-- Container /- -->
-    </footer></div>
-
+    </footer>
 </div>
 
 <!-- JQuery v1.12.4 -->
@@ -320,16 +342,36 @@
 
 <!-- Library - Theme JS -->
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+<!-- layer -->
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
 
 <script>
     $(function () {
-        $('order').on('click','order1',function(){
-            layer.confirm('是否删除该订单:', {icon: 3, title: '提示'}, function (index) {
-            $(this).remove();
+        $(".container").on("click", ".btn_del_order", function () {
+            var $table = $(this).parents("table");
+            //var name = $tr.find("td:eq(1)").html();
+            layer.confirm('是否删除该订单', {icon: 3, title: '提示'}, function (index) {
+                $table.remove();
                 layer.close(index);
             })
-        })
+        });
+
+
+
+        $(".container").on("click", ".btn_operate", function () {
+            layer.open({
+                type: 2,
+                title: '订单情况',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['500px', '600px'],
+                content: 'update.html'
+            })
+
+        });
 
 
     })

@@ -132,11 +132,11 @@
                     <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
-                            <li><a href="cart.html">购物车</a></li>
-                            <li><a href="${pageContext.request.contextPath}/front/history">游览历史</a></li>
-                            <li><a href="${pageContext.request.contextPath}/front/order">我的订单</a></li>
-                            <li><a href="${pageContext.request.contextPath}/front/myEvaluation">我的评价</a></li>
-                            <li><a href="${pageContext.request.contextPath}/front/sysNotice">系统通知</a></li>
+                            <li><a href="cart.html"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/order"><i class="icon icon-Heart"></i>我的订单</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/myEvaluation"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/sysNotice"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </nav><!-- nav /- -->
@@ -503,119 +503,6 @@
                 </div>
             </div><!-- Container /- -->
         </div><!-- Dealing Section2 -->
-
-        <!-- Selling -->
-        <div id="selling" class="container-fluid no-left-padding no-right-padding woocommerce-selling">
-            <!-- Container -->
-            <div class="container">
-                <!-- Section Header -->
-                <div class="section-header">
-                    <h3>推荐</h3>
-                    <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
-                </div><!-- Section Header /- -->
-                <div class="col-md-4 col-sm-6 col-xs-6">
-                    <div  class="selling-box">
-                        <img src="${pageContext.request.contextPath}/localLib/images/selling-1.jpg" alt="selling" />
-                        <div class="selling-content">
-                            <h6><a href="#">mens casual belts</a></h6>
-                            <span class="price"><del>$75</del> $49</span>
-                            <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-6">
-                    <div  class="selling-box">
-                        <img src="${pageContext.request.contextPath}/localLib/images/selling-2.jpg" alt="selling" />
-                        <div class="selling-content">
-                            <h6><a href="#">attractive chains</a></h6>
-                            <span class="price"><del>$220</del> $149</span>
-                            <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-6">
-                    <div  class="selling-box">
-                        <img src="${pageContext.request.contextPath}/localLib/images/selling-3.jpg" alt="selling" />
-                        <div class="selling-content">
-                            <h6><a href="#">ladies bags</a></h6>
-                            <span class="price"><del>$325</del> $249</span>
-                            <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-6">
-                    <div  class="selling-box">
-                        <img src="${pageContext.request.contextPath}/localLib/images/selling-4.jpg" alt="selling" />
-                        <div class="selling-content">
-                            <h6><a href="#">casual shirts</a></h6>
-                            <span class="price"><del>$240</del> $179</span>
-                            <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-6">
-                    <div  class="selling-box">
-                        <img src="${pageContext.request.contextPath}/localLib/images/selling-5.jpg" alt="selling" />
-                        <div class="selling-content">
-                            <h6><a href="#">ladies wallets</a></h6>
-                            <span class="price"><del>$120</del> $79</span>
-                            <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-6">
-                    <div  class="selling-box">
-                        <img src="${pageContext.request.contextPath}/localLib/images/selling-6.jpg" alt="selling" />
-                        <div class="selling-content">
-                            <h6><a href="#">huvai chappals</a></h6>
-                            <span class="price"><del>$850</del> $550</span>
-                            <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- Container /- -->
-        </div><!-- Selling /- -->
     </main>
 
     <!-- Footer Main -->

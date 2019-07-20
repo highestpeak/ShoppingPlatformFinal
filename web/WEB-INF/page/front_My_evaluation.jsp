@@ -40,8 +40,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/plugins.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/localLib/HomeStyle.css">
-
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/HomeStyle.css">
 
 </head>
 
@@ -57,65 +56,16 @@
     </div><!-- Loader /- -->
 
     <!-- Header -->
-    <header class="header-section header-section-1 container-fluid no-padding">
+    <header class="header-section container-fluid no-padding">
         <!-- Top Header -->
-        <div class="top-header top-header1 container-fluid no-padding">
-            <!-- Container -->
-            <div class="container">
-                <div class="col-md-7 col-sm-7 col-xs-7 dropdown-bar">
-                    <h5>Welcome To Tang Shop</h5>
-                </div>
-            </div><!-- Container /- -->
-        </div><!-- Top Header /- -->
-
-        <!-- Middel Header -->
-        <div class="middel-header">
-            <!-- Container -->
-            <div class="container">
-                <!-- Logo Block -->
-                <div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-                    <a href="front_home.jsp" class="navbar-brand">汤 <span>达人</span></a>
-                </div><!-- Logo Block /- -->
-                <!-- Search Block -->
-                <div class="col-md-5 col-sm-6 col-xs-6 search-block">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="搜索 . . ." type="text">
-                        <span class="input-group-btn">
-								<button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-                    </div>
-                </div><!-- Search Block /- -->
-                <!-- Menu Icon -->
-                <div class="col-md-3 col-sm-6 col-xs-6 menu-icon">
-                    <ul class="cart">
-                        <li>
-                            <a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>
-                            <ul class="dropdown-menu no-padding">
-                                <li class="mini_cart_item">
-                                    <a title="Remove this item" class="remove" href="#">&#215;</a>
-                                    <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/imagesproduct-wishlist-1.jpg">Flying Ninja
-                                    </a>
-                                    <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-                                </li>
-                                <li class="mini_cart_item">
-                                    <a title="Remove this item" class="remove" href="#">&#215;</a>
-                                    <a href="#" class="shop-thumbnail">
-                                        <img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/imagesproduct-wishlist-2.jpg">Flying Ninja
-                                    </a>
-                                    <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-                                </li>
-                                <li class="button">
-                                    <a href="#" title="View Cart">View Cart</a>
-                                    <a href="#" title="Check Out">Check out</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- Menu Icon /- -->
-            </div><!-- Container /- -->
-        </div><!-- Middel Header /- -->
-
+        <!--<div class="top-header top-header1 container-fluid no-padding">-->
+        <!--&lt;!&ndash; Container &ndash;&gt;-->
+        <!--<div class="container">-->
+        <!--<div class="col-md-7 col-sm-7 col-xs-7 dropdown-bar">-->
+        <!--<h5>Welcome To Tang Shop</h5>-->
+        <!--</div>-->
+        <!--</div>&lt;!&ndash; Container /- &ndash;&gt;-->
+        <!--</div>&lt;!&ndash; Top Header /- &ndash;&gt;-->
         <!-- Menu Block -->
         <div class="container-fluid no-padding menu-block">
             <!-- Container -->
@@ -129,104 +79,232 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="front_home.jsp" class="navbar-brand">汤 <span>达人</span></a>
+                        <a href="${pageContext.request.contextPath}/front/home" class="navbar-brand">汤 <span>达人</span></a>
                     </div>
-                    <div class="navbar-collapse collapse" id="navbar">
+                    <!-- Menu Icon -->
+                    <div class="menu-icon">
+                        <div class="search">
+                            <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
+                        </div>
+                        <ul class="cart">
+                            <%--<li>--%>
+                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
+                            <%--<ul class="dropdown-menu no-padding">--%>
+                            <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
+                            <%--<li class="mini_cart_item">--%>
+                            <%--<a title="Remove this item" class="remove" href="#">&#215;</a>--%>
+                            <%--<a href="#" class="shop-thumbnail">--%>
+                            <%--<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-1.jpg">Flying Ninja--%>
+                            <%--</a>--%>
+                            <%--<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>--%>
+                            <%--</li>--%>
+
+                            <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
+                            <%--<li class="mini_cart_item">--%>
+                            <%--<a title="Remove this item" class="remove" href="#">&#215;</a>--%>
+                            <%--<a href="#" class="shop-thumbnail">--%>
+                            <%--<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-2.jpg">Flying Ninja--%>
+                            <%--</a>--%>
+                            <%--<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>--%>
+                            <%--</li>--%>
+
+                            <%--&lt;%&ndash;购物车提交按钮&ndash;%&gt;--%>
+                            <%--<li class="button">--%>
+                            <%--<a href="#" title="View Cart">查看购物车</a>--%>
+                            <%--<a href="#" title="Check Out">刷新购物车</a>--%>
+                            <%--<a href="#" title="Check Out">购买</a>--%>
+                            <%--</li>--%>
+                            <%--</ul>--%>
+                            <%--</li>--%>
+                        </ul>
+                        <div>
+                            <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a>
+                        </div>
+                        <c:if test="${isLogin==false}">
+                            <div>
+                                <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${isLogin==true}">
+                            <div>
+                                <a title="User" class="btn_login"><i class="icon icon-User"></i></a>
+                            </div>
+                        </c:if>
+
+                    </div>
+                    <!-- Menu Icon /- -->
+                    <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="front_My_Personalcenter.jsp"><i class="icon icon-User"></i>个人资料</a></li>
-                            <li><a href="front_history.jsp"><i class="fa fa-vimeo"></i>游览历史</a></li>
-                            <li><a href="front_My_order.jsp"><i class="icon icon-Heart"></i>我的订单</a></li>
-                            <li><a href="front_My_evaluation.jsp"><i class="fa fa-tumblr"></i>我的评价</a></li>
-                            <li><a href="front_SystemNotice.jsp"><i class="fa fa-twitter"></i>系统通知</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
+                            <li><a href="cart.html"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/order"><i class="icon icon-Heart"></i>我的订单</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/myEvaluation"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/sysNotice"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </nav><!-- nav /- -->
+                <!-- Search Box -->
+                <div class="search-box">
+                    <span><i class="icon_close"></i></span>
+                    <form><input type="text" class="form-control" placeholder="输入关键词……" /></form>
+                </div><!-- Search Box /- -->
             </div><!-- Container /- -->
+
         </div><!-- Menu Block /- -->
     </header><!-- Header /- -->
-
     <main>
-        <!-- Page Banner -->
-        <div class="page-banner container-fluid no-padding">
-            <!-- Container -->
-            <div class="container">
-                <div class="banner-content">
-                    <h3>个人中心</h3>
-                </div>
-                <ol class="breadcrumb">
-                    <li><a href="front_home.jsp" title="Home">首页</a></li>
-                    <li class="active">个人中心</li>
-                </ol>
-            </div><!-- Container /- -->
-        </div><!-- Page Banner /- -->
 
-        <div class="testimonial-section testimonial-section1 container-fluid">
-            <!-- Container -->
-            <div class="container">
-                <!-- Section Header -->
-                <div class="section-header">
-                    <h3>我的评价</h3>
-                    <img src="${pageContext.request.contextPath}/localLib/images/imagessection-seprator.png" alt="section-seprator">
-                </div><!-- Section Header /- -->
-                <!-- Main Carousel -->
-                <div id="main-carousel1" class="carousel slide carousel-fade" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#main-carousel1" data-slide-to="0" class="active"></li>
-                        <li data-target="#main-carousel1" data-slide-to="1" class=""></li>
-                        <li data-target="#main-carousel1" data-slide-to="2" class=""></li>
-                    </ol>
-                    <div role="listbox" class="carousel-inner">
-                        <div class="item active">
-                            <div class="testimonial-content">
-                                <a href="xxx.html"><img src="${pageContext.request.contextPath}/localLib/imagestesti-1.png" alt="testi"></a>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                <p>The final frontier. These are the voyages of the Starship Enterprise? As long as we live its you and me baby. There ain't nothin'  Beats all you've ever saw been in trouble with the law since the day. </p>
-
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <a href="xxx.html"><img src="${pageContext.request.contextPath}/localLib/imagestesti-1.png" alt="testi"></a>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                <p>The final frontier. These are the voyages of the Starship Enterprise? As long as we live its you and me baby. There ain't nothin'  Beats all you've ever saw been in trouble with the law since the day. </p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <a href="xxx.html"><img src="${pageContext.request.contextPath}/localLib/imagestesti-1.png" alt="testi"></a>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                <p>The final frontier. These are the voyages of the Starship Enterprise? As long as we live its you and me baby. There ain't nothin'  Beats all you've ever saw been in trouble with the law since the day. </p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- Main Carousel /-  -->
-        </div><!-- Container /- -->
-        <div class="map container-fluid no-padding">
-            <div class="map-canvas" id="map-canvas-contact" data-lat="-32.559356" data-lng="149.564237" data-string="Max Shop, 65 Huge Street Melbourne,  2850 Australia." data-zoom="12"></div>
-            <a href="#">Tang <span>Shop</span></a>
-        </div>
-    </main>
-    <footer id="footer-main" class="footer-main footer-main-1 services-section container-fluid">
+    <div class="page-banner container-fluid no-padding">
         <!-- Container -->
         <div class="container">
+            <div class="section-header">
+                <h3>我的评价</h3>
+                <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator">
+            </div>
+        </div>
+    </div>
 
-            <!-- Widget About -->
-            <aside class="col-md-12 col-sm-12 col-xs-12 ftr-widget widget_about">
-                <a href="front_home.jsp" title="汤 达人">汤 <span>达人</span></a>
-                <p>On the most sensational inspirational celbrational Muppetational... This is what we call Show. I have always wanted to have a neighbor just like you.</p>
+    <div id="selling" class="container-fluid no-left-padding no-right-padding woocommerce-selling">
+        <!-- Container -->
+        <div class="container">
+            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
+                <div class="selling-box">
+                    <img src="${pageContext.request.contextPath}/localLib/images/selling-1.jpg" alt="selling">
+                    <div class="selling-content">
+                        <span class="price">￥49</span>
+                        <div class="star-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <h6><a href="#">mens casual belts······</a></h6>
+                    </div>
+                </div>
+            </div>
 
-            </aside>
+            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
+                <div class="selling-box">
+                    <img src="${pageContext.request.contextPath}/localLib/images/selling-2.jpg" alt="selling">
+                    <div class="selling-content">
+                        <span class="price">￥149</span>
+                        <div class="star-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <h6><a href="#">attractive chains······</a></h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
+                <div class="selling-box">
+                    <img src="${pageContext.request.contextPath}/localLib/images/selling-3.jpg" alt="selling">
+                    <div class="selling-content">
+                        <span class="price">￥249</span>
+                        <div class="star-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <h6><a href="#">ladies bags······</a></h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
+                <div class="selling-box">
+                    <img src="${pageContext.request.contextPath}/localLib/images/selling-4.jpg" alt="selling">
+                    <div class="selling-content">
+                        <span class="price">￥179</span>
+                        <div class="star-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <h6><a href="#">casual shirts······</a></h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
+                <div class="selling-box">
+                    <img src="${pageContext.request.contextPath}/localLib/images/selling-5.jpg" alt="selling">
+                    <div class="selling-content">
+                        <span class="price">￥79</span>
+                        <div class="star-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <h6><a href="#">ladies wallets······</a></h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
+                <div class="selling-box">
+                    <img src="${pageContext.request.contextPath}/localLib/images/selling-6.jpg" alt="selling">
+                    <div class="selling-content">
+                        <span class="price">￥550</span>
+                        <div class="star-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <h6><a href="#">huvai chappals······</a></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Container /- -->
+
+    <div class="map container-fluid no-padding">
+        <div class="map-canvas" id="map-canvas-contact" data-lat="-32.559356" data-lng="149.564237" data-string="Max Shop, 65 Huge Street Melbourne,  2850 Australia." data-zoom="12"></div>
+        <a href="#">Tang <span>Shop</span></a>
+    </div>
+
+    </main>
+
+    <footer id="footer-main" class="footer-main container-fluid">
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <!-- Widget About -->
+                <aside class="col-md-12 col-sm-12 col-xs-12 ftr-widget widget_about">
+                    <a href="/front/home" title="Max Shop">汤 <span>达人</span></a>
+                    <p>On the most sensational inspirational celbrational Muppetational... This is what we call Show. I have always wanted to have a neighbor just like you.</p>
+
+                    <div class="info">
+                        <p><i class="icon icon-Phone2"></i><a href="tel:(11)1234567890" title="Phone" class="phone">(11) 123 456 7890</a></p>
+                        <p><i class="icon icon-Imbox"></i><a href="mailto:info@maxshop.com" title="info@maxshop.com">info@maxshop.com</a></p>
+                    </div>
+
+                </aside><!-- Widget About /- -->
+            </div>
             <div class="copyright-section">
                 <div class="coyright-content">
                     <p>Copyright © 2017.Tang Shop All rights reserved.</p>
                 </div>
-
             </div>
         </div><!-- Container /- -->
-    </footer></div>
-
+    </footer>
 </div>
 
 <!-- JQuery v1.12.4 -->
