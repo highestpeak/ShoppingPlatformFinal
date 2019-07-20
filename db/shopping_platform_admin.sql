@@ -1,1 +1,0 @@
-INSERT INTO shopping_platform.admin (user_id, permission, create_time, update_time) VALUES ('123456', 'this is a note', '20190718-134600', '20190718-134600');
