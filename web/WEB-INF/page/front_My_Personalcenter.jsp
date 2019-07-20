@@ -201,6 +201,14 @@
                             <input type="text" name="contact-name" class="form-control" id="input_email" placeholder="电子邮箱 *" required="">
                         </div>
 
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>收货地址</label>
+                            <select class="form-control">
+                                <option>收货地址1</option>
+                                <option>收货地址2</option>
+                                <option>收货地址3</option>
+                            </select>
+                        </div>
+
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                             <textarea placeholder="个人简介" id="textarea_message" name="contact-message" rows="5" class="form-control"></textarea>
                         </div>

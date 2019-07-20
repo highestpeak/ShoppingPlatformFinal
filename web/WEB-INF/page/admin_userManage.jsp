@@ -6,12 +6,12 @@
 
     <!-- 注意使用adminlte文件夹的css，js文件(教程视频有) -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="../../adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../adminlte/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../adminlte/bower_components/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="../../adminlte/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="../../adminlte/dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="../../adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -31,7 +31,7 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="../../Adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="${pageContext.request.contextPath}/Adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">User Name</span>
                         </a>
                     </li>
@@ -312,14 +312,14 @@
 
 </div>
 
-<script src="../../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../../adminlte/dist/js/adminlte.min.js"></script>
-<script src="../../adminlte/dist/js/demo.js"></script>
-<script src="../../adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="../../adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
 
 <script>
     $(function () {
