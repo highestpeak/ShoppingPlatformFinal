@@ -13,6 +13,30 @@
         where store_id = #{store_id}
     </select>
 
+    <resultMap id="queryAllGoodsOfStoreVO" type="com.demo.mms.common.domain.Goods">
+    </resultMap>
+    <select id="queryAllGoodsOfStore" parameterType="String" resultMap="queryAllGoodsOfStoreVO" >
+        select *
+        from goods
+        where store_id = #{store_id}
+    </select>
+    <select id="queryAllGoodsOfStore_specialClass" parameterType="String" resultMap="queryAllGoodsOfStoreVO" >
+        SELECT
+          goods.goods_id,
+          goods_name,
+          goods.old_level,
+          goods.pic_url,
+          goods.status,
+          goods.description,
+          goods.store_id,
+          goods.create_time,
+          goods.update_time
+        FROM goods,classify_of_goods, store_sell_classify,goods_classify
+        where goods.store_id=#{store_id} AND goods_classify.classify_name=#{classify_name} AND
+              goods.goods_id=classify_of_goods.goods_id AND
+              classify_of_goods.classify_selled_id=store_sell_classify.id AND
+              store_sell_classify.classify_id=goods_classify.classify_id
+    </select>
     <!--<resultMap id="returnGoodsOfStore" type="com.demo.mms.common.domain.Goods" ></resultMap>-->
     <!--<select id="queryGoodsOfStore" parameterType="String" resultMap="returnGoodsOfStore">-->
         <!--select *-->

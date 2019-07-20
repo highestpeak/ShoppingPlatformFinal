@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-public interface LoginRegisterService {
+public interface UserService {
     Map<String,Object> login(String user_id, String verify,
                              HttpServletRequest request,
                              HttpServletResponse response);
@@ -22,4 +22,8 @@ public interface LoginRegisterService {
     Map<String,Object> newVerify(String user_id, String email, String newVerify);
 
     Map<String,Object> updateUser(User userOld, User userNew);
+
+    Map<String,Object> getUserInfo(User user);
+
+    Map<String,Object> delUser(User user);
 }

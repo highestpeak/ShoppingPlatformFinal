@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class LoginRegisterServiceImpl implements LoginRegisterService{
+public class UserServiceImpl implements UserService {
     @Autowired
     UserOperateMapper userOperateMapper;
 
@@ -201,28 +201,61 @@ public class LoginRegisterServiceImpl implements LoginRegisterService{
         return rs;
     }
 
+    @Override
+    public Map<String, Object> getUserInfo(User user) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        if(userFind==null){//不存在user
+            rs.put("user existed",false);
+            return rs;
+        }
+        //存在User
+        rs.put("userFind",userFind);
+        //这里说明返回的rs不应该是判断为空即为正确，
+        //应当返回rs中有success为true说明执行正确，
+        //这样可以网map里面放置多个值
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> delUser(User user) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        if(userFind==null){//不存在user
+            rs.put("user existed",false);
+            return rs;
+        }
+        //存在User
+        try {
+            userOperateMapper.delUser("user_id",user.getUser_id());
+        }catch (Exception e){
+            rs.put("delError",true);
+        }
+        return rs;
+    }
+
     private Map<String, Object> updateUserHelp(User userOld, User userNew) {
         Map<String,Object> rs=new HashMap<>();
         Map<String,String> modifyList=new HashMap<>();
-        if(!userOld.getVerify().equals(userNew.getVerify())){
+        if(userNew.getVerify()!=null && !userNew.getVerify().equals(userOld.getVerify())){
             rs.putAll(newVerify(userOld.getUser_id(),userOld.getEmail(),userNew.getVerify()));
         }
-        if(!userOld.getRealname().equals(userNew.getRealname())){
+        if(userNew.getRealname()!=null && !userNew.getRealname().equals(userOld.getRealname())){
             modifyList.put("realname",userNew.getRealname());
         }
-        if(!userOld.getNickname().equals(userNew.getNickname())){
+        if(userNew.getNickname()!=null && !userNew.getNickname().equals(userOld.getNickname())){
             modifyList.put("nickname",userNew.getNickname());
         }
-        if(!userOld.getAvator_url().equals(userNew.getAvator_url())){
+        if(userNew.getAvator_url()!=null && !userNew.getAvator_url().equals(userOld.getAvator_url())){
             modifyList.put("avator_url",userNew.getAvator_url());
         }
-        if(!userOld.getSex().equals(userNew.getSex())){
+        if(userNew.getSex()!=null && !userNew.getSex().equals(userOld.getSex())){
             modifyList.put("sex",userNew.getSex().toString());
         }
-        if(!userOld.getEmail().equals(userNew.getEmail())){
+        if(userNew.getEmail()!=null && !userNew.getEmail().equals(userOld.getEmail())){
             modifyList.put("email",userNew.getEmail());
         }
-        if(!userOld.getNote().equals(userNew.getNote())){
+        if(userNew.getNote()!=null && !userNew.getNote().equals(userOld.getNote())){
             modifyList.put("note",userNew.getNote());
         }
         for (Map.Entry<String ,String> entry:modifyList.entrySet()){
