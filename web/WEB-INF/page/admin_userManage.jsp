@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -6,12 +8,12 @@
 
     <!-- 注意使用adminlte文件夹的css，js文件(教程视频有) -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="../../adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../adminlte/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../adminlte/bower_components/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="../../adminlte/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="../../adminlte/dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="../../adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -31,7 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="../../Adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="${pageContext.request.contextPath}/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">User Name</span>
                         </a>
                     </li>
@@ -56,41 +58,45 @@
 
             <!-- 增加功能栏目 -->
             <ul class="sidebar-menu tree" data-widget="tree">
-                <!-- 有子功能的功能项 -->
-                <li class="treeview">
-                    <!-- 母功能 -->
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">功能1</font></font></span>
-                        <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                    </a>
-                    <!-- 子功能 -->
-                    <ul class="treeview-menu" style="display: none;">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i><font
-                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                            子功能1</font></font></a></li>
-                        <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i><font
-                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                            子功能2</font></font></a></li>
-                    </ul>
-                </li>
-
-                <!-- 没有子功能的功能项 -->
-                <!-- li标签加上class="active"或在已有class前加active(如class="active treeview")，保证标签为被选中 -->
-                <li class="active">
-                    <a href="pages/widgets.html">
-                        <i class="fa fa-th"></i> <span><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">功能2</font></font></span>
-                    </a>
-                </li>
-
-                <!-- 没有子功能的功能项 -->
                 <li>
-                    <a href="pages/widgets.html">
-                        <i class="fa fa-th"></i> <span><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">功能3</font></font></span>
+                    <a href="${pageContext.request.contextPath}/admin/">
+                        <i class="fa fa-home"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">主页</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/classifyManage">
+                        <i class="fa fa-book"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">分类管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/goodsManage">
+                        <i class="fa fa-tag"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">商品管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/orderManage">
+                        <i class="fa fa-shopping-cart"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">订单管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/userManage">
+                        <i class="fa fa-user"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">用户管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/storeInfoManage">
+                        <i class="fa fa-info-circle"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">商店信息</font></font></span>
                     </a>
                 </li>
             </ul>
@@ -312,14 +318,14 @@
 
 </div>
 
-<script src="../../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../../adminlte/dist/js/adminlte.min.js"></script>
-<script src="../../adminlte/dist/js/demo.js"></script>
-<script src="../../adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="../../adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
 
 <script>
     $(function () {
