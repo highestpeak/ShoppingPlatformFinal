@@ -86,9 +86,8 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg" style="color:orangered">${msg}</p>
 
-        <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return loginCheck()">
+        <form action="${pageContext.request.contextPath}/user/login" method="post" onsubmit="return loginCheck()">
             <div class="form-group has-feedback">
                 <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
