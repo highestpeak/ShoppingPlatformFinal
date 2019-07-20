@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>商品管理</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/bootstrap-treeview.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/css/bootstrap-treeview.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/css/ionicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/css/_all-skins.min.css">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -32,7 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="${pageContext.request.contextPath}/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="${pageContext.request.contextPath}/localLib/images/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">User Name</span>
                         </a>
                     </li>
@@ -55,9 +56,9 @@
                 </div>
             </form>
             <li class="active">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/goods/toClassify">
                     <!-- 请求url -->
-                    <i class="fa fa-fw fa-wrench" href="###"></i> <span>商品管理</span>
+                    <i class="fa fa-th" href="###"></i> <span>商品管理</span>
                 </a>
             </li>
             </ul>
@@ -100,14 +101,15 @@
     </div>
 
 </div>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/bootstrap-treeview.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/plugins/iCheck/icheck.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/chart.js/Chart.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/bootstrap-treeview.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/icheck.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/fastclick.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/Chart.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 
 <script>
     $(function(){
@@ -337,7 +339,7 @@
             animateScale         : false,
             responsive           : true,
             maintainAspectRatio  : true,
-            legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+            <%--legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'--%>
         }
         pieChart.Doughnut(PieData, pieOptions);
     })
