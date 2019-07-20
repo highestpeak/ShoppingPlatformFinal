@@ -434,7 +434,7 @@
 		
 		/* - Contact Map* */
 		if($("#map-canvas-contact").length===1){
-			initialize("map-canvas-contact");
+			//initialize("map-canvas-contact");
 		}
 		
 		/* - Quick Contact Form* */

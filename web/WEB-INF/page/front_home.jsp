@@ -133,9 +133,9 @@
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
                             <li><a href="cart.html"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
-                            <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/order"><i class="icon icon-Heart"></i>我的订单</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/myEvaluation"><i class="fa fa-tumblr"></i>我的评价</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/sysNotice"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
