@@ -5,12 +5,11 @@ import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.GoodsCrudVO;
+import com.demo.mms.common.vo.GoodsQueryVO;
 import com.demo.mms.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,11 +27,11 @@ public class GoodsController {
     //按分类查询
     @RequestMapping("/getByClassify")
     @ResponseBody
-    public Object goodsQuery(Store store, GoodsClassify classifyToGet){
+    public Object goodsQuery(@RequestBody GoodsQueryVO goodsQueryVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-
+        Store store= goodsQueryVO.getStore(); GoodsClassify classifyToGet= goodsQueryVO.getGoodsClassify();
         ArrayList goodsList=new ArrayList();
         Map<String,Object> rsService=null;
         rsService=goodsService.getStoreGoods(store,classifyToGet,goodsList);
@@ -70,9 +69,10 @@ public class GoodsController {
             rs.put("success",false);
             return rs;
         }
+        //here!!
         goodsList=getBySearchGoodsInfo(goodsList,goodsToGet);
         if(goodsList==null || goodsList.isEmpty()){
-            rs.put("goods find",false);
+            rs.put("Goods find",false);
         }
         //处理返回页面的需要填写的值
         //code here

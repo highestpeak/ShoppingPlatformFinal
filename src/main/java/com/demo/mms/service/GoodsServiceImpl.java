@@ -266,7 +266,7 @@ public class GoodsServiceImpl implements GoodsService{
                             goods.getDescription(),goods.getPic_url(),goods.getStatus(),
                             goods.getOld_level(),ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
                 }catch (Exception e){
-                    rs.put("goods "+goods.getGoods_name()+" del","cannot del");
+                    rs.put("goods "+goods.getGoods_name()+" add","cannot add");
                 }
             }
         }
