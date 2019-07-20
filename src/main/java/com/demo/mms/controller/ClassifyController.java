@@ -3,18 +3,18 @@ package com.demo.mms.controller;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.ClassifyCrudVO;
 import com.demo.mms.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-@RequestMapping("/goods")
+@RequestMapping("/classify")
 @Controller
 public class ClassifyController {
     @Autowired
@@ -48,11 +48,14 @@ public class ClassifyController {
     //删除商店所售卖所有商品的---传入classifiesToDel包含所有本商店已经拥有的，需要删除的分类
     @RequestMapping("/deleteClassifyOfStore")
     @ResponseBody
-    public Object deleteClassifyOfStore(Store store, ArrayList<GoodsClassify> classifiesToDel){
+    public Object deleteClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in deleteClassifyOfStore");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        
+
+        Store store=classifyCrudVO.getStore();
+        ArrayList<GoodsClassify> classifiesToDel=(ArrayList<GoodsClassify>)classifyCrudVO.getClassifiesToDel();
+
         Map<String,Object> rsService=goodsService.deleteStoreGoodsClassify(store,classifiesToDel);
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
@@ -95,11 +98,15 @@ public class ClassifyController {
     //更改商店分类信息
     @RequestMapping("/modifyClassifyOfStore")
     @ResponseBody
-    public Object modifyClassifyOfStore(Store store, GoodsClassify oldClassify,GoodsClassify newClassify){
+    public Object modifyClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO
+            ){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in modifyClassifyOfStore");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
 
+        Store store=classifyCrudVO.getStore();
+        GoodsClassify oldClassify=classifyCrudVO.getOldGoodsClassify();
+        GoodsClassify newClassify=classifyCrudVO.getNewGoodsClassify();
         Map<String,Object> rsService=goodsService.updateStoreGoodsClassify(store, oldClassify,newClassify);
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
@@ -130,6 +137,6 @@ public class ClassifyController {
 //        }
 //        modelMap.put("classifyList",rsGetClassify.get("classifyList"));
 //        modelMap.put("rsMap",rs);
-        return "admin_clasiifyManage";
+        return "admin_classifyManage";
     }
 }

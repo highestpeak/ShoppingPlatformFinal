@@ -3,25 +3,29 @@ package com.demo.mms.controller;
 import com.demo.mms.common.domain.Admin;
 import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.common.domain.User;
-import com.demo.mms.service.LoginRegisterService;
+import com.demo.mms.common.vo.UserVO;
+import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //路由到service函数，接收字典返回值---错误、错误类型
 //使用元组返回分页数据
+@RequestMapping("/user")
 @Controller
-public class LoginRegisterController {
+public class UserController {
     @Autowired
-    private LoginRegisterService loginRegisterService;
+    private UserService userService;
 
     //数据请求
     //前台购买者调用
@@ -32,7 +36,7 @@ public class LoginRegisterController {
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         //调用service服务
-        Map<String,Object> rsService=loginRegisterService.registerUser(user,"Buyer");
+        Map<String,Object> rsService= userService.registerUser(user,"Buyer");
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
             rs.put("success",false);
@@ -55,7 +59,7 @@ public class LoginRegisterController {
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         //调用service服务
-        Map<String,Object> rsService=loginRegisterService.registerUser(user,"Admin");
+        Map<String,Object> rsService= userService.registerUser(user,"Admin");
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
             rs.put("success",false);
@@ -78,7 +82,7 @@ public class LoginRegisterController {
 //        System.out.println("in addSeller");
 //        Map<String,Object> rs = new HashMap<>();
 //        //调用service服务
-//        Map<String,Object> rsService=loginRegisterService.registerUser("Seller",user);
+//        Map<String,Object> rsService=userService.registerUser("Seller",user);
 //        if(rsService!=null && rsService.isEmpty()){//含有错误信息
 //            rs.putAll(rsService);
 //            return rs;
@@ -97,7 +101,7 @@ public class LoginRegisterController {
         System.out.println("in login");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsLogin=loginRegisterService.login(user_id,verify,request,response);
+        Map<String,Object> rsLogin= userService.login(user_id,verify,request,response);
         if(rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
             rs.putAll(rsLogin);
             rs.put("success",false);
@@ -112,6 +116,7 @@ public class LoginRegisterController {
         //admin返回admin page
     }
 
+    //使用user_id退出有风险，不法者可能会退出其他用户的登入状态
     @RequestMapping("/logout")
     @ResponseBody
     public Object logout(String user_id,
@@ -120,13 +125,32 @@ public class LoginRegisterController {
         System.out.println("in logout");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsLogin=loginRegisterService.logout(user_id,request,response);
+        Map<String,Object> rsLogin= userService.logout(user_id,request,response);
         if(rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
             rs.putAll(rsLogin);
             rs.put("success",false);
             return rs;
         }
         if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    @RequestMapping("/getInfo")
+    @ResponseBody
+    public Object getUserInfo(User user){
+        System.out.println("in getUserInfo");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsLogin= userService.getUserInfo(user);
+        if(rsLogin!=null && !rsLogin.isEmpty() && !rsLogin.containsKey("userFind")){//含有错误信息
+            rs.putAll(rsLogin);
+            rs.put("success",false);
+            return rs;
+        }
+        rs.putAll(rsLogin);
+        if(rs.size()>1 && !rsLogin.containsKey("userFind")){
             rs.put("success",false);
         }
         return rs;
@@ -145,7 +169,7 @@ public class LoginRegisterController {
         userOld.setUser_id(user_id);
         userOld.setEmail(email);
         userNew.setVerify(newVerify);
-        Map<String,Object> rsEdit=loginRegisterService.updateUser(userOld,userNew);
+        Map<String,Object> rsEdit= userService.updateUser(userOld,userNew);
         if(rsEdit!=null && !rsEdit.isEmpty()){//含有错误信息
             rs.putAll(rsEdit);
             rs.put("success",false);
@@ -157,13 +181,57 @@ public class LoginRegisterController {
         return rs;
     }
 
-    @RequestMapping("/modifyUser")
+    //注销用户
+    //使用user_id有风险，不法者可能会注销其他用户
+    @RequestMapping("/drop")
     @ResponseBody
-    public Object updateUserInfo(User userOld,User userNew){
+    public Object dropUser(User user){
+        System.out.println("in dropUser");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsLogin= userService.delUser(user);
+        if(rsLogin!=null && !rsLogin.isEmpty() && !rsLogin.containsKey("userFind")){//含有错误信息
+            rs.putAll(rsLogin);
+            rs.put("success",false);
+            return rs;
+        }
+        rs.putAll(rsLogin);
+        if(rs.size()>1 && !rsLogin.containsKey("userFind")){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    @RequestMapping("/modify")
+    @ResponseBody
+    public Object updateUserInfo(@RequestBody List<UserVO> userVOs){
         System.out.println("in updateUserInfo");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsService=loginRegisterService.updateUser(userOld,userNew);
+
+        User userOld=null;
+        User userNew=null;
+        for (UserVO userVO: userVOs){
+            switch (userVO.getUserType()){
+                case "userOld":
+                    userOld=userVO.getUser();
+                    break;
+                case "userNew":
+                    userNew=userVO.getUser();
+                    break;
+                default:
+                    rs.put("success",false);
+                    rs.put("userType","not find");
+                    return rs;
+            }
+        }
+        if (userOld==null || userNew==null){
+            rs.put("data error","not enough data");
+            rs.put("success",false);
+            return rs;
+        }
+
+        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
             rs.put("success",false);
@@ -188,7 +256,7 @@ public class LoginRegisterController {
     public Object checkIfLogin(User user,HttpServletRequest request){
         System.out.println("in checkIfLogin");
         Map<String,Object> rs = new HashMap<>();
-        rs.put("already login",loginRegisterService.isAlreadyLogin(user.getUser_id(),request));
+        rs.put("already login", userService.isAlreadyLogin(user.getUser_id(),request));
         rs.put("success",true);
         return rs;
     }

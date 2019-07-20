@@ -30,11 +30,11 @@ public interface GoodsService {
     Map<String,Object> updateStoreGoodsClassify(Store store, GoodsClassify oldClassify,GoodsClassify newClassify);
 
 
-    Map<String,Object> getStoreGoods(Store store, ArrayList goodsList);
+    Map<String,Object> getStoreGoods(Store store, GoodsClassify classifyToGet,ArrayList goodsList);
 
     Map<String,Object> updateStoreGoods(Store store, Goods oldGoods, Goods newGoods);
 
-    Map<String,Object> delStoreGoods(Store store, Goods goodsToDel);
+    Map<String,Object> delStoreGoods(Store store, ArrayList<Goods> goodsToDel);
 
-    Map<String,Object> addStoreGoods(Store store, Goods goodsToAdd);
+    Map<String,Object> addStoreGoods(Store store, ArrayList<Goods> goodsToAdd);
 }

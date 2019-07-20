@@ -1,0 +1,1 @@
+INSERT INTO shopping_platform.seller (user_id, bank_card, create_time, update_time) VALUES ('142536', '9999888877776666', '20190718-134600', '20190718-134600');

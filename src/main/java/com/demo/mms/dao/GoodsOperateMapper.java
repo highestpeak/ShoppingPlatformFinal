@@ -17,7 +17,8 @@ public interface GoodsOperateMapper {
 
     ArrayList<StoreSelledClassifyVO> queryGoodsWithClassify(String store_id);
 
-    @Select("select * from store_sell_classify NATURAL JOIN goods_classify where ${column} = #{value} and store_id = #{store_id}")
+    @Select("select classify_id,top_level_classify_id,parent_id,classify_name,create_time,update_time" +
+            " from store_sell_classify NATURAL JOIN goods_classify where ${column} = #{value} and store_id = #{store_id}")
     GoodsClassify queryClassifyOfStore(@Param("store_id") String store_id,
                                        @Param("column") String column,
                                        @Param("value") String value);
@@ -27,8 +28,7 @@ public interface GoodsOperateMapper {
             "where store_id = #{store_id}")
     String queryMaxLevel_ClassifyOfStore(@Param("store_id") String store_id);
 
-    @Delete("DELETE from store_sell_classify where classify_id in " +
-            "(select classify_id from store_sell_classify natural join goods_classify where ${column} = #{value})")
+    @Delete("DELETE from store_sell_classify where ${column} = #{value}")
     void deleteClassifyOfStore(@Param("column") String column,
                                @Param("value") String value);
 
@@ -45,7 +45,7 @@ public interface GoodsOperateMapper {
                                   @Param("store_id") String store_id,
                                   @Param("classify_id") String classify_id);
 
-    @Update("update goods_modify SET ${columnModify} = #{valueModify} " +
+    @Update("update goods_classify SET ${columnModify} = #{valueModify} " +
             "where ${columnKey} = #{valueKey}")
     void updateGoodsClassify(@Param("columnModify") String columnModify,
                              @Param("valueModify") String valueModify,
@@ -63,10 +63,11 @@ public interface GoodsOperateMapper {
     @Update("update goods SET ${columnModify} = #{valueModify} " +
             "where  store_id = #{store_id} and ${columnKey} = #{valueKey}")
     void updateGoods(@Param("store_id") String store_id,
-                     @Param("columnModify") String columnModify,
-                     @Param("valueModify") String valueModify,
                      @Param("columnKey") String columnKey,
-                     @Param("valueKey") String valueKey);
+                     @Param("valueKey") String valueKey,
+                     @Param("columnModify") String columnModify,
+                     @Param("valueModify") String valueModify
+                     );
 
     @Insert("INSERT INTO goods (goods_id, store_id, goods_name, description, pic_url, status, old_level, create_time, update_time) " +
             "VALUES (#{goods_id}, #{store_id}, #{goods_name}, #{description}, #{pic_url}, #{status}, #{old_level}, #{create_time}, #{update_time})")
@@ -84,4 +85,13 @@ public interface GoodsOperateMapper {
     void deleteGoods(@Param("store_id") String store_id,
                      @Param("column") String column,
                      @Param("value") String value);
+
+    ArrayList<Goods> queryAllGoodsOfStore_specialClass(String store_id, String classify_name);
+
+    @Update("update store SET ${columnModify} = #{valueModify} " +
+            "where ${columnKey} = #{valueKey}")
+    void updateStore(@Param("columnKey") String columnKey,
+                     @Param("valueKey") String valueKey,
+                     @Param("columnModify") String columnModify,
+                     @Param("valueModify") String valueModify);
 }

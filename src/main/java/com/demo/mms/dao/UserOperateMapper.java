@@ -4,6 +4,7 @@ import com.demo.mms.common.domain.Admin;
 import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.common.domain.Seller;
 import com.demo.mms.common.domain.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -26,5 +27,7 @@ public interface UserOperateMapper {
     int insertSeller(Seller seller);
     int insertAdmin(Admin admin);
 
-
+    @Delete("DELETE FROM user WHERE ${columnKey} = #{valueKey}")
+    void delUser(@Param("columnKey") String columnKey,
+                 @Param("valueKey") String valueKey);
 }

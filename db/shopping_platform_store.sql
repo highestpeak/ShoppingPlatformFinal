@@ -1,0 +1,2 @@
+INSERT INTO shopping_platform.store (store_id, note, store_pic_url, store_classify, level, certification, create_time, update_time) VALUES ('0000', 'first store', 'https://www.google.com/', '3', '5', 'fastExpress', '20190718-111541', '20190720-135224');
+INSERT INTO shopping_platform.store (store_id, note, store_pic_url, store_classify, level, certification, create_time, update_time) VALUES ('0001', 'second store', 'https://www.google.com/', '4', '1', 'fastExpress', '20190718-111541', '20190718-111541');

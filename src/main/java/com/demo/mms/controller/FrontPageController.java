@@ -1,6 +1,6 @@
 package com.demo.mms.controller;
 
-import com.demo.mms.service.LoginRegisterService;
+import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class FrontPageController {
     @Autowired
-    LoginRegisterService loginRegisterService;
+    UserService userService;
 
     @RequestMapping("/home")
     public String frontHomeGet(ModelMap modelMap,HttpServletRequest request){
         System.out.println("in frontHomeGet edit");
-        modelMap.put("isLogin",loginRegisterService.isAlreadyLogin("",request));
+        modelMap.put("isLogin", userService.isAlreadyLogin("",request));
 //        modelMap.put("isLogin",true);
         return "front_home";
     }
