@@ -6,9 +6,10 @@ import com.demo.mms.common.domain.Store;
 import java.util.List;
 
 public class ClassifyCrudVO {
-    private String tt;
     private Store store;
     private List<GoodsClassify> classifiesToDel;
+
+    private List<GoodsClassify> classifiesToAdd;
 
     private GoodsClassify oldGoodsClassify;
     private GoodsClassify newGoodsClassify;
@@ -45,11 +46,11 @@ public class ClassifyCrudVO {
         this.classifiesToDel = classifiesToDel;
     }
 
-    public String getTt() {
-        return tt;
+    public List<GoodsClassify> getClassifiesToAdd() {
+        return classifiesToAdd;
     }
 
-    public void setTt(String tt) {
-        this.tt = tt;
+    public void setClassifiesToAdd(List<GoodsClassify> classifiesToAdd) {
+        this.classifiesToAdd = classifiesToAdd;
     }
 }
