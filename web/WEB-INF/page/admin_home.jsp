@@ -81,28 +81,28 @@
                 </li>
 
                 <li>
-                    <a href="${pageContext.request.contextPath}">
+                    <a href="${pageContext.request.contextPath}/admin/goodsManage">
                         <i class="fa fa-tag"></i> <span><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">商品管理</font></font></span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="${pageContext.request.contextPath}">
+                    <a href="${pageContext.request.contextPath}/admin/orderManage">
                         <i class="fa fa-shopping-cart"></i> <span><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">订单管理</font></font></span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="${pageContext.request.contextPath}">
+                    <a href="${pageContext.request.contextPath}/admin/userManage">
                         <i class="fa fa-user"></i> <span><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">用户管理</font></font></span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="${pageContext.request.contextPath}">
+                    <a href="${pageContext.request.contextPath}/admin/storeInfoManage">
                         <i class="fa fa-info-circle"></i> <span><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">商店信息</font></font></span>
                     </a>
