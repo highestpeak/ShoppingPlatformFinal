@@ -150,15 +150,21 @@
         </div><!-- Menu Block /- -->
     </header><!-- Header /- -->
     <main>
+        <div class="page-banner container-fluid no-padding">
+            <!-- Container -->
+            <div class="container">
+                <div class="section-header">
+                    <h3>我的订单</h3>
+                    <img src="/localLib/images/section-seprator.png" alt="section-seprator">
+                </div>
+            </div><!-- Container /- -->
+        </div>
     <div id="product-section" class="product-section container-fluid no-padding">
         <!-- Container -->
         <div class="container">
             <div class="row">
                 <!-- Section Header -->
-                <div class="section-header">
-                    <h3>我的订单</h3>
-                    <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator">
-                </div><!-- Section Header /- -->
+                <!-- Section Header /- -->
                 <ul id="filters" class="products-categories no-left-padding">
                     <li><a data-filter="*" class="active" href="#">全部</a></li>
                     <li><a data-filter=".design" href="#" class="">未付款</a></li>
