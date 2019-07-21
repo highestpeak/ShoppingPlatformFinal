@@ -106,35 +106,55 @@
     <div class="content-wrapper" style="min-height: 1000px;">
         <!-- 在此处添加内容 -->
 
-        <br><br>
-        <div>
-            <button class="btn btn_add" style="float:left; margin-left:10px; background:green; color:white">添加商品</button>
-        </div>
+        <section class="content-header">
+                <h1>
+                    商品管理
+    
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active">商品管理</li>
+                </ol>
+    
+    
+        </section>
 
-        <br><br><br>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <table id="goodTable" class="table">
-                    <thead>
-                        <tr>
-                            <th style="width: 10%">ID</th>
-                            <th>Store ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Pic</th>
-                            <th>Status</th>
-                            <th>Old Level</th>
-                            <th>Create Time</th>
-                            <th>Update Time</th>
-                            <th>Operation</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyId">
-                    </tbody>
-                </table>
+        <section class="content container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">商品信息</h3>
+                            <button class="btn btn_add" style="float:right; margin-right:10px; background:green; color:white">添加商品</button>                           
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="goodTable" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10%">ID</th>
+                                                <th>Store ID</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Pic</th>
+                                                <th>Status</th>
+                                                <th>Old Level</th>
+                                                <th>Create Time</th>
+                                                <th>Update Time</th>
+                                                <th>Operation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyId">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
     </div>
 
@@ -403,6 +423,8 @@
             var store_id = $tr.find("td:eq(1)").html();
             var old_goods_id = $tr.find("td:eq(0)").html();
             var old_goods_name = $tr.find("td:eq(2)").html();
+
+            $("#mod_name").attr("value", );
 
             $("#good_info_mod_sumbit").click(function(){
                 var dataSend = {
