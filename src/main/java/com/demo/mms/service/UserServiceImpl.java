@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 //
 //        }
         // 创建Cookie
-        Cookie cookie = new Cookie("user_id_"+user_id, "exist");
+        Cookie cookie = new Cookie("user_id", user_id);
         cookie.setMaxAge(60);// 有效期,秒为单位
         response.addCookie(cookie);// 设置cookie
         return rs;
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAlreadyLogin(String user_id, HttpServletRequest request) {
-        Cookie cookie= ProjectFactory.getCookieByName(request,"user_id_"+user_id);
+        Cookie cookie= ProjectFactory.getCookieByName(request,"user_id");
         if(cookie!=null){//已经登录
             return true;
         }
@@ -241,7 +241,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> getViewHistory(User user, GoodsClassify goodsClassify) {
         Map<String ,Object> rs=new HashMap<>();
-        User userFind= goodsOperateMapper.queryUser("user","user_id",user.getUser_id());
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
         if(userFind==null){//不存在user
             rs.put("user existed",false);
             return rs;
@@ -275,6 +275,10 @@ public class UserServiceImpl implements UserService {
     }
 
     //返回用户信息+历史记录信息+商品信息+分类信息
+    //即返回用户id  nickname realname  头像，sex email 和
+    //历史记录view_time和view_id
+    //商品 name pic_url goods_id
+    //分类id name
     @Override
     public Map<String, Object> getViewHistory(Store store, GoodsClassify goodsClassify) {
         Map<String, Object> rs=new HashMap<>();
@@ -284,7 +288,8 @@ public class UserServiceImpl implements UserService {
             rs.put("store exist",false);
             return rs;
         }
-        
+        ArrayList<GoodsViewedQueryVO> goodsViewedQueryVOArrayList=
+                userOperateMapper.queryGoodsViewedByStore(store.getStore_id(),goodsClassify.getClassify_name());
         return rs;
     }
 
