@@ -20,4 +20,34 @@
     insert into admin (user_id,permission,permission,create_time,update_time)
     values   (#{user_id}, #{permission}, #{note},#{create_time},#{update_time})
   </insert>
+
+  <resultMap id="tempQueryGoodsViewed" type="com.demo.mms.common.vo.GoodsViewedQueryVO">
+  </resultMap>
+
+  <select id="queryGoodsViewedByGoods" parameterType="String" resultMap="tempQueryGoodsViewed" >
+        select
+          view_id,
+          view_time,
+          goods_viewed.goods_id as goods_id,
+          goods.goods_name as goods_name,
+          goods_viewed.classify_id as classify_id,
+          goods_classify.classify_name as classify_name
+        FROM goods_viewed,goods,goods_classify
+        where buyer_id = #{buyer_id} AND
+          goods_viewed.goods_id=goods.goods_id AND
+          goods_viewed.classify_id=goods_classify.classify_id;
+  </select>
+
+    <select id="queryGoodsViewedByClassify" parameterType="String" resultMap="tempQueryGoodsViewed" >
+        select
+  view_id,
+  view_time,
+  goods_viewed.goods_id as goods_id,
+  goods.goods_name as goods_name,
+  goods_viewed.classify_id as classify_id
+FROM goods_classify,(goods_viewed LEFT JOIN goods ON goods_viewed.goods_id = goods.goods_id)
+where buyer_id = #{buyer_id} AND
+      goods_viewed.classify_id=goods_classify.classify_id AND
+      goods_classify.classify_name=#{classify_name}
+  </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.demo.mms.service;
 
+import com.demo.mms.common.domain.GoodsClassify;
+import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,4 +28,8 @@ public interface UserService {
     Map<String,Object> getUserInfo(User user);
 
     Map<String,Object> delUser(User user);
+
+    Map<String,Object> getViewHistory(User user, GoodsClassify goodsClassify);
+
+    Map<String,Object> getViewHistory(Store store, GoodsClassify goodsClassify);
 }

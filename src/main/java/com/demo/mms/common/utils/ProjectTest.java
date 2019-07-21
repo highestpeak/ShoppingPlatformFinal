@@ -20,5 +20,13 @@ public class ProjectTest {
         mapTest.put("list", Arrays.asList("hello","hi"));
         List<String> modiyArr=(List<String>) mapTest.get("list");
         System.out.println(((String)modiyArr.get(0))+" "+((String)modiyArr.get(1)));
+
+        Object integerTest=new Integer(0);
+        modifyInteger(integerTest);
+        System.out.println(integerTest);
+    }
+
+    private static void modifyInteger(Object integerTest) {
+        integerTest=new Integer(23);
     }
 }
