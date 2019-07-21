@@ -44,6 +44,43 @@ public class GoodsServiceImpl implements GoodsService{
         return rs;
     }
 
+    @Override
+    public Map<String, Object> getStoreGoodsClassifyChartInfo(Store store, ArrayList classifyList) {
+        Map<String,Object> rs=new HashMap<>();
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        //store 存在
+        Map<String,Integer> returnTempMap=new HashMap<>();
+        ArrayList<ArrayList> classifyListTemp=new ArrayList<>();
+        rs.putAll(getStoreGoodsClassify(store,classifyListTemp));
+        for (ArrayList arrayList:classifyListTemp){
+            String classifyName=(String) arrayList.get(1);
+            if (returnTempMap.containsKey(classifyName)){
+                returnTempMap.put(classifyName,returnTempMap.get(classifyName)+1);
+            }else {
+                returnTempMap.put(classifyName,0);
+            }
+        }
+        List<Map.Entry<String,Integer>> list = new ArrayList<Map.Entry<String,Integer>>(returnTempMap.entrySet());
+        Collections.sort(list,new Comparator<Map.Entry<String,Integer>>() {
+            //升序排序
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        Map<String,Object> returnMap=new HashMap<>();
+        for(Map.Entry<String,Integer> mapping:list){
+            returnMap.put(mapping.getKey(),mapping.getValue());
+        }
+        rs.put("classifyMap",list);
+        return rs;
+    }
+
     //删除商店所售卖部分商品分类
     @Override
     public Map<String, Object> deleteStoreGoodsClassify(Store store, ArrayList<GoodsClassify> classifiesToDel) {

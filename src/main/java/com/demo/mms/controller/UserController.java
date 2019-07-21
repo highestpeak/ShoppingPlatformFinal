@@ -3,7 +3,9 @@ package com.demo.mms.controller;
 import com.demo.mms.common.domain.Admin;
 import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.common.domain.User;
+import com.demo.mms.common.vo.MailInfoCrudVO;
 import com.demo.mms.common.vo.UserVO;
+import com.demo.mms.common.vo.ViewHistoryGetVO;
 import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -263,6 +265,99 @@ public class UserController {
     @ResponseBody
     public Object newPicVerify(){
         return null;
+    }
+
+    //猜你喜欢
+    //根据游览历史--选取频率较高的商品和分类推荐
+    //根据收货地址--具有相同收货地址的用户的购买推荐
+    //根据销量---推荐销量高的商品
+    //根据用户关注的商品来推荐
+    //推荐的商品后面跟一字段是 推荐原因
+    @RequestMapping("/guessLike")
+    @ResponseBody
+    public Object guessUserLike(User user){
+        return null;
+    }
+
+    //获取用户游览历史
+    //根据用户获取商品的请求来加入
+    //根据用户游览请求的分类来加入
+    @RequestMapping("/viewHistory")
+    @ResponseBody
+    public Object getViewHistory(@RequestBody ViewHistoryGetVO viewHistoryGetVO){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService= userService.getViewHistory(viewHistoryGetVO.getUser(), viewHistoryGetVO.getGoodsClassify());
+        if(!rsService.containsKey("viewedHistoryReturn") && rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(!rsService.containsKey("viewedHistoryReturn") && rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //获取用户评价
+    @RequestMapping("/getEvaluationOfUser")
+    @ResponseBody
+    public Object userEvaluationGet(User user){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
+        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //修改用户评价
+    @RequestMapping("/modifyEvaluationOfUser")
+    @ResponseBody
+    public Object userEvaluationUpdate(User user){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
+        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //修改收货地址--增删查改
+    @RequestMapping("/modifyMailInfo")
+    @ResponseBody
+    public Object userEvaluationUpdate(@RequestBody MailInfoCrudVO mailInfoCrudVO){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
+        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
     }
 
     private static boolean isEmail(String string) {

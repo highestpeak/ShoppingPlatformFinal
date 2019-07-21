@@ -3,9 +3,12 @@ package com.demo.mms.controller;
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.domain.User;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.GoodsCrudVO;
+import com.demo.mms.common.vo.GoodsEvaluationVO;
 import com.demo.mms.common.vo.GoodsQueryVO;
+import com.demo.mms.common.vo.StarGoodsVO;
 import com.demo.mms.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -151,7 +154,6 @@ public class GoodsController {
         Map<String,Object> rsService=goodsService.addStoreGoods(store,goodsToAdd);
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
-
             rs.put("success",false);
             return rs;
         }
@@ -163,6 +165,25 @@ public class GoodsController {
         }
         return rs;
     }
+
+    //关注商品
+    //必须传入goods的id 或者传入store id和goods name的组合
+    //必须传入user id
+    @RequestMapping("/star")
+    @ResponseBody
+    public Object starGoods(@RequestBody StarGoodsVO starGoodsVO){
+        Map<String ,Object> rs=new HashMap<>();
+        return rs;
+    }
+
+    //获取商品的所有评价
+    @RequestMapping("getEvaluationOfGoods")
+    @ResponseBody
+    public Object goodsEvaluationGet(@RequestBody GoodsEvaluationVO goodsEvaluationVO){
+        return null;
+    }//根据好评差评获取评价
+
+
 
     //模糊检索
     private ArrayList<Goods> getBySearchGoodsInfo(ArrayList<Goods> goodsList,Goods goodsToGet) {

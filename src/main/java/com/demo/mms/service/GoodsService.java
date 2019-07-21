@@ -15,6 +15,11 @@ public interface GoodsService {
     Map<String,Object> getStoreGoodsClassify(Store store, ArrayList classifyList);
 
     /*
+    获取分类统计信息
+     */
+    Map<String,Object> getStoreGoodsClassifyChartInfo(Store store, ArrayList classifyList);
+
+    /*
     classifiesToDel 包含所有本商店已经拥有的，需要删除的分类
      */
     Map<String,Object> deleteStoreGoodsClassify(Store store, ArrayList<GoodsClassify> classifiesToDel);
