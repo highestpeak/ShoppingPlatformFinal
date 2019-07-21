@@ -48,6 +48,10 @@ JSON传值与接收 https://segmentfault.com/a/1190000012555875
 |      | /user/checkPassword             | user_id<br />password                                        | 暂未实现                                                     |
 |      | /user/checkIfLogin              | user_id                                                      | {"already login":true/false}<br />{success:true/false}<br /> |
 |      | /user/newPicVerify              | 暂未实现                                                     |                                                              |
+|      | /user/viewHistory               | user_id<br />classify_name<br />(请求全部历史请赋值"all")    | {success:true/false}<br />{"user existed":false}<br />{"classify name send":"can not be null"}<br />{"view type":"by Goods search all"}<br />{"viewedHistoryReturn":viewedHistoryReturnVOArrayList}<br />{"view type","by classify "+Classify_name+" search"}<br />{"view goods in classify "+Classify_name()+" count",count}<br />{"view classify only "+Classify_name()+" count",count}<br /> |
+|      |                                 |                                                              |                                                              |
+|      |                                 |                                                              |                                                              |
+|      |                                 |                                                              |                                                              |
 
 注意：请求数据的名称需要和列表一致;
 
