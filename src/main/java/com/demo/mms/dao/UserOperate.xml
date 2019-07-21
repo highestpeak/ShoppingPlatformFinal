@@ -64,7 +64,7 @@
             <id property="view_id" column="view_id"/>
             <result property="view_time" column="view_time"/>
         </association>
-        <association property="goodsViewed" javaType="com.demo.mms.common.domain.Goods">
+        <association property="goods" javaType="com.demo.mms.common.domain.Goods">
             <id property="goods_id" column="goods_id"/>
             <result property="goods_name" column="goods_name"/>
             <result property="pic_url" column="pic_url"/>
