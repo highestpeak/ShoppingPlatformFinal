@@ -151,6 +151,7 @@ public class GoodsController {
         Map<String,Object> rsService=goodsService.addStoreGoods(store,goodsToAdd);
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
+
             rs.put("success",false);
             return rs;
         }

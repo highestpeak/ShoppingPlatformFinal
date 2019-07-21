@@ -127,30 +127,30 @@
                         <th>Number</th>
                         <th>Description</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${allGood}" var="good">
-                        <tr>
-                            <td>${good.id}</td>
-                            <td>${good.pic}</td>
-                            <td>${good.name}</td>
-                            <td>${good.price}</td>
-                            <td>${good.classify}</td>
-                            <td>${good.number}</td>
-                            <td style="word-break:break-all;width: 200px">${good.description}</td>
-                            <td>
-                                <button class="btn btn_del" id="del" style="float:right; margin-right:10px; background:red; color:white">删除</button>
-                                <button class="btn btn_mod" style="float:right; margin-right:10px; background:yellowgreen; color:white">修改</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+            </thead>
+            <tbody>
+            <%--<c:forEach items="${allGood}" var="good">--%>
+            <tr>
+                <td>${good.id}</td>
+                <td>${good.pic}</td>
+                <td>${good.name}</td>
+                <td>${good.price}</td>
+                <td>${good.classify}</td>
+                <td>${good.number}</td>
+                <td style="word-break:break-all;width: 200px">${good.description}</td>
+                <td>
+                    <button class="btn btn_del" id="del" style="float:right; margin-right:10px; background:red; color:white">删除</button>
+                    <button class="btn btn_mod" style="float:right; margin-right:10px; background:yellowgreen; color:white">修改</button>
+                </td>
+            </tr>
+            <%--</c:forEach>--%>
+            </tbody>
+            </table>
         </div>
-        <button class="btn btn_add" style="float:right; margin-right:10px; background:green; color:white">添加商品</button>
+</div>
+<button class="btn btn_add" style="float:right; margin-right:10px; background:green; color:white">添加商品</button>
 
-    </div>
+</div>
 
 </div>
 
@@ -158,7 +158,7 @@
     $(function(){
 
         // 分页
-        $("#goodTable").DataTable();
+        // $("#goodTable").DataTable();
 
         // 删除商品按钮
         $(".content-wrapper").on("click", ".btn_del", function(){

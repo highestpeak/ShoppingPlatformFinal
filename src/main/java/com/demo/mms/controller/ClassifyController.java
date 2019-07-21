@@ -139,4 +139,10 @@ public class ClassifyController {
 //        modelMap.put("rsMap",rs);
         return "admin_classifyManage";
     }
+
+    @RequestMapping("/toClassify")
+    public Object toClassify(){return  "admin_classifyManage";}
+
+    @RequestMapping("/toGoodManage")
+    public Object toGoodManage(){return  "admin_goodManage";}
 }

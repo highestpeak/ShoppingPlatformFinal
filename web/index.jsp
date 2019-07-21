@@ -25,6 +25,8 @@ ${ctx}
 <br/>
 <a href = "${pageContext.request.contextPath}/classifyOfStore?store_id=0000">点击查询商店0000商品分类</a>
 ${classify}
+<a href="${pageContext.request.contextPath}/classify/toClassify">商品分类管理</a>
+<a href="${pageContext.request.contextPath}/classify/toGoodManage">商品管理</a>
 </body>
 </html>--%>
 <%--edit test55--%>
