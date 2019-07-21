@@ -37,11 +37,11 @@ public class ShoppingCartController {
 
     @GetMapping("/")
     @ResponseBody
-    public Object getUserShoppingCart(Buyer buyer) {
+    public Object getUserShoppingCart(String userId) {
         Map<String, Object> result = new HashMap<>();
         Collection<Object> relations;
         try {
-            relations = shoppingCartService.getShoppingCartGoodsOfUser(buyer);
+            relations = shoppingCartService.getShoppingCartGoodsOfUserByUserId(userId);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mms.dao.InCartOfMapper">
     <resultMap id="InCartOfModel" type="com.demo.mms.common.domain.InCartOf">
-        <id property="id" column="id" javaType="java.lang.Integer"/>
-        <result property="buyerId" column="buyer_id" javaType="java.lang.Integer"/>
-        <result property="goodsId" column="good_id" javaType="java.lang.Integer"/>
+        <id property="id" column="id" javaType="java.lang.String"/>
+        <result property="buyerId" column="buyer_id" javaType="java.lang.String"/>
+        <result property="goodsId" column="good_id" javaType="java.lang.String"/>
         <result property="number" column="good_num" javaType="java.lang.Integer"/>
     </resultMap>
 
@@ -22,3 +22,4 @@
 
     <update id="updateEntryByUserAndGoodsId">UPDATE in_cart_of SET good_num = #{newNum} WHERE buyer_id = #{buyerId} AND good_id = #{goodsId};</update>
 </mapper>
+
