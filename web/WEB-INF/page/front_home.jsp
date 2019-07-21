@@ -43,7 +43,6 @@
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 <div class="main-container">
 
-
     <section class="content container-fluid">
     <!-- Header -->
     <header class="header-section container-fluid no-padding">
