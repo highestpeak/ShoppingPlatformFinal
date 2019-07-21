@@ -162,13 +162,13 @@
                 <div class="form-detail">
                     <form>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>ID</label>
-                            <input type="text" name="contact-name" class="form-control" id="input_ID" placeholder="ID *" required="" disabled>
+                            <input type="text" name="contact-name" class="form-control" id="input_ID" placeholder="ID *" required="" value="" disabled>
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>用户名</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_nickname" placeholder="用户名 *" required="">
+                            <input type="text" name="contact-email" class="form-control" id="input_nickname" placeholder="用户名 *" required="" value="">
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>真实姓名</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_realname" placeholder="真实姓名 *" required="">
+                            <input type="text" name="contact-email" class="form-control" id="input_realname" placeholder="真实姓名 *" required="" value="">
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>性别</label>
                             <select class="form-control">
@@ -180,7 +180,7 @@
                         </div>
 
                         <div class="col-md-11 col-sm-12 col-xs-12 form-group"><label>密码</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_password" placeholder="密码 *" required="">
+                            <input type="text" name="contact-email" class="form-control" id="input_password" placeholder="密码 *" required="" value="">
                         </div>
 
                         <div class="form-group col-md-1 col-sm-12 col-xs-12"><label>&nbsp;</label>
@@ -190,7 +190,7 @@
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>电子邮箱</label>
-                            <input type="text" name="contact-name" class="form-control" id="input_email" placeholder="电子邮箱 *" required="">
+                            <input type="text" name="contact-name" class="form-control" id="input_email" placeholder="电子邮箱 *" required="" value="">
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>收货地址</label>
@@ -263,6 +263,29 @@
 
 <!-- Library - Theme JS -->
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
+    <script>
+        $(function(){
+            var dataSend = {
+                user_id: "654321"
+            }
 
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/user/getInfo",//请求controller方法   
+                data: JSON.stringify(dataSend),//发送的数据  
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false, //同步请求，注意此字段    
+                success: function (data) {
+                        var info = data.user;
+                        document.getElementById("input_ID").value = info.user_id;
+                        document.getElementById("input_nickname").value = info.nickname;
+
+
+                }
+            });
+        });
+    </script>
+</div>>
 </body>
 </html>
