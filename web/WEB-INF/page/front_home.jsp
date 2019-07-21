@@ -329,6 +329,9 @@
                 <div class="row">
                     <!-- Section Header -->
                     <div class="section-header">
+                            <br/>
+                            <br/>
+                            <br/>
                         <h3>商品</h3>
                         <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
                     </div><!-- Section Header /- -->
@@ -345,8 +348,8 @@
                     <div class="input-group">
                         <input class="form-control" placeholder="搜索" type="text">
                         <span class="input-group-btn">
-								<button class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
-							</span>
+                            <button class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
+                        </span>
                     </div>
                     <!-- Products -->
                     <ul class="products">
@@ -357,6 +360,11 @@
                                 <h5>Stylish Chair</h5>
                                 <span class="price"><del>$200</del>$139</span>
                             </a>
+                            <div class="wishlist-box">
+                            <a href="#"><i class="fa fa-arrows-alt"></i></a>
+                            <a href="#"><i class="fa fa-heart-o"></i></a>
+                            <a href="#"><i class="fa fa-search"></i></a>
+                            </div>
                             <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
                         </li><!-- Product /- -->
 
@@ -432,11 +440,12 @@
                     </ul><!-- Products /- -->
                 </div><!-- Row /- -->
                 <nav class="ow-pagination">
-                    <ul class="pager">
-                        <li class="load-more"><a href="#">更多</a></li>
+                        <ul class="pager">
+                        <li class="number"><a href="#">4</a></li>
+                        <li class="addto-cart load-more"><a href="#">Load More</a></li>
                         <li class="previous"><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         <li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    </ul>
+                        </ul>
                 </nav>
             </div><!-- Container /- -->
         </div><!-- Product Section /- -->
