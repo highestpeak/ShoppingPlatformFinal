@@ -36,7 +36,7 @@ JSON传值与接收 https://segmentfault.com/a/1190000012555875
 |      | /goods/modify                   | store_id<br />oldGoods<br />newGoods<br />(必有goods_name或goods_id) | {success:true/false}<br />{"store exist":false}<br />{"goods "+goodsName+" existed":false}<br />{"update "+updateColumn:"error"}<br />{"update update_time":"error"} |
 |      | /goods/del                      | store_id<br />goodsToDel(必有goods_name或goods_id)           | {success:true/false}<br />{"store exist":false}<br />{"goods "+goodsName+" existed":false}<br />{"goods "+goodsName+" del":"cannot del"}<br /> |
 |      | /goods/add                      | store_id<br />goodsToAdd(必有goods_name或goods_id)           | {success:true/false}<br />{"store exist":false}<br />{"goods "+goodsName+" existed":true}<br />{"goods "+goodsName+" add":"cannot del"}<br /> |
-|      | /store/getInfo                  | store_id                                                     | {success:true/false}<br />{"store exist":false}<br /><br />{"store",storeGeted} |
+|      | /store/getInfo                  | store_id                                                     | {success:true/false}<br />{"store exist":false}<br />{"store",storeGeted} |
 |      | /store/modify                   | store_id<br />oldStore<br />newStore                         | {success:true/false}<br />{"store exist":false}<br /><br />{"update "+updateColumn:"error"}<br />{"update update_time":"error"} |
 |      | /user/addBuyer                  | 必须有<br />user_id<br />verify<br />email<br />其他选有     | {success:true/false}<br />{"user existed":false}<br />{"type not find":true}<br /> |
 |      | /user/login                     | user_id<br />verify                                          | {success:true/false}<br />{"already login":true}<br />{"user existed":false}<br />{"password wrong":true}<br /> |
@@ -49,8 +49,8 @@ JSON传值与接收 https://segmentfault.com/a/1190000012555875
 |      | /user/checkIfLogin              | user_id                                                      | {"already login":true/false}<br />{success:true/false}<br /> |
 |      | /user/newPicVerify              | 暂未实现                                                     |                                                              |
 |      | /user/viewHistory               | user_id<br />classify_name<br />(请求全部历史请赋值"all")    | {success:true/false}<br />{"user existed":false}<br />{"classify name send":"can not be null"}<br />{"view type":"by Goods search all"}<br />{"viewedHistoryReturn":viewedHistoryReturnVOArrayList}<br />{"view type","by classify "+Classify_name+" search"}<br />{"view goods in classify "+Classify_name()+" count",count}<br />{"view classify only "+Classify_name()+" count",count}<br /> |
-|      |                                 |                                                              |                                                              |
-|      |                                 |                                                              |                                                              |
+|      | /store/getViewedHistory         | store_id<br />classify_name<br />(请求全部历史请赋值"all")   | {success:true/false}<br />{"store exist":false}<br /><br />{"viewedHistoryReturn",[{}{}{}]} |
+|      | /store/getChartOfClassify       | store_id<br />                                               | {success:true/false}<br />{"store exist":false}<br />{"classifyMap",[{}{}{}]} |
 |      |                                 |                                                              |                                                              |
 
 注意：请求数据的名称需要和列表一致;

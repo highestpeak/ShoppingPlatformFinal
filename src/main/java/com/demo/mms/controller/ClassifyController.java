@@ -4,6 +4,7 @@ import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.ClassifyCrudVO;
+import com.demo.mms.common.vo.StarGoodsVO;
 import com.demo.mms.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,6 +121,15 @@ public class ClassifyController {
             rs.put("success",false);
         }
         return rs;
+    }
+
+    //关注分类
+    //必须传入分类名称--或者分类id
+    //必须传入用户名称
+    @RequestMapping("/star")
+    @ResponseBody
+    public Object starClassify(@RequestBody StarGoodsVO starGoodsVO){
+        return null;
     }
 
     //页面请求

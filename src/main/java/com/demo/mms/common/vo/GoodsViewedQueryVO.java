@@ -3,10 +3,19 @@ package com.demo.mms.common.vo;
 public class GoodsViewedQueryVO {
     private String view_id;
     private String view_time;
+    private String user_id;
     private String goods_id;
     private String goods_name;
     private String classify_id;
     private String classify_name;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     public String getGoods_name() {
         return goods_name;

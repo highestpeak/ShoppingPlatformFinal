@@ -167,10 +167,13 @@ public class GoodsController {
     }
 
     //关注商品
+    //必须传入goods的id 或者传入store id和goods name的组合
+    //必须传入user id
     @RequestMapping("/star")
     @ResponseBody
     public Object starGoods(@RequestBody StarGoodsVO starGoodsVO){
-        return null;
+        Map<String ,Object> rs=new HashMap<>();
+        return rs;
     }
 
     //获取商品的所有评价

@@ -24,6 +24,29 @@ public class ProjectTest {
         Object integerTest=new Integer(0);
         modifyInteger(integerTest);
         System.out.println(integerTest);
+
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("c", "ccccc");
+        map.put("a", "aaaaa");
+        map.put("b", "bbbbb");
+        map.put("d", "ddddd");
+
+        List<Map.Entry<String,String>> list = new ArrayList<Map.Entry<String,String>>(map.entrySet());
+        Collections.sort(list,new Comparator<Map.Entry<String,String>>() {
+            //升序排序
+            public int compare(Map.Entry<String, String> o1,
+                               Map.Entry<String, String> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+
+        });
+        Map<String,Object> testMap=new HashMap<>();
+        for(Map.Entry<String,String> mapping:list){
+            testMap.put(mapping.getKey(),mapping.getValue());
+//            System.out.println(mapping.getKey()+":"+mapping.getValue());
+        }
+        System.out.println(testMap);
     }
 
     private static void modifyInteger(Object integerTest) {

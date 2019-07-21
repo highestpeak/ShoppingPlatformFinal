@@ -2,6 +2,7 @@ package com.demo.mms.service;
 
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.GoodsViewedQueryTestVO;
 import com.demo.mms.common.vo.GoodsViewedQueryVO;
 import com.demo.mms.common.vo.ViewHistoryGetVO;
 import com.demo.mms.common.vo.ViewedHistoryReturnVO;
@@ -275,8 +276,8 @@ public class UserServiceImpl implements UserService {
     }
 
     //返回用户信息+历史记录信息+商品信息+分类信息
-    //即返回用户id  nickname realname  头像，sex email 和
-    //历史记录view_time和view_id
+    //即返回用户 id  nickname realname  头像，sex email 和
+    //历史记录 view_time和view_id
     //商品 name pic_url goods_id
     //分类id name
     @Override
@@ -288,8 +289,13 @@ public class UserServiceImpl implements UserService {
             rs.put("store exist",false);
             return rs;
         }
-        ArrayList<GoodsViewedQueryVO> goodsViewedQueryVOArrayList=
+        //取得所有游览记录一条数据: 用户信息+游览记录信息+商品信息+分类信息
+        ArrayList<GoodsViewedQueryTestVO> goodsViewedQueryVOArrayList=
                 userOperateMapper.queryGoodsViewedByStore(store.getStore_id(),goodsClassify.getClassify_name());
+        //其他条件检索历史记录
+        //code here
+        //end
+        rs.put("viewedHistoryReturn",goodsViewedQueryVOArrayList);
         return rs;
     }
 
