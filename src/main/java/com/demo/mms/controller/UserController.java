@@ -31,7 +31,7 @@ public class UserController {
     //前台购买者调用
     @RequestMapping("/addBuyer")
     @ResponseBody
-    public Object addBuyer(Buyer user){
+    public Object addBuyer(@RequestBody Buyer user){
         System.out.println("in addUser");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -54,7 +54,7 @@ public class UserController {
     //管理员后台调用
     @RequestMapping("/addAdmin")
     @ResponseBody
-    public Object addAdmin(Admin user){
+    public Object addAdmin(@RequestBody Admin user){
         System.out.println("in addAdmin");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -95,13 +95,13 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Object login(String user_id,String verify,
+    public Object login(@RequestBody User user,
                         HttpServletRequest request,
                         HttpServletResponse response){
         System.out.println("in login");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsLogin= userService.login(user_id,verify,request,response);
+        Map<String,Object> rsLogin= userService.login(user.getUser_id(),user.getVerify(),request,response);
         if(rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
             rs.putAll(rsLogin);
             rs.put("success",false);
@@ -119,13 +119,13 @@ public class UserController {
     //使用user_id退出有风险，不法者可能会退出其他用户的登入状态
     @RequestMapping("/logout")
     @ResponseBody
-    public Object logout(String user_id,
+    public Object logout(@RequestBody User user,
                          HttpServletRequest request,
                          HttpServletResponse response){
         System.out.println("in logout");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsLogin= userService.logout(user_id,request,response);
+        Map<String,Object> rsLogin= userService.logout(user.getUser_id(),request,response);
         if(rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
             rs.putAll(rsLogin);
             rs.put("success",false);
@@ -158,17 +158,15 @@ public class UserController {
 
     @RequestMapping("/newVerify")
     @ResponseBody
-    public Object newVerify(String user_id,
-                            String email,
-                            String newVerify){
+    public Object newVerify(@RequestBody User user){
         System.out.println("in forgetVerify");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         User userOld=new User();
         User userNew=new User();
-        userOld.setUser_id(user_id);
-        userOld.setEmail(email);
-        userNew.setVerify(newVerify);
+        userOld.setUser_id(user.getUser_id());
+        userOld.setEmail(user.getEmail());
+        userNew.setVerify(user.getVerify());
         Map<String,Object> rsEdit= userService.updateUser(userOld,userNew);
         if(rsEdit!=null && !rsEdit.isEmpty()){//含有错误信息
             rs.putAll(rsEdit);
@@ -185,7 +183,7 @@ public class UserController {
     //使用user_id有风险，不法者可能会注销其他用户
     @RequestMapping("/drop")
     @ResponseBody
-    public Object dropUser(User user){
+    public Object dropUser(@RequestBody User user){
         System.out.println("in dropUser");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);

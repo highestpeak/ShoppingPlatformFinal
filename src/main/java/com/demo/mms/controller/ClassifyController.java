@@ -75,12 +75,12 @@ public class ClassifyController {
     //必须传入分类名称、分类level
     @RequestMapping("/addClassifyOfStore")
     @ResponseBody
-    public Object addClassifyOfStore(Store store, ArrayList<GoodsClassify> classifiesToAdd){
+    public Object addClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in addClassifyOfStore");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         
-        Map<String,Object> rsService=goodsService.addStoreGoodsClassify(store,classifiesToAdd);
+        Map<String,Object> rsService=goodsService.addStoreGoodsClassify(classifyCrudVO.getStore(),(ArrayList<GoodsClassify>) classifyCrudVO.getClassifiesToAdd());
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
             rs.put("success",false);
@@ -98,8 +98,7 @@ public class ClassifyController {
     //更改商店分类信息
     @RequestMapping("/modifyClassifyOfStore")
     @ResponseBody
-    public Object modifyClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO
-            ){
+    public Object modifyClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in modifyClassifyOfStore");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
