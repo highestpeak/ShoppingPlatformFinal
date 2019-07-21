@@ -440,61 +440,6 @@
                 </nav>
             </div><!-- Container /- -->
         </div><!-- Product Section /- -->
-
-        <!-- Dealing Section2 -->
-        <div id="dealing" class="dealing-section2 shop-single dealing-section container-fluid no-padding">
-            <!-- Container -->
-            <div class="container">
-                <!-- Section Header -->
-                <div class="section-header">
-                    <h3>Deals Of The Day</h3>
-                    <p>our vision is to be Earth's most customer centric company</p>
-                    <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
-                </div><!-- Section Header /- -->
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="accessories-block">
-                        <h5>mens accessories</h5>
-                        <p>The weather started getting rough the tossed. If not for the courage of the fearless crew the Minnow would be lost. would be lost.</p>
-                        <ul>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-3.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-4.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-5.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-6.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-7.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-8.jpg" alt="deal"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12 saleup-img">
-                    <div class="carousel-item">
-                        <div class="item">
-                            <img src="${pageContext.request.contextPath}/localLib/images/deal-9.jpg" alt="deal" />
-                            <a href="#" class="product-del">
-                                <h5>mens casual shoes</h5>
-                                <span class="price"><del>$850</del>$550</span>
-                            </a>
-                        </div>
-
-                        <div class="item">
-                            <img src="${pageContext.request.contextPath}/localLib/images/deal-9.jpg" alt="deal" />
-                            <a href="#" class="product-del">
-                                <h5>mens casual shoes</h5>
-                                <span class="price"><del>$850</del>$550</span>
-                            </a>
-                        </div>
-
-                        <div class="item">
-                            <img src="${pageContext.request.contextPath}/localLib/images/deal-9.jpg" alt="deal" />
-                            <a href="#" class="product-del">
-                                <h5>mens casual shoes</h5>
-                                <span class="price"><del>$850</del>$550</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div data-date="2017/04/04" id="clock-2" class="clock"></div>
-                </div>
-            </div><!-- Container /- -->
-        </div><!-- Dealing Section2 -->
     </main>
 
     <!-- Footer Main -->

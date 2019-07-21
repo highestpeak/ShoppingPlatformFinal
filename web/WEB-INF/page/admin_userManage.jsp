@@ -117,6 +117,97 @@
 
 
         </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-md-12 connectedSortable ui-sortable">
+                    <!-- Custom tabs (Charts with tabs)-->
+                    <div class="nav-tabs-custom" style="cursor: move;">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right ui-sortable-handle">
+                            <li class="pull-left header"><i class="fa fa-inbox"></i> 用户统计</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <!-- Morris chart - Sales -->
+                            <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                <svg height="300" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;">
+                                    <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc>
+                                    <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+                                <text x="51.6875" y="258.5" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
+                                    <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan>
+                                </text>
+                                <path fill="none" stroke="#aaaaaa" d="M64.1875,258.5H710" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                <text x="51.6875" y="200.125" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
+                                    <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">7,500</tspan>
+                                </text>
+                                <path fill="none" stroke="#aaaaaa" d="M64.1875,200.125H710" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                <text x="51.6875" y="141.75" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
+                                    <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">15,000</tspan>
+                                </text>
+                                <path fill="none" stroke="#aaaaaa" d="M64.1875,141.75H710" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                <text x="51.6875" y="83.375" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
+                                    <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">22,500</tspan>
+                                </text>
+                                <path fill="none" stroke="#aaaaaa" d="M64.1875,83.375H710" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                <text x="51.6875" y="25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
+                                    <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">30,000</tspan>
+                                </text>
+                                <path fill="none" stroke="#aaaaaa" d="M64.1875,25H710" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                <text x="591.509492709599" y="271" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,8.25)">
+                                <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019/8</tspan>
+                                </text>
+                                <text x="304.30733596597815" y="271" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,8.25)">
+                                    <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019/7</tspan>
+                                </text>
+                                <path fill="none" stroke="#3c8dbc" d="M64.1875,216.99926666666667C82.23572296476306,217.50518333333332,118.3321688942892,220.52998125,136.38039185905225,219.02293333333333C154.4286148238153,217.51588541666666,190.52506075334145,207.18499371584699,208.5732837181045,204.94288333333333C226.42533034629406,202.725143715847,262.1294236026731,202.97661875,279.98147023086267,201.18353333333334C297.8335168590522,199.3904479166667,333.53761011543133,193.1129928734062,351.3896567436209,190.59820000000002C369.43787970838395,188.0557720400729,405.53432563791006,180.84860208333336,423.5825486026731,180.95465000000002C441.63077156743617,181.06069791666667,477.72721749696234,202.2824719489982,495.7754404617254,191.44658333333334C513.6274870899149,180.72847611566485,549.331580346294,101.12886933701657,567.1836269744836,94.73866666666666C584.8394972660997,88.41868600368323,620.1512378493317,133.97130673076924,637.8071081409478,140.60585C655.8553311057108,147.38782756410257,691.951777035237,146.455025,710,148.40475" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                <circle cx="64.1875" cy="216.99926666666667" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="136.38039185905225" cy="219.02293333333333" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="208.5732837181045" cy="204.94288333333333" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="279.98147023086267" cy="201.18353333333334" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="351.3896567436209" cy="190.59820000000002" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="423.5825486026731" cy="180.95465000000002" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="495.7754404617254" cy="191.44658333333334" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="567.1836269744836" cy="94.73866666666666" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="637.8071081409478" cy="140.60585" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                <circle cx="710" cy="148.40475" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+
+
+
+                                    <path fill="none" stroke="#aaaaaa" d="M64.1875,25H710" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                    <text x="591.509492709599" y="271" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,8.25)">
+                                        <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019/8</tspan>
+                                    </text>
+                                    <text x="304.30733596597815" y="271" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,8.25)">
+                                        <tspan dy="4.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019/7</tspan>
+                                    </text>
+                                    <path fill="none" stroke="#3c8dbc" d="M64.1875,216.99926666666667C82.23572296476306,217.50518333333332,118.3321688942892,220.52998125,136.38039185905225,219.02293333333333C154.4286148238153,217.51588541666666,190.52506075334145,207.18499371584699,208.5732837181045,204.94288333333333C226.42533034629406,202.725143715847,262.1294236026731,202.97661875,279.98147023086267,201.18353333333334C297.8335168590522,199.3904479166667,333.53761011543133,193.1129928734062,351.3896567436209,190.59820000000002C369.43787970838395,188.0557720400729,405.53432563791006,180.84860208333336,423.5825486026731,180.95465000000002C441.63077156743617,181.06069791666667,477.72721749696234,202.2824719489982,495.7754404617254,191.44658333333334C513.6274870899149,180.72847611566485,549.331580346294,101.12886933701657,567.1836269744836,94.73866666666666C584.8394972660997,88.41868600368323,620.1512378493317,133.97130673076924,637.8071081409478,140.60585C655.8553311057108,147.38782756410257,691.951777035237,146.455025,710,148.40475" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                    <circle cx="64.1875" cy="216.99926666666667" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="136.38039185905225" cy="219.02293333333333" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="208.5732837181045" cy="204.94288333333333" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="279.98147023086267" cy="201.18353333333334" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="351.3896567436209" cy="190.59820000000002" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="423.5825486026731" cy="180.95465000000002" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="495.7754404617254" cy="191.44658333333334" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="567.1836269744836" cy="94.73866666666666" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="637.8071081409478" cy="140.60585" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                    <circle cx="710" cy="148.40475" r="4" fill="#3c8dbc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+
+
+
+                                </svg>
+                            </div>
+
+                        </div>
+                    </div>                    <!-- /.nav-tabs-custom -->
+
+                </section>
+            </div>
+            <!-- /.row (main row) -->
+
+        </section>
+        <!-- /.content -->
 
         <!-- Main content -->
         <section class="content container-fluid">
