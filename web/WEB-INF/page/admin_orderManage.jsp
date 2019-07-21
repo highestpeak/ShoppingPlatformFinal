@@ -32,7 +32,7 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="${pageContext.request.contextPath}/Adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="${pageContext.request.contextPath}/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">User Name</span>
                         </a>
                     </li>
@@ -41,6 +41,7 @@
         </nav>
     </header>
 
+    <!-- 添加左侧功能区 -->
     <!-- 添加左侧功能区 -->
     <aside class="main-sidebar">
         <section class="sidebar" style="height: auto;">
@@ -57,41 +58,45 @@
 
             <!-- 增加功能栏目 -->
             <ul class="sidebar-menu tree" data-widget="tree">
-                <!-- 有子功能的功能项 -->
-                <li class="treeview">
-                    <!-- 母功能 -->
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">功能1</font></font></span>
-                        <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                    </a>
-                    <!-- 子功能 -->
-                    <ul class="treeview-menu" style="display: none;">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i><font
-                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                            子功能1</font></font></a></li>
-                        <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i><font
-                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                            子功能2</font></font></a></li>
-                    </ul>
-                </li>
-
-                <!-- 没有子功能的功能项 -->
-                <!-- li标签加上class="active"或在已有class前加active(如class="active treeview")，保证标签为被选中 -->
-                <li class="active">
-                    <a href="pages/widgets.html">
-                        <i class="fa fa-th"></i> <span><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">功能2</font></font></span>
-                    </a>
-                </li>
-
-                <!-- 没有子功能的功能项 -->
                 <li>
-                    <a href="pages/widgets.html">
-                        <i class="fa fa-th"></i> <span><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">功能3</font></font></span>
+                    <a href="${pageContext.request.contextPath}/admin/">
+                        <i class="fa fa-home"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">主页</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/classifyManage">
+                        <i class="fa fa-book"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">分类管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/goodsManage">
+                        <i class="fa fa-tag"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">商品管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/orderManage">
+                        <i class="fa fa-shopping-cart"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">订单管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/userManage">
+                        <i class="fa fa-user"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">用户管理</font></font></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/storeInfoManage">
+                        <i class="fa fa-info-circle"></i> <span><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">商店信息</font></font></span>
                     </a>
                 </li>
             </ul>
@@ -368,7 +373,7 @@
                 shadeClose: true,
                 shade: 0.8,
                 area: ['500px', '600px'],
-                content: 'admin_orderManage_OrderInfoLayer.html'
+                content: 'admin_orderManage_OrderInfoLayer.jsp'
             })
 
         });
