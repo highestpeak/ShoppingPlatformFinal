@@ -16,6 +16,23 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style type="text/css">
+        #i1{
+            transform:scale(0.6,0.6) translate(40px,10px);
+        }
+        #i2{
+            transform:scale(0.6,0.6) translate(30px,10px);
+        }
+        #i3{
+            transform:scale(0.6,0.6) translate(40px,10px);
+        }
+        #i4{
+            transform:scale(0.6,0.6) translate(40px,10px);
+        }
+        #i5{
+            transform:scale(0.6,0.6) translate(40px,10px);
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -108,7 +125,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                管理员主界面
+                &nbsp&nbsp&nbsp&nbsp管理员主界面
                 <%--<small>Control panel</small>--%>
             </h1>
             <ol class="breadcrumb">
@@ -120,7 +137,7 @@
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
+            <div style="display: flex">
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-aqua">
@@ -133,7 +150,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i class="ion ion-bag"></i>
+                            <i id="i1" class="ion ion-bag"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/orderManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -151,7 +168,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i class="ion ion-stats-bars"></i>
+                            <i id="i2" class="ion ion-stats-bars"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/goodsManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -169,7 +186,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i class="ion ion-person-add"></i>
+                            <i id="i3" class="ion ion-person-add"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/userManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -187,7 +204,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i class="ion ion-pie-graph"></i>
+                            <i id="i4" class="ion ion-pie-graph"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/classifyManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -205,7 +222,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i class="ion ion-bag"></i>
+                            <i id="i5" class="ion ion-bag"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/storeInfoManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
