@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2019-07-20 15:08:47
+Date: 2019-07-21 16:12:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -100,8 +100,6 @@ INSERT INTO `goods` VALUES ('003', '0000', 'github文化衫', null, 'https://www
 INSERT INTO `goods` VALUES ('101', '0001', '川大文化衫', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
 INSERT INTO `goods` VALUES ('102', '0001', '川大快乐水', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
 INSERT INTO `goods` VALUES ('103', '0001', '肥宅的快乐', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
-INSERT INTO `goods` VALUES ('9f5ab1d7d7af451a9e633e994bee8b4b', '0000', '芒果', null, null, null, null, '20190720-124846', '20190720-124846');
-INSERT INTO `goods` VALUES ('d0d8c6dc87a1474e90f99df97fa48cdb', '0000', '菠菜', null, null, null, null, '20190720-124854', '20190720-124854');
 
 -- ----------------------------
 -- Table structure for goods_classify
@@ -130,6 +128,74 @@ INSERT INTO `goods_classify` VALUES ('7', '1', '2', '阿迪达斯', '20190718-11
 INSERT INTO `goods_classify` VALUES ('8', '2', '6', 'AJ球鞋', '20190718-111541', '20190718-111541');
 
 -- ----------------------------
+-- Table structure for goods_viewed
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_viewed`;
+CREATE TABLE `goods_viewed` (
+  `view_id` varchar(36) NOT NULL,
+  `buyer_id` varchar(36) DEFAULT NULL,
+  `goods_id` varchar(36) DEFAULT NULL,
+  `view_time` varchar(19) DEFAULT NULL,
+  `classify_id` varchar(36) DEFAULT NULL,
+  PRIMARY KEY (`view_id`),
+  KEY `goods_viewed_buyer_user_id_fk` (`buyer_id`),
+  KEY `goods_viewed_goods_goods_id_fk` (`goods_id`),
+  KEY `goods_viewed_goods_classify_classify_id_fk` (`classify_id`),
+  CONSTRAINT `goods_viewed_buyer_user_id_fk` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `goods_viewed_goods_classify_classify_id_fk` FOREIGN KEY (`classify_id`) REFERENCES `goods_classify` (`classify_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `goods_viewed_goods_goods_id_fk` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of goods_viewed
+-- ----------------------------
+INSERT INTO `goods_viewed` VALUES ('001', '654321', '003', '20190718-134040', '4');
+INSERT INTO `goods_viewed` VALUES ('002', '654321', null, '20190718-134040', '4');
+INSERT INTO `goods_viewed` VALUES ('003', '654321', null, '20190718-134040', null);
+INSERT INTO `goods_viewed` VALUES ('004', '654321', '101', '20190718-134040', '5');
+INSERT INTO `goods_viewed` VALUES ('005', '654321', null, '20190718-134040', '6');
+
+-- ----------------------------
+-- Table structure for interested_classify
+-- ----------------------------
+DROP TABLE IF EXISTS `interested_classify`;
+CREATE TABLE `interested_classify` (
+  `classifyStar_id` varchar(36) NOT NULL,
+  `user_id` varchar(36) DEFAULT NULL,
+  `classify_id` varchar(36) DEFAULT NULL,
+  `setStar_time` varchar(19) DEFAULT NULL,
+  PRIMARY KEY (`classifyStar_id`),
+  KEY `interested_classify_user_user_id_fk` (`user_id`),
+  KEY `interested_classify_goods_classify_classify_id_fk` (`classify_id`),
+  CONSTRAINT `interested_classify_goods_classify_classify_id_fk` FOREIGN KEY (`classify_id`) REFERENCES `goods_classify` (`classify_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `interested_classify_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of interested_classify
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for interested_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `interested_goods`;
+CREATE TABLE `interested_goods` (
+  `goodsStar_id` varchar(36) NOT NULL,
+  `user_id` varchar(36) DEFAULT NULL,
+  `goods_id` varchar(36) DEFAULT NULL,
+  `setStar_time` varchar(19) DEFAULT NULL,
+  PRIMARY KEY (`goodsStar_id`),
+  KEY `interested_goods_user_user_id_fk` (`user_id`),
+  KEY `interested_goods_goods_goods_id_fk` (`goods_id`),
+  CONSTRAINT `interested_goods_goods_goods_id_fk` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `interested_goods_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of interested_goods
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for in_cart_of
 -- ----------------------------
 DROP TABLE IF EXISTS `in_cart_of`;
@@ -147,6 +213,29 @@ CREATE TABLE `in_cart_of` (
 
 -- ----------------------------
 -- Records of in_cart_of
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for on_sale
+-- ----------------------------
+DROP TABLE IF EXISTS `on_sale`;
+CREATE TABLE `on_sale` (
+  `on_sale_id` varchar(36) NOT NULL,
+  `store_id` varchar(36) DEFAULT NULL,
+  `goods_id` varchar(36) DEFAULT NULL,
+  `create_time` varchar(19) DEFAULT NULL,
+  `due_time` varchar(36) DEFAULT NULL,
+  `note` text,
+  `sale_level` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`on_sale_id`),
+  KEY `on_sale_store_store_id_fk` (`store_id`),
+  KEY `on_sale_goods_goods_id_fk` (`goods_id`),
+  CONSTRAINT `on_sale_goods_goods_id_fk` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `on_sale_store_store_id_fk` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of on_sale
 -- ----------------------------
 
 -- ----------------------------
