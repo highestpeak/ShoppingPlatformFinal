@@ -424,7 +424,10 @@
             var old_goods_id = $tr.find("td:eq(0)").html();
             var old_goods_name = $tr.find("td:eq(2)").html();
 
-            $("#mod_name").attr("value", );
+            $("#mod_name").attr("value", $tr.find("td:eq(2)").html());
+            $("#mod_description").attr("value", $tr.find("td:eq(3)").html());
+            $("#mod_status").attr("value", $tr.find("td:eq(5)").html());
+            $("#mod_oldlevel").attr("value", $tr.find("td:eq(6)").html());
 
             $("#good_info_mod_sumbit").click(function(){
                 var dataSend = {
