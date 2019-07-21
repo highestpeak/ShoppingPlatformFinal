@@ -146,7 +146,7 @@
                                                 aria-label="用户名: activate to sort column ascending">用户名
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example"
-                                                araria-label="性别: activate to sort column ascending">性别
+                                                aria-label="性别: activate to sort column ascending">性别
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example"
                                                 aria-label="密码: activate to sort column ascending">密码
@@ -325,7 +325,7 @@
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 
 <script>
     $(function () {
@@ -376,4 +376,4 @@
 
 </script>
 </body>
-</html></html>
+</html>
