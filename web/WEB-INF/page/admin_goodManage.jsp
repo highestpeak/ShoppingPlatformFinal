@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 自由在风中
-  Date: 2019/7/20
-  Time: 15:14
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -114,112 +106,55 @@
     <div class="content-wrapper" style="min-height: 1000px;">
         <!-- 在此处添加内容 -->
 
+        <br><br>
+
         <div class="row">
             <div class="col-xs-12">
-                <table class="table" id="goodTable">
+                <table id="goodTable" class="table">
                     <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>picture</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Classify</th>
-                        <th>Number</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${allGood}" var="good">
                         <tr>
-                            <td>${good.id}</td>
-                            <td>${good.pic}</td>
-                            <td>${good.name}</td>
-                            <td>${good.price}</td>
-                            <td>${good.classify}</td>
-                            <td>${good.number}</td>
-                            <td style="word-break:break-all;width: 200px">${good.description}</td>
-                            <td>
-                                <button class="btn btn_del" id="del" style="float:right; margin-right:10px; background:red; color:white">删除</button>
-                                <button class="btn btn_mod" style="float:right; margin-right:10px; background:yellowgreen; color:white">修改</button>
-                            </td>
+                            <th>ID</th>
+                            <th>Store ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Pic</th>
+                            <th>Status</th>
+                            <th>Old Level</th>
+                            <th>Create Time</th>
+                            <th>Update Time</th>
+                            <th>Operation</th>
                         </tr>
-                    </c:forEach>
+                    </thead>
+                    <tbody id="tbodyId">
+                       <!-- <tr v-for="good in goodsList">
+                            <td>{{good.goods_id}}</td>
+                            <td>{{good.store_id}}</td>
+                            <td>{{good.goods_name}}</td>
+                            <td>{{good.description}}</td>
+                            <td>{{good.pic_url}}</td>
+                            <td>{{good.status}}</td>
+                            <td>{{good.old_level}}</td>
+                            <td>{{good.create_time}}</td>
+                            <td>{{good.update_time}}</td>
+                            <td>
+                                <a class="btn btn-xs btn-info btn_update_good">修改</a>
+                                <a class="btn btn-xs btn-danger btn_del_good">删除</a>
+                            </td>
+                        </tr> -->
+
                     </tbody>
                 </table>
             </div>
         </div>
-        <button class="btn btn_add" style="float:right; margin-right:10px; background:green; color:white">添加商品</button>
+
+        <br><br>
+        <div>
+            <button class="btn btn_add" style="float:right; margin-right:10px; background:green; color:white">添加商品</button>
+        </div>
 
     </div>
 
 </div>
-
-<script>
-    $(function(){
-
-        // 分页
-        $("#goodTable").DataTable();
-
-        // 删除商品按钮
-        $(".content-wrapper").on("click", ".btn_del", function(){
-            var $tr = $(this).parents("tr");
-            var id = $tr.attr("id");
-
-            layer.confirm('确定删除?', {icon: 3, title:'提示'}, function(index){
-                $.ajax({
-                    type: "post",
-                    url: "/deleteGood",
-                    data: id,
-                    success: function(status){
-                        layer.alert("删除成功!");
-                        window.location.reload();
-                    }
-                });
-
-                layer.close(index);
-            });
-        })
-
-        // 修改商品按钮
-        $(".content-wrapper").on("click", ".btn_mod", function(){
-            layer.open({
-                type: 1,
-                title: "",
-                shadeClose: true,
-                shade: 0.5,
-                area: ["500px","500px"],
-                content: $("#good_info_modify_table")
-            });
-
-        });
-
-        $("#good_info_mod_cancel").click(function(){
-            layer.closeAll();
-        });
-
-        // 添加商品按钮
-        $(".content-wrapper").on("click", ".btn_add", function(){
-            var $div = $(this).parent().parent().parent();
-            var id = $div.attr("id");
-
-            layer.open({
-                type: 1,
-                title: "",
-                shadeClose: true,
-                shade: 0.5,
-                area: ["500px","500px"],
-                content: $("#good_info_add_table")
-            });
-
-        });
-
-        $("#good_info_add_cancel").click(function(){
-            layer.closeAll();
-        });
-
-    });
-
-</script>
 
 <!-- 修改商品表格 -->
 <div class="box box-info" id="good_info_modify_table" style="display: none">
@@ -362,9 +297,141 @@
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/js/vue.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+<script>
+    $(function(){
+        var dataSend = {
+            store:{
+                store_id: "0000"
+            },
+            goodsClassify:{
+                classify_name: "all"
+            }
+        }
+
+        $.ajax({    
+            type: "POST",    
+            url: "http://localhost:8080/goods/getByClassify",//请求controller方法   
+            data: JSON.stringify(dataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",    
+            dataType: "json",    
+            async: false, //同步请求，注意此字段    
+            success: function (data) {        
+                if(data.success == true){
+
+                    var $tbody = $("#tbodyId");
+                    var gl = data.goodsList;
+                    $.each(gl,function (i,e) {
+                        var $tr = $("<tr>")
+                            .append($("<td>").html(e["goods_id"]))
+                            .append($("<td>").html(e["store_id"]))
+                            .append($("<td>").html(e["goods_name"]))
+                            .append($("<td>").html(e["description"]))
+                            .append($("<td>").html(e["pic_url"]))
+                            .append($("<td>").html(e["status"]))
+                            .append($("<td>").html(e["old_level"]))
+                            .append($("<td>").html(e["create_time"]))
+                            .append($("<td>").html(e["update_time"]))
+                            .append($("<td>").html(e["update_time"]));
+                        // var button_1 = $("<button>")
+                        $tbody.append($tr);
+                    });
+                }else{
+                    layer.alert("数据请求失败！");
+                }
+            }
+        });
+    })
+</script>
+
+<script>
+    $(function(){
+
+        $("#goodTable").DataTable({
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : true,
+            'stateSave':true,
+            "language": {
+                "paginate": {
+                    "next": "下一页",
+                    "previous":"上一页"
+
+                },
+                "search":"快速搜索",
+                "info": "第_PAGE_页(共_PAGES_页)",
+                "emptyTable":"无可用数据",
+                "lengthMenu": "_MENU_ 条/页"
+            }
+        });
+
+
+        // 删除商品按钮
+        $(".content-wrapper").on("click", ".btn_del", function(){
+            var $tr = $(this).parents("tr");
+            var id = $tr.attr("id");
+
+            layer.confirm('确定删除?', {icon: 3, title:'提示'}, function(index){
+                $.ajax({
+                    type: "post",
+                    url: "/deleteGood",
+                    data: id,
+                    success: function(status){
+                        layer.alert("删除成功!");
+                        window.location.reload();
+                    }
+                });
+                layer.close(index);
+            });
+        });
+
+        // 修改商品按钮
+        $(".content-wrapper").on("click", ".btn_mod", function(){
+            layer.open({
+                type: 1,
+                title: "",
+                shadeClose: true,
+                shade: 0.5,
+                area: ["500px","500px"],
+                content: $("#good_info_modify_table")
+            });
+
+        });
+
+        $("#good_info_mod_cancel").click(function(){
+            layer.closeAll();
+        });
+
+        // 添加商品按钮
+        $(".content-wrapper").on("click", ".btn_add", function(){
+            var $div = $(this).parent().parent().parent();
+            var id = $div.attr("id");
+
+            layer.open({
+                type: 1,
+                title: "",
+                shadeClose: true,
+                shade: 0.5,
+                area: ["500px","500px"],
+                content: $("#good_info_add_table")
+            });
+
+        });
+
+        $("#good_info_add_cancel").click(function(){
+            layer.closeAll();
+        });
+
+
+    })
+</script>
 
 </body>
 </html>
