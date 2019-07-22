@@ -67,7 +67,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
-                    <button type="submit" name="search" selled_id="search-btn" class="btn btn-flat">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                     <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -150,7 +150,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i selled_id="i1" class="ion ion-bag"></i>
+                            <i id="i1" class="ion ion-bag"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/orderManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -168,7 +168,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i selled_id="i2" class="ion ion-stats-bars"></i>
+                            <i id="i2" class="ion ion-stats-bars"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/goodsManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -186,7 +186,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i selled_id="i3" class="ion ion-person-add"></i>
+                            <i id="i3" class="ion ion-person-add"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/userManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -204,7 +204,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i selled_id="i4" class="ion ion-pie-graph"></i>
+                            <i id="i4" class="ion ion-pie-graph"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/classifyManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -222,7 +222,7 @@
                         </div>
                         <div class="icon">
                             <p>&nbsp</p>
-                            <i selled_id="i5" class="ion ion-bag"></i>
+                            <i id="i5" class="ion ion-bag"></i>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/storeInfoManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>

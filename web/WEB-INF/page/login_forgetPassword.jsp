@@ -115,22 +115,22 @@
 
         <form action="${pageContext.request.contextPath}/forgetPassword" method="post" onsubmit="return forgetPasswordCheck()">
             <div class="form-group has-feedback">
-                <input selled_id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名" name="user_id">
+                <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input selled_id="verify" type="password" class="form-control" maxlength=16 placeholder=新密码 name="verify">
+                <input id="verify" type="password" class="form-control" maxlength=16 placeholder=新密码 name="verify">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input selled_id="email" type="text" class="form-control" placeholder=邮箱 name="email">
+                <input id="email" type="text" class="form-control" placeholder=邮箱 name="email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <div selled_id="leftDiv">
-                    <input selled_id="verificationCode" type="text" class="form-control" placeholder=验证码 name="verificationCode">
+                <div id="leftDiv">
+                    <input id="verificationCode" type="text" class="form-control" placeholder=验证码 name="verificationCode">
                 </div>
-                <div selled_id="rightDiv">
+                <div id="rightDiv">
                     <button type="button" class="btn btn-default btn-lrg ajax" >获取验证码</button>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                 <!-- /.col -->
             </div>
             <br>
-            <div selled_id="error_box"><br></div>
+            <div id="error_box"><br></div>
         </form>
         <!-- /.social-auth-links -->
         <br>

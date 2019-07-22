@@ -49,7 +49,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
-                    <button type="submit" name="search" selled_id="search-btn" class="btn btn-flat">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                     <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -131,7 +131,7 @@
                         </ul>
                         <div class="tab-content no-padding">
                             <!-- Morris chart - Sales -->
-                            <div class="chart tab-pane active" selled_id="revenue-chart" style="position: relative; height: 300px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                            <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
                                 <svg height="300" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;">
                                     <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc>
                                     <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
@@ -225,7 +225,7 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table selled_id="example" class="table" >
+                                    <table id="example" class="table" >
                                         <thead>
                                         <tr>
                                             <th>全选 <input type="checkbox"></th>
