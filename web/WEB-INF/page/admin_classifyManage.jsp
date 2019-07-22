@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 自由在风中
-  Date: 2019/7/20
-  Time: 15:14
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -17,7 +9,6 @@
     <!-- 注意使用adminlte文件夹的css，js文件(教程视频有) -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/AdminLTE.min.css">
@@ -118,15 +109,21 @@
         <br><br><br><br>
 
         <div class="col-md-6">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Donut Chart</h3>
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Donut Chart</h3>
+                
+                        <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <canvas id="pieChart" style="height: 221px; width: 442px;" width="442" height="221"></canvas>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-
-                <div class="box-body">
-                    <canvas id="pieChart" style="height: 351px; width: 703px;" width="500" height="438"></canvas>
-                </div>
-            </div>
         </div>
 
         <div class="col-md-6">
@@ -150,6 +147,18 @@
 
 </div>
 
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/chart.js/Chart.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/bootstrap-treeview.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+
 <script>
     $(function(){
         function listToTree(data, pid) {
@@ -171,7 +180,7 @@
             var result;
             $.ajax({
                 type:"post",
-                url:"http://localhost:8080/goods/classifyOfStore",
+                url:"http://localhost:8080/classify/classifyOfStore",
                 data:{"store_id":"0000"},
                 dataType:'json',
                 async: false,//禁止异步请求，变为同步请求
@@ -324,67 +333,83 @@
 
 </script>
 
-<!-- Chart -->
 <script>
-    $(function(){
-        var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
-        var pieChart       = new Chart(pieChartCanvas);
-        var PieData        = [
+        $(function () {
+      
+          //-------------
+          //- PIE CHART -
+          //-------------
+          // Get context with jQuery - using jQuery's .get() method.
+          var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+          var pieChart       = new Chart(pieChartCanvas)
+          var PieData        = [
             {
-                value    : 700,
-                color    : '#f56954',
-                highlight: '#f56954',
-                label    : 'Chrome'
+              value    : 700,
+              color    : '#f56954',
+              highlight: '#f56954',
+              label    : 'Chrome'
             },
             {
-                value    : 500,
-                color    : '#00a65a',
-                highlight: '#00a65a',
-                label    : 'IE'
+              value    : 500,
+              color    : '#00a65a',
+              highlight: '#00a65a',
+              label    : 'IE'
             },
             {
-                value    : 400,
-                color    : '#f39c12',
-                highlight: '#f39c12',
-                label    : 'FireFox'
+              value    : 400,
+              color    : '#f39c12',
+              highlight: '#f39c12',
+              label    : 'FireFox'
             },
             {
-                value    : 600,
-                color    : '#00c0ef',
-                highlight: '#00c0ef',
-                label    : 'Safari'
+              value    : 600,
+              color    : '#00c0ef',
+              highlight: '#00c0ef',
+              label    : 'Safari'
             },
             {
-                value    : 300,
-                color    : '#3c8dbc',
-                highlight: '#3c8dbc',
-                label    : 'Opera'
+              value    : 300,
+              color    : '#3c8dbc',
+              highlight: '#3c8dbc',
+              label    : 'Opera'
             },
             {
-                value    : 100,
-                color    : '#d2d6de',
-                highlight: '#d2d6de',
-                label    : 'Navigator'
+              value    : 100,
+              color    : '#d2d6de',
+              highlight: '#d2d6de',
+              label    : 'Navigator'
             }
-        ];
-        var pieOptions     = {
+          ]
+          var pieOptions     = {
+            //Boolean - Whether we should show a stroke on each segment
             segmentShowStroke    : true,
+            //String - The colour of each segment stroke
             segmentStrokeColor   : '#fff',
+            //Number - The width of each segment stroke
             segmentStrokeWidth   : 2,
-            percentageInnerCutout: 50,
+            //Number - The percentage of the chart that we cut out of the middle
+            percentageInnerCutout: 50, // This is 0 for Pie charts
+            //Number - Amount of animation steps
             animationSteps       : 100,
+            //String - Animation easing effect
             animationEasing      : 'easeOutBounce',
+            //Boolean - Whether we animate the rotation of the Doughnut
             animateRotate        : true,
+            //Boolean - Whether we animate scaling the Doughnut from the centre
             animateScale         : false,
+            //Boolean - whether to make the chart responsive to window resizing
             responsive           : true,
+            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
             maintainAspectRatio  : true,
-            <%--legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'--%>
-        }
-        pieChart.Doughnut(PieData, pieOptions);
-    })
-</script>
+            //String - A legend template
+            legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+          }
+      
+          pieChart.Doughnut(PieData, pieOptions)
+        })
+      </script>
 
-<!-- 添加商品表格 -->
+<!-- 添加分类表格 -->
 <div class="box box-info" id="good_classify_add_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">添加分类</h3>
@@ -424,7 +449,7 @@
     </form>
 </div>
 
-<!-- 添加商品表格 -->
+<!-- 修改分类表格 -->
 <div class="box box-info" id="good_classify_mod_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">添加分类</h3>
@@ -463,16 +488,6 @@
         </div>
     </form>
 </div>
-
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/bootstrap-treeview.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 
 </body>
 </html>
