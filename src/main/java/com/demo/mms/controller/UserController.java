@@ -3,18 +3,21 @@ package com.demo.mms.controller;
 import com.demo.mms.common.domain.Admin;
 import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.common.domain.User;
+import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.MailInfoCrudVO;
 import com.demo.mms.common.vo.UserVO;
 import com.demo.mms.common.vo.ViewHistoryGetVO;
 import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -275,9 +278,48 @@ public class UserController {
     //推荐的商品后面跟一字段是 推荐原因
     @RequestMapping("/guessLike")
     @ResponseBody
-    public Object guessUserLike(User user){
-        return null;
+    public Object guessUserLike(@RequestBody User user){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+//        rsService=goodsService.starGoods(starGoodsVO.getUser(),starGoodsVO.getStore(),starGoodsVO.getGoods());
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
     }
+
+    @RequestMapping("/getUserStar/{user_id}")
+    @ResponseBody
+    public Object getUserStar(@PathVariable String user_id){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=userService.getUserStar(user_id);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
 
     //获取用户游览历史
     //根据用户获取商品的请求来加入

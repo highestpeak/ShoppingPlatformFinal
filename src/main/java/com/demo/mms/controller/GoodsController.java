@@ -199,7 +199,22 @@ public class GoodsController {
     @RequestMapping("/star")
     @ResponseBody
     public Object starGoods(@RequestBody StarGoodsVO starGoodsVO){
-        Map<String ,Object> rs=new HashMap<>();
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=goodsService.starGoods(starGoodsVO.getUser(),starGoodsVO.getStore(),starGoodsVO.getGoods());
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
         return rs;
     }
 

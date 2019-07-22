@@ -21,6 +21,11 @@
     values   (#{user_id}, #{permission}, #{note},#{create_time},#{update_time})
   </insert>
 
+    <insert id="insertInterested" parameterType="com.demo.mms.common.domain.GoodsStar">
+        insert into interested_goods (goodsStar_id,user_id,goods_id,setStar_time)
+        values   (#{goodsStar_id}, #{user_id}, #{goods_id}, #{setStar_time})
+    </insert>
+
   <resultMap id="tempQueryGoodsViewed" type="com.demo.mms.common.vo.GoodsViewedQueryVO">
   </resultMap>
 

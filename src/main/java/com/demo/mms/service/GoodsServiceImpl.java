@@ -1,12 +1,11 @@
 package com.demo.mms.service;
 
-import com.demo.mms.common.domain.Goods;
-import com.demo.mms.common.domain.GoodsClassify;
-import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.IDGenerator;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import com.demo.mms.dao.GoodsOperateMapper;
+import com.demo.mms.dao.UserOperateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,8 @@ import java.util.*;
 public class GoodsServiceImpl implements GoodsService{
     @Autowired
     GoodsOperateMapper goodsOperateMapper;
+    @Autowired
+    UserOperateMapper userOperateMapper;
 
     //查询商店所售卖所有商品分类
     @Override
@@ -334,6 +335,41 @@ public class GoodsServiceImpl implements GoodsService{
                 rs.put("goodsGet",idCheck);
             }else {//nameCheck!=null
                 rs.put("goodsGet",nameCheck);
+            }
+        }
+
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> starGoods(User user, Store store, Goods goods) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        if(userFind==null){//用户不存在
+            rs.put("user existed",false);
+            return rs;
+        }
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        Goods nameCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_name",goods.getGoods_name());
+        Goods idCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_id",goods.getGoods_id());
+        if((nameCheck==null)&&(idCheck==null)){//不存在
+            rs.put("goods "+goods.getGoods_name()+" existed",false);
+        }else {
+            GoodsStar goodsStar=new GoodsStar();
+            goodsStar.setGoodsStar_id(IDGenerator.getId());
+            goodsStar.setUser_id(user.getUser_id());
+            goodsStar.setSetStar_time(ProjectFactory.getPorjectStrDate(new Date()));
+            if (idCheck!=null){
+                goodsStar.setGoods_id(idCheck.getGoods_id());
+                userOperateMapper.insertInterested(goodsStar);
+            }else {//nameCheck!=null
+                goodsStar.setGoods_id(nameCheck.getGoods_id());
+                userOperateMapper.insertInterested(goodsStar);
             }
         }
 

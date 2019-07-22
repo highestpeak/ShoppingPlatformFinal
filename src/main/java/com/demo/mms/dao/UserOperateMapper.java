@@ -3,10 +3,7 @@ package com.demo.mms.dao;
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.vo.GoodsViewedQueryTestVO;
 import com.demo.mms.common.vo.GoodsViewedQueryVO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
 
@@ -37,4 +34,6 @@ public interface UserOperateMapper {
     ArrayList<GoodsViewedQueryVO> queryGoodsViewedByClassify(String buyer_id,String classify_name);
 
     ArrayList<GoodsViewedQueryTestVO> queryGoodsViewedByStore(String store_id, String classify_name);
+
+    int insertInterested(GoodsStar goodsStar);
 }
