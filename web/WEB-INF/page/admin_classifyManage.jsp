@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 自由在风中
-  Date: 2019/7/20
-  Time: 15:14
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -17,7 +9,6 @@
     <!-- 注意使用adminlte文件夹的css，js文件(教程视频有) -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/localLib/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/bower_components/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/AdminLTE.min.css">
@@ -115,276 +106,346 @@
     <div class="content-wrapper" style="min-height: 1000px;">
         <!-- 在此处添加内容 -->
 
-        <br><br><br><br>
+        <section class="content-header">
+            <h1>
+                分类信息
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">分类管理</li>
+            </ol>  
+        </section>
 
-        <div class="col-md-6">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Donut Chart</h3>
+        <section class="content container-fluid">
+            <div class="row">
+
+                <div class="col-xs-6">
+                    <div class="box" style="height: 500px">
+                        <div class="box-header">
+                            <h3 class="box-title">统计</h3>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="box-body">
-                    <canvas id="pieChart" style="height: 351px; width: 703px;" width="500" height="438"></canvas>
+                <div class="col-xs-6">
+                    <div class="box" style="height: 500px">
+                        <div class="box-header">
+                            <h3 class="box-title">分类树</h3>
+                            <div>
+                                <input id="delete" style="float:right; margin-right:10px;background:red; color:white" class="btn" type="button" style="float:right" value="删除" />
+                            </div>
+                
+                            <div>
+                                <input id="modify" style="float:right; margin-right:10px; background:yellowgreen; color:white" class="btn" type="button" style="float:right" value="修改" />
+                            </div>
+                
+                            <div>
+                                <input id="add" style="float:right; margin-right:10px; background:greenyellow; color:white" class="btn" type="button" style="float:right" value="添加" />
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="tree"></div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        </div>
-
-        <div class="col-md-6">
-
-            <div id="tree"></div>
-
-            <div>
-                <input id="delete" style="float:right; margin-right:10px; background:red; color:white" class="btn" type="button" style="float:right" value="删除" />
-            </div>
-
-            <div>
-                <input id="modify" style="float:right; margin-right:10px; background:yellowgreen; color:white" class="btn" type="button" style="float:right" value="修改" />
-            </div>
-
-            <div>
-                <input id="add" style="float:right; margin-right:10px; background:greenyellow; color:white" class="btn" type="button" style="float:right" value="添加" />
-            </div>
-        </div>
+        </section>>
 
     </div>
 
 </div>
 
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/chart.js/Chart.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/bootstrap-treeview.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+
+
 <script>
-    $(function(){
-        function listToTree(data, pid) {
-            var result = [], temp;
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].pid == pid) {
-                    var obj = data[i];
-                    temp = listToTree(data, data[i].id);
-                    if (temp.length > 0) {
-                        obj["nodes"] = temp;
-                    }
-                    result.push(obj);
+$(function(){
+    function listToTree(data, pid) {
+        var result = [], temp;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].pid == pid) {
+                var obj = data[i];
+                temp = listToTree(data, data[i].id);
+                if (temp.length > 0) {
+                    obj["nodes"] = temp;
                 }
+                result.push(obj);
             }
-            return result;
+        }
+        return result;
+    }
+
+    function getTree() {
+        var result;
+        var dataSend = {
+            store_id: "0000"
+        };
+        $.ajax({
+            type:"POST",
+            url:"http://localhost:8080/classify/classifyOfStore",
+            data:JSON.stringify(dataSend),
+            contentType: "application/json; charset=utf-8",    
+            dataType:'json',
+            async: false,//禁止异步请求，变为同步请求
+            success:function(data) {
+                var list=data.classifyList;
+                var obj = [];
+                for(var i=0; i<list.length; i++){
+                    var item = {
+                        text: list[i][1],
+                        id: list[i][0],
+                        pid:list[i][2],
+                    }
+                    obj.push(item);
+                }
+                result= listToTree(obj, 0);
+            }
+        });
+        return result;
+    }
+
+    $('#tree').treeview({
+        data: getTree(),
+        showCheckbox: true,
+        enableLinks: true
+    });
+
+    $("#delete").click(function(){
+        arr=$("#tree").treeview("getChecked");
+        if(arr.length ==0){
+            layer.alert('请勾选！', { icon: 2, closeBtn: 0 });
+            return;
+        }
+        var delID = [];
+        for(var i=0; i<arr.length; i++){
+            delID.push({
+                classify_id: arr[i].id
+            });
         }
 
-        function getTree() {
-            var result;
+        var dataSend = {
+            store: {
+                store_id: "0000"
+            },
+            classifiesToDel: delID
+        }
+
+        console.log(dataSend);
+
+        if(layer.confirm("确认删除？")){
             $.ajax({
-                type:"post",
-                url:"http://localhost:8080/goods/classifyOfStore",
-                data:{"store_id":"0000"},
-                dataType:'json',
-                async: false,//禁止异步请求，变为同步请求
-                success:function(data) {
-                    var list=data.classifyList;
-                    var obj = [];
-                    for(var i=0; i<list.length; i++){
-                        var item = {
-                            text: list[i][1],
-                            id: list[i][0],
-                            pid:list[i][2],
-                            href: "/goods/classify/" + list[i][0]
-                        }
-                        obj.push(item);
+                type:"POST",
+                url:"http://localhost:8080/classify/deleteClassifyOfStore",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",    
+                async: false,  
+                success:function(data){
+                    if(data.success == true){                            
+                        layer.alert('删除成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
                     }
-                    result= listToTree(obj, 0);
                 }
             });
-            return result;
+        }else{
+            return;
+        }
+    });
+
+    $("#modify").click(function(){
+        arr=$("#tree").treeview("getChecked");
+        if(arr.length != 1){
+            layer.alert("请正确勾选!");
+            return;
         }
 
-        $('#tree').treeview({
-            data: getTree(),
-            showCheckbox: true,
-            enableLinks: true
+        layer.open({
+            type: 1,
+            title: "",
+            shadeClose: true,
+            shade: 0.5,
+            area: ["400px","300px"],
+            content: $("#good_classify_mod_table")
         });
 
-        $("#delete").click(function(){
-            arr=$("#tree").treeview("getChecked");
-            if(arr.length ==0){
-                layer.alert("请勾选!");
-                return;
-            }
-            var ids=[];
-            for(var i=0; i<arr.length; i++){
-                ids.push(arr[i].id);
-            }
+    });
 
-            // 向deleteClassify功能发送要删除的分类的id的数组，[1,2,3,4]
-            if(confirm("确认删除？")){
-                $.ajax({
-                    type:"post",
-                    url:"/deleteClassify",
-                    data: {ids:ids},
-                    success:function(data,status){
-                        layer.alert("删除“"+data+"”成功！(status:"+status+".)");
-                        $('#tree').treeview('removeNode', [ arr, { silent: true } ]);
-                        window.location.reload();
-                    }
-                });
-            }else{
-                return;
-            }
-        });
+    $("#good_classify_mod_cancel").click(function(){
+        layer.closeAll();
+    });
 
-        $("#modify").click(function(){
-            arr=$("#tree").treeview("getChecked");
-            if(arr.length != 1){
-                layer.alert("请正确勾选!");
-                return;
-            }
+    $("#good_classify_mod_submit").click(function(){
+        var id = document.getElementById("mod_id").value;
+        var name = document.getElementById("mod_name").value;
+        var pid = document.getElementById("mod_pid").value;
 
-            layer.open({
-                type: 1,
-                title: "",
-                shadeClose: true,
-                shade: 0.5,
-                area: ["400px","300px"],
-                content: $("#good_classify_mod_table")
+        var temp = {
+            text: name,
+            id: id,
+            pid: pid
+        }
+
+        arr = $("#tree").treeview("getChecked");
+        if(temp){
+            $.ajax({
+                type: "post",
+                url: "/modifyClassify",
+                data: temp,
+                success: function(data, status){
+                    layer.alert("添加“"+data+"”成功！(status:"+status+".)");
+                    $("#tree").treeview("addNode", [data,arr]);
+                    window.location.reload();
+                }
             });
+        }
+        layer.closeAll();
+    });
 
+
+    $("#add").click(function(){
+        layer.open({
+            type: 1,
+            title: "",
+            shadeClose: true,
+            shade: 0.5,
+            area: ["400px","300px"],
+            content: $("#good_classify_add_table")
         });
 
-        $("#good_classify_mod_cancel").click(function(){
-            layer.closeAll();
-        });
+    });
 
-        $("#good_classify_mod_submit").click(function(){
-            var id = document.getElementById("mod_id").value;
-            var name = document.getElementById("mod_name").value;
-            var pid = document.getElementById("mod_pid").value;
+    $("#good_classify_add_cancel").click(function(){
+        layer.closeAll();
+    });
 
-            var temp = {
-                text: name,
-                id: id,
-                pid: pid
-            }
+    $("#good_classify_add_submit").click(function(){
+        var id = document.getElementById("add_id").value;
+        var name = document.getElementById("add_name").value;
+        var pid = document.getElementById("add_pid").value;
 
-            arr = $("#tree").treeview("getChecked");
-            if(temp){
-                $.ajax({
-                    type: "post",
-                    url: "/modifyClassify",
-                    data: temp,
-                    success: function(data, status){
-                        layer.alert("添加“"+data+"”成功！(status:"+status+".)");
-                        $("#tree").treeview("addNode", [data,arr]);
-                        window.location.reload();
-                    }
-                });
-            }
-            layer.closeAll();
-        });
+        var temp = {
+            text: name,
+            id: id,
+            pid: pid
+        }
 
-
-        $("#add").click(function(){
-            layer.open({
-                type: 1,
-                title: "",
-                shadeClose: true,
-                shade: 0.5,
-                area: ["400px","300px"],
-                content: $("#good_classify_add_table")
+        arr = $("#tree").treeview("getChecked");
+        if(temp){
+            $.ajax({
+                type: "post",
+                url: "/addClassify",
+                data: temp,
+                success: function(data, status){
+                    layer.alert("添加“"+data+"”成功！(status:"+status+".)");
+                    $("#tree").treeview("addNode", [data,arr]);
+                    window.location.reload();
+                }
             });
+        }
+        layer.closeAll();
+    });
 
-        });
-
-        $("#good_classify_add_cancel").click(function(){
-            layer.closeAll();
-        });
-
-        $("#good_classify_add_submit").click(function(){
-            var id = document.getElementById("add_id").value;
-            var name = document.getElementById("add_name").value;
-            var pid = document.getElementById("add_pid").value;
-
-            var temp = {
-                text: name,
-                id: id,
-                pid: pid
-            }
-
-            arr = $("#tree").treeview("getChecked");
-            if(temp){
-                $.ajax({
-                    type: "post",
-                    url: "/addClassify",
-                    data: temp,
-                    success: function(data, status){
-                        layer.alert("添加“"+data+"”成功！(status:"+status+".)");
-                        $("#tree").treeview("addNode", [data,arr]);
-                        window.location.reload();
-                    }
-                });
-            }
-            layer.closeAll();
-        });
-
-    })
+})
 
 </script>
 
-<!-- Chart -->
 <script>
-    $(function(){
-        var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
-        var pieChart       = new Chart(pieChartCanvas);
-        var PieData        = [
-            {
-                value    : 700,
-                color    : '#f56954',
-                highlight: '#f56954',
-                label    : 'Chrome'
-            },
-            {
-                value    : 500,
-                color    : '#00a65a',
-                highlight: '#00a65a',
-                label    : 'IE'
-            },
-            {
-                value    : 400,
-                color    : '#f39c12',
-                highlight: '#f39c12',
-                label    : 'FireFox'
-            },
-            {
-                value    : 600,
-                color    : '#00c0ef',
-                highlight: '#00c0ef',
-                label    : 'Safari'
-            },
-            {
-                value    : 300,
-                color    : '#3c8dbc',
-                highlight: '#3c8dbc',
-                label    : 'Opera'
-            },
-            {
-                value    : 100,
-                color    : '#d2d6de',
-                highlight: '#d2d6de',
-                label    : 'Navigator'
-            }
-        ];
-        var pieOptions     = {
-            segmentShowStroke    : true,
-            segmentStrokeColor   : '#fff',
-            segmentStrokeWidth   : 2,
-            percentageInnerCutout: 50,
-            animationSteps       : 100,
-            animationEasing      : 'easeOutBounce',
-            animateRotate        : true,
-            animateScale         : false,
-            responsive           : true,
-            maintainAspectRatio  : true,
-            <%--legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'--%>
+$(function () {
+
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+    var pieChart       = new Chart(pieChartCanvas);
+    var PieData        = [];
+
+    var color = [
+        {
+            color    : '#f56954',
+            highlight: '#f56954'
+        },
+        {
+            color    : '#00a65a',
+            highlight: '#00a65a'
+        },
+        {
+            color    : '#f39c12',
+            highlight: '#f39c12'
+        },
+        {
+            color    : '#00c0ef',
+            highlight: '#00c0ef'
+        },
+        {
+            color    : '#3c8dbc',
+            highlight: '#3c8dbc'
+        },
+        {
+            color    : '#d2d6de',
+            highlight: '#d2d6de'
         }
-        pieChart.Doughnut(PieData, pieOptions);
-    })
+    ];
+
+    var dataSend = {
+        store_id: "0000"
+    };
+
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/store/getChartOfClassify",
+        data:JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType:'json',
+        async: false,
+        success:function(data) {
+            var list=data.classifyMap;
+            var item = {};
+            var i = 0;
+            for(var val in list){
+                item.label = val;
+                item.color = color[i%6].color;
+                item.highlight = color[i%6].highlight;
+                item.value = list[val];
+                i++;
+                PieData.push(JSON.parse(JSON.stringify(item)));
+            } 
+        }
+    });
+
+    var pieOptions     = {
+        segmentShowStroke    : true,
+        segmentStrokeColor   : '#fff',
+        segmentStrokeWidth   : 2,
+        percentageInnerCutout: 50, 
+        animationSteps       : 100,
+        animationEasing      : 'easeOutBounce',
+        animateRotate        : true,
+        animateScale         : false,
+        responsive           : true,
+        maintainAspectRatio  : true,
+        legendTemplate       : '<ul class="<=name.toLowerCase()>-legend">< for (var i=0; i<segments.length; i++){><li><span style="background-color:<=segments[i].fillColor>"></span><if(segments[i].label){><=segments[i].label><}></li><}></ul>'
+    }
+
+    pieChart.Doughnut(PieData, pieOptions)
+})
 </script>
 
-<!-- 添加商品表格 -->
+<!-- 添加分类表格 -->
 <div class="box box-info" id="good_classify_add_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">添加分类</h3>
@@ -424,7 +485,7 @@
     </form>
 </div>
 
-<!-- 添加商品表格 -->
+<!-- 修改分类表格 -->
 <div class="box box-info" id="good_classify_mod_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">添加分类</h3>
@@ -463,16 +524,6 @@
         </div>
     </form>
 </div>
-
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/bootstrap-treeview.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 
 </body>
 </html>

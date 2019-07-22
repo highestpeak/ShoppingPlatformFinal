@@ -4,6 +4,7 @@ package com.demo.mms.dao;
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.vo.StoreGoodsChartByClassifyVO;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import org.apache.ibatis.annotations.*;
 
@@ -14,6 +15,9 @@ public interface GoodsOperateMapper {
     Store queryStore(
                      @Param("column") String column,
                      @Param("value") String value);
+
+    @Select("SELECT * FROM GOODS WHERE GOODS.goods_id = #{id}")
+    Goods getGoodById(@Param("id") String goodsId);
 
     ArrayList<StoreSelledClassifyVO> queryGoodsWithClassify(String store_id);
 
@@ -94,4 +98,10 @@ public interface GoodsOperateMapper {
                      @Param("valueKey") String valueKey,
                      @Param("columnModify") String columnModify,
                      @Param("valueModify") String valueModify);
+
+    ArrayList<StoreGoodsChartByClassifyVO> queryStoreGoodsChartByClassify(String store_id);
+
+    @Select("select * from goods_classify where ${column} = #{value}")
+    GoodsClassify queryGoodsClassify(@Param("column") String column,
+                                     @Param("value") String value);
 }

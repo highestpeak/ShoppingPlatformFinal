@@ -32,4 +32,6 @@ public interface UserService {
     Map<String,Object> getViewHistory(User user, GoodsClassify goodsClassify);
 
     Map<String,Object> getViewHistory(Store store, GoodsClassify goodsClassify);
+
+    Map<String,Object> getUserStar(String user_id);
 }

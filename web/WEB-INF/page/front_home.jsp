@@ -501,9 +501,8 @@
 
 <!--layer 引入-->
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
-
+<script src="${pageContext.request.contextPath}/localLib/js/vue.min.js"></script>
 <script>
-
     $(function () {
         $(".content").on("click", ".btn_login", function () {
             layer.open({
@@ -514,6 +513,48 @@
                 area: ['500px', '600px'],
                 content:"${pageContext.request.contextPath}/toLogin"
             })
+        });
+
+        var productVue = new Vue({
+            el: '#product-section',
+            data: {
+                store_id:"",
+                info:[] //触发更新用
+            }
+        });
+
+        var productDataSend = {
+            store_id: "00020"
+        }
+
+        $.ajax({    
+            type: "POST",    
+            url: "http://localhost:8080/classify/classifyOfStore",//请求controller方法   
+            data: JSON.stringify(productDataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",    
+            dataType: "json",
+            async: false, //同步请求，注意此字段    
+            success: function (data) { 
+                console.log(data);
+                if(data.success == true){
+                    var classifyOfStore = data.classifyList;
+
+                    productVue.info.push({
+                        a:"a"
+                    });//触发更新用
+                    
+                }else{
+                    layer.alert("数据请求失败！");
+                    for(var i=0,l=data.length;i<l;i++){
+                        for(var key in data[i]){
+                            console.log( key+':'+data[i][key] );
+                        }
+                    }
+                    if(data["store exist"] == true){
+                        layer.alert("数据请求失败！--商店不存在");
+                    }
+                }
+            } 
         });
     });
 

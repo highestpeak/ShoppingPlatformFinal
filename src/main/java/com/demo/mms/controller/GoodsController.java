@@ -28,13 +28,15 @@ public class GoodsController {
 
     //查询商品
     //按分类查询
+    //获取一个classify的所有商品，即list
     @RequestMapping("/getByClassify")
     @ResponseBody
     public Object goodsQuery(@RequestBody GoodsQueryVO goodsQueryVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Store store= goodsQueryVO.getStore(); GoodsClassify classifyToGet= goodsQueryVO.getGoodsClassify();
+        Store store= goodsQueryVO.getStore();
+        GoodsClassify classifyToGet= goodsQueryVO.getGoodsClassify();
         ArrayList goodsList=new ArrayList();
         Map<String,Object> rsService=null;
         rsService=goodsService.getStoreGoods(store,classifyToGet,goodsList);
@@ -53,7 +55,7 @@ public class GoodsController {
         return rs;
     }
 
-    //查询商品
+    //查询商品--搜搜商品
     //按商品信息查询
     @RequestMapping("/getByInfo")
     @ResponseBody
@@ -84,6 +86,31 @@ public class GoodsController {
             rs.put("success",false);
         }
         rs.put("goodsList",goodsList);
+        return rs;
+    }
+
+    //查询商品--请求商品id
+    //按商品信息查询
+    @RequestMapping("/getGoodsInfo")
+    @ResponseBody
+    public Object goodsInfoGet(Store store,Goods goodsToGet){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=goodsService.getStoreGoodsInfo(store,goodsToGet);
+        if(!rsService.containsKey("goodsGet") && rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.putAll(rsService);
         return rs;
     }
 
@@ -172,19 +199,25 @@ public class GoodsController {
     @RequestMapping("/star")
     @ResponseBody
     public Object starGoods(@RequestBody StarGoodsVO starGoodsVO){
-        Map<String ,Object> rs=new HashMap<>();
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in starGoods");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=goodsService.starGoods(starGoodsVO.getUser(),starGoodsVO.getStore(),starGoodsVO.getGoods());
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
         return rs;
     }
-
-    //获取商品的所有评价
-    @RequestMapping("getEvaluationOfGoods")
-    @ResponseBody
-    public Object goodsEvaluationGet(@RequestBody GoodsEvaluationVO goodsEvaluationVO){
-        return null;
-    }//根据好评差评获取评价
-
-
-
+    
     //模糊检索
     private ArrayList<Goods> getBySearchGoodsInfo(ArrayList<Goods> goodsList,Goods goodsToGet) {
         //默认按商品名称检索

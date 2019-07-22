@@ -3,10 +3,7 @@ package com.demo.mms.dao;
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.vo.GoodsViewedQueryTestVO;
 import com.demo.mms.common.vo.GoodsViewedQueryVO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
 
@@ -18,15 +15,15 @@ public interface UserOperateMapper {
                    @Param("value") String value);
 
     @Update("update user set ${columnNew} = #{valueNew} where ${columnKey} = #{valueKey}")
-    int updateUser(@Param("columnKey") String columnKey,
+    void updateUser(@Param("columnKey") String columnKey,
                    @Param("valueKey") String valueKey,
                    @Param("columnNew") String columnNew,
                    @Param("valueNew") String valueNew);
 
-    int insertUser(User user);
-    int insertBuyer(Buyer buyerToIn);
-    int insertSeller(Seller seller);
-    int insertAdmin(Admin admin);
+    void insertUser(User user);
+    void insertBuyer(Buyer buyerToIn);
+    void insertSeller(Seller seller);
+    void insertAdmin(Admin admin);
 
     @Delete("DELETE FROM user WHERE ${columnKey} = #{valueKey}")
     void delUser(@Param("columnKey") String columnKey,
@@ -37,4 +34,8 @@ public interface UserOperateMapper {
     ArrayList<GoodsViewedQueryVO> queryGoodsViewedByClassify(String buyer_id,String classify_name);
 
     ArrayList<GoodsViewedQueryTestVO> queryGoodsViewedByStore(String store_id, String classify_name);
+
+    void insertInterestedGoods(GoodsStar goodsStar);
+
+    void insertInterestedClassify(ClassifyStar classifyStar);
 }

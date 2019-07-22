@@ -8,9 +8,20 @@
         select DISTINCT
             classify_id,
             classify_name,
-            top_level_classify_id
+            parent_id
         from store_sell_classify NATURAL JOIN goods_classify
         where store_id = #{store_id}
+    </select>
+
+    <resultMap id="tempStoreGoodsChartByClassifyVO" type="com.demo.mms.common.vo.StoreGoodsChartByClassifyVO">
+    </resultMap>
+    <select id="queryStoreGoodsChartByClassify" parameterType="String" resultMap="tempStoreGoodsChartByClassifyVO">
+        SELECT A.id as id,
+              classify_name,
+              goods_id
+        FROM (SELECT goods_classify.classify_id,classify_name,store_sell_classify.id
+              FROM store_sell_classify  LEFT JOIN goods_classify ON goods_classify.classify_id = store_sell_classify.classify_id
+              WHERE store_id=#{store_id}) AS A LEFT JOIN classify_of_goods ON A.id=classify_of_goods.classify_selled_id
     </select>
 
     <resultMap id="queryAllGoodsOfStoreVO" type="com.demo.mms.common.domain.Goods">

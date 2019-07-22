@@ -7,8 +7,8 @@
   </insert>
 
   <insert id="insertBuyer" parameterType="com.demo.mms.common.domain.Buyer">
-    insert into buyer (user_id,nickname,permission,bank_card,create_time,update_time)
-    values   (#{user_id}, #{nickname}, #{permission}, #{bank_card},#{create_time},#{update_time})
+    insert into buyer (user_id,bank_card,create_time,update_time)
+    values   (#{user_id}, #{bank_card},#{create_time},#{update_time})
   </insert>
 
   <insert id="insertSeller" parameterType="com.demo.mms.common.domain.Seller">
@@ -20,6 +20,16 @@
     insert into admin (user_id,permission,permission,create_time,update_time)
     values   (#{user_id}, #{permission}, #{note},#{create_time},#{update_time})
   </insert>
+
+    <insert id="insertInterestedGoods" parameterType="com.demo.mms.common.domain.GoodsStar">
+        insert into interested_classify (classifyStar_id,user_id,classify_id,setStar_time)
+        values   (#{classifyStar_id}, #{user_id}, #{classify_id}, #{setStar_time})
+    </insert>
+
+    <insert id="insertInterestedClassify" parameterType="com.demo.mms.common.domain.ClassifyStar">
+        insert into interested_goods (goodsStar_id,user_id,goods_id,setStar_time)
+        values   (#{goodsStar_id}, #{user_id}, #{goods_id}, #{setStar_time})
+    </insert>
 
   <resultMap id="tempQueryGoodsViewed" type="com.demo.mms.common.vo.GoodsViewedQueryVO">
   </resultMap>
