@@ -189,6 +189,7 @@ $(function(){
         return result;
     }
 
+    var obj = [];
     function getTree() {
         var result;
         var dataSend = {
@@ -203,13 +204,12 @@ $(function(){
             async: false,//禁止异步请求，变为同步请求
             success:function(data) {
                 var list=data.classifyList;
-                var obj = [];
                 for(var i=0; i<list.length; i++){
                     var item = {
                         text: list[i][1],
                         id: list[i][0],
-                        pid:list[i][2],
-                    }
+                        pid: list[i][2],
+                    };
                     obj.push(item);
                 }
                 result= listToTree(obj, 0);
@@ -270,6 +270,8 @@ $(function(){
         }
     });
 
+    var mod_son;
+
     $("#modify").click(function(){
         arr=$("#tree").treeview("getChecked");
         if(arr.length != 1){
@@ -277,6 +279,18 @@ $(function(){
             return;
         }
 
+        mod_son = $("#tree").treeview("getChecked")[0];
+        $("#mod_name").attr("value", mod_son.text);
+        var p_index = obj.findIndex((v)=>{return mod_son.pid == v.id});
+        var p_name = "";
+
+        if( p_index == -1){
+            $("#mod_pname").attr("value", "");
+        }else{
+            p_name = obj[p_index].text;
+            $("#mod_pname").attr("value", p_name);
+        }
+        
         layer.open({
             type: 1,
             title: "",
@@ -293,32 +307,51 @@ $(function(){
     });
 
     $("#good_classify_mod_submit").click(function(){
-        var id = document.getElementById("mod_id").value;
-        var name = document.getElementById("mod_name").value;
-        var pid = document.getElementById("mod_pid").value;
+        var mod_id = mod_son.id;
+        var new_name = $("#mod_name").val();
+        var new_p_name = $("#mod_pname").val();
+        var new_p_id = -1;
 
-        var temp = {
-            text: name,
-            id: id,
-            pid: pid
+        if(new_name == ""){
+            new_p_id = 0;
+        }
+        else if(obj.findIndex((v)=>{return v.text == new_p_name}) != -1){
+            var new_p_index = obj.findIndex((v)=>{return v.text == new_p_name});
+            new_p_id = obj[new_p_index].id;
+        }
+        else{
+            layer.alert('父类错误！', { icon: 2, closeBtn: 0 });
         }
 
-        arr = $("#tree").treeview("getChecked");
-        if(temp){
+        if(new_p_id != -1){
+            var dataSend = {
+                store: {
+                    store_id: "0000"
+                },
+                classify_id:"",
+                new_name:"",
+                new_p_id:""
+            };
             $.ajax({
-                type: "post",
-                url: "/modifyClassify",
-                data: temp,
-                success: function(data, status){
-                    layer.alert("添加“"+data+"”成功！(status:"+status+".)");
-                    $("#tree").treeview("addNode", [data,arr]);
-                    window.location.reload();
+                type:"POST",
+                url:"http://localhost:8080/classify/modifyClassifyOfStore",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",    
+                async: false,  
+                success:function(data){
+                    if(data.success == true){                            
+                        layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
+                    }
                 }
             });
         }
-        layer.closeAll();
     });
-
 
     $("#add").click(function(){
         layer.open({
@@ -337,30 +370,48 @@ $(function(){
     });
 
     $("#good_classify_add_submit").click(function(){
-        var id = document.getElementById("add_id").value;
-        var name = document.getElementById("add_name").value;
-        var pid = document.getElementById("add_pid").value;
+        var new_name = $("#add_name").val();
+        var new_p_name = $("add_pname").val();
+        var new_p_id = -1;
 
-        var temp = {
-            text: name,
-            id: id,
-            pid: pid
+        if(new_name == ""){
+            new_p_id = 0;
+        }
+        else if(obj.findIndex((v)=>{return v.text == new_p_name}) != -1){
+            var new_p_index = obj.findIndex((v)=>{return v.text == new_p_name});
+            new_p_id = obj[new_p_index].id;
+        }
+        else{
+            layer.alert('父类错误！', { icon: 2, closeBtn: 0 });
         }
 
-        arr = $("#tree").treeview("getChecked");
-        if(temp){
+        if(new_p_id != -1){
+            var dataSend = {
+                store: {
+                    store_id: "0000"
+                },
+                new_name:"",
+                new_p_id:""
+            }
             $.ajax({
-                type: "post",
-                url: "/addClassify",
-                data: temp,
-                success: function(data, status){
-                    layer.alert("添加“"+data+"”成功！(status:"+status+".)");
-                    $("#tree").treeview("addNode", [data,arr]);
-                    window.location.reload();
+                type:"POST",
+                url:"http://localhost:8080/classify/addClassifyOfStore",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",    
+                async: false,  
+                success:function(data){
+                    if(data.success == true){                            
+                        layer.alert('添加成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('添加失败！', { icon: 2, closeBtn: 0 });
+                    }
                 }
             });
         }
-        layer.closeAll();
     });
 
 })
@@ -452,15 +503,8 @@ $(function () {
     </div>
 
     <!-- 提交表单 -->
-    <form class="form-horizontal"  action="###" method="post">
+    <form class="form-horizontal">
         <div class="box-body">
-
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_id" name="add_id">
-                </div>
-            </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
@@ -470,9 +514,9 @@ $(function () {
             </div>
 
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">PID</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">Parent</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_pid" name="add_pid">
+                    <input type="text" class="form-control" id="add_pname" name="add_pname">
                 </div>
             </div>
 
@@ -492,15 +536,8 @@ $(function () {
     </div>
 
     <!-- 提交表单 -->
-    <form class="form-horizontal"  action="###" method="post">
-        <div class="box-body">
-
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_id" name="mod_id">
-                </div>
-            </div>
+    <form class="form-horizontal">
+        <div class="box-body">           
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
@@ -510,9 +547,9 @@ $(function () {
             </div>
 
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">PID</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">Parent</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_pid" name="mod_pid">
+                    <input type="text" class="form-control" id="mod_pname" name="mod_pname">
                 </div>
             </div>
 
