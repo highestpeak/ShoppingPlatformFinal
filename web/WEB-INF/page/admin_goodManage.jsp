@@ -136,6 +136,8 @@
                                                 <th style="width: 10%">ID</th>
                                                 <th>Store ID</th>
                                                 <th>Name</th>
+                                                <th>classify name</th>
+                                                <th>price</th>
                                                 <th>Description</th>
                                                 <th>Pic</th>
                                                 <th>Status</th>
@@ -174,6 +176,20 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">good name</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="mod_name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">good classify</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mod_classify">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">good price</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mod_price">
                 </div>
             </div>
 
@@ -237,6 +253,20 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">good name</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="add_name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">classify</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="add_classify">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">price</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="add_price">
                 </div>
             </div>
 
@@ -318,6 +348,8 @@
                             .append($("<td>").html(e["goods_id"]))
                             .append($("<td>").html(e["store_id"]))
                             .append($("<td>").html(e["goods_name"]))
+                            .append($("<td>").html(e["classify_name"]))
+                            .append($("<td>").html(e["price"]))
                             .append($("<td>").html(e["description"]))
                             .append($("<td>").html(e["pic_url"]))
                             .append($("<td>").html(e["status"]))
@@ -426,9 +458,11 @@
             var old_goods_name = $tr.find("td:eq(2)").html();
 
             $("#mod_name").attr("value", $tr.find("td:eq(2)").html());
-            $("#mod_description").attr("value", $tr.find("td:eq(3)").html());
-            $("#mod_status").attr("value", $tr.find("td:eq(5)").html());
-            $("#mod_oldlevel").attr("value", $tr.find("td:eq(6)").html());
+            $("#mod_classify").attr("value", $tr.find("td:eq(3)").html());
+            $("#mod_price").attr("value", $tr.find("td:eq(4)").html());
+            $("#mod_description").attr("value", $tr.find("td:eq(5)").html());
+            $("#mod_status").attr("value", $tr.find("td:eq(7)").html());
+            $("#mod_oldlevel").attr("value", $tr.find("td:eq(8)").html());
 
             $("#good_info_mod_sumbit").click(function(){
                 var dataSend = {
@@ -442,6 +476,8 @@
                     newGoods: {
                         goods_id: old_goods_id,
                         goods_name: $("#mod_name").val(),
+                        classify_name:$("#mod_classify").val(),
+                        price:$("#mod_price").val(),
                         description: $("#mod_description").val(),
                         status: $("#mod_status").val(),
                         old_level: $("#mod_oldlevel").val()
@@ -504,6 +540,8 @@
                     {
                         goods_name:$("#add_name").val(),
                         description:$("#add_description").val(),
+                        classify_name:$("#add_classify").val(),
+                        price:$("#add_price").val(),
                         status:$("#add_status").val(),
                         old_level:$("#add_oldlevel").val(),
                     }

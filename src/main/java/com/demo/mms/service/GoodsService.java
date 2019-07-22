@@ -4,6 +4,7 @@ import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
+import com.demo.mms.common.vo.GoodsAddWithClassifyVO;
 import com.demo.mms.common.vo.StarGoodsGetVO;
 import com.demo.mms.common.vo.StarGoodsVO;
 
@@ -46,7 +47,7 @@ public interface GoodsService {
 
     Map<String,Object> delStoreGoods(Store store, ArrayList<Goods> goodsToDel);
 
-    Map<String,Object> addStoreGoods(Store store, ArrayList<Goods> goodsToAdd);
+    Map<String,Object> addStoreGoods(Store store, ArrayList<GoodsAddWithClassifyVO> goodsToAdd);
 
     /*
     根据商品id，寻找一个商品的信息并返回

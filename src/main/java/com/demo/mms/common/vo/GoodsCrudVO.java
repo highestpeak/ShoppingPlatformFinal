@@ -11,17 +11,17 @@ public class GoodsCrudVO {
     private Goods newGoods;
 
     private List<Goods> goodsToDel;
-    private List<Goods> goodsToAdd;
+    private List<GoodsAddWithClassifyVO> goodsToAdd;
 
     public List<Goods> getGoodsToDel() {
         return goodsToDel;
     }
 
-    public List<Goods> getGoodsToAdd() {
+    public List<GoodsAddWithClassifyVO> getGoodsToAdd() {
         return goodsToAdd;
     }
 
-    public void setGoodsToAdd(List<Goods> goodsToAdd) {
+    public void setGoodsToAdd(List<GoodsAddWithClassifyVO> goodsToAdd) {
         this.goodsToAdd = goodsToAdd;
     }
 
