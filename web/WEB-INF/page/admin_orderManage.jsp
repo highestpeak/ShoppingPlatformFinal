@@ -136,7 +136,7 @@
                                     <table id="example" class="table" >
                                         <thead>
                                         <tr>
-                                            <th>全选 <input type="checkbox"></th>
+                                            <input value="1" id="user_id">user_id</input>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example"
                                                 aria-sort="ascending"
                                                 aria-label="订单号: activate to sort column descending">订单号
@@ -170,160 +170,9 @@
                                             <th width="120px">操作</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tbodyId">
                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000005</td>
-                                            <td class="sorting_1">0000004</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000002</td>
-                                            <td class="sorting_1">0000003</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000007</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>9999</td>
-                                            <td>已支付</td>
-                                            <td>2019/7/17</td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>1</td>
-                                            <td>2019/7/17</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
+                                            <td><button type="button" class="btn_mod">测试用，属性没放齐导致快速搜索等功能失效</button></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -346,6 +195,83 @@
 
 </div>
 
+<!-- 修改订单表格 -->
+<div class="box box-info" id="order_info_modify_table" style="display: none">
+    <div class="box-header with-border">
+        <h3 class="box-title">修改订单</h3>
+    </div>
+
+    <!-- 提交表单 -->
+    <form class="form-horizontal">
+        <div class="box-body">
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">订单号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="order_id">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">买家id</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="buyer_id">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">付款金额</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="pay_price">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">是否支付</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="is_pay">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">支付时间</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="pay_time">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">快递单号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="express_id">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">订单状态</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="status">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">创建时间</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="create_time">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">更新时间</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="update_time">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box-footer">
+            <button type="button" class="btn btn-default pull-left" id="order_info_mod_cancel">取消</button>
+            <button type="button" class="btn btn-info pull-right" id="order_info_mod_sumbit">提交</button>
+        </div>
+    </form>
+</div>
+
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -355,29 +281,141 @@
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
 
+<script>
+    $(function(){
+        var dataSend = {
+            store_id:"0000"
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/orders/",//请求controller方法   
+            data: JSON.stringify(dataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false, //同步请求，注意此字段    
+            success: function (data) {
+                if(data.success == true){
+
+                    var $tbody = $("#tbodyId");
+                    var gl = data.cartList;
+                    $.each(gl,function (i,e) {
+                        var $tr = $("<tr>")
+                            .append($("<td>").html(e["order_id"]))
+                            .append($("<td>").html(e["buyer_id"]))
+                            .append($("<td>").html(e["pay_price"]))
+                            .append($("<td>").html(e["is_pay"]))
+                            .append($("<td>").html(e["express_id"]))
+                            .append($("<td>").html(e["status"]))
+                            .append($("<td>").html(e["create_time"]))
+                            .append($("<td>").html(e["update_time"]));
+                        var $button_1 = document.createElement("a");
+                        $button_1.text = "修改";
+                        $button_1.className = "btn_mod";
+                        var $button_2 = document.createElement("a");
+                        $button_2.text = "删除";
+                        $button_2.className = "btn_del";
+                        $button_2.style = "margin-left:10px";
+                        var $td = $("<td>").append($button_1).append($button_2);
+                        $tr.append($td);
+                        $tbody.append($tr);
+                    });
+                }else{
+                    layer.alert("数据请求失败！");
+                }
+            }
+        });
+    })
+</script>
 <script type="text/javascript">
     $(function () {
-        $(".content").on("click", ".btn_del_user", function () {
+        $(".content").on("click", ".btn_del", function () {
             var $tr = $(this).parents("tr");
-            var name = $tr.find("td:eq(1)").html();
+            var order_id = $tr.find("td:eq(0)").html();
+            var dataSend = {
+                order_id:order_id
+            };
+            layer.confirm('确定删除: '+order_id+"?", {icon: 3, title:'提示'}, function(index){
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://localhost:8080/goods/orders/",
+                    data: JSON.stringify(dataSend),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        if(data.success == true){
+                            layer.alert('删除成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                                window.location.reload();
+                            });
 
-            layer.confirm('是否删除:' + name, {icon: 3, title: '提示'}, function (index) {
-                $tr.remove();
-                layer.close(index);
-            })
+                        }else{
+                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
+                        }
+                    }
+                });
+            });
         });
-        $(".content").on("click", ".btn_update_user", function () {
+        $(".content").on("click", ".btn_mod", function () {
             layer.open({
-                type: 2,
-                title: '修改用户信息',
+                type: 1,
+                title: "",
                 shadeClose: true,
-                shade: 0.8,
-                area: ['500px', '600px'],
-                content: 'admin_orderManage_OrderInfoLayer.jsp'
-            })
+                shade: 0.5,
+                area: ["500px", "500px"],
+                content: $("#order_info_modify_table")
+            });
 
+            var $tr = $(this).parents("tr");
+
+            $("#order_id").attr("value", $tr.find("td:eq(0)").html());
+            $("#buyer_id").attr("value", $tr.find("td:eq(1)").html());
+            $("#pay_price").attr("value", $tr.find("td:eq(2)").html());
+            $("#is_pay").attr("value", $tr.find("td:eq(3)").html());
+            $("#pay_time").attr("value", $tr.find("td:eq(4)").html());
+            $("#express_id").attr("value", $tr.find("td:eq(5)").html());
+            $("#status").attr("value", $tr.find("td:eq(6)").html());
+            $("#create_time").attr("value", $tr.find("td:eq(7)").html());
         });
 
+        $("#order_info_mod_sumbit").click(function(){
+            var dataSend = {
+                order_id:$("#order_id").val(),
+                buyer_id:$("#buyer_id").val(),
+                pay_price:$("#pay_price").val(),
+                is_pay:$("#is_pay").val(),
+                pay_time:$("#pay_time").val(),
+                express_id:$("#express_id").val(),
+                status:$("#status").val(),
+                create_tiem:$("#create_time").val(),
+                update_time:$("#update_time").val()
+            };
+
+            console.log(dataSend);
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/??",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    if(data.success == true){
+                        layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
+                    }
+                }
+            });
+        });
+
+        $("#order_info_mod_cancel").click(function(){
+            layer.closeAll();
+        });
 
         $("#example").DataTable({
             'paging'      : true,
@@ -399,7 +437,7 @@
                 "lengthMenu": "_MENU_ 条/页"
             }
 
-        });
+         })
     })
 
 </script>
