@@ -65,8 +65,8 @@ public class FrontPageController {
         return "good_info";
     }
 
-    @RequestMapping("/goodsInfoByName/{store_id}/{goods_id}")
-    public String goodsInfoByNameGet(@PathVariable String store_id,@PathVariable String goods_id){
+    @RequestMapping("/goodsInfoByName/{store_id}/{goods_name}")
+    public String goodsInfoByNameGet(@PathVariable String store_id,@PathVariable String goods_name){
         System.out.println("in goodsInfoByIdGet");
         return "good_info";
     }

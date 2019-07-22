@@ -34,7 +34,9 @@ public interface GoodsService {
      */
     Map<String,Object> updateStoreGoodsClassify(Store store, GoodsClassify oldClassify,GoodsClassify newClassify);
 
-
+    /*
+    根据分类查找商店的，该分类下面所有商品
+     */
     Map<String,Object> getStoreGoods(Store store, GoodsClassify classifyToGet,ArrayList goodsList);
 
     Map<String,Object> updateStoreGoods(Store store, Goods oldGoods, Goods newGoods);
@@ -42,4 +44,9 @@ public interface GoodsService {
     Map<String,Object> delStoreGoods(Store store, ArrayList<Goods> goodsToDel);
 
     Map<String,Object> addStoreGoods(Store store, ArrayList<Goods> goodsToAdd);
+
+    /*
+    根据商品id，寻找一个商品的信息并返回
+     */
+    Map<String,Object> getStoreGoodsInfo(Store store, Goods goodsToGet);
 }
