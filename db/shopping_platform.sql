@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2019-07-21 16:12:54
+Date: 2019-07-22 15:02:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -81,6 +81,7 @@ CREATE TABLE `goods` (
   `goods_id` varchar(36) NOT NULL,
   `store_id` varchar(36) NOT NULL,
   `goods_name` varchar(36) DEFAULT NULL,
+  `price` int(11) DEFAULT '0',
   `description` text,
   `pic_url` text,
   `status` varchar(20) DEFAULT NULL,
@@ -96,10 +97,10 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('003', '0000', 'github文化衫', null, 'https://www.google.com/', 'selling', 'new', '20190718-134040', '20190718-134040');
-INSERT INTO `goods` VALUES ('101', '0001', '川大文化衫', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
-INSERT INTO `goods` VALUES ('102', '0001', '川大快乐水', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
-INSERT INTO `goods` VALUES ('103', '0001', '肥宅的快乐', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
+INSERT INTO `goods` VALUES ('003', '0000', 'github文化衫', '0', '修改描述测试', 'https://www.google.com/', '', '', '20190718-134040', '20190721-222604');
+INSERT INTO `goods` VALUES ('101', '0001', '川大文化衫', '0', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
+INSERT INTO `goods` VALUES ('102', '0001', '川大快乐水', '0', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
+INSERT INTO `goods` VALUES ('103', '0001', '肥宅的快乐', '0', null, 'https://www.google.com/', 'selling', 'new', '20190718-111541', '20190718-111541');
 
 -- ----------------------------
 -- Table structure for goods_classify
@@ -194,6 +195,7 @@ CREATE TABLE `interested_goods` (
 -- ----------------------------
 -- Records of interested_goods
 -- ----------------------------
+INSERT INTO `interested_goods` VALUES ('bb55aab6a2d04f8abf5f4c321e950f41', '654321', '003', '20190722-105917');
 
 -- ----------------------------
 -- Table structure for in_cart_of
