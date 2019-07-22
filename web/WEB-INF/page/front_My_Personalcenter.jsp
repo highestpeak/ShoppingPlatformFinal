@@ -155,42 +155,34 @@
             </div><!-- Container /- -->
         </div>
 
-        <!-- Contact Us -->
+
         <div class="contact-us container-fluid no-padding">
             <div class="col-md-12 col-sm-12 col-xs-12 no-padding"> </div>
             <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
                 <div class="form-detail">
                     <form>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>ID</label>
-                            <input type="text" name="contact-name" class="form-control" id="input_ID" placeholder="ID *" required="" value="" disabled>
+                            <input type="text" name="id" class="form-control" id="input_ID" required="" value="" disabled>
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>用户名</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_nickname" placeholder="用户名 *" required="" value="">
+                            <input type="text" name="nickname" class="form-control" id="input_nickname"  required="" value="">
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>真实姓名</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_realname" placeholder="真实姓名 *" required="" value="">
+                            <input type="text" name="realname" class="form-control" id="input_realname" required="" value="">
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>性别</label>
-                            <select class="form-control">
-                                <option>男</option>
-                                <option>女</option>
-                                <option>未知</option>
-
+                            <select class="form-control" name="sex" id="sexID">
+                                <option value="true">男</option>
+                                <option value="false">女</option>
                             </select>
                         </div>
 
-                        <div class="col-md-11 col-sm-12 col-xs-12 form-group"><label>密码</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_password" placeholder="密码 *" required="" value="">
-                        </div>
-
-                        <div class="form-group col-md-1 col-sm-12 col-xs-12"><label>&nbsp;</label>
-                            <a href="#">
-                                <button type="submit" id="btn_change_password" name="change_password">修改密码</button>
-                            </a>
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>密码</label>
+                            <input type="text" name="password" class="form-control" id="input_password" required="" value="">
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>电子邮箱</label>
-                            <input type="text" name="contact-name" class="form-control" id="input_email" placeholder="电子邮箱 *" required="" value="">
+                            <input type="text" name="email" class="form-control" id="input_email" required="" value="">
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>收货地址</label>
@@ -202,21 +194,15 @@
                         </div>
 
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                            <textarea placeholder="个人简介" id="textarea_message" name="contact-message" rows="5" class="form-control"></textarea>
+                            <textarea id="textarea_message" name="note" rows="5" class="form-control"></textarea>
                         </div>
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                            <button title="Submit" type="submit" id="btn_submit" name="post">保存</button>
+                            <button title="Submit" type="button" id="mybtn_submit" name="submit">保存</button>
                         </div>
-                        <div id="alert-msg" class="alert-msg"></div>
                     </form>
                 </div>
             </div>
-            <!-- Map Section -->
-            <div class="map container-fluid no-padding">
-                <div class="map-canvas" id="map-canvas-contact" data-lat="-32.559356" data-lng="149.564237" data-string="Max Shop, 65 Huge Street Melbourne,  2850 Australia." data-zoom="12"></div>
-                <a href="#">Tang <span>Shop</span></a>
-            </div><!--  Map Section /- -->
-        </div><!-- Contact Us /- -->
+        </div>
 
     </main>
     <footer id="footer-main" class="footer-main container-fluid">
@@ -263,29 +249,117 @@
 
 <!-- Library - Theme JS -->
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
-    <script>
+<script src="${pageContext.request.contextPath}/localLib/js/vue.min.js"></script>
+
+<script>
         $(function(){
+
             var dataSend = {
                 user_id: "654321"
-            }
+
+            };
+            var old=null;
 
             $.ajax({
-                type: "POST",
+                type: "post",
                 url: "http://localhost:8080/user/getInfo",//请求controller方法   
                 data: JSON.stringify(dataSend),//发送的数据  
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                async: false, //同步请求，注意此字段    
+                async: false, //同步请求，注意此字le段    
                 success: function (data) {
-                        var info = data.user;
-                        document.getElementById("input_ID").value = info.user_id;
-                        document.getElementById("input_nickname").value = info.nickname;
+                    if(data.success == true){
+                        var obj= data["userFind"];
+                        old=obj;
+                        var input_ID = obj["user_id"];
+                        var input_nickname = obj["nickname"];
+                        var input_realname = obj["realname"];
+                        var sex = obj["sex"];
+                        var input_password = obj["verify"];
+                        var input_email = obj["email"];
+                        var textarea_message = obj["note"];
+                        console.log(data);
+                        $("#sexID option").eq( (sex?0:1) ).attr("selected","selected");//
+                        $("#input_ID").val(input_ID);
+                        $("#input_nickname").val(input_nickname);
+                        $("#input_realname").val(input_realname);
+                        $("#input_password").val(input_password);
+                        $("#input_email").val(input_email);
+                        $("#textarea_message").val(textarea_message);
+                    }else{
+                        layer.alert("数据请求失败！");
+                    }
+
 
 
                 }
             });
+
+            $(".main-container").on("click", "#mybtn_submit", function(){
+
+                var input_ID = old["user_id"];
+                var input_nickname = old["nickname"];
+                var input_realname = old["realname"];
+                var sex = old["sex"];
+                var input_password = old["verify"];
+                var input_email = old["email"];
+                var textarea_message = old["note"];
+                var ninput_ID = $("#input_ID").val();
+                var ninput_nickname = $("#input_nickname").val();
+                var ninput_realname = $("#input_realname").val();
+                var nsex = $("#sexID").val();
+                var ninput_password = $("#input_password").val();
+                var ninput_email = $("#input_email").val();
+                var ntextarea_message = $("#textarea_message").val();
+                var dataSend =
+                    [
+                        {
+                            user_type:"userOld",
+                            user_id:input_ID,
+                            nickname:input_nickname,
+                            realname:input_realname,
+                            sex:sex,
+                            verify:input_password,
+                            email:input_email,
+                            note:textarea_message
+
+                        },
+                        {
+                            user_type:"userNew",
+                            user_id:input_ID,
+                            nickname:ninput_nickname,
+                            realname:ninput_realname,
+                            sex:nsex,
+                            verify:ninput_password,
+                            email:ninput_email,
+                            note:ntextarea_message
+                        }
+                    ];
+                console.log(dataSend);
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8080/user/modify",//请求controller方法   
+                    data: JSON.stringify(dataSend),//发送的数据  
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false, //同步请求，注意此字le段    
+                    success: function (data) {
+                        if(data.success == true){
+                            layer.alert("保存成功！");
+
+                        }else{
+                            layer.alert("保存失败！");
+                        }
+
+
+
+                    }
+                });
+
+            });
+
         });
-    </script>
-</div>>
+</script>
+</div>
 </body>
 </html>

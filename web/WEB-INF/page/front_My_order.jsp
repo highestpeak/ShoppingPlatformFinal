@@ -176,7 +176,7 @@
             </div><!-- Row /- -->
         </div><!-- Container /- -->
     </div>
-    <div class="page-banner container-fluid no-padding">
+    <div class="woocommerce-cart container-fluid no-left-padding no-right-padding">
         <!-- Container -->
         <div class="container">
             <div class="row">
