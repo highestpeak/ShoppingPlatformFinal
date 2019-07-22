@@ -444,7 +444,7 @@
                         goods_name: $("#mod_name").val(),
                         description: $("#mod_description").val(),
                         status: $("#mod_status").val(),
-                        old_level: $("#mod_oldlevel").val(),
+                        old_level: $("#mod_oldlevel").val()
                     }
                 };
 
