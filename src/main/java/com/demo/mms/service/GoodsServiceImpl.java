@@ -144,37 +144,33 @@ public class GoodsServiceImpl implements GoodsService{
         for (GoodsClassify goodsClassify:classifiesToAdd){
             //查询分类是否存在
             GoodsClassify nameCheck=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_name",goodsClassify.getClassify_name());
-            GoodsClassify idCheck=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",goodsClassify.getClassify_id());
-            if((nameCheck!=null)||(idCheck!=null)){//分类已经存在
+            if(nameCheck!=null){//分类已经存在
                 rs.put("classify "+goodsClassify.getClassify_name()+" existed",true);
                 continue;
             }else {//分类不存在
                 //先插入到goods_classify表
                 try {
-                    Integer thisLevel=Integer.parseInt(goodsClassify.getClassify_id());
                     goodsClassify.setClassify_id(IDGenerator.getId());
-                    //检查top_level
-                    if(thisLevel>maxLevel){
-                        rs.put("top level "+goodsClassify.getTop_level_classify_id()+" too high","should less than "+maxLevel);
-                        continue;
-                    }
                     //需要插入的level是0级
-                    if(Integer.parseInt(goodsClassify.getParent_id())==0){
+                    if(goodsClassify.getClassify_name().trim().isEmpty()){
                         //直接插入
-                        goodsOperateMapper.insertNewClassify(goodsClassify.getClassify_id(),goodsClassify.getTop_level_classify_id(),goodsClassify.getClassify_name(),
+                        goodsOperateMapper.insertNewClassify(
+                                goodsClassify.getClassify_id(),
+                               "0",
+                                goodsClassify.getParent_id(),
+                                goodsClassify.getClassify_name(),
                                 ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
                         goodsOperateMapper.insertNewClassifyOfStore(IDGenerator.getId(),store.getStore_id(),goodsClassify.getClassify_id());
                         continue;
                     }
                     //top_level应该比parent的top level大1
                     GoodsClassify parentClassify=goodsOperateMapper.queryClassifyOfStore(store.getStore_id(),"classify_id",goodsClassify.getParent_id());
-                    //不是parent的下一级
-                    if(thisLevel-1!=Integer.parseInt(parentClassify.getTop_level_classify_id())){
-                        rs.put("classify level "+goodsClassify.getTop_level_classify_id()+" error","parent level is "+parentClassify.getTop_level_classify_id());
-                        continue;
-                    }
                     //可以执行插入
-                    goodsOperateMapper.insertNewClassify(goodsClassify.getClassify_id(),goodsClassify.getTop_level_classify_id(),goodsClassify.getClassify_name(),
+                    goodsOperateMapper.insertNewClassify(
+                            goodsClassify.getClassify_id(),
+                            parentClassify.getTop_level_classify_id()+1,
+                            goodsClassify.getParent_id(),
+                            goodsClassify.getClassify_name(),
                             ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
                     goodsOperateMapper.insertNewClassifyOfStore(IDGenerator.getId(),store.getStore_id(),goodsClassify.getClassify_id());
                 }catch (Exception e){
@@ -200,9 +196,24 @@ public class GoodsServiceImpl implements GoodsService{
         GoodsClassify idCheck=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",oldClassify.getClassify_id());
         if((nameCheck==null)&&(idCheck==null)){//分类不存在
             rs.put("classify "+oldClassify.getClassify_name()+" existed",false);
-        }else {
-            rs.putAll(modifyClassifyHelp(store,nameCheck,newClassify));
+            return rs;
         }
+        //分类存在
+        GoodsClassify findNewClassifyParent=null;
+        if(newClassify.getClassify_name().trim().isEmpty()){
+            newClassify.setParent_id("0");
+            newClassify.setTop_level_classify_id("0");
+        }else {
+            findNewClassifyParent=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_name",newClassify.getClassify_name());
+            if(findNewClassifyParent==null){
+                rs.put("parent "+newClassify.getClassify_name()+" not find",true);
+                return rs;
+            }
+            newClassify.setParent_id(findNewClassifyParent.getClassify_id());
+            newClassify.setTop_level_classify_id(Integer.toString(Integer.valueOf(findNewClassifyParent.getTop_level_classify_id())+1));
+        }
+        //新分类父级分类存在
+        rs.putAll(modifyClassifyHelp(store,nameCheck,newClassify));
         return rs;
     }
 
@@ -418,50 +429,16 @@ public class GoodsServiceImpl implements GoodsService{
             modifyList.put("classify_name",newClassify.getClassify_name());
         }
 
-        if(newClassify.getParent_id()!=null && !newClassify.getParent_id().equals(oldClassify.getParent_id())){
+        if(!newClassify.getParent_id().equals(oldClassify.getParent_id())){
             //top_level应该比parent的top level大1
             //需要插入的level是0级
-            try{
-                if(Integer.parseInt(newClassify.getParent_id())==0){
-                    //直接插入
-                    modifyList.put("parent_id",newClassify.getParent_id());
-                }else {
-                    GoodsClassify parentClassify=goodsOperateMapper.queryClassifyOfStore(store.getStore_id(),"classify_id",newClassify.getParent_id());
-                    //不是parent的下一级
-                    if(Integer.parseInt(newClassify.getTop_level_classify_id()) -1!=
-                            Integer.parseInt(parentClassify.getTop_level_classify_id())){
-                        rs.put("new classify level "+newClassify.getTop_level_classify_id()+" error","parent level is "+parentClassify.getTop_level_classify_id());
-                        return rs;
-                    }
-                    modifyList.put("parent_id",newClassify.getParent_id());
-                }
-            }catch (Exception e){
-                rs.put("modify level wrong",true);
-                return rs;
-            }
+            modifyList.put("parent_id",newClassify.getParent_id());
         }
 
-        if(newClassify.getTop_level_classify_id()!=null && !newClassify.getTop_level_classify_id().equals(oldClassify.getTop_level_classify_id())){
+        if(!newClassify.getTop_level_classify_id().equals(oldClassify.getTop_level_classify_id())){
             //top_level应该比parent的top level大1
             //需要插入的level是0级
-            try{
-                if(Integer.parseInt(newClassify.getTop_level_classify_id())==0){
-                    //直接插入
-                    modifyList.put("top_level_classify_id",newClassify.getTop_level_classify_id());
-                }else {
-                    GoodsClassify parentClassify=goodsOperateMapper.queryClassifyOfStore(store.getStore_id(),"classify_id",newClassify.getParent_id());
-                    //不是parent的下一级
-                    if(Integer.parseInt(newClassify.getTop_level_classify_id()) -1!=
-                            Integer.parseInt(parentClassify.getTop_level_classify_id())){
-                        rs.put("new classify level "+newClassify.getTop_level_classify_id()+" error","parent level is "+parentClassify.getTop_level_classify_id());
-                        return rs;
-                    }
-                    modifyList.put("top_level_classify_id",newClassify.getTop_level_classify_id());
-                }
-            }catch (Exception e){
-                rs.put("modify top_level_classify_id wrong",true);
-                return rs;
-            }
+            modifyList.put("top_level_classify_id",newClassify.getTop_level_classify_id());
         }
 
         for (Map.Entry<String ,String> entry:modifyList.entrySet()){
