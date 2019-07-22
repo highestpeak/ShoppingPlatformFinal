@@ -49,10 +49,10 @@
     <script src="${pageContext.request.contextPath}/localLib/js/html5/respond.min.js"></script>
 
     <style type="text/css">
-        .item-selled_id{
+        .item-id{
             display:none;
         }
-        .user-selled_id{
+        .user-id{
             display:none;
         }
     </style>
@@ -109,11 +109,11 @@
                     <!-- Menu Icon -->
                     <div class="menu-icon">
                         <div class="search">
-                            <a href="#" selled_id="search" title="Search"><i class="icon icon-Search"></i></a>
+                            <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
                         </div>
                         <ul class="cart">
                             <%--<li>--%>
-                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" selled_id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
+                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
                             <%--<ul class="dropdown-menu no-padding">--%>
                             <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
                             <%--<li class="mini_cart_item">--%>
@@ -159,7 +159,7 @@
 
                     </div>
                     <!-- Menu Icon /- -->
-                    <div class="navbar-collapse collapse navbar-right" selled_id="navbar">
+                    <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/cart"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
@@ -198,10 +198,10 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 cart-table">
                     <form name="form1">
                         <c:if test="${!empty(list)}">
-                        <input name="user_id" value="2017" class="user-selled_id" type="text" >
-                        <input selled_id="remove_id" name="remove_id" value="" class="item-selled_id" type="text" >
-                        <input selled_id="update_id" name="update_id" value="" class="item-selled_id" type="text" >
-                        <input selled_id="quantity" name="quantity" value="" class="item-selled_id" type="text" >
+                        <input name="user_id" value="2017" class="user-id" type="text" >
+                        <input id="remove_id" name="remove_id" value="" class="item-id" type="text" >
+                        <input id="update_id" name="update_id" value="" class="item-id" type="text" >
+                        <input id="quantity" name="quantity" value="" class="item-id" type="text" >
                         <table class="table table-bordered table-responsive">
                             <thead>
                             <tr>
@@ -217,13 +217,13 @@
 
                             <c:forEach var="me" items="${list}" varStatus="cou">
                                 <tr class="cart_item">
-                                    <input name="item${cou.count}" value="${cou.count}" class="item-selled_id" type="text" selled_id="item${cou.count}">
+                                    <input name="item${cou.count}" value="${cou.count}" class="item-id" type="text" id="item${cou.count}">
                                     <td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>
                                     <td data-title="Product Name" class="product-name"><a href="#">aaa</a></td>
                                     <td data-title="Quantity" class="product-quantity">
                                         <div class="prd-quantity" data-title="Quantity">
                                             <input value="-" class="qtyminus btn" data-field="quantity1" type="button">
-                                            <input selled_id="quantity${cou.count}" name="quantity${cou.count}" value="0" class="qty" type="text" >
+                                            <input id="quantity${cou.count}" name="quantity${cou.count}" value="0" class="qty" type="text" >
                                             <input value="+" class="qtyplus btn" data-field="quantity1" type="button">
                                         </div>
                                     </td>
@@ -302,7 +302,7 @@
 
     </main>
 
-    <footer selled_id="footer-main" class="footer-main container-fluid">
+    <footer id="footer-main" class="footer-main container-fluid">
         <!-- Container -->
         <div class="container">
             <div class="row">

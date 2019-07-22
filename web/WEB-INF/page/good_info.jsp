@@ -113,7 +113,7 @@
                 <div class="col-md-7 col-sm-7 col-xs-7 dropdown-bar">
                     <h5>Welcome To Tang Shop</h5>
                     <div class="language-dropdown dropdown">
-                        <button aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" title="languages" selled_id="language" type="button" class="btn dropdown-toggle">English <span class="caret"></span></button>
+                        <button aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" title="languages" id="language" type="button" class="btn dropdown-toggle">English <span class="caret"></span></button>
                         <ul class="dropdown-menu no-padding">
                             <li><a title="Danish" href="#">Danish</a></li>
                             <li><a title="German" href="#">German</a></li>
@@ -121,7 +121,7 @@
                         </ul>
                     </div>
                     <div class="language-dropdown dropdown">
-                        <button aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" title="currency" selled_id="currency" type="button" class="btn dropdown-toggle">US Dollar<span class="caret"></span></button>
+                        <button aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" title="currency" id="currency" type="button" class="btn dropdown-toggle">US Dollar<span class="caret"></span></button>
                         <ul class="dropdown-menu no-padding">
                             <li><a title="Danish" href="#">Usd</a></li>
                             <li><a title="German" href="#">Ora</a></li>
@@ -157,11 +157,11 @@
                     </div>
                     <div class="menu-icon">
                         <div class="search">
-                            <a href="#" selled_id="search" title="Search"><i class="icon icon-Search"></i></a>
+                            <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
                         </div>
                         <ul class="cart">
                             <li>
-                                <a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" selled_id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>
+                                <a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>
                                 <ul class="dropdown-menu no-padding">
                                     <li class="mini_cart_item">
                                         <a title="Remove this item" class="remove" href="#">&#215;</a>
@@ -187,7 +187,7 @@
                             <li><a href="#" title="User"><i class="icon icon-User"></i></a></li>
                         </ul>
                     </div><!-- Menu Icon /- -->
-                    <div class="navbar-collapse collapse navbar-right" selled_id="navbar">
+                    <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="index.html">Home</a></li>
                             <li><a href="cart.html">Cart</a></li>
@@ -207,16 +207,16 @@
     </header>
 
     <!-- 内容 -->
-    <div class="main-container" selled_id="container">
+    <div class="main-container" id="container">
         <div class="col-md-6">
             <!-- 图片链接 -->
             <img src="${pageContext.request.contextPath}/localLib/images/category-1.jpg" alt="商品" width="400px" style="float:left; margin-left: 50%; margin-top: 200px">
         </div>
 
-        <div class="col-md-6 good" style="padding: 80px" v-bind:selled_id="goods_id">
+        <div class="col-md-6 good" style="padding: 80px" v-bind:id="goods_id">
             <br>
             <br>
-            <h1 selled_id="goodName">{{goods_name}}</h1>
+            <h1 id="goodName">{{goods_name}}</h1>
             <br>
             <a href="#">{{goods_classify}}</a>
             <br>
@@ -226,21 +226,21 @@
             <ul class="btn-numbox">
                 <li>
                     <ul class="count" style="margin-left: 5px">
-                        <li><span selled_id="num-jian" class="num-jian">-</span></li>
-                        <li><input type="text" class="input-num" selled_id="input-num" value="0" /></li>
-                        <li><span selled_id="num-jia" class="num-jia">+</span></li>
+                        <li><span id="num-jian" class="num-jian">-</span></li>
+                        <li><input type="text" class="input-num" id="input-num" value="0" /></li>
+                        <li><span id="num-jia" class="num-jia">+</span></li>
                     </ul>
                 </li>
             </ul>
-            <button type="button" class="btn btn-block btn-success" selled_id="btn_cart" style="width: 150px">Add to cart</button>
+            <button type="button" class="btn btn-block btn-success" id="btn_cart" style="width: 150px">Add to cart</button>
             <br>
-            <button type="button" class="btn btn-block btn-warning" selled_id="btn_collection" style="width: 150px">Add to collection</button>
+            <button type="button" class="btn btn-block btn-warning" id="btn_collection" style="width: 150px">Add to collection</button>
         </div>
     </div>
 
     <br><br><br><br><br>
 
-    <footer selled_id="footer-main" class="footer-main footer-main-1 services-section container-fluid">
+    <footer id="footer-main" class="footer-main footer-main-1 services-section container-fluid">
         <!-- Container -->
         <div class="container">
             <div class="services-item">
@@ -405,9 +405,9 @@
         // 添加至购物车按钮
         $("#btn_cart").click(function(){
             var number = $("#input-num").attr("value");
-            var selled_id = vm.goods_id;
+            var id = vm.goods_id;
             var temp = {
-                selled_id: selled_id,
+                id: id,
                 number: number
             };
             $.ajax({
@@ -424,9 +424,9 @@
         // 添加至收藏按钮
         $("#btn_collection").click(function(){
             var number = $("#input-num").attr("value");
-            var selled_id = $(".good").attr("selled_id");
+            var id = $(".good").attr("id");
             var temp = {
-                selled_id: selled_id,
+                id: id,
                 number: number
             };
             $.ajax({

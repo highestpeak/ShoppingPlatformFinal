@@ -73,11 +73,11 @@
                     <!-- Menu Icon -->
                     <div class="menu-icon">
                         <div class="search">
-                            <a href="#" selled_id="search" title="Search"><i class="icon icon-Search"></i></a>
+                            <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
                         </div>
                         <ul class="cart">
                             <%--<li>--%>
-                                <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" selled_id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
+                                <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
                                 <%--<ul class="dropdown-menu no-padding">--%>
                                     <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
                                     <%--<li class="mini_cart_item">--%>
@@ -121,7 +121,7 @@
 
                     </div>
                     <!-- Menu Icon /- -->
-                    <div class="navbar-collapse collapse navbar-right" selled_id="navbar">
+                    <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/cart"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
@@ -145,14 +145,14 @@
 
     <main>
         <!-- Slider Section 1 -->
-        <div selled_id="home-revslider" class="slider-section container-fluid no-padding">
+        <div id="home-revslider" class="slider-section container-fluid no-padding">
             <!-- START REVOLUTION SLIDER 5.0 -->
             <div class="rev_slider_wrapper">
-                <div selled_id="home-slider1" class="rev_slider" data-version="5.0">
+                <div id="home-slider1" class="rev_slider" data-version="5.0">
                     <ul>
                         <li data-transition="zoomout" data-slotamount="default"  data-easein="easeInOut" data-easeout="easeInOut" data-masterspeed="2000" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7">
                             <img src="${pageContext.request.contextPath}/localLib/images/slider-1.jpg" alt="slider" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" selled_id="slide-layer-1"
+                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-1"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-200','-130','-110','-80']"
                                  data-fontsize="['38','30','25','16']"
@@ -172,7 +172,7 @@
                                  data-elementdelay="0.05"
                                  style="z-index: 5; white-space: nowrap; letter-spacing: 3.04px; color:#333; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">new way to purchase your products
                             </div>
-                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" selled_id="slide-layer-2"
+                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-2"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-135','-80','-60','-50']"
                                  data-fontsize="['18','18','18','14']"
@@ -192,7 +192,7 @@
                                  data-elementdelay="0.05"
                                  style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">The weather started getting rough the tiny ship was tossed. If not for the courage of the fearless
                             </div>
-                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" selled_id="slide-layer-3"
+                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-3"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-110','-50','-35','-30']"
                                  data-fontsize="['18','18','18','14']"
@@ -211,7 +211,7 @@
                                  data-elementdelay="0.05"
                                  style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">crew the Minnow would be lost. our dreams come true for me and you.
                             </div>
-                            <div class="tp-caption NotGeneric-Button rev-btn  rs-parallaxlevel-0" selled_id="slide-layer-4"
+                            <div class="tp-caption NotGeneric-Button rev-btn  rs-parallaxlevel-0" id="slide-layer-4"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-30','20','40','30']"
                                  data-fontsize="['14','14','14','12']"
@@ -236,7 +236,7 @@
 
                         <li data-transition="zoomout" data-slotamount="default"  data-easein="easeInOut" data-easeout="easeInOut" data-masterspeed="2000" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7">
                             <img src="${pageContext.request.contextPath}/localLib/images/slider-1.jpg" alt="slider" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" selled_id="slide-layer-5"
+                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-5"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-200','-130','-110','-80']"
                                  data-fontsize="['38','30','25','16']"
@@ -256,7 +256,7 @@
                                  data-elementdelay="0.05"
                                  style="z-index: 5; white-space: nowrap; letter-spacing: 3.04px; color:#333; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">new way to purchase your products
                             </div>
-                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" selled_id="slide-layer-6"
+                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-6"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-135','-80','-60','-50']"
                                  data-fontsize="['18','18','18','14']"
@@ -276,7 +276,7 @@
                                  data-elementdelay="0.05"
                                  style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">The weather started getting rough the tiny ship was tossed. If not for the courage of the fearless
                             </div>
-                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" selled_id="slide-layer-7"
+                            <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-7"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-110','-50','-35','-30']"
                                  data-fontsize="['18','18','18','14']"
@@ -295,7 +295,7 @@
                                  data-elementdelay="0.05"
                                  style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">crew the Minnow would be lost. our dreams come true for me and you.
                             </div>
-                            <div class="tp-caption NotGeneric-Button rev-btn  rs-parallaxlevel-0" selled_id="slide-layer-8"
+                            <div class="tp-caption NotGeneric-Button rev-btn  rs-parallaxlevel-0" id="slide-layer-8"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-30','20','40','30']"
                                  data-fontsize="['14','14','14','12']"
@@ -323,7 +323,7 @@
             <div class="goto-next"><a href="#category-section"><i class="icon icon-Mouse bounce"></i></a></div>
         </div><!-- Slider Section 1 /- -->
         <!-- Product Section -->
-        <div selled_id="product-section" class="product-section container-fluid no-padding">
+        <div id="product-section" class="product-section container-fluid no-padding">
             <!-- Container -->
             <div class="container">
                 <div class="row">
@@ -335,7 +335,7 @@
                         <h3>商品</h3>
                         <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
                     </div><!-- Section Header /- -->
-                    <ul selled_id="filters" class="products-categories no-left-padding">
+                    <ul id="filters" class="products-categories no-left-padding">
                         <li><a data-filter="*" class="active" href="#">全部</a></li>
                         <li><a data-filter=".design" href="#">美妆</a></li>
                         <li><a data-filter=".video" href="#">书籍</a></li>
@@ -452,7 +452,7 @@
     </main>
 
     <!-- Footer Main -->
-    <footer selled_id="footer-main" class="footer-main container-fluid">
+    <footer id="footer-main" class="footer-main container-fluid">
         <!-- Container -->
         <div class="container">
             <div class="row">
