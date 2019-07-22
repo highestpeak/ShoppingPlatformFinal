@@ -7,8 +7,8 @@
   </insert>
 
   <insert id="insertBuyer" parameterType="com.demo.mms.common.domain.Buyer">
-    insert into buyer (user_id,nickname,permission,bank_card,create_time,update_time)
-    values   (#{user_id}, #{nickname}, #{permission}, #{bank_card},#{create_time},#{update_time})
+    insert into buyer (user_id,bank_card,create_time,update_time)
+    values   (#{user_id}, #{bank_card},#{create_time},#{update_time})
   </insert>
 
   <insert id="insertSeller" parameterType="com.demo.mms.common.domain.Seller">
