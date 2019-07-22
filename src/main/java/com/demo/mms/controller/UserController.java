@@ -320,7 +320,6 @@ public class UserController {
         return rs;
     }
 
-
     //获取用户游览历史
     //根据用户获取商品的请求来加入
     //根据用户游览请求的分类来加入
@@ -337,66 +336,6 @@ public class UserController {
             return rs;
         }
         if(!rsService.containsKey("viewedHistoryReturn") && rs.size()>1){
-            rs.put("success",false);
-        }
-        return rs;
-    }
-
-    //获取用户评价
-    @RequestMapping("/getEvaluationOfUser")
-    @ResponseBody
-    public Object userEvaluationGet(User user){
-        System.out.println("in getViewHistory");
-        Map<String,Object> rs = new HashMap<>();
-        rs.put("success",true);
-//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
-        Map<String,Object> rsService= null;
-        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
-            rs.putAll(rsService);
-            rs.put("success",false);
-            return rs;
-        }
-        if(rs.size()>1){
-            rs.put("success",false);
-        }
-        return rs;
-    }
-
-    //修改用户评价
-    @RequestMapping("/modifyEvaluationOfUser")
-    @ResponseBody
-    public Object userEvaluationUpdate(User user){
-        System.out.println("in getViewHistory");
-        Map<String,Object> rs = new HashMap<>();
-        rs.put("success",true);
-//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
-        Map<String,Object> rsService= null;
-        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
-            rs.putAll(rsService);
-            rs.put("success",false);
-            return rs;
-        }
-        if(rs.size()>1){
-            rs.put("success",false);
-        }
-        return rs;
-    }
-
-    //修改收货地址--增删查改
-    @RequestMapping("/modifyMailInfo")
-    @ResponseBody
-    public Object userEvaluationUpdate(@RequestBody MailInfoCrudVO mailInfoCrudVO){
-        System.out.println("in getViewHistory");
-        Map<String,Object> rs = new HashMap<>();
-        rs.put("success",true);
-//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
-        Map<String,Object> rsService= null;
-        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
-            rs.putAll(rsService);
-            rs.put("success",false);
-            return rs;
-        }
-        if(rs.size()>1){
             rs.put("success",false);
         }
         return rs;

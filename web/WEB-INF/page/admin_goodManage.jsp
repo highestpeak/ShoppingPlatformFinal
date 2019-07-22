@@ -49,7 +49,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <button type="submit" name="search" selled_id="search-btn" class="btn btn-flat">
                     <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -130,7 +130,7 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="goodTable" class="table">
+                                    <table selled_id="goodTable" class="table">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10%">ID</th>
@@ -145,7 +145,7 @@
                                                 <th>Operation</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tbodyId">
+                                        <tbody selled_id="tbodyId">
                                         </tbody>
                                     </table>
                                 </div>
@@ -161,7 +161,7 @@
 </div>
 
 <!-- 修改商品表格 -->
-<div class="box box-info" id="good_info_modify_table" style="display: none">
+<div class="box box-info" selled_id="good_info_modify_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">修改商品</h3>
     </div>
@@ -173,28 +173,28 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">good name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_name">
+                    <input type="text" class="form-control" selled_id="mod_name">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">description</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_description">
+                    <input type="text" class="form-control" selled_id="mod_description">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">status</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_status">
+                    <input type="text" class="form-control" selled_id="mod_status">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">old level</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_oldlevel">
+                    <input type="text" class="form-control" selled_id="mod_oldlevel">
                 </div>
             </div>
 
@@ -202,7 +202,7 @@
             <div class="form-group">
                 <label for="exampleInputFile"  class="col-sm-2 control-label">picture</label>
                 <div class="col-sm-10">
-                    <input type="file" id="mod_pic">
+                    <input type="file" selled_id="mod_pic">
                 </div>
             </div>
 
@@ -210,14 +210,14 @@
     
 
         <div class="box-footer">
-            <button type="button" class="btn btn-default pull-left" id="good_info_mod_cancel">取消</button>
-            <button type="button" class="btn btn-info pull-right" id="good_info_mod_sumbit">提交</button>
+            <button type="button" class="btn btn-default pull-left" selled_id="good_info_mod_cancel">取消</button>
+            <button type="button" class="btn btn-info pull-right" selled_id="good_info_mod_sumbit">提交</button>
         </div>
     </form>
 </div>
 
 <!-- 添加商品表格 -->
-<div class="box box-info" id="good_info_add_table" style="display: none">
+<div class="box box-info" selled_id="good_info_add_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">添加商品</h3>
     </div>
@@ -227,37 +227,37 @@
         <div class="box-body">
 
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">store id</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">store selled_id</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_store_id"">
+                    <input type="text" class="form-control" selled_id="add_store_id"">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">good name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_name">
+                    <input type="text" class="form-control" selled_id="add_name">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">description</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_description">
+                    <input type="text" class="form-control" selled_id="add_description">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">status</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_status">
+                    <input type="text" class="form-control" selled_id="add_status">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">old level</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_oldlevel">
+                    <input type="text" class="form-control" selled_id="add_oldlevel">
                 </div>
             </div>
 
@@ -265,15 +265,15 @@
             <div class="form-group">
                 <label for="exampleInputFile"  class="col-sm-2 control-label">picture</label>
                 <div class="col-sm-10">
-                    <input type="file" id="add_pic">
+                    <input type="file" selled_id="add_pic">
                 </div>
             </div>
 
         </div>
 
         <div class="box-footer">
-            <button type="button" class="btn btn-default pull-left" id="good_info_add_cancel">取消</button>
-            <button type="button" class="btn btn-info pull-right" id="good_info_add_sumbit">提交</button>
+            <button type="button" class="btn btn-default pull-left" selled_id="good_info_add_cancel">取消</button>
+            <button type="button" class="btn btn-info pull-right" selled_id="good_info_add_sumbit">提交</button>
         </div>
     </form>
 </div>

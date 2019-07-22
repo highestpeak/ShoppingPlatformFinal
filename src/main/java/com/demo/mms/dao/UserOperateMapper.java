@@ -15,15 +15,15 @@ public interface UserOperateMapper {
                    @Param("value") String value);
 
     @Update("update user set ${columnNew} = #{valueNew} where ${columnKey} = #{valueKey}")
-    int updateUser(@Param("columnKey") String columnKey,
+    void updateUser(@Param("columnKey") String columnKey,
                    @Param("valueKey") String valueKey,
                    @Param("columnNew") String columnNew,
                    @Param("valueNew") String valueNew);
 
-    int insertUser(User user);
-    int insertBuyer(Buyer buyerToIn);
-    int insertSeller(Seller seller);
-    int insertAdmin(Admin admin);
+    void insertUser(User user);
+    void insertBuyer(Buyer buyerToIn);
+    void insertSeller(Seller seller);
+    void insertAdmin(Admin admin);
 
     @Delete("DELETE FROM user WHERE ${columnKey} = #{valueKey}")
     void delUser(@Param("columnKey") String columnKey,
@@ -35,5 +35,7 @@ public interface UserOperateMapper {
 
     ArrayList<GoodsViewedQueryTestVO> queryGoodsViewedByStore(String store_id, String classify_name);
 
-    int insertInterested(GoodsStar goodsStar);
+    void insertInterestedGoods(GoodsStar goodsStar);
+
+    void insertInterestedClassify(ClassifyStar classifyStar);
 }

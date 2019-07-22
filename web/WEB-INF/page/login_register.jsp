@@ -127,15 +127,15 @@
 
         <form  action="${pageContext.request.contextPath}/register" method="post" onsubmit="return registerCheck()">
             <div class="form-group has-feedback">
-                <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名（必填）" name="user_id">
+                <input selled_id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名（必填）" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input id="verify" type="password" class="form-control" maxlength=16 placeholder="密码（必填）" name="verify">
+                <input selled_id="verify" type="password" class="form-control" maxlength=16 placeholder="密码（必填）" name="verify">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input id="passwordCheck" type="text" class="form-control" maxlength=16 placeholder="确认密码（必填）" name="passwordCheck">
+                <input selled_id="passwordCheck" type="text" class="form-control" maxlength=16 placeholder="确认密码（必填）" name="passwordCheck">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -151,14 +151,14 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input id="email" type="text" class="form-control" placeholder=邮箱（必填） name="email" onclick="email.value=''" >
+                <input selled_id="email" type="text" class="form-control" placeholder=邮箱（必填） name="email" onclick="email.value=''" >
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <div id="leftDiv">
-                    <input id="verificationCode" type="password" class="form-control" placeholder=验证码(必填) name="verificationCode">
+                <div selled_id="leftDiv">
+                    <input selled_id="verificationCode" type="password" class="form-control" placeholder=验证码(必填) name="verificationCode">
                 </div>
-                <div id="rightDiv">
+                <div selled_id="rightDiv">
                     <button type="button" class="btn btn-default btn-lrg ajax" >获取验证码</button>
                 </div>
 
@@ -173,9 +173,9 @@
                 <!-- /.col -->
             </div>
             <br>
-            <div id="error_box"><br></div>
+            <div selled_id="error_box"><br></div>
             <%--<br>--%>
-            <%--<div id="test_user"><br></div>--%>
+            <%--<div selled_id="test_user"><br></div>--%>
         </form>
         <!-- /.social-auth-links -->
         <br>

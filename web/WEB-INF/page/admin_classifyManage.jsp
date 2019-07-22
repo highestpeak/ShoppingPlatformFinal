@@ -49,7 +49,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <button type="submit" name="search" selled_id="search-btn" class="btn btn-flat">
                     <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <canvas id="pieChart" style="height: 221px; width: 442px;" width="442" height="221"></canvas>
+                        <canvas selled_id="pieChart" style="height: 221px; width: 442px;" width="442" height="221"></canvas>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -128,18 +128,18 @@
 
         <div class="col-md-6">
 
-            <div id="tree"></div>
+            <div selled_id="tree"></div>
 
             <div>
-                <input id="delete" style="float:right; margin-right:10px; background:red; color:white" class="btn" type="button" style="float:right" value="删除" />
+                <input selled_id="delete" style="float:right; margin-right:10px; background:red; color:white" class="btn" type="button" style="float:right" value="删除" />
             </div>
 
             <div>
-                <input id="modify" style="float:right; margin-right:10px; background:yellowgreen; color:white" class="btn" type="button" style="float:right" value="修改" />
+                <input selled_id="modify" style="float:right; margin-right:10px; background:yellowgreen; color:white" class="btn" type="button" style="float:right" value="修改" />
             </div>
 
             <div>
-                <input id="add" style="float:right; margin-right:10px; background:greenyellow; color:white" class="btn" type="button" style="float:right" value="添加" />
+                <input selled_id="add" style="float:right; margin-right:10px; background:greenyellow; color:white" class="btn" type="button" style="float:right" value="添加" />
             </div>
         </div>
 
@@ -166,7 +166,7 @@
             for (var i = 0; i < data.length; i++) {
                 if (data[i].pid == pid) {
                     var obj = data[i];
-                    temp = listToTree(data, data[i].id);
+                    temp = listToTree(data, data[i].selled_id);
                     if (temp.length > 0) {
                         obj["nodes"] = temp;
                     }
@@ -190,7 +190,7 @@
                     for(var i=0; i<list.length; i++){
                         var item = {
                             text: list[i][1],
-                            id: list[i][0],
+                            selled_id: list[i][0],
                             pid:list[i][2],
                             href: "/goods/classify/" + list[i][0]
                         }
@@ -216,7 +216,7 @@
             }
             var ids=[];
             for(var i=0; i<arr.length; i++){
-                ids.push(arr[i].id);
+                ids.push(arr[i].selled_id);
             }
 
             // 向deleteClassify功能发送要删除的分类的id的数组，[1,2,3,4]
@@ -259,13 +259,13 @@
         });
 
         $("#good_classify_mod_submit").click(function(){
-            var id = document.getElementById("mod_id").value;
+            var selled_id = document.getElementById("mod_id").value;
             var name = document.getElementById("mod_name").value;
             var pid = document.getElementById("mod_pid").value;
 
             var temp = {
                 text: name,
-                id: id,
+                selled_id: selled_id,
                 pid: pid
             }
 
@@ -303,13 +303,13 @@
         });
 
         $("#good_classify_add_submit").click(function(){
-            var id = document.getElementById("add_id").value;
+            var selled_id = document.getElementById("add_id").value;
             var name = document.getElementById("add_name").value;
             var pid = document.getElementById("add_pid").value;
 
             var temp = {
                 text: name,
-                id: id,
+                selled_id: selled_id,
                 pid: pid
             }
 
@@ -402,7 +402,7 @@
             // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
             maintainAspectRatio  : true,
             //String - A legend template
-            legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+            legendTemplate       : "<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
           }
       
           pieChart.Doughnut(PieData, pieOptions)
@@ -410,7 +410,7 @@
       </script>
 
 <!-- 添加分类表格 -->
-<div class="box box-info" id="good_classify_add_table" style="display: none">
+<div class="box box-info" selled_id="good_classify_add_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">添加分类</h3>
     </div>
@@ -422,35 +422,35 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_id" name="add_id">
+                    <input type="text" class="form-control" selled_id="add_id" name="add_id">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_name" name="add_name">
+                    <input type="text" class="form-control" selled_id="add_name" name="add_name">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">PID</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_pid" name="add_pid">
+                    <input type="text" class="form-control" selled_id="add_pid" name="add_pid">
                 </div>
             </div>
 
         </div>
 
         <div class="box-footer">
-            <button type="button" class="btn btn-default pull-left" id="good_classify_add_cancel">取消</button>
-            <button type="button" class="btn btn-info pull-right" id="good_classify_add_submit">提交</button>
+            <button type="button" class="btn btn-default pull-left" selled_id="good_classify_add_cancel">取消</button>
+            <button type="button" class="btn btn-info pull-right" selled_id="good_classify_add_submit">提交</button>
         </div>
     </form>
 </div>
 
 <!-- 修改分类表格 -->
-<div class="box box-info" id="good_classify_mod_table" style="display: none">
+<div class="box box-info" selled_id="good_classify_mod_table" style="display: none">
     <div class="box-header with-border">
         <h3 class="box-title">添加分类</h3>
     </div>
@@ -462,29 +462,29 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_id" name="mod_id">
+                    <input type="text" class="form-control" selled_id="mod_id" name="mod_id">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_name" name="mod_name">
+                    <input type="text" class="form-control" selled_id="mod_name" name="mod_name">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">PID</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="mod_pid" name="mod_pid">
+                    <input type="text" class="form-control" selled_id="mod_pid" name="mod_pid">
                 </div>
             </div>
 
         </div>
 
         <div class="box-footer">
-            <button type="button" class="btn btn-default pull-left" id="good_classify_mod_cancel">取消</button>
-            <button type="button" class="btn btn-info pull-right" id="good_classify_mod_submit">提交</button>
+            <button type="button" class="btn btn-default pull-left" selled_id="good_classify_mod_cancel">取消</button>
+            <button type="button" class="btn btn-info pull-right" selled_id="good_classify_mod_submit">提交</button>
         </div>
     </form>
 </div>

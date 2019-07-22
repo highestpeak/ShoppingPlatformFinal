@@ -26,7 +26,7 @@ create table buyer
 
 create table classify_of_goods
 (
-  id varchar(36) not null
+  selled_id varchar(36) not null
     primary key,
   classify_selled_id varchar(36) null,
   goods_id varchar(36) null
@@ -85,7 +85,7 @@ create table goods_classify
 
 create table in_cart_of
 (
-  id varchar(36) not null
+  selled_id varchar(36) not null
     primary key,
   buyer_id varchar(36) not null,
   good_id varchar(36) not null,
@@ -149,7 +149,7 @@ foreign key (store_id) references store (store_id)
 
 create table store_sell_classify
 (
-  id varchar(36) not null
+  selled_id varchar(36) not null
     primary key,
   store_id varchar(36) null,
   classify_id varchar(36) null,
@@ -173,7 +173,7 @@ create index store_sell_classify_goods_classify_classify_id_fk
 
 alter table classify_of_goods
   add constraint classify_of_goods_store_sell_classify_id_fk
-foreign key (classify_selled_id) references store_sell_classify (id)
+foreign key (classify_selled_id) references store_sell_classify (selled_id)
   on update cascade on delete cascade
 ;
 

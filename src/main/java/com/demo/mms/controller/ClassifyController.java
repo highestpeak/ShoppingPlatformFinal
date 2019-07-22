@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
@@ -129,7 +128,23 @@ public class ClassifyController {
     @RequestMapping("/star")
     @ResponseBody
     public Object starClassify(@RequestBody StarGoodsVO starGoodsVO){
-        return null;
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in starClassify");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=goodsService.starClassify(starGoodsVO.getUser(),starGoodsVO.getGoodsClassify());
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
     }
 
     //页面请求

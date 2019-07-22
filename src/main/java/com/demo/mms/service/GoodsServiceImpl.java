@@ -3,13 +3,13 @@ package com.demo.mms.service;
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.IDGenerator;
 import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.StoreGoodsChartByClassifyVO;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.UserOperateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -40,7 +40,7 @@ public class GoodsServiceImpl implements GoodsService{
         for (StoreSelledClassifyVO classifyOwn:classifyOwnList){
             classifyList.add(new ArrayList<>(Arrays.asList(classifyOwn.getClassify_id(),
                                             classifyOwn.getClassify_name(),
-                                            classifyOwn.getTop_level_classify_id())));
+                                            classifyOwn.getParent_id())));
         }
         return rs;
     }
@@ -56,14 +56,18 @@ public class GoodsServiceImpl implements GoodsService{
         }
         //store 存在
         Map<String,Integer> returnTempMap=new HashMap<>();
-        ArrayList<ArrayList> classifyListTemp=new ArrayList<>();
-        rs.putAll(getStoreGoodsClassify(store,classifyListTemp));
-        for (ArrayList arrayList:classifyListTemp){
-            String classifyName=(String) arrayList.get(1);
-            if (returnTempMap.containsKey(classifyName)){
-                returnTempMap.put(classifyName,returnTempMap.get(classifyName)+1);
+        ArrayList<StoreGoodsChartByClassifyVO> classifyListTemp=goodsOperateMapper.queryStoreGoodsChartByClassify(store.getStore_id());
+
+        for (StoreGoodsChartByClassifyVO arrayList:classifyListTemp){
+            String classifyName=arrayList.getClassify_name();
+            if(arrayList.getGoods_id()!=null){
+                if (returnTempMap.containsKey(classifyName) ){
+                    returnTempMap.put(classifyName,returnTempMap.get(classifyName)+1);
+                }else {
+                    returnTempMap.put(classifyName,1);
+                }
             }else {
-                returnTempMap.put(classifyName,1);
+                returnTempMap.put(classifyName,0);
             }
         }
         List<Map.Entry<String,Integer>> list = new ArrayList<Map.Entry<String,Integer>>(returnTempMap.entrySet());
@@ -366,10 +370,39 @@ public class GoodsServiceImpl implements GoodsService{
             goodsStar.setSetStar_time(ProjectFactory.getPorjectStrDate(new Date()));
             if (idCheck!=null){
                 goodsStar.setGoods_id(idCheck.getGoods_id());
-                userOperateMapper.insertInterested(goodsStar);
+                userOperateMapper.insertInterestedGoods(goodsStar);
             }else {//nameCheck!=null
                 goodsStar.setGoods_id(nameCheck.getGoods_id());
-                userOperateMapper.insertInterested(goodsStar);
+                userOperateMapper.insertInterestedGoods(goodsStar);
+            }
+        }
+
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> starClassify(User user, GoodsClassify goodsClassify) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        if(userFind==null){//用户不存在
+            rs.put("user existed",false);
+            return rs;
+        }
+        GoodsClassify idCheck=goodsOperateMapper.queryGoodsClassify("classify_id",goodsClassify.getClassify_id());
+        GoodsClassify nameCheck=goodsOperateMapper.queryGoodsClassify("classify_name",goodsClassify.getClassify_name());
+        if((idCheck==null)&&(nameCheck==null)){//不存在
+            rs.put("goods classify"+nameCheck.getClassify_name()+" existed",false);
+        }else {
+            ClassifyStar classifyStar=new ClassifyStar();
+            classifyStar.setClassifyStar_id(IDGenerator.getId());
+            classifyStar.setUser_id(user.getUser_id());
+            classifyStar.setSetStar_time(ProjectFactory.getPorjectStrDate(new Date()));
+            if (idCheck!=null){
+                classifyStar.setClassify_id(idCheck.getClassify_id());
+                userOperateMapper.insertInterestedClassify(classifyStar);
+            }else {//nameCheck!=null
+                classifyStar.setClassify_id(nameCheck.getClassify_id());
+                userOperateMapper.insertInterestedClassify(classifyStar);
             }
         }
 

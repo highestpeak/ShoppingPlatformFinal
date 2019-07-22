@@ -50,7 +50,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <button type="submit" name="search" selled_id="search-btn" class="btn btn-flat">
                     <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -131,32 +131,32 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3" id="store_info">
+                                    <div class="col-sm-6 col-sm-offset-3" selled_id="store_info">
                                         <img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/localLib/images/user2-160x160.jpg" alt="User profile picture">
 
-                                        <h3 id="store_id" class="profile-username text-center">{{store_id}}</h3>
+                                        <h3 selled_id="store_id" class="profile-username text-center">{{store_id}}</h3>
                         
-                                        <p id="store_note" class="text-muted text-center">{{note}}</p>
+                                        <p selled_id="store_note" class="text-muted text-center">{{note}}</p>
                         
                                         <ul class="list-group list-group-unbordered">
                                             <li class="list-group-item">
-                                                <b>Pic Url</b> <a class="pull-right" id="store_pic" v-bind:href="store_pic_url">{{store_pic_url}}</a>
+                                                <b>Pic Url</b> <a class="pull-right" selled_id="store_pic" v-bind:href="store_pic_url">{{store_pic_url}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Classify</b> <a id="store_classify" class="pull-right">{{store_classify}}</a>
+                                                <b>Classify</b> <a selled_id="store_classify" class="pull-right">{{store_classify}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Level</b> <a id="store_level" class="pull-right">{{level}}</a>
+                                                <b>Level</b> <a selled_id="store_level" class="pull-right">{{level}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Certification</b> <a id="store_certi" class="pull-right">{{certification}}</a>
+                                                <b>Certification</b> <a selled_id="store_certi" class="pull-right">{{certification}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Create Time</b> <a id="store_time" class="pull-right">{{create_time}}</a>
+                                                <b>Create Time</b> <a selled_id="store_time" class="pull-right">{{create_time}}</a>
                                             </li>
                                         </ul>
                         
-                                        <button class="btn btn-primary btn-block" id="modify"><b>Modify</b></button>
+                                        <button class="btn btn-primary btn-block" selled_id="modify"><b>Modify</b></button>
                                     </div>
                                 </div>       
                             </div>
@@ -172,7 +172,7 @@
 
 
 <!-- 修改商店信息 -->
-<div class="box box-info" id="store_info_modify_table" style="display: none">
+<div class="box box-info" selled_id="store_info_modify_table" style="display: none">
         <div class="box-header with-border">
             <h3 class="box-title">修改信息</h3>
         </div>
@@ -184,35 +184,35 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Note</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="mod_note">
+                        <input type="text" class="form-control" selled_id="mod_note">
                     </div>
                 </div>
     
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Classify</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="mod_classify">
+                        <input type="text" class="form-control" selled_id="mod_classify">
                     </div>
                 </div>
     
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Level</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="mod_level">
+                        <input type="text" class="form-control" selled_id="mod_level">
                     </div>
                 </div>
     
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Certification</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="mod_certification">
+                        <input type="text" class="form-control" selled_id="mod_certification">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Pic Url</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="mod_picurl">
+                        <input type="text" class="form-control" selled_id="mod_picurl">
                     </div>
                 </div>
     
@@ -221,8 +221,8 @@
         
     
             <div class="box-footer">
-                <button type="button" class="btn btn-default pull-left" id="store_info_mod_cancel">取消</button>
-                <button type="button" class="btn btn-info pull-right" id="store_info_mod_sumbit">提交</button>
+                <button type="button" class="btn btn-default pull-left" selled_id="store_info_mod_cancel">取消</button>
+                <button type="button" class="btn btn-info pull-right" selled_id="store_info_mod_sumbit">提交</button>
             </div>
         </form>
     </div>

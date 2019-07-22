@@ -77,11 +77,11 @@
                     <!-- Menu Icon -->
                     <div class="menu-icon">
                         <div class="search">
-                            <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
+                            <a href="#" selled_id="search" title="Search"><i class="icon icon-Search"></i></a>
                         </div>
                         <ul class="cart">
                             <%--<li>--%>
-                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
+                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" selled_id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
                             <%--<ul class="dropdown-menu no-padding">--%>
                             <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
                             <%--<li class="mini_cart_item">--%>
@@ -125,7 +125,7 @@
 
                     </div>
                     <!-- Menu Icon /- -->
-                    <div class="navbar-collapse collapse navbar-right" id="navbar">
+                    <div class="navbar-collapse collapse navbar-right" selled_id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/cart"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
@@ -162,13 +162,13 @@
                 <div class="form-detail">
                     <form>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>ID</label>
-                            <input type="text" name="contact-name" class="form-control" id="input_ID" placeholder="ID *" required="" value="" disabled>
+                            <input type="text" name="contact-name" class="form-control" selled_id="input_ID" placeholder="ID *" required="" value="" disabled>
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>用户名</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_nickname" placeholder="用户名 *" required="" value="">
+                            <input type="text" name="contact-email" class="form-control" selled_id="input_nickname" placeholder="用户名 *" required="" value="">
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>真实姓名</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_realname" placeholder="真实姓名 *" required="" value="">
+                            <input type="text" name="contact-email" class="form-control" selled_id="input_realname" placeholder="真实姓名 *" required="" value="">
                         </div>
                         <div class="col-md-6 col-md-6 col-md-6 col-xs-12 form-group"><label>性别</label>
                             <select class="form-control">
@@ -180,17 +180,17 @@
                         </div>
 
                         <div class="col-md-11 col-sm-12 col-xs-12 form-group"><label>密码</label>
-                            <input type="text" name="contact-email" class="form-control" id="input_password" placeholder="密码 *" required="" value="">
+                            <input type="text" name="contact-email" class="form-control" selled_id="input_password" placeholder="密码 *" required="" value="">
                         </div>
 
                         <div class="form-group col-md-1 col-sm-12 col-xs-12"><label>&nbsp;</label>
                             <a href="#">
-                                <button type="submit" id="btn_change_password" name="change_password">修改密码</button>
+                                <button type="submit" selled_id="btn_change_password" name="change_password">修改密码</button>
                             </a>
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>电子邮箱</label>
-                            <input type="text" name="contact-name" class="form-control" id="input_email" placeholder="电子邮箱 *" required="" value="">
+                            <input type="text" name="contact-name" class="form-control" selled_id="input_email" placeholder="电子邮箱 *" required="" value="">
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>收货地址</label>
@@ -202,24 +202,24 @@
                         </div>
 
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                            <textarea placeholder="个人简介" id="textarea_message" name="contact-message" rows="5" class="form-control"></textarea>
+                            <textarea placeholder="个人简介" selled_id="textarea_message" name="contact-message" rows="5" class="form-control"></textarea>
                         </div>
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                            <button title="Submit" type="submit" id="btn_submit" name="post">保存</button>
+                            <button title="Submit" type="submit" selled_id="btn_submit" name="post">保存</button>
                         </div>
-                        <div id="alert-msg" class="alert-msg"></div>
+                        <div selled_id="alert-msg" class="alert-msg"></div>
                     </form>
                 </div>
             </div>
             <!-- Map Section -->
             <div class="map container-fluid no-padding">
-                <div class="map-canvas" id="map-canvas-contact" data-lat="-32.559356" data-lng="149.564237" data-string="Max Shop, 65 Huge Street Melbourne,  2850 Australia." data-zoom="12"></div>
+                <div class="map-canvas" selled_id="map-canvas-contact" data-lat="-32.559356" data-lng="149.564237" data-string="Max Shop, 65 Huge Street Melbourne,  2850 Australia." data-zoom="12"></div>
                 <a href="#">Tang <span>Shop</span></a>
             </div><!--  Map Section /- -->
         </div><!-- Contact Us /- -->
 
     </main>
-    <footer id="footer-main" class="footer-main container-fluid">
+    <footer selled_id="footer-main" class="footer-main container-fluid">
         <!-- Container -->
         <div class="container">
             <div class="row">

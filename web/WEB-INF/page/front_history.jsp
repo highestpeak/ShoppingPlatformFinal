@@ -79,11 +79,11 @@
                     <!-- Menu Icon -->
                     <div class="menu-icon">
                         <div class="search">
-                            <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
+                            <a href="#" selled_id="search" title="Search"><i class="icon icon-Search"></i></a>
                         </div>
                         <ul class="cart">
                             <%--<li>--%>
-                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
+                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" selled_id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
                             <%--<ul class="dropdown-menu no-padding">--%>
                             <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
                             <%--<li class="mini_cart_item">--%>
@@ -129,7 +129,7 @@
 
                     </div>
                     <!-- Menu Icon /- -->
-                    <div class="navbar-collapse collapse navbar-right" id="navbar">
+                    <div class="navbar-collapse collapse navbar-right" selled_id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/cart"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
@@ -164,7 +164,7 @@
                 <!-- Cart Table -->
                 <div class="col-md-12 col-sm-12 col-xs-12 cart-table">
                     <form>
-                        <table class="table table-bordered table-responsive" id="table_history">
+                        <table class="table table-bordered table-responsive" selled_id="table_history">
                             <thead>
                             <tr>
                                 <th class="product-thumbnail" style="width: 20%">商品实物图</th>
@@ -216,7 +216,7 @@
 
 
     </main>
-    <footer id="footer-main" class="footer-main container-fluid">
+    <footer selled_id="footer-main" class="footer-main container-fluid">
         <!-- Container -->
         <div class="container">
             <div class="row">

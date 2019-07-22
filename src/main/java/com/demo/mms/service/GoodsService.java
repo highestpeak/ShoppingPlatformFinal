@@ -52,4 +52,6 @@ public interface GoodsService {
     Map<String,Object> getStoreGoodsInfo(Store store, Goods goodsToGet);
 
     Map<String,Object> starGoods(User user, Store store, Goods goods);
+
+    Map<String,Object> starClassify(User user, GoodsClassify goodsClassify);
 }

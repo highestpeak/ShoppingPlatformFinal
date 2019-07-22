@@ -1,11 +1,13 @@
 package com.demo.mms.service;
 
+import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.dao.GoodsOperateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +40,31 @@ public class StoreServiceImpl implements StoreService{
         }
         rs.putAll(modifyStoreInfoHelp(oldStore,newStore));
         return rs;
+    }
+
+    @Override
+    public Map<String, Object> getStoreThingOfDay(Store store, String dateToGet) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> setOnSale(String store_id, String oldGoodsId, Goods newOnSaleGoodInfo) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> delOnSale(String store_id, String goodOnSaleId) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getOnSaleGoods(String store_id, ArrayList<Goods> getOnSaleList) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> updateOnSaleGoods(String store_id, String goodOnSaleId, Goods newGoodsOnSale) {
+        return null;
     }
 
     private Map<String, Object> modifyStoreInfoHelp(Store oldStore, Store newStore) {

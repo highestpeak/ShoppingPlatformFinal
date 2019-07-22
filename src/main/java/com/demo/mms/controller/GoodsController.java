@@ -199,7 +199,7 @@ public class GoodsController {
     @RequestMapping("/star")
     @ResponseBody
     public Object starGoods(@RequestBody StarGoodsVO starGoodsVO){
-        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in starGoods");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         Map<String,Object> rsService=null;
@@ -217,16 +217,7 @@ public class GoodsController {
         }
         return rs;
     }
-
-    //获取商品的所有评价
-    @RequestMapping("getEvaluationOfGoods")
-    @ResponseBody
-    public Object goodsEvaluationGet(@RequestBody GoodsEvaluationVO goodsEvaluationVO){
-        return null;
-    }//根据好评差评获取评价
-
-
-
+    
     //模糊检索
     private ArrayList<Goods> getBySearchGoodsInfo(ArrayList<Goods> goodsList,Goods goodsToGet) {
         //默认按商品名称检索

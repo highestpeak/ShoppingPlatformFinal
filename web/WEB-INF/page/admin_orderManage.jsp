@@ -49,7 +49,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <button type="submit" name="search" selled_id="search-btn" class="btn btn-flat">
                     <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -133,7 +133,7 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example" class="table" >
+                                    <table selled_id="example" class="table" >
                                         <thead>
                                         <tr>
                                             <th>全选 <input type="checkbox"></th>
