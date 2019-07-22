@@ -314,6 +314,27 @@ public class UserServiceImpl implements UserService {
         return rs;
     }
 
+    @Override
+    public Map<String, Object> delUserStar(String user_id,String goodsStar_id) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user_id);
+        if(userFind==null){//不存在user
+            rs.put("user existed",false);
+            return rs;
+        }
+        GoodsStar  goodsStar=userOperateMapper.queryStar("goodsStar_id",goodsStar_id);
+        if(goodsStar==null){
+            rs.put("star goods exist",false);
+            return rs;
+        }
+        try {
+            userOperateMapper.delStar("goodsStar_id",goodsStar_id);
+        }catch (Exception e){
+            rs.put("delError",true);
+        }
+        return rs;
+    }
+
     private Map<String, Object> QueryToReturnHelp(ArrayList<GoodsViewedQueryVO> goodsViewedQueryVOArrayList, ArrayList<ViewedHistoryReturnVO> viewedHistoryReturnVOArrayList,String type) {
         Map<String, Object> rs=new HashMap<>();
         int countGoodsNotNull=0;

@@ -54,3 +54,4 @@ public class ClassifyCrudVO {
         this.classifiesToAdd = classifiesToAdd;
     }
 }
+

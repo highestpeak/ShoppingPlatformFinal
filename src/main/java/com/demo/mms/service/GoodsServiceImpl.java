@@ -3,10 +3,13 @@ package com.demo.mms.service;
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.IDGenerator;
 import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.StarGoodsGetVO;
+import com.demo.mms.common.vo.StarGoodsVO;
 import com.demo.mms.common.vo.StoreGoodsChartByClassifyVO;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.UserOperateMapper;
+import org.openxmlformats.schemas.drawingml.x2006.main.STAdjAngle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -391,6 +394,20 @@ public class GoodsServiceImpl implements GoodsService{
         }
 
         return rs;
+    }
+
+    @Override
+    public Map<String, Object> getStarGoods(String user_id, ArrayList<StarGoodsGetVO> starGoodsVOs) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user_id);
+        if(userFind==null){//用户不存在
+            rs.put("user existed",false);
+            return rs;
+        }
+        ArrayList<StarGoodsGetVO> starGoodsTemp=new ArrayList<>();
+        starGoodsTemp=userOperateMapper.getStarGoods("user_id",user_id);
+        starGoodsVOs.addAll(starGoodsTemp);
+        return rs   ;
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
+import com.demo.mms.common.vo.StarGoodsGetVO;
+import com.demo.mms.common.vo.StarGoodsVO;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -54,4 +56,6 @@ public interface GoodsService {
     Map<String,Object> starGoods(User user, Store store, Goods goods);
 
     Map<String,Object> starClassify(User user, GoodsClassify goodsClassify);
+
+    Map<String,Object> getStarGoods(String user_id, ArrayList<StarGoodsGetVO> starGoodsVOs);
 }

@@ -3,7 +3,9 @@ package com.demo.mms.dao;
 
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
+import com.demo.mms.common.domain.OnSale;
 import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.vo.OnSaleGoodsVO;
 import com.demo.mms.common.vo.StoreGoodsChartByClassifyVO;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import org.apache.ibatis.annotations.*;
@@ -105,4 +107,16 @@ public interface GoodsOperateMapper {
     @Select("select * from goods_classify where ${column} = #{value}")
     GoodsClassify queryGoodsClassify(@Param("column") String column,
                                      @Param("value") String value);
+
+    void insertOnSale(OnSale onSale);
+
+    @Select("select * from on_sale where ${column} = #{value}")
+    OnSale queryOnSale(@Param("column") String column,
+                       @Param("value") String value);
+
+    @Delete("delete from on_sale where ${column} = #{value}")
+    void delOnSale(@Param("column") String column,
+                   @Param("value") String value);
+
+    ArrayList<OnSaleGoodsVO> getStoreOnSale(String store_id);
 }
