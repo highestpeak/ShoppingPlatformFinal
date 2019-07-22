@@ -396,12 +396,13 @@
                     dataType: "json",    
                     async: false,   
                     success: function (data) {        
-                        if(data.success == true){
-                            layer.alert("删除成功!");
-                            layer.closeAll();
-                            window.location.reload();
+                        if(data.success == true){                            
+                            layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                                window.location.reload();
+                            });
+
                         }else{
-                            layer.alert("删除失败！");
+                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
                         }
                     } 
                 });
@@ -457,12 +458,13 @@
                     dataType: "json",    
                     async: false,   
                     success: function (data) {        
-                        if(data.success == true){
-                            layer.alert("修改成功!");
-                            layer.closeAll();
-                            window.location.reload();
+                        if(data.success == true){                            
+                            layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                                window.location.reload();
+                            });
+
                         }else{
-                            layer.alert("修改失败！");
+                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
                         }
                     } 
                 });
@@ -519,12 +521,13 @@
                     dataType: "json",    
                     async: false,   
                     success: function (data) {        
-                        if(data.success == true){
-                            layer.alert("添加成功!");
-                            layer.closeAll();
-                            window.location.reload();
+                        if(data.success == true){                            
+                            layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                                window.location.reload();
+                            });
+
                         }else{
-                            layer.alert("添加失败！");
+                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
                         }
                     } 
                 });
