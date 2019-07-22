@@ -3,16 +3,21 @@ package com.demo.mms.controller;
 import com.demo.mms.common.domain.Admin;
 import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.common.domain.User;
+import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.MailInfoCrudVO;
 import com.demo.mms.common.vo.UserVO;
+import com.demo.mms.common.vo.ViewHistoryGetVO;
 import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +36,7 @@ public class UserController {
     //前台购买者调用
     @RequestMapping("/addBuyer")
     @ResponseBody
-    public Object addBuyer(Buyer user){
+    public Object addBuyer(@RequestBody Buyer user){
         System.out.println("in addUser");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -54,7 +59,7 @@ public class UserController {
     //管理员后台调用
     @RequestMapping("/addAdmin")
     @ResponseBody
-    public Object addAdmin(Admin user){
+    public Object addAdmin(@RequestBody Admin user){
         System.out.println("in addAdmin");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -95,13 +100,13 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Object login(String user_id,String verify,
+    public Object login(@RequestBody User user,
                         HttpServletRequest request,
                         HttpServletResponse response){
         System.out.println("in login");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsLogin= userService.login(user_id,verify,request,response);
+        Map<String,Object> rsLogin= userService.login(user.getUser_id(),user.getVerify(),request,response);
         if(rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
             rs.putAll(rsLogin);
             rs.put("success",false);
@@ -119,13 +124,13 @@ public class UserController {
     //使用user_id退出有风险，不法者可能会退出其他用户的登入状态
     @RequestMapping("/logout")
     @ResponseBody
-    public Object logout(String user_id,
+    public Object logout(@RequestBody User user,
                          HttpServletRequest request,
                          HttpServletResponse response){
         System.out.println("in logout");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Map<String,Object> rsLogin= userService.logout(user_id,request,response);
+        Map<String,Object> rsLogin= userService.logout(user.getUser_id(),request,response);
         if(rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
             rs.putAll(rsLogin);
             rs.put("success",false);
@@ -158,17 +163,15 @@ public class UserController {
 
     @RequestMapping("/newVerify")
     @ResponseBody
-    public Object newVerify(String user_id,
-                            String email,
-                            String newVerify){
+    public Object newVerify(@RequestBody User user){
         System.out.println("in forgetVerify");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         User userOld=new User();
         User userNew=new User();
-        userOld.setUser_id(user_id);
-        userOld.setEmail(email);
-        userNew.setVerify(newVerify);
+        userOld.setUser_id(user.getUser_id());
+        userOld.setEmail(user.getEmail());
+        userNew.setVerify(user.getVerify());
         Map<String,Object> rsEdit= userService.updateUser(userOld,userNew);
         if(rsEdit!=null && !rsEdit.isEmpty()){//含有错误信息
             rs.putAll(rsEdit);
@@ -185,7 +188,7 @@ public class UserController {
     //使用user_id有风险，不法者可能会注销其他用户
     @RequestMapping("/drop")
     @ResponseBody
-    public Object dropUser(User user){
+    public Object dropUser(@RequestBody User user){
         System.out.println("in dropUser");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -265,6 +268,138 @@ public class UserController {
     @ResponseBody
     public Object newPicVerify(){
         return null;
+    }
+
+    //猜你喜欢
+    //根据游览历史--选取频率较高的商品和分类推荐
+    //根据收货地址--具有相同收货地址的用户的购买推荐
+    //根据销量---推荐销量高的商品
+    //根据用户关注的商品来推荐
+    //推荐的商品后面跟一字段是 推荐原因
+    @RequestMapping("/guessLike")
+    @ResponseBody
+    public Object guessUserLike(@RequestBody User user){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+//        rsService=goodsService.starGoods(starGoodsVO.getUser(),starGoodsVO.getStore(),starGoodsVO.getGoods());
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    @RequestMapping("/getUserStar/{user_id}")
+    @ResponseBody
+    public Object getUserStar(@PathVariable String user_id){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=userService.getUserStar(user_id);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+
+    //获取用户游览历史
+    //根据用户获取商品的请求来加入
+    //根据用户游览请求的分类来加入
+    @RequestMapping("/viewHistory")
+    @ResponseBody
+    public Object getViewHistory(@RequestBody ViewHistoryGetVO viewHistoryGetVO){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService= userService.getViewHistory(viewHistoryGetVO.getUser(), viewHistoryGetVO.getGoodsClassify());
+        if(!rsService.containsKey("viewedHistoryReturn") && rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(!rsService.containsKey("viewedHistoryReturn") && rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //获取用户评价
+    @RequestMapping("/getEvaluationOfUser")
+    @ResponseBody
+    public Object userEvaluationGet(User user){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
+        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //修改用户评价
+    @RequestMapping("/modifyEvaluationOfUser")
+    @ResponseBody
+    public Object userEvaluationUpdate(User user){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
+        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //修改收货地址--增删查改
+    @RequestMapping("/modifyMailInfo")
+    @ResponseBody
+    public Object userEvaluationUpdate(@RequestBody MailInfoCrudVO mailInfoCrudVO){
+        System.out.println("in getViewHistory");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+//        Map<String,Object> rsService= userService.updateUser(userOld,userNew);
+        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
     }
 
     private static boolean isEmail(String string) {

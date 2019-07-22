@@ -42,14 +42,6 @@
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 <div class="main-container">
-    <!-- Loader -->
-    <div id="site-loader" class="load-complete">
-        <div class="loader">
-            <div class="loader-inner ball-clip-rotate">
-                <div></div>
-            </div>
-        </div>
-    </div><!-- Loader /- -->
 
     <section class="content container-fluid">
     <!-- Header -->
@@ -132,7 +124,7 @@
                     <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
-                            <li><a href="cart.html"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/cart"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/order"><i class="icon icon-Heart"></i>我的订单</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/myEvaluation"><i class="fa fa-tumblr"></i>我的评价</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
@@ -337,6 +329,9 @@
                 <div class="row">
                     <!-- Section Header -->
                     <div class="section-header">
+                            <br/>
+                            <br/>
+                            <br/>
                         <h3>商品</h3>
                         <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
                     </div><!-- Section Header /- -->
@@ -353,8 +348,8 @@
                     <div class="input-group">
                         <input class="form-control" placeholder="搜索" type="text">
                         <span class="input-group-btn">
-								<button class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
-							</span>
+                            <button class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
+                        </span>
                     </div>
                     <!-- Products -->
                     <ul class="products">
@@ -365,6 +360,11 @@
                                 <h5>Stylish Chair</h5>
                                 <span class="price"><del>$200</del>$139</span>
                             </a>
+                            <div class="wishlist-box">
+                            <a href="#"><i class="fa fa-arrows-alt"></i></a>
+                            <a href="#"><i class="fa fa-heart-o"></i></a>
+                            <a href="#"><i class="fa fa-search"></i></a>
+                            </div>
                             <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
                         </li><!-- Product /- -->
 
@@ -440,69 +440,15 @@
                     </ul><!-- Products /- -->
                 </div><!-- Row /- -->
                 <nav class="ow-pagination">
-                    <ul class="pager">
-                        <li class="load-more"><a href="#">更多</a></li>
+                        <ul class="pager">
+                        <li class="number"><a href="#">4</a></li>
+                        <li class="addto-cart load-more"><a href="#">Load More</a></li>
                         <li class="previous"><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         <li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    </ul>
+                        </ul>
                 </nav>
             </div><!-- Container /- -->
         </div><!-- Product Section /- -->
-
-        <!-- Dealing Section2 -->
-        <div id="dealing" class="dealing-section2 shop-single dealing-section container-fluid no-padding">
-            <!-- Container -->
-            <div class="container">
-                <!-- Section Header -->
-                <div class="section-header">
-                    <h3>Deals Of The Day</h3>
-                    <p>our vision is to be Earth's most customer centric company</p>
-                    <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
-                </div><!-- Section Header /- -->
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="accessories-block">
-                        <h5>mens accessories</h5>
-                        <p>The weather started getting rough the tossed. If not for the courage of the fearless crew the Minnow would be lost. would be lost.</p>
-                        <ul>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-3.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-4.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-5.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-6.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-7.jpg" alt="deal"></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/deal-8.jpg" alt="deal"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12 saleup-img">
-                    <div class="carousel-item">
-                        <div class="item">
-                            <img src="${pageContext.request.contextPath}/localLib/images/deal-9.jpg" alt="deal" />
-                            <a href="#" class="product-del">
-                                <h5>mens casual shoes</h5>
-                                <span class="price"><del>$850</del>$550</span>
-                            </a>
-                        </div>
-
-                        <div class="item">
-                            <img src="${pageContext.request.contextPath}/localLib/images/deal-9.jpg" alt="deal" />
-                            <a href="#" class="product-del">
-                                <h5>mens casual shoes</h5>
-                                <span class="price"><del>$850</del>$550</span>
-                            </a>
-                        </div>
-
-                        <div class="item">
-                            <img src="${pageContext.request.contextPath}/localLib/images/deal-9.jpg" alt="deal" />
-                            <a href="#" class="product-del">
-                                <h5>mens casual shoes</h5>
-                                <span class="price"><del>$850</del>$550</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div data-date="2017/04/04" id="clock-2" class="clock"></div>
-                </div>
-            </div><!-- Container /- -->
-        </div><!-- Dealing Section2 -->
     </main>
 
     <!-- Footer Main -->
@@ -555,9 +501,8 @@
 
 <!--layer 引入-->
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
-
+<script src="${pageContext.request.contextPath}/localLib/js/vue.min.js"></script>
 <script>
-
     $(function () {
         $(".content").on("click", ".btn_login", function () {
             layer.open({
@@ -568,6 +513,48 @@
                 area: ['500px', '600px'],
                 content:"${pageContext.request.contextPath}/toLogin"
             })
+        });
+
+        var productVue = new Vue({
+            el: '#product-section',
+            data: {
+                store_id:"",
+                info:[] //触发更新用
+            }
+        });
+
+        var productDataSend = {
+            store_id: "00020"
+        }
+
+        $.ajax({    
+            type: "POST",    
+            url: "http://localhost:8080/classify/classifyOfStore",//请求controller方法   
+            data: JSON.stringify(productDataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",    
+            dataType: "json",
+            async: false, //同步请求，注意此字段    
+            success: function (data) { 
+                console.log(data);
+                if(data.success == true){
+                    var classifyOfStore = data.classifyList;
+
+                    productVue.info.push({
+                        a:"a"
+                    });//触发更新用
+                    
+                }else{
+                    layer.alert("数据请求失败！");
+                    for(var i=0,l=data.length;i<l;i++){
+                        for(var key in data[i]){
+                            console.log( key+':'+data[i][key] );
+                        }
+                    }
+                    if(data["store exist"] == true){
+                        layer.alert("数据请求失败！--商店不存在");
+                    }
+                }
+            } 
         });
     });
 

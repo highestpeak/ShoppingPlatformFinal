@@ -68,6 +68,32 @@
             }
             return true;
         }
+        function submitLoginList() {
+            var oUser_id =document.getElementById("user_id").value;
+            var oVerify = document.getElementById("verify").value;
+            var dataSend={
+                user_id:oUser_id,
+                verify:oVerify
+            };
+            $.ajax({
+                type:"POST",
+                url:"http://localhost:8080/user/login",
+                data: JSON.stringify(dataSend),//放置数据的字段    
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",
+                async: false, //同步请求，注意此字段    
+                success: function (data) {
+                    if(data.success == true){
+                        alert("登陆成功");
+                    }
+                    if(data.success == false){
+                        alert("登陆失败");
+                    }
+
+                    // 在这里取出数据  
+                }
+            })
+        }
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,9 +112,8 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg" style="color:orangered">${msg}</p>
 
-        <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return loginCheck()">
+        <form>
             <div class="form-group has-feedback">
                 <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -110,7 +135,7 @@
 
                 <!-- /.col -->
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">登陆</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="submitLoginList()">登陆</button>
                 </div>
                 <!-- /.col -->
             </div>

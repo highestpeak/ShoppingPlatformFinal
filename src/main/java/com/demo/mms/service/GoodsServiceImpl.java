@@ -1,12 +1,11 @@
 package com.demo.mms.service;
 
-import com.demo.mms.common.domain.Goods;
-import com.demo.mms.common.domain.GoodsClassify;
-import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.IDGenerator;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import com.demo.mms.dao.GoodsOperateMapper;
+import com.demo.mms.dao.UserOperateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,8 @@ import java.util.*;
 public class GoodsServiceImpl implements GoodsService{
     @Autowired
     GoodsOperateMapper goodsOperateMapper;
+    @Autowired
+    UserOperateMapper userOperateMapper;
 
     //查询商店所售卖所有商品分类
     @Override
@@ -41,6 +42,43 @@ public class GoodsServiceImpl implements GoodsService{
                                             classifyOwn.getClassify_name(),
                                             classifyOwn.getTop_level_classify_id())));
         }
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> getStoreGoodsClassifyChartInfo(Store store, ArrayList classifyList) {
+        Map<String,Object> rs=new HashMap<>();
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        //store 存在
+        Map<String,Integer> returnTempMap=new HashMap<>();
+        ArrayList<ArrayList> classifyListTemp=new ArrayList<>();
+        rs.putAll(getStoreGoodsClassify(store,classifyListTemp));
+        for (ArrayList arrayList:classifyListTemp){
+            String classifyName=(String) arrayList.get(1);
+            if (returnTempMap.containsKey(classifyName)){
+                returnTempMap.put(classifyName,returnTempMap.get(classifyName)+1);
+            }else {
+                returnTempMap.put(classifyName,1);
+            }
+        }
+        List<Map.Entry<String,Integer>> list = new ArrayList<Map.Entry<String,Integer>>(returnTempMap.entrySet());
+        Collections.sort(list,new Comparator<Map.Entry<String,Integer>>() {
+            //升序排序
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        Map<String,Object> returnMap=new HashMap<>();
+        for(Map.Entry<String,Integer> mapping:list){
+            returnMap.put(mapping.getKey(),mapping.getValue());
+        }
+        rs.put("classifyMap",returnMap);
         return rs;
     }
 
@@ -212,7 +250,11 @@ public class GoodsServiceImpl implements GoodsService{
         if((nameCheck==null)&&(idCheck==null)){//不存在
             rs.put("goods "+oldGoods.getGoods_name()+" existed",false);
         }else {
-            rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods));
+            if (idCheck!=null){
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_id",idCheck.getGoods_id()));
+            }else {//nameCheck!=null
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_name",idCheck.getGoods_name()));
+            }
         }
         return rs;
     }
@@ -266,10 +308,71 @@ public class GoodsServiceImpl implements GoodsService{
                             goods.getDescription(),goods.getPic_url(),goods.getStatus(),
                             goods.getOld_level(),ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
                 }catch (Exception e){
-                    rs.put("goods "+goods.getGoods_name()+" del","cannot del");
+                    rs.put("goods "+goods.getGoods_name()+" add","cannot add");
                 }
             }
         }
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> getStoreGoodsInfo(Store store, Goods goodsToGet) {
+        Map<String,Object> rs=new HashMap<>();
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        //store 存在
+        //查找商品是否存在
+        Goods nameCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_name",goodsToGet.getGoods_name());
+        Goods idCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_id",goodsToGet.getGoods_id());
+        if((nameCheck==null)&&(idCheck==null)){//不存在
+            rs.put("goods "+goodsToGet.getGoods_name()+" existed",false);
+        }else {
+            if (idCheck!=null){
+                rs.put("goodsGet",idCheck);
+            }else {//nameCheck!=null
+                rs.put("goodsGet",nameCheck);
+            }
+        }
+
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> starGoods(User user, Store store, Goods goods) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        if(userFind==null){//用户不存在
+            rs.put("user existed",false);
+            return rs;
+        }
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        Goods nameCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_name",goods.getGoods_name());
+        Goods idCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_id",goods.getGoods_id());
+        if((nameCheck==null)&&(idCheck==null)){//不存在
+            rs.put("goods "+goods.getGoods_name()+" existed",false);
+        }else {
+            GoodsStar goodsStar=new GoodsStar();
+            goodsStar.setGoodsStar_id(IDGenerator.getId());
+            goodsStar.setUser_id(user.getUser_id());
+            goodsStar.setSetStar_time(ProjectFactory.getPorjectStrDate(new Date()));
+            if (idCheck!=null){
+                goodsStar.setGoods_id(idCheck.getGoods_id());
+                userOperateMapper.insertInterested(goodsStar);
+            }else {//nameCheck!=null
+                goodsStar.setGoods_id(nameCheck.getGoods_id());
+                userOperateMapper.insertInterested(goodsStar);
+            }
+        }
+
         return rs;
     }
 
@@ -337,7 +440,7 @@ public class GoodsServiceImpl implements GoodsService{
         return rs;
     }
 
-    private Map<String, Object> modifyGoodsHelp(Store store,Goods oldGoods, Goods newGoods) {
+    private Map<String, Object> modifyGoodsHelp(Store store,Goods oldGoods, Goods newGoods,String modifyKey,String modifyValue) {
         Map<String,Object> rs = new HashMap<>();
         Map<String ,Object> modifyList=new HashMap<>();
         if(newGoods.getGoods_name()!=null && !newGoods.getGoods_name().equals(oldGoods.getGoods_name())){
@@ -364,15 +467,16 @@ public class GoodsServiceImpl implements GoodsService{
             try {
                 List<String> modiyArr=(List<String>) entry.getValue();
                 goodsOperateMapper.updateGoods(store.getStore_id(),
-                        entry.getKey(),modiyArr.get(0),
+                        modifyKey,modifyValue,
                         entry.getKey(),modiyArr.get(1));
             }catch (Exception e){
                 rs.put("update "+entry.getKey(),"error");
             }
         }
         try {
-            goodsOperateMapper.updateGoods(store.getStore_id(),"update_time",ProjectFactory.getPorjectStrDate(new Date()),
-                    "goods_id",oldGoods.getGoods_id());
+            goodsOperateMapper.updateGoods(store.getStore_id(),
+                    modifyKey,modifyValue,
+                    "update_time",ProjectFactory.getPorjectStrDate(new Date()));
         }catch (Exception e){
             rs.put("update update_time","error");
         }

@@ -4,6 +4,7 @@ import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.ClassifyCrudVO;
+import com.demo.mms.common.vo.StarGoodsVO;
 import com.demo.mms.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class ClassifyController {
     //查询商店所售卖所有商品分类
     @RequestMapping("/classifyOfStore")
     @ResponseBody
-    public Object getClassify(Store store){
+    public Object getClassify(@RequestBody Store store){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in getClassify");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -75,12 +76,12 @@ public class ClassifyController {
     //必须传入分类名称、分类level
     @RequestMapping("/addClassifyOfStore")
     @ResponseBody
-    public Object addClassifyOfStore(Store store, ArrayList<GoodsClassify> classifiesToAdd){
+    public Object addClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in addClassifyOfStore");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         
-        Map<String,Object> rsService=goodsService.addStoreGoodsClassify(store,classifiesToAdd);
+        Map<String,Object> rsService=goodsService.addStoreGoodsClassify(classifyCrudVO.getStore(),(ArrayList<GoodsClassify>) classifyCrudVO.getClassifiesToAdd());
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
             rs.put("success",false);
@@ -98,8 +99,7 @@ public class ClassifyController {
     //更改商店分类信息
     @RequestMapping("/modifyClassifyOfStore")
     @ResponseBody
-    public Object modifyClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO
-            ){
+    public Object modifyClassifyOfStore(@RequestBody ClassifyCrudVO classifyCrudVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in modifyClassifyOfStore");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -121,6 +121,15 @@ public class ClassifyController {
             rs.put("success",false);
         }
         return rs;
+    }
+
+    //关注分类
+    //必须传入分类名称--或者分类id
+    //必须传入用户名称
+    @RequestMapping("/star")
+    @ResponseBody
+    public Object starClassify(@RequestBody StarGoodsVO starGoodsVO){
+        return null;
     }
 
     //页面请求

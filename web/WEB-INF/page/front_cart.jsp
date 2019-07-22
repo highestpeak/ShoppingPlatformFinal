@@ -79,14 +79,6 @@
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 <div class="main-container">
-    <!-- Loader -->
-    <div id="site-loader" class="load-complete">
-        <div class="loader">
-            <div class="loader-inner ball-clip-rotate">
-                <div></div>
-            </div>
-        </div>
-    </div><!-- Loader /- -->
 
     <!-- Header -->
     <header class="header-section container-fluid no-padding">
@@ -170,7 +162,7 @@
                     <div class="navbar-collapse collapse navbar-right" id="navbar">
                         <ul class="nav navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/front/home">首页</a></li>
-                            <li><a href="cart.html"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
+                            <li><a href="${pageContext.request.contextPath}/front/cart"><i class="icon icon-ShoppingCart"></i>购物车</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/order"><i class="icon icon-Heart"></i>我的订单</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/myEvaluation"><i class="fa fa-tumblr"></i>我的评价</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
