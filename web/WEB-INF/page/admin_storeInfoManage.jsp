@@ -156,7 +156,7 @@
                                             </li>
                                         </ul>
                         
-                                        <button class="btn btn-primary btn-block" id="modify"><b>Modify</b></a>
+                                        <button class="btn btn-primary btn-block" id="modify"><b>Modify</b></button>
                                     </div>
                                 </div>       
                             </div>
