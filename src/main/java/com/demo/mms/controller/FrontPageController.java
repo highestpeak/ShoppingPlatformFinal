@@ -4,6 +4,7 @@ import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,18 @@ public class FrontPageController {
     public String cartGet(){
         System.out.println("in myEvaluation");
         return "front_cart";
+    }
+
+    @RequestMapping("/goodsInfoById/{store_id}/{goods_id}")
+    public String goodsInfoByIdGet(@PathVariable String store_id,@PathVariable String goods_id){
+        System.out.println("in goodsInfoByIdGet");
+        return "good_info";
+    }
+
+    @RequestMapping("/goodsInfoByName/{store_id}/{goods_id}")
+    public String goodsInfoByNameGet(@PathVariable String store_id,@PathVariable String goods_id){
+        System.out.println("in goodsInfoByIdGet");
+        return "good_info";
     }
 
 }
