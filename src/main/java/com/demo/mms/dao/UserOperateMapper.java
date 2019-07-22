@@ -6,6 +6,7 @@ import com.demo.mms.common.vo.GoodsViewedQueryVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 //所有传到mapper的数据全部都是正确的
 public interface UserOperateMapper {
@@ -38,4 +39,6 @@ public interface UserOperateMapper {
     void insertInterestedGoods(GoodsStar goodsStar);
 
     void insertInterestedClassify(ClassifyStar classifyStar);
+
+    ArrayList<User> queryAllUser();
 }

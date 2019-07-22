@@ -208,10 +208,6 @@
             </div><!-- Container /- -->
         </div>
         <!-- Container /- -->
-        <div class="map container-fluid no-padding">
-            <div class="map-canvas" id="map-canvas-contact" data-lat="-32.559356" data-lng="149.564237" data-string="Max Shop, 65 Huge Street Melbourne,  2850 Australia." data-zoom="12"></div>
-            <a href="#">Tang <span>Shop</span></a>
-        </div>
     </main>
     <footer id="footer-main" class="footer-main container-fluid">
         <!-- Container -->

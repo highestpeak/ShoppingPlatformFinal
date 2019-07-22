@@ -225,10 +225,12 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example" class="table" >
+                                    <table id="userTable" class="table" >
                                         <thead>
                                         <tr>
-                                            <th>全选 <input type="checkbox"></th>
+                                            <!-- 全选
+                                            <th>全选 <input type="checkbox"></th> -->
+
                                             <th class="sorting_asc" tabindex="0" aria-controls="example"
                                                 aria-sort="ascending"
                                                 aria-label="ID: activate to sort column descending">ID
@@ -254,140 +256,7 @@
                                             <th width="120px">操作</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000002</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000003</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000004</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td class="sorting_1">0000001</td>
-                                            <td>Gecko</td>
-                                            <td>男</td>
-                                            <td>123456789</td>
-                                            <td>123456789@qq.com</td>
-                                            <td>买家</td>
-                                            <td>2019/7/17</td>
-                                            <td><a class="btn btn-xs btn-info btn_update_user">修改</a> <a
-                                                    class="btn btn-xs btn-danger btn_del_user">删除</a></td>
-                                        </tr>
-
+                                        <tbody id="tbodyId">
                                         </tbody>
                                     </table>
 
@@ -409,6 +278,57 @@
 
 </div>
 
+<!-- 修改用户信息表格 -->
+<div class="box box-info" id="user_info_modify_table" style="display: none">
+    <div class="box-header with-border">
+        <h3 class="box-title">修改用户信息</h3>
+    </div>
+
+    <!-- 提交表单 -->
+    <form class="form-horizontal">
+        <div class="box-body">
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mod_name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mod_sex">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mod_password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">电子邮箱</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mod_email">
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="box-footer">
+            <button type="button" class="btn btn-default pull-left" id="user_info_mod_cancel">取消</button>
+            <button type="button" class="btn btn-info pull-right" id="user_info_mod_sumbit">提交</button>
+        </div>
+    </form>
+</div>
+
+
+
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -418,29 +338,154 @@
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 
+
+<script>
+    $(function(){
+        var dataSend = {
+            user_id: "654321"
+
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/user/getInfo",//请求controller方法   
+            data: JSON.stringify(dataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false, //同步请求，注意此字段    
+            success: function (data) {
+                if(data.success == true){
+
+                    var $tbody = $("#tbodyId");
+                    var uf = data["userFind"];
+                    $.each(function (uf) {
+                        var $tr = $("<tr>")
+                            .append($("<td>").html(uf["user_id"]))
+                            .append($("<td>").html(uf["nickname"]))
+                            .append($("<td>").html(uf["sex"]))
+                            .append($("<td>").html(uf["verify"]))
+                            .append($("<td>").html(uf["email"]))
+                            .append($("<td>").html(uf["identity"]))
+                            .append($("<td>").html(uf["create_time"]))
+                        var $button_1 = document.createElement("a");
+                        $button_1.text = "修改";
+                        $button_1.className = "btn btn-xs btn-info btn_mod";
+                        var $button_2 = document.createElement("a");
+                        $button_2.text = "删除";
+                        $button_2.className = "btn btn-xs btn-danger btn_del";
+                        $button_2.style = "margin-left:10px";
+                        var $td = $("<td>").append($button_1).append($button_2);
+                        $tr.append($td);
+                        $tbody.append($tr);
+
+                    });
+                }else{
+                    layer.alert("数据请求失败！");
+                }
+            }
+        });
+    })
+</script>
+
 <script>
     $(function () {
-        $(".content").on("click", ".btn_del_user", function () {
+        $(".content-wrapper").on("click", ".btn_del", function () {
             var $tr = $(this).parents("tr");
+            var id = $tr.find("td:eq(0)").html();
             var name = $tr.find("td:eq(1)").html();
+            var dataSend = {
+                user_id: id
 
-            layer.confirm('是否删除:' + name, {icon: 3, title: '提示'}, function (index) {
-                $tr.remove();
-                layer.close(index);
-            })
+            };
+
+            layer.confirm('确定删除: '+name+"?", {icon: 3, title:'提示'}, function(index){
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/user/drop",
+                    data: JSON.stringify(dataSend),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        if(data.success == true){
+                            layer.alert("删除成功!");
+                            layer.closeAll();
+                            window.location.reload();
+                        }else{
+                            layer.alert("删除失败！");
+                        }
+                    }
+                });
+            });
+
         });
-        $(".content").on("click", ".btn_update_user", function () {
+        // 修改用户信息
+        $(".content-wrapper").on("click", ".btn_mod", function () {
             layer.open({
-                type: 2,
+                type: 1,
                 title: '修改用户信息',
                 shadeClose: true,
-                shade: 0.8,
+                shade: 0.5,
                 area: ['500px', '600px'],
-                content: 'update.html'
+                content: $("#user_info_modify_table")
             })
+            var $tr = $(this).parents("tr");
+            var user_id = $tr.find("td:eq(0)").html();
+            var old_user_name = $tr.find("td:eq(1)").html();
+            var old_user_sex = $tr.find("td:eq(2)").html();
+            var old_user_password = $tr.find("td:eq(3)").html();
+            var old_user_email = $tr.find("td:eq(4)").html();
+
+            $("#mod_name").attr("value", $tr.find("td:eq(1)").html());
+            $("#mod_sex").attr("value", $tr.find("td:eq(2)").html());
+            $("#mod_password").attr("value", $tr.find("td:eq(3)").html());
+            $("#mod_email").attr("value", $tr.find("td:eq(4)").html());
+
+            $("#user_info_mod_sumbit").click(function(){
+                var dataSend = {
+                    olduser: {
+                        user_id: user_id,
+                        nickname: old_user_name,
+                        sex:old_user_sex,
+                        verify:old_user_password,
+                        email:old_user_email,
+                    },
+                    newuser: {
+                        user_id: user_id,
+                        nickname: $("#mod_name").val(),
+                        sex: $("#mod_sex").val(),
+                        verify: $("#mod_password").val(),
+                        email: $("#mod_email").val(),
+                    }
+                };
+
+                console.log(dataSend);
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/user/modify",
+                    data: JSON.stringify(dataSend),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        if(data.success == true){
+                            layer.alert("修改成功!");
+                            layer.closeAll();
+                            window.location.reload();
+                        }else{
+                            layer.alert("修改失败！");
+                        }
+                    }
+                });
+
+            });
+
 
         });
-
+        $("#user_info_mod_cancel").click(function(){
+            layer.closeAll();
+        });
 
         $("#example").DataTable({
             'paging'      : true,

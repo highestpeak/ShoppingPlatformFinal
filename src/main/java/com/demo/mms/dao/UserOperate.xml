@@ -31,6 +31,13 @@
         values   (#{goodsStar_id}, #{user_id}, #{goods_id}, #{setStar_time})
     </insert>
 
+    <resultMap id="userTemp" type="com.demo.mms.common.domain.User">
+        
+    </resultMap>
+    <select id="queryAllUser" resultMap="userTemp">
+          select * from user;
+    </select>
+
   <resultMap id="tempQueryGoodsViewed" type="com.demo.mms.common.vo.GoodsViewedQueryVO">
   </resultMap>
 
