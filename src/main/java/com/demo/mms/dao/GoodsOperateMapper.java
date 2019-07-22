@@ -38,6 +38,10 @@ public interface GoodsOperateMapper {
     void deleteClassifyOfStore(@Param("column") String column,
                                @Param("value") String value);
 
+    @Delete("DELETE from goods_classify where ${column} = #{value}")
+    void deleteGoodsClassify(@Param("column") String column,
+                               @Param("value") String value);
+
     @Insert("INSERT INTO goods_classify (classify_id, top_level_classify_id, parent_id,classify_name, create_time, update_time) " +
             "VALUES (#{classify_id}, #{top_level_classify_id},#{parent_id}, #{classify_name},#{create_time},#{update_time})")
     void insertNewClassify(@Param("classify_id") String classify_id,

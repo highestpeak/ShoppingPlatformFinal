@@ -82,7 +82,7 @@ public class StoreController {
     //分类+数量
     @RequestMapping("/getChartOfClassify")
     @ResponseBody
-    public Object chartClassifyGet(Store store){
+    public Object chartClassifyGet(@RequestBody Store store){
         System.out.println("in chartClassifyGet store");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);

@@ -280,15 +280,15 @@ $(function(){
         }
 
         mod_son = $("#tree").treeview("getChecked")[0];
-        $("#mod_name").attr("value", mod_son.text);
+        $("#mod_name").val(mod_son.text);
         var p_index = obj.findIndex((v)=>{return mod_son.pid == v.id});
         var p_name = "";
 
         if( p_index == -1){
-            $("#mod_pname").attr("value", "");
+            $("#mod_pname").val("");
         }else{
             p_name = obj[p_index].text;
-            $("#mod_pname").attr("value", p_name);
+            $("#mod_pname").val(p_name);
         }
         
         layer.open({
@@ -312,7 +312,7 @@ $(function(){
         var new_p_name = $("#mod_pname").val();
         var new_p_id = -1;
 
-        if(new_name == ""){
+        if(new_p_name == ""){
             new_p_id = 0;
         }
         else if(obj.findIndex((v)=>{return v.text == new_p_name}) != -1){
@@ -328,9 +328,16 @@ $(function(){
                 store: {
                     store_id: "0000"
                 },
-                classify_id:"",
-                new_name:"",
-                new_p_id:""
+                oldGoodsClassify:{
+                    classify_id:mod_id,
+                    classify_name:mod_son.text,
+                    parent_id:mod_son.pid
+                },
+                newGoodsClassify:{
+                    classify_id:mod_id,
+                    classify_name:new_name,
+                    parent_id:new_p_id
+                }
             };
             $.ajax({
                 type:"POST",
@@ -371,10 +378,10 @@ $(function(){
 
     $("#good_classify_add_submit").click(function(){
         var new_name = $("#add_name").val();
-        var new_p_name = $("add_pname").val();
+        var new_p_name = $("#add_pname").val();
         var new_p_id = -1;
-
-        if(new_name == ""){
+        console.log(new_p_name);
+        if(new_p_name == ""){
             new_p_id = 0;
         }
         else if(obj.findIndex((v)=>{return v.text == new_p_name}) != -1){
@@ -390,8 +397,12 @@ $(function(){
                 store: {
                     store_id: "0000"
                 },
-                new_name:"",
-                new_p_id:""
+                classifiesToAdd:[
+                    {
+                        classify_name:new_name,
+                        parent_id:new_p_id
+                    }
+                ]
             }
             $.ajax({
                 type:"POST",

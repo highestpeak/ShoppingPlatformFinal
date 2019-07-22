@@ -116,10 +116,12 @@ public class GoodsServiceImpl implements GoodsService{
                 //根据分类名称去删除
                 if(idCheck!=null){
                     goodsOperateMapper.deleteClassifyOfStore("classify_id",idCheck.getClassify_id());
+                    goodsOperateMapper.deleteGoodsClassify("classify_id",idCheck.getClassify_id());
                 }
 
                 if(nameCheck!=null){
                     goodsOperateMapper.deleteClassifyOfStore("classify_name",nameCheck.getClassify_name());
+                    goodsOperateMapper.deleteGoodsClassify("classify_name",nameCheck.getClassify_name());
                 }
             }
         }
@@ -155,7 +157,7 @@ public class GoodsServiceImpl implements GoodsService{
                 try {
                     goodsClassify.setClassify_id(IDGenerator.getId());
                     //需要插入的level是0级
-                    if(goodsClassify.getClassify_name().trim().isEmpty()){
+                    if(Integer.parseInt(goodsClassify.getParent_id())==0){
                         //直接插入
                         goodsOperateMapper.insertNewClassify(
                                 goodsClassify.getClassify_id(),
@@ -203,13 +205,13 @@ public class GoodsServiceImpl implements GoodsService{
         }
         //分类存在
         GoodsClassify findNewClassifyParent=null;
-        if(newClassify.getClassify_name().trim().isEmpty()){
+        if(Integer.parseInt(newClassify.getParent_id())==0){
             newClassify.setParent_id("0");
             newClassify.setTop_level_classify_id("0");
         }else {
-            findNewClassifyParent=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_name",newClassify.getClassify_name());
+            findNewClassifyParent=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",newClassify.getParent_id());
             if(findNewClassifyParent==null){
-                rs.put("parent "+newClassify.getClassify_name()+" not find",true);
+                rs.put("parent of "+newClassify.getClassify_name()+" not find",true);
                 return rs;
             }
             newClassify.setParent_id(findNewClassifyParent.getClassify_id());
