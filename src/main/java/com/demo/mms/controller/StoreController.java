@@ -147,4 +147,25 @@ public class StoreController {
     public Object thingOfDayGet(Store store){
         return null;
     }
+
+    //获取所有的注册用户
+    @RequestMapping("/getUser")
+    public Object getUserAll(){
+        System.out.println("in getViewedHistory store");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        ArrayList<User> users=new ArrayList<>();
+        Map<String,Object> rsService= storeService.getAllUser(users);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+            return rs;
+        }
+        rs.put("userList",users);
+        return rs;
+    }
 }

@@ -2,8 +2,10 @@ package com.demo.mms.service;
 
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.domain.User;
 import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.dao.GoodsOperateMapper;
+import com.demo.mms.dao.UserOperateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import java.util.Map;
 public class StoreServiceImpl implements StoreService{
     @Autowired
     GoodsOperateMapper goodsOperateMapper;
+    @Autowired
+    UserOperateMapper userOperateMapper;
     @Override
     public Map<String,Object> getStoreInfo(Store store) {
         Map<String ,Object> rs=new HashMap<>();
@@ -65,6 +69,13 @@ public class StoreServiceImpl implements StoreService{
     @Override
     public Map<String, Object> updateOnSaleGoods(String store_id, String goodOnSaleId, Goods newGoodsOnSale) {
         return null;
+    }
+
+    @Override
+    public Map<String, Object> getAllUser(ArrayList<User> users) {
+        Map<String,Object> rs=new HashMap<>();
+        users.addAll(userOperateMapper.queryAllUser());
+        return rs;
     }
 
     private Map<String, Object> modifyStoreInfoHelp(Store oldStore, Store newStore) {
