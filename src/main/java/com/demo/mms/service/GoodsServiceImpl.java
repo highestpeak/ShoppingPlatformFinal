@@ -249,7 +249,11 @@ public class GoodsServiceImpl implements GoodsService{
         if((nameCheck==null)&&(idCheck==null)){//不存在
             rs.put("goods "+oldGoods.getGoods_name()+" existed",false);
         }else {
-            rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods));
+            if (idCheck!=null){
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_id",idCheck.getGoods_id()));
+            }else {//nameCheck!=null
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_name",idCheck.getGoods_name()));
+            }
         }
         return rs;
     }
@@ -374,7 +378,7 @@ public class GoodsServiceImpl implements GoodsService{
         return rs;
     }
 
-    private Map<String, Object> modifyGoodsHelp(Store store,Goods oldGoods, Goods newGoods) {
+    private Map<String, Object> modifyGoodsHelp(Store store,Goods oldGoods, Goods newGoods,String modifyKey,String modifyValue) {
         Map<String,Object> rs = new HashMap<>();
         Map<String ,Object> modifyList=new HashMap<>();
         if(newGoods.getGoods_name()!=null && !newGoods.getGoods_name().equals(oldGoods.getGoods_name())){
@@ -401,15 +405,16 @@ public class GoodsServiceImpl implements GoodsService{
             try {
                 List<String> modiyArr=(List<String>) entry.getValue();
                 goodsOperateMapper.updateGoods(store.getStore_id(),
-                        entry.getKey(),modiyArr.get(0),
+                        modifyKey,modifyValue,
                         entry.getKey(),modiyArr.get(1));
             }catch (Exception e){
                 rs.put("update "+entry.getKey(),"error");
             }
         }
         try {
-            goodsOperateMapper.updateGoods(store.getStore_id(),"update_time",ProjectFactory.getPorjectStrDate(new Date()),
-                    "goods_id",oldGoods.getGoods_id());
+            goodsOperateMapper.updateGoods(store.getStore_id(),
+                    modifyKey,modifyValue,
+                    "update_time",ProjectFactory.getPorjectStrDate(new Date()));
         }catch (Exception e){
             rs.put("update update_time","error");
         }

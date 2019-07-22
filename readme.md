@@ -58,4 +58,6 @@ JSON传值与接收 https://segmentfault.com/a/1190000012555875
 
 store_id默认请求"0000";
 
-具体请求数据的格式请查看controller接口定义；然后按照json格式去匹配
+具体请求数据的格式请查看controller接口定义；然后按照json格式去匹配；
+
+准备吧返回字段中的空格替换成-

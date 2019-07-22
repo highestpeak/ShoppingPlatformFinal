@@ -24,7 +24,7 @@ public class ClassifyController {
     //查询商店所售卖所有商品分类
     @RequestMapping("/classifyOfStore")
     @ResponseBody
-    public Object getClassify(Store store){
+    public Object getClassify(@RequestBody Store store){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in getClassify");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
