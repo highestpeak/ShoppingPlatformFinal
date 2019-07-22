@@ -16,7 +16,7 @@ public interface InCartOfMapper {
 
     void updateEntryByRelationId(String id, Integer newNum) throws Exception;
 
-    void updateEntryByUserAndGoodsId(String userId, String goodsId, Integer newNum) throws Exception;
+    void updateEntryByUserAndGoodsId(@Param("userId") String userId, @Param("goodsId") String goodsId, @Param("newNum") Integer newNum) throws Exception;
 
-    void deleteEntryByUserAndGoodsId(String userId, String goodsId) throws Exception;
+    void deleteEntryByUserAndGoodsId(@Param("userId") String userId, @Param("goodsId") String goodsId) throws Exception;
 }

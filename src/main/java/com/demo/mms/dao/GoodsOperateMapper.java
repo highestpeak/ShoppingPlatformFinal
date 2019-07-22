@@ -15,6 +15,9 @@ public interface GoodsOperateMapper {
                      @Param("column") String column,
                      @Param("value") String value);
 
+    @Select("SELECT * FROM GOODS WHERE GOODS.goods_id = #{id}")
+    Goods getGoodById(@Param("id") String goodsId);
+
     ArrayList<StoreSelledClassifyVO> queryGoodsWithClassify(String store_id);
 
     @Select("select classify_id,top_level_classify_id,parent_id,classify_name,create_time,update_time" +

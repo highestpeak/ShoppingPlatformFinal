@@ -53,10 +53,10 @@ public class ShoppingCartController {
 
     @PostMapping("/")
     @ResponseBody
-    public Object insertGoods(Buyer buyer, Goods goods, Integer num) {
+    public Object insertGoods(String goodsId, String buyerId, Integer num) {
         Map<String, Object> result = new HashMap<>();
         try {
-            shoppingCartService.insertGoodsToShoppingCartOfUser(goods, buyer, num);
+            shoppingCartService.insertGoodsToShoppingCartOfUser(goodsId, buyerId, num);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
@@ -68,13 +68,13 @@ public class ShoppingCartController {
 
     @PutMapping("/")
     @ResponseBody
-    public Object updateGoodsNum(Buyer buyer, Goods goods, Integer newNum) {
+    public Object updateGoodsNum(String relationId, Integer newNum) {
         Map<String, Object> result = new HashMap<>();
         if (newNum <= 0) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, "assertion failed: newNum > 0");
         }
         try {
-            shoppingCartService.modifyGoodNumber(buyer, goods, newNum);
+            shoppingCartService.modifyGoodNumber(relationId, newNum);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
@@ -86,10 +86,10 @@ public class ShoppingCartController {
 
     @DeleteMapping("/")
     @ResponseBody
-    public Object deleteGoods(Buyer buyer, Goods goods) {
+    public Object deleteGoods(String relationId) {
         Map<String, Object> result = new HashMap<>();
         try {
-            shoppingCartService.deleteGoodFromCart(buyer, goods);
+            shoppingCartService.deleteGoodFromCart(relationId);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;

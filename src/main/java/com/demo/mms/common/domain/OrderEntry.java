@@ -10,4 +10,11 @@ public class OrderEntry {
     private Date payTime;
     private Express express;
     private Boolean recieved;
+
+    private Integer score;
+    private String description;
+
+    public boolean isPositive() {
+        return score > 6;
+    }
 }
