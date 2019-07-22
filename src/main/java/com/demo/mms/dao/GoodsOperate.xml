@@ -36,6 +36,18 @@
         from goods
         where store_id = #{store_id}
     </select>
+
+    <resultMap id="queryAllGoodsOfStoreWithClassifyVO" type="com.demo.mms.common.vo.GoodsWithClassifyVO">
+    </resultMap>
+    <select id="queryAllGoodsOfStoreWithClassifySend" parameterType="String" resultMap="queryAllGoodsOfStoreWithClassifyVO" >
+        SELECT B.goods_id,goods_name,classify_name,price,description,pic_url,status,old_level,B.create_time,B.update_time
+          FROM (SELECT id, classify_id,classify_name
+          FROM goods_classify NATURAL JOIN store_sell_classify) A
+          RIGHT JOIN
+          (SELECT goods.goods_id,goods_name,price,description,pic_url,status,old_level,goods.create_time,goods.update_time,classify_selled_id
+          FROM goods LEFT JOIN  classify_of_goods ON goods.goods_id = classify_of_goods.goods_id
+        WHERE  store_id=#{store_id}) B ON A.id=B.classify_selled_id
+    </select>
     <select id="queryAllGoodsOfStore_specialClass" parameterType="String" resultMap="queryAllGoodsOfStoreVO" >
         SELECT
           goods.goods_id,

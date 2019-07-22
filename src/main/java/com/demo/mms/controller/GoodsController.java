@@ -176,7 +176,7 @@ public class GoodsController {
         rs.put("success",true);
 
         Store store=goodsCrudVO.getStore();
-        ArrayList<Goods> goodsToAdd=(ArrayList<Goods>)goodsCrudVO.getGoodsToAdd();
+        ArrayList<GoodsAddWithClassifyVO> goodsToAdd=(ArrayList<GoodsAddWithClassifyVO>)goodsCrudVO.getGoodsToAdd();
 
         Map<String,Object> rsService=goodsService.addStoreGoods(store,goodsToAdd);
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息

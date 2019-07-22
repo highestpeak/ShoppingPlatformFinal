@@ -3,10 +3,7 @@ package com.demo.mms.service;
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.IDGenerator;
 import com.demo.mms.common.utils.ProjectFactory;
-import com.demo.mms.common.vo.StarGoodsGetVO;
-import com.demo.mms.common.vo.StarGoodsVO;
-import com.demo.mms.common.vo.StoreGoodsChartByClassifyVO;
-import com.demo.mms.common.vo.StoreSelledClassifyVO;
+import com.demo.mms.common.vo.*;
 import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.UserOperateMapper;
 import org.openxmlformats.schemas.drawingml.x2006.main.STAdjAngle;
@@ -73,19 +70,7 @@ public class GoodsServiceImpl implements GoodsService{
                 returnTempMap.put(classifyName,0);
             }
         }
-        List<Map.Entry<String,Integer>> list = new ArrayList<Map.Entry<String,Integer>>(returnTempMap.entrySet());
-        Collections.sort(list,new Comparator<Map.Entry<String,Integer>>() {
-            //升序排序
-            public int compare(Map.Entry<String, Integer> o1,
-                               Map.Entry<String, Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        Map<String,Object> returnMap=new HashMap<>();
-        for(Map.Entry<String,Integer> mapping:list){
-            returnMap.put(mapping.getKey(),mapping.getValue());
-        }
-        rs.put("classifyMap",returnMap);
+        rs.put("classifyMap",returnTempMap);
         return rs;
     }
 
@@ -232,11 +217,13 @@ public class GoodsServiceImpl implements GoodsService{
             return rs;
         }
         //store 存在
-        ArrayList<Goods> goodsInStore=null;
+//        ArrayList<Goods> goodsInStore=null;
         //查找classify是否存在
         //获取所有商品
         if(classifyToGet.getClassify_name().equals("all")){
-            goodsInStore=goodsOperateMapper.queryAllGoodsOfStore(store.getStore_id());
+//            goodsInStore=goodsOperateMapper.queryAllGoodsOfStore(store.getStore_id());
+            ArrayList<GoodsWithClassifyVO> goodsInStoreWithClassify=goodsOperateMapper.queryAllGoodsOfStoreWithClassifySend(store.getStore_id());
+            goodsList.addAll(goodsInStoreWithClassify);
         }else {
             //获取特定种类商品
             //查找分类是否存在
@@ -246,14 +233,16 @@ public class GoodsServiceImpl implements GoodsService{
                 return rs;
             }
             //分类存在
-            goodsInStore=goodsOperateMapper.queryAllGoodsOfStore_specialClass(store.getStore_id(),classifyToGet.getClassify_name());
+            ArrayList<Goods> goodsInStore=goodsOperateMapper.queryAllGoodsOfStore_specialClass(store.getStore_id(),classifyToGet.getClassify_name());
+            if (goodsInStore==null || goodsInStore.size()==0){
+                rs.put("Goods find",false);
+                return rs;
+            }
+            goodsList.addAll(goodsInStore);
         }
-        if (goodsInStore==null || goodsInStore.size()==0){
-            rs.put("Goods find",false);
-            return rs;
-        }
+
         //classify存在
-        goodsList.addAll(goodsInStore);
+
         return rs;
     }
 
@@ -309,7 +298,7 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Override
-    public Map<String, Object> addStoreGoods(Store store, ArrayList<Goods> goodsToAdd) {
+    public Map<String, Object> addStoreGoods(Store store, ArrayList<GoodsAddWithClassifyVO> goodsToAdd) {
         Map<String,Object> rs = new HashMap<>();
         //查找store是否存在
         Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
@@ -318,18 +307,27 @@ public class GoodsServiceImpl implements GoodsService{
             return rs;
         }
         //store 存在
-        for (Goods goods:goodsToAdd){
+        for (GoodsAddWithClassifyVO goods:goodsToAdd){
             Goods nameCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_name",goods.getGoods_name());
             Goods idCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_id",goods.getGoods_id());
+
             if((nameCheck!=null)||(idCheck!=null)){//存在
                 rs.put("goods "+goods.getGoods_name()+" existed",true);
             }else {
+                ClassifySelledQueryVO classifyCheck=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_name",goods.getClassify_name());
+                if(classifyCheck==null){//分类不存在
+                    rs.put("classify "+goods.getClassify_name()+" selled",false);
+                    return rs;
+                }
                 try {
+                    String newGoodsId=IDGenerator.getId();
                     goodsOperateMapper.insertGoods(
-                            IDGenerator.getId(), store.getStore_id(),goods.getGoods_name(),
+                            newGoodsId, store.getStore_id(),goods.getGoods_name(),Integer.toString(goods.getPrice()),
                             goods.getDescription(),goods.getPic_url(),goods.getStatus(),
                             goods.getOld_level(),ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
+                    goodsOperateMapper.insertNewClassifyOfGoods(IDGenerator.getId(),classifyCheck.getStore_selled_id(),newGoodsId);
                 }catch (Exception e){
+                    e.printStackTrace();
                     rs.put("goods "+goods.getGoods_name()+" add","cannot add");
                 }
             }
