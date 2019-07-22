@@ -4,6 +4,7 @@ public class Goods {
     private String goods_id;
     private String store_id;
     private String goods_name;
+    private Integer price;
     private String description;
     private String pic_url;
 
@@ -11,6 +12,14 @@ public class Goods {
     private String old_level;
     private String create_time;
     private String update_time;
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
     public String getGoods_id() {
         return goods_id;

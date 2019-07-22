@@ -47,6 +47,8 @@ public class ProjectTest {
 //            System.out.println(mapping.getKey()+":"+mapping.getValue());
         }
         System.out.println(testMap);
+        String strTest="                            ";
+        System.out.println(strTest.trim().isEmpty());
     }
 
     private static void modifyInteger(Object integerTest) {

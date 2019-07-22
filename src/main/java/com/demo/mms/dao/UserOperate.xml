@@ -21,6 +21,23 @@
     values   (#{user_id}, #{permission}, #{note},#{create_time},#{update_time})
   </insert>
 
+    <insert id="insertInterestedGoods" parameterType="com.demo.mms.common.domain.GoodsStar">
+        insert into interested_classify (classifyStar_id,user_id,classify_id,setStar_time)
+        values   (#{classifyStar_id}, #{user_id}, #{classify_id}, #{setStar_time})
+    </insert>
+
+    <insert id="insertInterestedClassify" parameterType="com.demo.mms.common.domain.ClassifyStar">
+        insert into interested_goods (goodsStar_id,user_id,goods_id,setStar_time)
+        values   (#{goodsStar_id}, #{user_id}, #{goods_id}, #{setStar_time})
+    </insert>
+
+    <resultMap id="userTemp" type="com.demo.mms.common.domain.User">
+        
+    </resultMap>
+    <select id="queryAllUser" resultMap="userTemp">
+          select * from user;
+    </select>
+
   <resultMap id="tempQueryGoodsViewed" type="com.demo.mms.common.vo.GoodsViewedQueryVO">
   </resultMap>
 

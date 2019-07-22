@@ -14,7 +14,7 @@ public interface ShoppingCartService {
     Collection<Object> getShoppingCartGoodsOfUser(Buyer user) throws Exception;
     Collection<Object> getShoppingCartGoodsOfUserByUserId(String user) throws Exception;
 
-    void insertGoodsToShoppingCartOfUser(Goods goods, Buyer user, Integer num) throws Exception;
+    void insertGoodsToShoppingCartOfUser(String goodsId, String userId, Integer num) throws Exception;
 
     void modifyGoodNumber(String relationId, Integer newNumber) throws Exception;
     void modifyGoodNumber(InCartOf inCartOf, Integer newNumber) throws Exception;

@@ -3,7 +3,10 @@ package com.demo.mms.dao;
 
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
+import com.demo.mms.common.domain.OnSale;
 import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.vo.OnSaleGoodsVO;
+import com.demo.mms.common.vo.StoreGoodsChartByClassifyVO;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import org.apache.ibatis.annotations.*;
 
@@ -14,6 +17,9 @@ public interface GoodsOperateMapper {
     Store queryStore(
                      @Param("column") String column,
                      @Param("value") String value);
+
+    @Select("SELECT * FROM GOODS WHERE GOODS.goods_id = #{id}")
+    Goods getGoodById(@Param("id") String goodsId);
 
     ArrayList<StoreSelledClassifyVO> queryGoodsWithClassify(String store_id);
 
@@ -32,10 +38,15 @@ public interface GoodsOperateMapper {
     void deleteClassifyOfStore(@Param("column") String column,
                                @Param("value") String value);
 
-    @Insert("INSERT INTO goods_classify (classify_id, top_level_classify_id, classify_name, create_time, update_time) " +
-            "VALUES (#{classify_id}, #{top_level_classify_id}, #{classify_name},#{create_time},#{update_time})")
+    @Delete("DELETE from goods_classify where ${column} = #{value}")
+    void deleteGoodsClassify(@Param("column") String column,
+                               @Param("value") String value);
+
+    @Insert("INSERT INTO goods_classify (classify_id, top_level_classify_id, parent_id,classify_name, create_time, update_time) " +
+            "VALUES (#{classify_id}, #{top_level_classify_id},#{parent_id}, #{classify_name},#{create_time},#{update_time})")
     void insertNewClassify(@Param("classify_id") String classify_id,
                           @Param("top_level_classify_id") String top_level_classify_id,
+                           @Param("parent_id") String parent_id,
                            @Param("classify_name") String classify_name,
                            @Param("create_time") String create_time,
                           @Param("update_time") String update_time);
@@ -94,4 +105,22 @@ public interface GoodsOperateMapper {
                      @Param("valueKey") String valueKey,
                      @Param("columnModify") String columnModify,
                      @Param("valueModify") String valueModify);
+
+    ArrayList<StoreGoodsChartByClassifyVO> queryStoreGoodsChartByClassify(String store_id);
+
+    @Select("select * from goods_classify where ${column} = #{value}")
+    GoodsClassify queryGoodsClassify(@Param("column") String column,
+                                     @Param("value") String value);
+
+    void insertOnSale(OnSale onSale);
+
+    @Select("select * from on_sale where ${column} = #{value}")
+    OnSale queryOnSale(@Param("column") String column,
+                       @Param("value") String value);
+
+    @Delete("delete from on_sale where ${column} = #{value}")
+    void delOnSale(@Param("column") String column,
+                   @Param("value") String value);
+
+    ArrayList<OnSaleGoodsVO> getStoreOnSale(String store_id);
 }

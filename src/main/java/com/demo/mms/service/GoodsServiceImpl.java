@@ -1,22 +1,26 @@
 package com.demo.mms.service;
 
-import com.demo.mms.common.domain.Goods;
-import com.demo.mms.common.domain.GoodsClassify;
-import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.IDGenerator;
 import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.StarGoodsGetVO;
+import com.demo.mms.common.vo.StarGoodsVO;
+import com.demo.mms.common.vo.StoreGoodsChartByClassifyVO;
 import com.demo.mms.common.vo.StoreSelledClassifyVO;
 import com.demo.mms.dao.GoodsOperateMapper;
+import com.demo.mms.dao.UserOperateMapper;
+import org.openxmlformats.schemas.drawingml.x2006.main.STAdjAngle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
 public class GoodsServiceImpl implements GoodsService{
     @Autowired
     GoodsOperateMapper goodsOperateMapper;
+    @Autowired
+    UserOperateMapper userOperateMapper;
 
     //查询商店所售卖所有商品分类
     @Override
@@ -39,7 +43,7 @@ public class GoodsServiceImpl implements GoodsService{
         for (StoreSelledClassifyVO classifyOwn:classifyOwnList){
             classifyList.add(new ArrayList<>(Arrays.asList(classifyOwn.getClassify_id(),
                                             classifyOwn.getClassify_name(),
-                                            classifyOwn.getTop_level_classify_id())));
+                                            classifyOwn.getParent_id())));
         }
         return rs;
     }
@@ -55,12 +59,16 @@ public class GoodsServiceImpl implements GoodsService{
         }
         //store 存在
         Map<String,Integer> returnTempMap=new HashMap<>();
-        ArrayList<ArrayList> classifyListTemp=new ArrayList<>();
-        rs.putAll(getStoreGoodsClassify(store,classifyListTemp));
-        for (ArrayList arrayList:classifyListTemp){
-            String classifyName=(String) arrayList.get(1);
-            if (returnTempMap.containsKey(classifyName)){
-                returnTempMap.put(classifyName,returnTempMap.get(classifyName)+1);
+        ArrayList<StoreGoodsChartByClassifyVO> classifyListTemp=goodsOperateMapper.queryStoreGoodsChartByClassify(store.getStore_id());
+
+        for (StoreGoodsChartByClassifyVO arrayList:classifyListTemp){
+            String classifyName=arrayList.getClassify_name();
+            if(arrayList.getGoods_id()!=null){
+                if (returnTempMap.containsKey(classifyName) ){
+                    returnTempMap.put(classifyName,returnTempMap.get(classifyName)+1);
+                }else {
+                    returnTempMap.put(classifyName,1);
+                }
             }else {
                 returnTempMap.put(classifyName,0);
             }
@@ -77,7 +85,7 @@ public class GoodsServiceImpl implements GoodsService{
         for(Map.Entry<String,Integer> mapping:list){
             returnMap.put(mapping.getKey(),mapping.getValue());
         }
-        rs.put("classifyMap",list);
+        rs.put("classifyMap",returnMap);
         return rs;
     }
 
@@ -106,10 +114,14 @@ public class GoodsServiceImpl implements GoodsService{
                 rs.put("classify "+goodsClassify.getClassify_name()+" existed",false);
             }else {//分类存在
                 //根据分类名称去删除
-                try {
-                    goodsOperateMapper.deleteClassifyOfStore("classify_id",nameCheck.getClassify_name());
-                }catch (Exception e){
-                    rs.put("classify "+goodsClassify.getClassify_name()+" del","cannot del");
+                if(idCheck!=null){
+                    goodsOperateMapper.deleteClassifyOfStore("classify_id",idCheck.getClassify_id());
+                    goodsOperateMapper.deleteGoodsClassify("classify_id",idCheck.getClassify_id());
+                }
+
+                if(nameCheck!=null){
+                    goodsOperateMapper.deleteClassifyOfStore("classify_name",nameCheck.getClassify_name());
+                    goodsOperateMapper.deleteGoodsClassify("classify_name",nameCheck.getClassify_name());
                 }
             }
         }
@@ -137,37 +149,33 @@ public class GoodsServiceImpl implements GoodsService{
         for (GoodsClassify goodsClassify:classifiesToAdd){
             //查询分类是否存在
             GoodsClassify nameCheck=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_name",goodsClassify.getClassify_name());
-            GoodsClassify idCheck=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",goodsClassify.getClassify_id());
-            if((nameCheck!=null)||(idCheck!=null)){//分类已经存在
+            if(nameCheck!=null){//分类已经存在
                 rs.put("classify "+goodsClassify.getClassify_name()+" existed",true);
                 continue;
             }else {//分类不存在
                 //先插入到goods_classify表
                 try {
-                    Integer thisLevel=Integer.parseInt(goodsClassify.getClassify_id());
                     goodsClassify.setClassify_id(IDGenerator.getId());
-                    //检查top_level
-                    if(thisLevel>maxLevel){
-                        rs.put("top level "+goodsClassify.getTop_level_classify_id()+" too high","should less than "+maxLevel);
-                        continue;
-                    }
                     //需要插入的level是0级
                     if(Integer.parseInt(goodsClassify.getParent_id())==0){
                         //直接插入
-                        goodsOperateMapper.insertNewClassify(goodsClassify.getClassify_id(),goodsClassify.getTop_level_classify_id(),goodsClassify.getClassify_name(),
+                        goodsOperateMapper.insertNewClassify(
+                                goodsClassify.getClassify_id(),
+                               "0",
+                                goodsClassify.getParent_id(),
+                                goodsClassify.getClassify_name(),
                                 ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
                         goodsOperateMapper.insertNewClassifyOfStore(IDGenerator.getId(),store.getStore_id(),goodsClassify.getClassify_id());
                         continue;
                     }
                     //top_level应该比parent的top level大1
                     GoodsClassify parentClassify=goodsOperateMapper.queryClassifyOfStore(store.getStore_id(),"classify_id",goodsClassify.getParent_id());
-                    //不是parent的下一级
-                    if(thisLevel-1!=Integer.parseInt(parentClassify.getTop_level_classify_id())){
-                        rs.put("classify level "+goodsClassify.getTop_level_classify_id()+" error","parent level is "+parentClassify.getTop_level_classify_id());
-                        continue;
-                    }
                     //可以执行插入
-                    goodsOperateMapper.insertNewClassify(goodsClassify.getClassify_id(),goodsClassify.getTop_level_classify_id(),goodsClassify.getClassify_name(),
+                    goodsOperateMapper.insertNewClassify(
+                            goodsClassify.getClassify_id(),
+                            parentClassify.getTop_level_classify_id()+1,
+                            goodsClassify.getParent_id(),
+                            goodsClassify.getClassify_name(),
                             ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
                     goodsOperateMapper.insertNewClassifyOfStore(IDGenerator.getId(),store.getStore_id(),goodsClassify.getClassify_id());
                 }catch (Exception e){
@@ -193,9 +201,24 @@ public class GoodsServiceImpl implements GoodsService{
         GoodsClassify idCheck=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",oldClassify.getClassify_id());
         if((nameCheck==null)&&(idCheck==null)){//分类不存在
             rs.put("classify "+oldClassify.getClassify_name()+" existed",false);
-        }else {
-            rs.putAll(modifyClassifyHelp(store,nameCheck,newClassify));
+            return rs;
         }
+        //分类存在
+        GoodsClassify findNewClassifyParent=null;
+        if(Integer.parseInt(newClassify.getParent_id())==0){
+            newClassify.setParent_id("0");
+            newClassify.setTop_level_classify_id("0");
+        }else {
+            findNewClassifyParent=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",newClassify.getParent_id());
+            if(findNewClassifyParent==null){
+                rs.put("parent of "+newClassify.getClassify_name()+" not find",true);
+                return rs;
+            }
+            newClassify.setParent_id(findNewClassifyParent.getClassify_id());
+            newClassify.setTop_level_classify_id(Integer.toString(Integer.valueOf(findNewClassifyParent.getTop_level_classify_id())+1));
+        }
+        //新分类父级分类存在
+        rs.putAll(modifyClassifyHelp(store,nameCheck,newClassify));
         return rs;
     }
 
@@ -249,7 +272,11 @@ public class GoodsServiceImpl implements GoodsService{
         if((nameCheck==null)&&(idCheck==null)){//不存在
             rs.put("goods "+oldGoods.getGoods_name()+" existed",false);
         }else {
-            rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods));
+            if (idCheck!=null){
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_id",idCheck.getGoods_id()));
+            }else {//nameCheck!=null
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_name",idCheck.getGoods_name()));
+            }
         }
         return rs;
     }
@@ -310,6 +337,110 @@ public class GoodsServiceImpl implements GoodsService{
         return rs;
     }
 
+    @Override
+    public Map<String, Object> getStoreGoodsInfo(Store store, Goods goodsToGet) {
+        Map<String,Object> rs=new HashMap<>();
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        //store 存在
+        //查找商品是否存在
+        Goods nameCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_name",goodsToGet.getGoods_name());
+        Goods idCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_id",goodsToGet.getGoods_id());
+        if((nameCheck==null)&&(idCheck==null)){//不存在
+            rs.put("goods "+goodsToGet.getGoods_name()+" existed",false);
+        }else {
+            if (idCheck!=null){
+                rs.put("goodsGet",idCheck);
+            }else {//nameCheck!=null
+                rs.put("goodsGet",nameCheck);
+            }
+        }
+
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> starGoods(User user, Store store, Goods goods) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        if(userFind==null){//用户不存在
+            rs.put("user existed",false);
+            return rs;
+        }
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        Goods nameCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_name",goods.getGoods_name());
+        Goods idCheck=goodsOperateMapper.queryGoodsOfStore(store.getStore_id(),"goods_id",goods.getGoods_id());
+        if((nameCheck==null)&&(idCheck==null)){//不存在
+            rs.put("goods "+goods.getGoods_name()+" existed",false);
+        }else {
+            GoodsStar goodsStar=new GoodsStar();
+            goodsStar.setGoodsStar_id(IDGenerator.getId());
+            goodsStar.setUser_id(user.getUser_id());
+            goodsStar.setSetStar_time(ProjectFactory.getPorjectStrDate(new Date()));
+            if (idCheck!=null){
+                goodsStar.setGoods_id(idCheck.getGoods_id());
+                userOperateMapper.insertInterestedGoods(goodsStar);
+            }else {//nameCheck!=null
+                goodsStar.setGoods_id(nameCheck.getGoods_id());
+                userOperateMapper.insertInterestedGoods(goodsStar);
+            }
+        }
+
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> getStarGoods(String user_id, ArrayList<StarGoodsGetVO> starGoodsVOs) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user_id);
+        if(userFind==null){//用户不存在
+            rs.put("user existed",false);
+            return rs;
+        }
+        ArrayList<StarGoodsGetVO> starGoodsTemp=new ArrayList<>();
+        starGoodsTemp=userOperateMapper.getStarGoods("user_id",user_id);
+        starGoodsVOs.addAll(starGoodsTemp);
+        return rs   ;
+    }
+
+    @Override
+    public Map<String, Object> starClassify(User user, GoodsClassify goodsClassify) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user.getUser_id());
+        if(userFind==null){//用户不存在
+            rs.put("user existed",false);
+            return rs;
+        }
+        GoodsClassify idCheck=goodsOperateMapper.queryGoodsClassify("classify_id",goodsClassify.getClassify_id());
+        GoodsClassify nameCheck=goodsOperateMapper.queryGoodsClassify("classify_name",goodsClassify.getClassify_name());
+        if((idCheck==null)&&(nameCheck==null)){//不存在
+            rs.put("goods classify"+nameCheck.getClassify_name()+" existed",false);
+        }else {
+            ClassifyStar classifyStar=new ClassifyStar();
+            classifyStar.setClassifyStar_id(IDGenerator.getId());
+            classifyStar.setUser_id(user.getUser_id());
+            classifyStar.setSetStar_time(ProjectFactory.getPorjectStrDate(new Date()));
+            if (idCheck!=null){
+                classifyStar.setClassify_id(idCheck.getClassify_id());
+                userOperateMapper.insertInterestedClassify(classifyStar);
+            }else {//nameCheck!=null
+                classifyStar.setClassify_id(nameCheck.getClassify_id());
+                userOperateMapper.insertInterestedClassify(classifyStar);
+            }
+        }
+
+        return rs;
+    }
+
     private Map<String, Object> modifyClassifyHelp(Store store, GoodsClassify oldClassify, GoodsClassify newClassify) {
         Map<String,Object> rs = new HashMap<>();
         Map<String ,String> modifyList=new HashMap<>();
@@ -317,50 +448,16 @@ public class GoodsServiceImpl implements GoodsService{
             modifyList.put("classify_name",newClassify.getClassify_name());
         }
 
-        if(newClassify.getParent_id()!=null && !newClassify.getParent_id().equals(oldClassify.getParent_id())){
+        if(!newClassify.getParent_id().equals(oldClassify.getParent_id())){
             //top_level应该比parent的top level大1
             //需要插入的level是0级
-            try{
-                if(Integer.parseInt(newClassify.getParent_id())==0){
-                    //直接插入
-                    modifyList.put("parent_id",newClassify.getParent_id());
-                }else {
-                    GoodsClassify parentClassify=goodsOperateMapper.queryClassifyOfStore(store.getStore_id(),"classify_id",newClassify.getParent_id());
-                    //不是parent的下一级
-                    if(Integer.parseInt(newClassify.getTop_level_classify_id()) -1!=
-                            Integer.parseInt(parentClassify.getTop_level_classify_id())){
-                        rs.put("new classify level "+newClassify.getTop_level_classify_id()+" error","parent level is "+parentClassify.getTop_level_classify_id());
-                        return rs;
-                    }
-                    modifyList.put("parent_id",newClassify.getParent_id());
-                }
-            }catch (Exception e){
-                rs.put("modify level wrong",true);
-                return rs;
-            }
+            modifyList.put("parent_id",newClassify.getParent_id());
         }
 
-        if(newClassify.getTop_level_classify_id()!=null && !newClassify.getTop_level_classify_id().equals(oldClassify.getTop_level_classify_id())){
+        if(!newClassify.getTop_level_classify_id().equals(oldClassify.getTop_level_classify_id())){
             //top_level应该比parent的top level大1
             //需要插入的level是0级
-            try{
-                if(Integer.parseInt(newClassify.getTop_level_classify_id())==0){
-                    //直接插入
-                    modifyList.put("top_level_classify_id",newClassify.getTop_level_classify_id());
-                }else {
-                    GoodsClassify parentClassify=goodsOperateMapper.queryClassifyOfStore(store.getStore_id(),"classify_id",newClassify.getParent_id());
-                    //不是parent的下一级
-                    if(Integer.parseInt(newClassify.getTop_level_classify_id()) -1!=
-                            Integer.parseInt(parentClassify.getTop_level_classify_id())){
-                        rs.put("new classify level "+newClassify.getTop_level_classify_id()+" error","parent level is "+parentClassify.getTop_level_classify_id());
-                        return rs;
-                    }
-                    modifyList.put("top_level_classify_id",newClassify.getTop_level_classify_id());
-                }
-            }catch (Exception e){
-                rs.put("modify top_level_classify_id wrong",true);
-                return rs;
-            }
+            modifyList.put("top_level_classify_id",newClassify.getTop_level_classify_id());
         }
 
         for (Map.Entry<String ,String> entry:modifyList.entrySet()){
@@ -374,7 +471,7 @@ public class GoodsServiceImpl implements GoodsService{
         return rs;
     }
 
-    private Map<String, Object> modifyGoodsHelp(Store store,Goods oldGoods, Goods newGoods) {
+    private Map<String, Object> modifyGoodsHelp(Store store,Goods oldGoods, Goods newGoods,String modifyKey,String modifyValue) {
         Map<String,Object> rs = new HashMap<>();
         Map<String ,Object> modifyList=new HashMap<>();
         if(newGoods.getGoods_name()!=null && !newGoods.getGoods_name().equals(oldGoods.getGoods_name())){
@@ -401,15 +498,16 @@ public class GoodsServiceImpl implements GoodsService{
             try {
                 List<String> modiyArr=(List<String>) entry.getValue();
                 goodsOperateMapper.updateGoods(store.getStore_id(),
-                        entry.getKey(),modiyArr.get(0),
+                        modifyKey,modifyValue,
                         entry.getKey(),modiyArr.get(1));
             }catch (Exception e){
                 rs.put("update "+entry.getKey(),"error");
             }
         }
         try {
-            goodsOperateMapper.updateGoods(store.getStore_id(),"update_time",ProjectFactory.getPorjectStrDate(new Date()),
-                    "goods_id",oldGoods.getGoods_id());
+            goodsOperateMapper.updateGoods(store.getStore_id(),
+                    modifyKey,modifyValue,
+                    "update_time",ProjectFactory.getPorjectStrDate(new Date()));
         }catch (Exception e){
             rs.put("update update_time","error");
         }

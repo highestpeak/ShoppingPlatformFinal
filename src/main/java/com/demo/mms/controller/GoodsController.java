@@ -5,11 +5,9 @@ import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
 import com.demo.mms.common.utils.ProjectFactory;
-import com.demo.mms.common.vo.GoodsCrudVO;
-import com.demo.mms.common.vo.GoodsEvaluationVO;
-import com.demo.mms.common.vo.GoodsQueryVO;
-import com.demo.mms.common.vo.StarGoodsVO;
+import com.demo.mms.common.vo.*;
 import com.demo.mms.service.GoodsService;
+import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,16 +23,20 @@ import java.util.regex.Pattern;
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private UserService userService;
 
     //查询商品
     //按分类查询
+    //获取一个classify的所有商品，即list
     @RequestMapping("/getByClassify")
     @ResponseBody
     public Object goodsQuery(@RequestBody GoodsQueryVO goodsQueryVO){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
-        Store store= goodsQueryVO.getStore(); GoodsClassify classifyToGet= goodsQueryVO.getGoodsClassify();
+        Store store= goodsQueryVO.getStore();
+        GoodsClassify classifyToGet= goodsQueryVO.getGoodsClassify();
         ArrayList goodsList=new ArrayList();
         Map<String,Object> rsService=null;
         rsService=goodsService.getStoreGoods(store,classifyToGet,goodsList);
@@ -53,7 +55,7 @@ public class GoodsController {
         return rs;
     }
 
-    //查询商品
+    //查询商品--搜搜商品
     //按商品信息查询
     @RequestMapping("/getByInfo")
     @ResponseBody
@@ -84,6 +86,31 @@ public class GoodsController {
             rs.put("success",false);
         }
         rs.put("goodsList",goodsList);
+        return rs;
+    }
+
+    //查询商品--请求商品id
+    //按商品信息查询
+    @RequestMapping("/getGoodsInfo")
+    @ResponseBody
+    public Object goodsInfoGet(Store store,Goods goodsToGet){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=goodsService.getStoreGoodsInfo(store,goodsToGet);
+        if(!rsService.containsKey("goodsGet") && rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.putAll(rsService);
         return rs;
     }
 
@@ -169,21 +196,72 @@ public class GoodsController {
     //关注商品
     //必须传入goods的id 或者传入store id和goods name的组合
     //必须传入user id
-    @RequestMapping("/star")
+    @RequestMapping("/star/set")
     @ResponseBody
     public Object starGoods(@RequestBody StarGoodsVO starGoodsVO){
-        Map<String ,Object> rs=new HashMap<>();
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in starGoods");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=goodsService.starGoods(starGoodsVO.getUser(),starGoodsVO.getStore(),starGoodsVO.getGoods());
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
         return rs;
     }
 
-    //获取商品的所有评价
-    @RequestMapping("getEvaluationOfGoods")
+    @RequestMapping("/star/get")
     @ResponseBody
-    public Object goodsEvaluationGet(@RequestBody GoodsEvaluationVO goodsEvaluationVO){
-        return null;
-    }//根据好评差评获取评价
+    public Object getStarGoods(String user_id){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in starGoods");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        ArrayList<StarGoodsGetVO> starGoodsVOs=new ArrayList<>();
+        Map<String,Object> rsService=null;
+        rsService=goodsService.getStarGoods(user_id,starGoodsVOs);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
 
-
+    @RequestMapping("/star/del")
+    @ResponseBody
+    public Object delStarGoods(String user_id,String goodsStar_id){
+        System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in starGoods");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=null;
+        rsService=userService.delUserStar(user_id,goodsStar_id);
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
 
     //模糊检索
     private ArrayList<Goods> getBySearchGoodsInfo(ArrayList<Goods> goodsList,Goods goodsToGet) {

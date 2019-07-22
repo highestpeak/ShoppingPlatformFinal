@@ -1,11 +1,15 @@
 package com.demo.mms.service;
 
-import com.demo.mms.common.domain.Store;
+import com.demo.mms.common.domain.*;
+import com.demo.mms.common.utils.IDGenerator;
 import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.OnSaleGoodsVO;
 import com.demo.mms.dao.GoodsOperateMapper;
+import com.demo.mms.dao.UserOperateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +18,8 @@ import java.util.Map;
 public class StoreServiceImpl implements StoreService{
     @Autowired
     GoodsOperateMapper goodsOperateMapper;
+    @Autowired
+    UserOperateMapper userOperateMapper;
     @Override
     public Map<String,Object> getStoreInfo(Store store) {
         Map<String ,Object> rs=new HashMap<>();
@@ -37,6 +43,82 @@ public class StoreServiceImpl implements StoreService{
             return rs;
         }
         rs.putAll(modifyStoreInfoHelp(oldStore,newStore));
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> getStoreThingOfDay(Store store, String dateToGet) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> setOnSale(OnSale onSale) {
+        //查找store是否存在
+        Map<String ,Object> rs=new HashMap<>();
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",onSale.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        Goods idCheck=goodsOperateMapper.queryGoodsOfStore(storeCheck.getStore_id(),"goods_id",onSale.getGoods_id());
+        if(idCheck==null){
+            rs.put("goods exist",false);
+            return rs;
+        }
+        onSale.setOn_sale_id(IDGenerator.getId());
+        onSale.setCreate_time(ProjectFactory.getPorjectStrDate(new Date()));
+        try {
+            goodsOperateMapper.insertOnSale(onSale);
+        }catch (Exception e){
+            rs.put("insert error",true);
+        }
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> delOnSale(String on_sale_id) {
+        Map<String ,Object> rs=new HashMap<>();
+        OnSale onSaleCheck=goodsOperateMapper.queryOnSale("on_sale_id",on_sale_id);
+        if(onSaleCheck==null){
+            rs.put("onSale not exist",true);
+            return rs;
+        }
+        try {
+            goodsOperateMapper.delOnSale("on_sale_id",on_sale_id);
+        }catch (Exception e){
+            rs.put("can not del","exception");
+        }
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> getOnSaleGoods(String store_id, ArrayList<OnSaleGoodsVO> getOnSaleList) {
+        Map<String ,Object> rs=new HashMap<>();
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store_id);
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        ArrayList<OnSaleGoodsVO> tempGet=null;
+        try {
+            tempGet=goodsOperateMapper.getStoreOnSale(store_id);
+        }catch (Exception e){
+            rs.put("get error",true);
+            return rs;
+        }
+        getOnSaleList.addAll(tempGet);
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> updateOnSaleGoods(String on_sale_id, String discount, String due_time, String note) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getAllUser(ArrayList<User> users) {
+        Map<String,Object> rs=new HashMap<>();
+        users.addAll(userOperateMapper.queryAllUser());
         return rs;
     }
 

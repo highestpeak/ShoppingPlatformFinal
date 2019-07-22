@@ -107,64 +107,64 @@
     <div class="content-wrapper" style="min-height: 1300px;">
         <!-- 在此处添加内容 -->
         <section class="content-header">
-                <h1>
-                    商店信息
+            <h1>
+                商店信息
 
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                    <li class="active">商店管理</li>
-                </ol>  
-            </section>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">商店管理</li>
+            </ol>  
+        </section>
     
-            <!-- Main content -->
-            <section class="content container-fluid">   
-                <div class="row">
-                    <div class="col-xs-12">
-    
-                        <!-- /.box -->
-    
-                        <div class="box">
-                            <div class="box-header">
-                                <h3 class="box-title">商店信息</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3" id="store_info">
-                                        <img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/localLib/images/user2-160x160.jpg" alt="User profile picture">
+        <!-- Main content -->
+        <section class="content container-fluid">   
+            <div class="row">
+                <div class="col-xs-12">
 
-                                        <h3 id="store_id" class="profile-username text-center">{{store_id}}</h3>
-                        
-                                        <p id="store_note" class="text-muted text-center">{{note}}</p>
-                        
-                                        <ul class="list-group list-group-unbordered">
-                                            <li class="list-group-item">
-                                                <b>Pic Url</b> <a class="pull-right" id="store_pic" v-bind:href="store_pic_url">{{store_pic_url}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Classify</b> <a id="store_classify" class="pull-right">{{store_classify}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Level</b> <a id="store_level" class="pull-right">{{level}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Certification</b> <a id="store_certi" class="pull-right">{{certification}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Create Time</b> <a id="store_time" class="pull-right">{{create_time}}</a>
-                                            </li>
-                                        </ul>
-                        
-                                        <button class="btn btn-primary btn-block" id="modify"><b>Modify</b></a>
-                                    </div>
-                                </div>       
-                            </div>
-                            <div class="box-footer"><br><br><br><br></div>
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">商店信息</h3>
                         </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3" id="store_info">
+                                    <img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/localLib/images/user2-160x160.jpg" alt="User profile picture">
+
+                                    <h3 id="store_id" class="profile-username text-center">{{store_id}}</h3>
+                    
+                                    <p id="store_note" class="text-muted text-center">{{note}}</p>
+                    
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Pic Url</b> <a class="pull-right" id="store_pic" v-bind:href="store_pic_url">{{store_pic_url}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Classify</b> <a id="store_classify" class="pull-right">{{store_classify}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Level</b> <a id="store_level" class="pull-right">{{level}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Certification</b> <a id="store_certi" class="pull-right">{{certification}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Create Time</b> <a id="store_time" class="pull-right">{{create_time}}</a>
+                                        </li>
+                                    </ul>
+                    
+                                    <button class="btn btn-primary btn-block" id="modify"><b>Modify</b></button>
+                                </div>
+                            </div>       
+                        </div>
+                        <div class="box-footer"><br><br><br><br></div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
     </div>
 
@@ -284,7 +284,7 @@
                     });
                     
                 }else{
-                    layer.alert("数据请求失败！");
+                    layer.alert('数据请求失败！', { icon: 3, closeBtn: 0 });
                 }
             } 
         });

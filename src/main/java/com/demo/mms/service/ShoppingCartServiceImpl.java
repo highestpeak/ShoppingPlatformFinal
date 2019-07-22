@@ -3,29 +3,38 @@ package com.demo.mms.service;
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.InCartOf;
 import com.demo.mms.common.domain.Buyer;
+import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.InCartOfMapper;
+import com.demo.mms.dto.ShoppingCartDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
+    private final UserService userService;
+    private final GoodsOperateMapper goodsOperateMapper;
     private final InCartOfMapper mapper;
 
-    public ShoppingCartServiceImpl(InCartOfMapper mapper) {
+    public ShoppingCartServiceImpl(UserService userService, GoodsOperateMapper goodsOperateMapper, InCartOfMapper mapper) {
+        this.userService = userService;
+        this.goodsOperateMapper = goodsOperateMapper;
         this.mapper = mapper;
     }
 
     @Override
     public Object getInCartOfRelationshipById(String id) throws Exception {
-        List<Object> result = mapper.selectAll();
-        return result.stream().filter(o -> {
-            InCartOf relation = (InCartOf) o;
-            return relation.getId().equals(id);
-        }).collect(Collectors.toList()).get(0);
+        List<Object> results = mapper.selectAllOfUser(id);
+        List<ShoppingCartDTO> ret = new ArrayList<>();
+        for (Object result : results) {
+            InCartOf relation = (InCartOf) result;
+            Goods good = goodsOperateMapper.getGoodById(relation.getGood());
+            ret.add(new ShoppingCartDTO(relation, good));
+        }
+        return ret;
     }
 
     @Override
@@ -44,8 +53,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void insertGoodsToShoppingCartOfUser(Goods goods, Buyer user, Integer num) throws Exception {
-        mapper.insertEntry(UUID.randomUUID().toString().replace("-", ""), user.getUser_id(), goods.getGoods_id(), num);
+    public void insertGoodsToShoppingCartOfUser(String goodsId, String userId, Integer num) throws Exception {
+        mapper.insertEntry(UUID.randomUUID().toString().replace("-", ""), userId, goodsId, num);
     }
 
     @Override

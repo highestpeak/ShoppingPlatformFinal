@@ -21,10 +21,10 @@ public abstract class ControllerUtility {
     }
 
     public static void insertFailFlag(Map<String, Object> map) {
-        map.replace("success", false);
+        map.put("success", false);
     }
 
     public static void insertSuccessFlag(Map<String, Object> map) {
-        map.replace("success", true);
+        map.put("success", true);
     }
 }

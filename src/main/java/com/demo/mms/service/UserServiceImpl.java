@@ -2,10 +2,7 @@ package com.demo.mms.service;
 
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.ProjectFactory;
-import com.demo.mms.common.vo.GoodsViewedQueryTestVO;
-import com.demo.mms.common.vo.GoodsViewedQueryVO;
-import com.demo.mms.common.vo.ViewHistoryGetVO;
-import com.demo.mms.common.vo.ViewedHistoryReturnVO;
+import com.demo.mms.common.vo.*;
 import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.UserOperateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -296,6 +293,45 @@ public class UserServiceImpl implements UserService {
         //code here
         //end
         rs.put("viewedHistoryReturn",goodsViewedQueryVOArrayList);
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> getUserStar(String user_id) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user_id);
+        if(userFind==null){//不存在user
+            rs.put("user existed",false);
+            return rs;
+        }
+        //存在User
+        ArrayList<StarGoodsQueryVO> starGoodsQueryVOS;
+        try {
+//            userOperateMapper.delUser("user_id",user.getUser_id());
+        }catch (Exception e){
+            rs.put("delError",true);
+        }
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> delUserStar(String user_id,String goodsStar_id) {
+        Map<String,Object> rs=new HashMap<>();
+        User userFind= userOperateMapper.queryUser("user","user_id",user_id);
+        if(userFind==null){//不存在user
+            rs.put("user existed",false);
+            return rs;
+        }
+        GoodsStar  goodsStar=userOperateMapper.queryStar("goodsStar_id",goodsStar_id);
+        if(goodsStar==null){
+            rs.put("star goods exist",false);
+            return rs;
+        }
+        try {
+            userOperateMapper.delStar("goodsStar_id",goodsStar_id);
+        }catch (Exception e){
+            rs.put("delError",true);
+        }
         return rs;
     }
 

@@ -8,9 +8,25 @@
         select DISTINCT
             classify_id,
             classify_name,
-            top_level_classify_id
+            parent_id
         from store_sell_classify NATURAL JOIN goods_classify
         where store_id = #{store_id}
+    </select>
+
+    <insert id="insertOnSale" parameterType="com.demo.mms.common.domain.OnSale">
+        insert into on_sale (on_sale_id,store_id,goods_id,create_time,due_time,note,discount)
+        values   (#{on_sale_id},#{store_id},#{goods_id}, #{create_time}, #{due_time},#{note},#{discount})
+    </insert>
+
+    <resultMap id="tempStoreGoodsChartByClassifyVO" type="com.demo.mms.common.vo.StoreGoodsChartByClassifyVO">
+    </resultMap>
+    <select id="queryStoreGoodsChartByClassify" parameterType="String" resultMap="tempStoreGoodsChartByClassifyVO">
+        SELECT A.id as id,
+              classify_name,
+              goods_id
+        FROM (SELECT goods_classify.classify_id,classify_name,store_sell_classify.id
+              FROM store_sell_classify  LEFT JOIN goods_classify ON goods_classify.classify_id = store_sell_classify.classify_id
+              WHERE store_id=#{store_id}) AS A LEFT JOIN classify_of_goods ON A.id=classify_of_goods.classify_selled_id
     </select>
 
     <resultMap id="queryAllGoodsOfStoreVO" type="com.demo.mms.common.domain.Goods">
@@ -36,6 +52,38 @@
               goods.goods_id=classify_of_goods.goods_id AND
               classify_of_goods.classify_selled_id=store_sell_classify.id AND
               store_sell_classify.classify_id=goods_classify.classify_id
+    </select>
+
+    <resultMap id="tempOnSaleGoodsVO" type="com.demo.mms.common.vo.OnSaleGoodsVO">
+        <association property="onSale" resultMap="com.demo.mms.common.domain.OnSale">
+        </association>
+    </resultMap>
+
+    <select id="getStoreOnSale" resultMap="tempOnSaleGoodsVO">
+        select
+          on_sale_id,
+          store_id,
+          goods_id,
+          create_time,
+          due_time,
+          note,
+          discount,
+          goods_name,
+          price
+        from on_sale NATURAL JOIN goods
+        WHERE store_id=#{store_id};
+    </select>
+
+    <select id="getStarGoods" resultType="com.demo.mms.common.vo.StarGoodsGetVO">
+        SELECT
+          goodsStar_id,
+          goods.store_id as store_id,
+          goods.goods_id as goods_id,
+          setStar_time
+        FROM interested_goods,goods
+        WHERE goods.goods_id=interested_goods.goods_id AND
+              user_id=#{user_id};
+
     </select>
     <!--<resultMap id="returnGoodsOfStore" type="com.demo.mms.common.domain.Goods" ></resultMap>-->
     <!--<select id="queryGoodsOfStore" parameterType="String" resultMap="returnGoodsOfStore">-->
