@@ -111,10 +111,12 @@ public class GoodsServiceImpl implements GoodsService{
                 rs.put("classify "+goodsClassify.getClassify_name()+" existed",false);
             }else {//分类存在
                 //根据分类名称去删除
-                try {
-                    goodsOperateMapper.deleteClassifyOfStore("classify_id",nameCheck.getClassify_name());
-                }catch (Exception e){
-                    rs.put("classify "+goodsClassify.getClassify_name()+" del","cannot del");
+                if(idCheck!=null){
+                    goodsOperateMapper.deleteClassifyOfStore("classify_id",idCheck.getClassify_id());
+                }
+
+                if(nameCheck!=null){
+                    goodsOperateMapper.deleteClassifyOfStore("classify_name",nameCheck.getClassify_name());
                 }
             }
         }
