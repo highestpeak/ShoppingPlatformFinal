@@ -284,7 +284,7 @@
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/js/vue.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -397,12 +397,12 @@
                     async: false,   
                     success: function (data) {        
                         if(data.success == true){                            
-                            layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            layer.alert('删除成功！', { icon: 1, closeBtn: 0 }, function (index) {
                                 window.location.reload();
                             });
 
                         }else{
-                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
+                            layer.alert('删除失败！', { icon: 2, closeBtn: 0 });
                         }
                     } 
                 });
@@ -522,12 +522,12 @@
                     async: false,   
                     success: function (data) {        
                         if(data.success == true){                            
-                            layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            layer.alert('添加成功！', { icon: 1, closeBtn: 0 }, function (index) {
                                 window.location.reload();
                             });
 
                         }else{
-                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
+                            layer.alert('添加失败！', { icon: 2, closeBtn: 0 });
                         }
                     } 
                 });
