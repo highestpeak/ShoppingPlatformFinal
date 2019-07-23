@@ -338,6 +338,7 @@ public class UserController {
         if(!rsService.containsKey("viewedHistoryReturn") && rs.size()>1){
             rs.put("success",false);
         }
+        rs.putAll(rsService);
         return rs;
     }
 
