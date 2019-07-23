@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -331,6 +328,25 @@ public class UserServiceImpl implements UserService {
             userOperateMapper.delStar("goodsStar_id",goodsStar_id);
         }catch (Exception e){
             rs.put("delError",true);
+        }
+        return rs;
+    }
+
+    @Override
+    public Map<String, Object> getUserNewWithTime(String goodsStar_id, Map<String, ArrayList<String>> uerOnTimeVOS) throws Exception{
+        if (uerOnTimeVOS==null){
+            throw new Exception("uerOnTimeVOS can not be null");
+        }
+        Map<String,Object> rs=new HashMap<>();
+        ArrayList<User> userAll=userOperateMapper.queryAllUser();
+        for (User user:userAll){
+            String createTime=user.getCreate_time();
+            String strSetIn="RealName:"+user.getRealname()+"_NickName:"+user.getNickname();
+            if(uerOnTimeVOS.containsKey(createTime)){
+                uerOnTimeVOS.get(createTime).add(strSetIn);
+            }else {
+                uerOnTimeVOS.put(createTime,new ArrayList<>(Arrays.asList(strSetIn)));
+            }
         }
         return rs;
     }

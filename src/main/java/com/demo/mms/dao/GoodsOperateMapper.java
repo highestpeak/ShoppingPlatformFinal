@@ -130,4 +130,6 @@ public interface GoodsOperateMapper {
                                   @Param("goods_id") String goods_id);
 
     ArrayList<GoodsWithClassifyVO> queryAllGoodsOfStoreWithClassifySend(String store_id);
+
+    ArrayList<Goods> queryStoreTopTenNewGoods(String store_id);
 }

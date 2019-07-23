@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping("/front")
 @Controller
@@ -60,7 +61,9 @@ public class FrontPageController {
     }
 
     @RequestMapping("/goodsInfoById/{store_id}/{goods_id}")
-    public String goodsInfoByIdGet(@PathVariable String store_id,@PathVariable String goods_id){
+    public String goodsInfoByIdGet(@PathVariable String store_id,@PathVariable String goods_id,
+                                   HttpServletRequest request,
+                                   HttpServletResponse response){
         System.out.println("in goodsInfoByIdGet");
         return "good_info";
     }
