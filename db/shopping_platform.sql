@@ -25,8 +25,8 @@ CREATE TABLE `admin` (
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL,
   PRIMARY KEY (`user_id`),
-  CONSTRAINT `admin_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `userId` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `admin_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of admin
@@ -43,8 +43,8 @@ CREATE TABLE `buyer` (
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL,
   PRIMARY KEY (`user_id`),
-  CONSTRAINT `buyer_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `userId` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `buyer_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of buyer
@@ -65,7 +65,7 @@ CREATE TABLE `classify_of_goods` (
   KEY `classify_of_goods_goods_goods_id_fk` (`goods_id`),
   CONSTRAINT `classify_of_goods_goods_goods_id_fk` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `classify_of_goods_store_sell_classify_id_fk` FOREIGN KEY (`classify_selled_id`) REFERENCES `store_sell_classify` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of classify_of_goods
@@ -97,7 +97,7 @@ CREATE TABLE `goods` (
   UNIQUE KEY `store_id` (`store_id`,`goods_name`),
   KEY `goods_store_store_id_fk` (`store_id`),
   CONSTRAINT `goods_store_store_id_fk` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of goods
@@ -133,7 +133,7 @@ CREATE TABLE `goods_classify` (
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL,
   PRIMARY KEY (`classify_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of goods_classify
@@ -168,7 +168,7 @@ CREATE TABLE `goods_viewed` (
   CONSTRAINT `goods_viewed_buyer_user_id_fk` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `goods_viewed_goods_classify_classify_id_fk` FOREIGN KEY (`classify_id`) REFERENCES `goods_classify` (`classify_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `goods_viewed_goods_goods_id_fk` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of goods_viewed
@@ -192,8 +192,8 @@ CREATE TABLE `interested_classify` (
   KEY `interested_classify_user_user_id_fk` (`user_id`),
   KEY `interested_classify_goods_classify_classify_id_fk` (`classify_id`),
   CONSTRAINT `interested_classify_goods_classify_classify_id_fk` FOREIGN KEY (`classify_id`) REFERENCES `goods_classify` (`classify_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `interested_classify_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `userId` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `interested_classify_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of interested_classify
@@ -212,8 +212,8 @@ CREATE TABLE `interested_goods` (
   KEY `interested_goods_user_user_id_fk` (`user_id`),
   KEY `interested_goods_goods_goods_id_fk` (`goods_id`),
   CONSTRAINT `interested_goods_goods_goods_id_fk` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `interested_goods_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `userId` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `interested_goods_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of interested_goods
@@ -234,7 +234,7 @@ CREATE TABLE `in_cart_of` (
   KEY `in_cart_of_goods_goods_id_fk` (`good_id`),
   CONSTRAINT `in_cart_of_buyer_user_id_fk` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `in_cart_of_goods_goods_id_fk` FOREIGN KEY (`good_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of in_cart_of
@@ -257,7 +257,7 @@ CREATE TABLE `on_sale` (
   KEY `on_sale_goods_goods_id_fk` (`goods_id`),
   CONSTRAINT `on_sale_goods_goods_id_fk` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `on_sale_store_store_id_fk` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of on_sale
@@ -273,8 +273,8 @@ CREATE TABLE `seller` (
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL,
   PRIMARY KEY (`user_id`),
-  CONSTRAINT `seller_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `userId` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `seller_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of seller
@@ -297,7 +297,7 @@ CREATE TABLE `store` (
   PRIMARY KEY (`store_id`),
   KEY `store_goods_classify_classify_id_fk` (`store_classify`),
   CONSTRAINT `store_goods_classify_classify_id_fk` FOREIGN KEY (`store_classify`) REFERENCES `goods_classify` (`classify_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of store
@@ -319,7 +319,7 @@ CREATE TABLE `store_sell_classify` (
   KEY `store_sell_classify_goods_classify_classify_id_fk` (`classify_id`),
   CONSTRAINT `store_sell_classify_goods_classify_classify_id_fk` FOREIGN KEY (`classify_id`) REFERENCES `goods_classify` (`classify_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `store_sell_classify_store_store_id_fk` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of store_sell_classify
@@ -336,8 +336,8 @@ INSERT INTO `store_sell_classify` VALUES ('7', '0001', '6');
 -- ----------------------------
 -- Table structure for userId
 -- ----------------------------
-DROP TABLE IF EXISTS `userId`;
-CREATE TABLE `userId` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `user_id` varchar(36) NOT NULL,
   `verify` varchar(16) NOT NULL,
   `realname` varchar(36) DEFAULT NULL,
@@ -350,13 +350,13 @@ CREATE TABLE `userId` (
   `create_time` varchar(19) NOT NULL,
   `update_time` varchar(19) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of userId
 -- ----------------------------
-INSERT INTO `userId` VALUES ('111111111', '123456', null, null, null, null, '123@126.com', null, null, '20190719-235233', '20190720-143032');
-INSERT INTO `userId` VALUES ('123456', '000000', null, null, null, '1', '123@163.com', null, 'admin', '20190718-134600', '20190718-134600');
-INSERT INTO `userId` VALUES ('142536', '000000', 'hello', null, null, null, '321@163.com', null, 'seller', '20190718-134600', '20190718-134600');
-INSERT INTO `userId` VALUES ('654321', '000000', '张三', '332', null, '0', '', null, 'buyer', '20190718-134600', '20190719-224928');
-INSERT INTO `userId` VALUES ('654987321', '123456', null, null, null, null, '123@126.com', null, null, '20190718-164750', '20190718-164750');
+INSERT INTO `user` VALUES ('111111111', '123456', null, null, null, null, '123@126.com', null, null, '20190719-235233', '20190720-143032');
+INSERT INTO `user` VALUES ('123456', '000000', null, null, null, '1', '123@163.com', null, 'admin', '20190718-134600', '20190718-134600');
+INSERT INTO `user` VALUES ('142536', '000000', 'hello', null, null, null, '321@163.com', null, 'seller', '20190718-134600', '20190718-134600');
+INSERT INTO `user` VALUES ('654321', '000000', '张三', '332', null, '0', '', null, 'buyer', '20190718-134600', '20190719-224928');
+INSERT INTO `user` VALUES ('654987321', '123456', null, null, null, null, '123@126.com', null, null, '20190718-164750', '20190718-164750');

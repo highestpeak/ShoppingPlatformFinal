@@ -204,7 +204,7 @@
                             <tr>
                                 <th class="item-id">Select</th>
                                 <th class="product-thumbnail">Select</th>
-                                <th class="product-thumbnail">Item</th>
+                                <%--<th class="product-thumbnail">Item</th>--%>
                                 <th class="product-name">Product Name</th>
                                 <th class="product-quantity">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                                 <th class="product-unit-price">Unit Price</th>
@@ -334,18 +334,18 @@
 <script>
     $(function(){
         var user_id="111111";
-        var urlSend="http://localhost:8080/shoppingCart/?userId="+user_id;
+        var urlSend="http://localhost:8080/shoppingCart/?user_id="+user_id;
         $.ajax({
             type: "GET",
-            url: ,urlSend,//请求controller方法
+            url:urlSend,//请求controller方法
             dataType: "json",
             async: false, //同步请求，注意此字段
             success: function (data) {
-
+                console.log(data);
                 if(data.success == true){
 
                     var $tbody = $("#tbodyId");
-                    var gl = data.cartList;
+                    var gl = data.result;
                     $.each(gl,function (i,e) {
                         if(gl.length == 0){
                             var $trError = $("<tr>").append('<input value="您还没有加入任何商品">');
@@ -354,23 +354,27 @@
 
                         }
                         var $tda = $("<td >").append('<input type="checkbox" name="ID">');
-                        var $tdc = $("<td class=\"item-id\">").append('<input value="我是商品id">');
-                        var $tdProductName = $("<td data-title=\"Product Name\" class=\"product-name\">").append("<a>商品名称</a>");
+                        var $tdc = $("<td class=\"item-id\">").append('<input>').html(e["relationId"]);
+                        var $tdProductName = $("<td data-title=\"Product Name\" class=\"product-name\">").append("<a>").html(e["name"]);
+                        // var url = e["pictureUrl"];
+                        // var $tdUrl = $("<td >").append('<a href=url>');
+                        var $input = $("<input name=\"quantity1\" class=\"qty\" type=\"text\">");
+                        $input.attr("value",e["quantity"]);
                         var $div = $("<div class=\"prd-quantity\" data-title=\"Quantity\">")
                             .append("<input value=\"-\" class=\"qtyminus btn\" data-field=\"quantity1\" type=\"button\">")
-                            .append("<input name=\"quantity1\" value=\"0\" class=\"qty\" type=\"text\">")
+                            .append($input)
                             .append("<input value=\"+\" class=\"qtyplus btn\" data-field=\"quantity1\" type=\"button\">");
                         var $tdQuantity = $("<td data-title=\"Quantity\" class=\"product-quantity\">").append($div);
                         var $tr = $("<tr class=\"cart_item\">")
                             .append($tdc)
                             .append($tda)
-                            .append($("<td>").html("a"))
+                            // .append($("<td>").html("a"))
                             .append($tdProductName)
                             // .append($("<td>").html("Mens Causual Shoe"))
                             .append($tdQuantity)
                             // .append($("<td>").html("a"))
-                            .append($("<td data-title=\"Unit Price\" class=\"product-unit-price\">").html("$550"))
-                            .append($("<td data-title=\"Total\" class=\"product-subtotal\">").html("$550"));
+                            .append($("<td data-title=\"Unit Price\" class=\"product-unit-price\">").html(e["unitPrice"]))
+                            .append($("<td data-title=\"Total\" class=\"product-subtotal\">").html(e["totalPrice"]));
                         var $button_1 = document.createElement("a");
                         $button_1.text = "保存";
                         $button_1.className = "btn btn-xs btn-info btn_mod";
@@ -398,17 +402,18 @@
             var dataSend = {
                 id: goods_id
             };
-
+            var relation_id = $tr.find('td').eq(0).html();
+            var urlSend = "http://localhost:8080/shoppingCart/"+relation_id;
             layer.confirm('确定删除: ' + goods_name + "?", {icon: 3, title: '提示'}, function (index) {
-                layer.close(index);
+
                 $.ajax({
                     type: "DELETE",
-                    url: "http://localhost:8080//shoppingcarts/",
-                    data: JSON.stringify(dataSend),
+                    url: urlSend,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: false,
                     success: function (data) {
+                        console.log(data);
                         if (data.success == true) {
                             layer.alert('删除成功！', {icon: 1, closeBtn: 0}, function (index) {
                                 window.location.reload();
@@ -419,6 +424,7 @@
                         }
                     }
                 });
+                layer.close(index);
             });
         });
         $(".main-container").on("click", ".btn_mod", function(){
@@ -426,28 +432,28 @@
             var $tr = $(this).parents("tr");
             var goods_id = "1";
             var goods_name = $tr.find("td:eq(1)").html();
-            var quantity = $tr.find('td').eq(4).find('div').eq(0).find('input').eq(1).val();
+            var quantity = $tr.find('td').eq(3).find('div').eq(0).find('input').eq(1).val();
             // var id = $tr.find('td').eq(0).find('input').eq(0).val();
             // var quantity = document.getElementById("quantity1").value;
-            var dataSend = {
-                goods_id:goods_id,
-                goods_name:goods_name,
-                quantity:quantity
-            };
+
             // console.log(dataSend);
             layer.confirm('是否保存 ', function (index) {
                 layer.close(index);
-                var relationId=0;
-                var newNum=11;
-                var urlSend="http://localhost:8080/shoppingcarts/?relationId="+relationId+"&newNum="+newNum;
+                var relation_id = $tr.find('td').eq(0).html();
+                console.log(relation_id);
+                var dataSend = {
+                    new_quantity:quantity
+                };
+                var urlSend="http://localhost:8080/shoppingCart/"+relation_id;
                 $.ajax({
-                    type: "POST",
+                    type: "PUT",
                     url: urlSend,
                     data: JSON.stringify(dataSend),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: false,
                     success: function (data) {
+                        console.log(data);
                         if (data.success == true) {
                             layer.alert('保存成功！', {icon: 1, closeBtn: 0}, function (index) {
                                 window.location.reload();
@@ -457,60 +463,12 @@
                         }
                     }
                 });
+
             });
         });
     })
 </script>
 <script type="text/javascript">
-    function toMain(){
-        document.form1.action="${pageContext.request.contextPath}/page/login";
-        document.form1.submit();
-    }
-    function updateTrolley(){
-        // document.getElementById("update_id").value=update_id;
-        // document.getElementById("quantity").value=value;
-        document.form1.action="${pageContext.request.contextPath}/updateTrolley"
-        document.form1.submit();
-    }
-    function setRemoveId(remove_id){
-        document.getElementById("remove_id").value=remove_id;
-        document.form1.action="${pageContext.request.contextPath}/removeItem"
-        document.form1.submit();
-    }
-    function submitOrderList(){
-        var oUser_id =document.getElementById("user_id").value;
-        var oEmail =document.getElementById("verify").value;
-        var oNewVerify = document.getElementById("email").value;
-        var dataSend={
-            user_id:oUser_id,
-            email:oEmail,
-            newVerify:oNewVerify
-        };
-        $.ajax({
-            type:"POST",
-            url:"http://localhost:8080/user/newVerify",
-            data: JSON.stringify(dataSend),//放置数据的字段    
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            async: false, //同步请求，注意此字段    
-            success: function (data) {
-                console.log(data);
-                if(data["user existed"] == false){
-                    layer.alert("用户名不存在");
-                }
-                else if(data["already login"] == false){
-                    layer.alert("用户在线");
-                }
-                else if(data["success"] == false){
-                    layer.alert("找回失败");
-                }
-                else if(data["success"] == true){
-                    layer.alert("找回成功");
-                }
-                // 在这里取出数据  
-            }
-        })
-    }
     function submitOrder(){
         layer.confirm('确定购买选中的商品?', function(index){
             var ID = document.getElementsByName("ID");
@@ -546,7 +504,6 @@
                     else if(!data["success"]){
                         layer.alert("提交失败");
                     }
-                    // 在这里取出数据  
                 }
             })
 
