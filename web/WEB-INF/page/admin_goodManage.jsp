@@ -284,7 +284,6 @@
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

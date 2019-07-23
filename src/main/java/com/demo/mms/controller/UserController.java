@@ -144,7 +144,7 @@ public class UserController {
 
     @RequestMapping("/getInfo")
     @ResponseBody
-    public Object getUserInfo(User user){
+    public Object getUserInfo(@RequestBody User user){
         System.out.println("in getUserInfo");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);

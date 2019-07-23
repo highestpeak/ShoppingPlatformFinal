@@ -345,10 +345,12 @@
                     async: false, //同步请求，注意此字le段    
                     success: function (data) {
                         if(data.success == true){
-                            layer.alert("保存成功！");
+                            layer.alert('保存成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                                window.location.reload();
+                            });
 
                         }else{
-                            layer.alert("保存失败！");
+                            layer.alert('保存失败！', { icon: 2, closeBtn: 0 });
                         }
 
 
