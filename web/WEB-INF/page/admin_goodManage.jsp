@@ -133,8 +133,8 @@
                                     <table id="goodTable" class="table">
                                         <thead>
                                             <tr>
-                                                <th style="width: 10%">ID</th>
-                                                <th>Store ID</th>
+                                                <%--<th style="width: 10%">ID</th>--%>
+                                                <%--<th>Store ID</th>--%>
                                                 <th>Name</th>
                                                 <th>classify name</th>
                                                 <th>price</th>
@@ -345,8 +345,8 @@
                     var gl = data.goodsList;
                     $.each(gl,function (i,e) {
                         var $tr = $("<tr>")
-                            .append($("<td>").html(e["goods_id"]))
-                            .append($("<td>").html(e["store_id"]))
+                            // .append($("<td>").html(e["goods_id"]))
+                            // .append($("<td>").html(e["store_id"]))
                             .append($("<td>").html(e["goods_name"]))
                             .append($("<td>").html(e["classify_name"]))
                             .append($("<td>").html(e["price"]))
