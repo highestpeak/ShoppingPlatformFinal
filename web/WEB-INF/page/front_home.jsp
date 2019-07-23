@@ -331,9 +331,9 @@
 
                         <!-- Product -->
                         <!-- 循环 -->                      
-                        <li v-bind:class="good.classify_name" v-for="good in goods">
+                        <li v-bind:class="good.classify_name" v-for="good in goods" style="height: 446px; width: 300px">
                             <a v-bind:href="good.href">
-                                <img src="${pageContext.request.contextPath}/localLib/images/blog-2.jpg" alt="product picture" height="300px" width="270px">
+                                <img v-bind:src="good.pic_url" alt="product picture" style="height: 300px; width: 270px">
                                 <h5>{{good.goods_name}}</h5>
                                 <span>￥：</span>
                                 <span class="price">{{good.price}}</span>
