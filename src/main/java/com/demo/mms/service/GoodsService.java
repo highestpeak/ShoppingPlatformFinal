@@ -6,6 +6,7 @@ import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
 import com.demo.mms.common.vo.GoodsAddWithClassifyVO;
 import com.demo.mms.common.vo.GoodsOnTimeVO;
+import com.demo.mms.common.vo.GoodsWithClassifyVO;
 import com.demo.mms.common.vo.StarGoodsGetVO;
 
 import java.util.ArrayList;
@@ -61,4 +62,6 @@ public interface GoodsService {
     Map<String,Object> getStarGoods(String user_id, ArrayList<StarGoodsGetVO> starGoodsVOs);
 
     Map<String,Object> getGoodsOnWithTime(String store_id,Map<String,ArrayList<String>> goodsOnTimeVOS) throws Exception;
+
+    Map<String,Object> getAllGoodsSelled(Store store,ArrayList<GoodsWithClassifyVO> goodsList);
 }

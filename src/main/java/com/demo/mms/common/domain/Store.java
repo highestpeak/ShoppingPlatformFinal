@@ -2,6 +2,7 @@ package com.demo.mms.common.domain;
 
 public class Store {
     private String store_id;
+    private String store_name;
     private String note;
     private String store_pic_url;
     private String store_classify;
@@ -9,6 +10,14 @@ public class Store {
     private String certification;
     private String create_time;
     private String update_time;
+
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public void setStore_name(String store_name) {
+        this.store_name = store_name;
+    }
 
     public String getStore_id() {
         return store_id;
