@@ -169,44 +169,21 @@
                             <tr>
                                 <th class="product-thumbnail" style="width: 20%">商品实物图</th>
                                 <th class="product-name" style="width: 20%">商品名称</th>
-                                <th class="product-unit-price" style="width: 10%">上次浏览日期</th>
+                                <th class="product-unit-price" style="width: 20%">上次浏览日期</th>
                                 <th class="product-unit-price" style="width: 10%">原价</th>
                                 <th class="product-unit-price" style="width: 10%">现价</th>
-                                <th class="product-remove" style="width: 10%">操作</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Last Date" class="product-last-date">2019/7/19</td>
-                                <td data-title="Last Price" class="product-last-price">￥550</td>
-                                <td data-title="Now Price" class="product-now-price">￥350</td>
-                                <td data-title="Remove" class="product-remove"><a class="btn btn_del_history"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Last Date" class="product-last-date">2019/7/19</td>
-                                <td data-title="Last Price" class="product-last-price">￥550</td>
-                                <td data-title="Now Price" class="product-now-price">￥350</td>
-                                <td data-title="Remove" class="product-remove"><a class="btn btn_del_history" ><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Last Date" class="product-last-date">2019/7/19</td>
-                                <td data-title="Last Price" class="product-last-price">￥550</td>
-                                <td data-title="Now Price" class="product-now-price">￥350</td>
-                                <td data-title="Remove" class="product-remove"><a class="btn btn_del_history"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
+                            <tbody id="tbodyId">
+                            </tbody>
+                            <tfoot>
                             <tr>
                                 <td class="action" colspan="6">
                                     <a href="${pageContext.request.contextPath}/front/home" title="Continue shopping">去购物</a>
                                     <a href="${pageContext.request.contextPath}/front/history" title="update shopping cart">刷新</a>
                                 </td>
                             </tr>
-                            </tbody>
+                            </tfoot>
                         </table>
                     </form>
                 </div>
@@ -265,26 +242,48 @@
 <!-- layer -->
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+
 
 <script>
-    $(function () {
+    $(function(){
+        var dataSend={
+            user:{
+                user_id:"654321"
+            },
+            goodsClassify:{
+                classify_name:"all"
+            }
+        }
 
-        //$(".btn_del_history").click(function () {
-            //alert("aaaa");
-        //});
-         $(".container").on("click", ".btn_del_history", function () {
-             var $tr = $(this).parents("tr");
-             //var name = $tr.find("td:eq(1)").html();
-             layer.confirm('是否删除该游览记录', {icon: 3, title: '提示'}, function (index) {
-                 $tr.remove();
-                 layer.close(index);
-             })
-         });
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/user/viewHistory",//请求controller方法   
+            data: JSON.stringify(dataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false, //同步请求，注意此字段    
+            success: function (data) {
+                if(data.success == true){
+                    var $tbody = $("#tbodyId");
+                    var uf = data.viewedHistoryReturn;
+                    $.each(uf,function (i,e) {
+                        var $tr = $("<tr>")
+                            .append($("<td>").html(e["pic_url"]))
+                            .append($("<td>").html(e["goods_name"]))
+                            .append($("<td>").html(e["view_time"]))
+                            .append($("<td>").html(e["price_before"]))
+                            .append($("<td>").html(e["price_now"]))
+                        $tbody.append($tr);
 
-    });
+                    });
+                }else{
 
+                    layer.alert("数据请求失败！");
+                }
+            }
+        });
+    })
 </script>
-
 </body>
 </html>
