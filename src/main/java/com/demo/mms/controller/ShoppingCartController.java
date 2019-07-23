@@ -1,12 +1,13 @@
 package com.demo.mms.controller;
 
-
-import com.demo.mms.common.domain.Buyer;
-import com.demo.mms.common.domain.Goods;
+import com.demo.mms.dto.NewShoppingCartRelationDTO;
+import com.demo.mms.dto.ShoppingCartDTO;
+import com.demo.mms.dto.UpdateGoodsQuantityDTO;
 import com.demo.mms.service.ShoppingCartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +15,9 @@ import java.util.Map;
 import com.demo.mms.common.utils.ControllerUtility;
 
 
+
+@RestController
 @RequestMapping("/shoppingCart")
-@Controller
 public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
@@ -37,11 +39,11 @@ public class ShoppingCartController {
 
     @GetMapping("/")
     @ResponseBody
-    public Object getUserShoppingCart(String userId) {
+    public Object getUserShoppingCart(String user_id) {
         Map<String, Object> result = new HashMap<>();
-        Collection<Object> relations;
+        Collection<ShoppingCartDTO> relations;
         try {
-            relations = shoppingCartService.getShoppingCartGoodsOfUserByUserId(userId);
+            relations = shoppingCartService.getShoppingCartGoodsOfUserByUserId(user_id);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
@@ -51,12 +53,45 @@ public class ShoppingCartController {
     }
 
 
+//    @PostMapping("/")
+//    @ResponseBody
+//    public Object insertGoods(@RequestBody String goods_id, @RequestBody String user_id, @RequestBody Integer quantity) {
+//        Map<String, Object> result = new HashMap<>();
+//        try {
+//            shoppingCartService.insertGoodsToShoppingCartOfUser(goods_id, user_id, quantity);
+//        } catch (Exception e) {
+//            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
+//            return result;
+//        }
+//        ControllerUtility.insertSuccessFlag(result);
+//        return result;
+//    }
+
     @PostMapping("/")
     @ResponseBody
-    public Object insertGoods(String goodsId, String buyerId, Integer num) {
+    public Object insertGoods(@RequestBody NewShoppingCartRelationDTO args) {
         Map<String, Object> result = new HashMap<>();
         try {
-            shoppingCartService.insertGoodsToShoppingCartOfUser(goodsId, buyerId, num);
+            shoppingCartService.insertGoodsToShoppingCartOfUser(args.getGoods_id(), args.getUser_id(), args.getQuantity());
+        } catch (Exception e) {
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
+            return result;
+        }
+        ControllerUtility.insertSuccessFlag(result);
+        return result;
+    }
+
+    @PutMapping("/{relation_id}")
+    @ResponseBody
+    public Object updateGoodsNum(@PathVariable String relation_id, @RequestBody UpdateGoodsQuantityDTO args) {
+        Map<String, Object> result = new HashMap<>();
+        int new_quantity = args.getQuantity();
+        if (new_quantity <= 0) {
+            ControllerUtility.insertErrorMessageAndFailFlag(result, "assertion failed: new_quantity > 0");
+            return result;
+        }
+        try {
+            shoppingCartService.modifyGoodNumber(relation_id, new_quantity);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
@@ -66,30 +101,12 @@ public class ShoppingCartController {
     }
 
 
-    @PutMapping("/")
+    @DeleteMapping("/{relation_id}")
     @ResponseBody
-    public Object updateGoodsNum(String relationId, Integer newNum) {
-        Map<String, Object> result = new HashMap<>();
-        if (newNum <= 0) {
-            ControllerUtility.insertErrorMessageAndFailFlag(result, "assertion failed: newNum > 0");
-        }
-        try {
-            shoppingCartService.modifyGoodNumber(relationId, newNum);
-        } catch (Exception e) {
-            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
-            return result;
-        }
-        ControllerUtility.insertSuccessFlag(result);
-        return result;
-    }
-
-
-    @DeleteMapping("/")
-    @ResponseBody
-    public Object deleteGoods(String relationId) {
+    public Object deleteGoods(@PathVariable String relation_id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            shoppingCartService.deleteGoodFromCart(relationId);
+            shoppingCartService.deleteGoodFromCart(relation_id);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;

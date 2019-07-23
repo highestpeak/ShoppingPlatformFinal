@@ -3,16 +3,16 @@ package com.demo.mms.service;
 import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.InCartOf;
 import com.demo.mms.common.domain.Buyer;
+import com.demo.mms.dto.ShoppingCartDTO;
 
 import java.util.Collection;
-import java.util.Map;
 
 
 public interface ShoppingCartService {
     Object getInCartOfRelationshipById(String id) throws Exception;
-    Collection<Object> getAllInCartOfRelationships() throws Exception;
-    Collection<Object> getShoppingCartGoodsOfUser(Buyer user) throws Exception;
-    Collection<Object> getShoppingCartGoodsOfUserByUserId(String user) throws Exception;
+    Collection<InCartOf> getAllInCartOfRelationships() throws Exception;
+    Collection<InCartOf> getShoppingCartGoodsOfUser(Buyer user) throws Exception;
+    Collection<ShoppingCartDTO> getShoppingCartGoodsOfUserByUserId(String user) throws Exception;
 
     void insertGoodsToShoppingCartOfUser(String goodsId, String userId, Integer num) throws Exception;
 

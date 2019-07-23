@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,29 +26,30 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public Object getInCartOfRelationshipById(String id) throws Exception {
-        List<Object> results = mapper.selectAllOfUser(id);
-        List<ShoppingCartDTO> ret = new ArrayList<>();
-        for (Object result : results) {
-            InCartOf relation = (InCartOf) result;
-            Goods good = goodsOperateMapper.getGoodById(relation.getGood());
-            ret.add(new ShoppingCartDTO(relation, good));
-        }
-        return ret;
+        InCartOf relation = (InCartOf) mapper.selectById(id);
+        Goods goods = goodsOperateMapper.getGoodById(relation.getGoodsId());
+        return new ShoppingCartDTO(relation, goods);
     }
 
     @Override
-    public Collection<Object> getAllInCartOfRelationships() throws Exception {
+    public Collection<InCartOf> getAllInCartOfRelationships() throws Exception {
         return mapper.selectAll();
     }
 
     @Override
-    public Collection<Object> getShoppingCartGoodsOfUser(Buyer user) throws Exception {
+    public Collection<InCartOf> getShoppingCartGoodsOfUser(Buyer user) throws Exception {
         return mapper.selectAllOfUser(user.getUser_id());
     }
 
     @Override
-    public Collection<Object> getShoppingCartGoodsOfUserByUserId(String user) throws Exception {
-        return mapper.selectAllOfUser(user);
+    public Collection<ShoppingCartDTO> getShoppingCartGoodsOfUserByUserId(String user) throws Exception {
+        Collection<InCartOf> results = mapper.selectAllOfUser(user);
+        Collection<ShoppingCartDTO> ret = new ArrayList<>();
+        for (InCartOf relation : results) {
+            Goods goods = goodsOperateMapper.getGoodById(relation.getGoodsId());
+            ret.add(new ShoppingCartDTO(relation, goods));
+        }
+        return ret;
     }
 
     @Override
