@@ -65,25 +65,12 @@
             /*float:right;*/
             /*width:50%;*/
         /*}*/
+        #trbig{
+            transform:scale(1,1)
+        }
     </style>
 
-    <script type="text/javascript">
-        function toMain(){
-            document.form1.action="${pageContext.request.contextPath}/page/login";
-            document.form1.submit();
-        }
-        function updateTrolley(){
-            // document.getElementById("update_id").value=update_id;
-            // document.getElementById("quantity").value=value;
-            document.form1.action="${pageContext.request.contextPath}/updateTrolley"
-            document.form1.submit();
-        }
-        function setRemoveId(remove_id){
-            document.getElementById("remove_id").value=remove_id;
-            document.form1.action="${pageContext.request.contextPath}/removeItem"
-            document.form1.submit();
-        }
-    </script>
+
 
 </head>
 
@@ -208,16 +195,18 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 cart-table">
                     <form name="form1">
                         <%--<c:if test="${!empty(list)}">--%>
-                        <input name="user_id" value="2017" class="user-id" type="text" >
+                        <input id="user_id" name="user_id" value="2017" class="user-id" type="text" >
                         <input id="remove_id" name="remove_id" value="" class="item-id" type="text" >
                         <input id="update_id" name="update_id" value="" class="item-id" type="text" >
                         <input id="quantity" name="quantity" value="" class="item-id" type="text" >
                         <table class="table table-bordered table-responsive">
                             <thead>
                             <tr>
-                                <th class="product-thumbnail">Item</th>
+                                <th class="item-id">Select</th>
+                                <th class="product-thumbnail">Select</th>
+                                <%--<th class="product-thumbnail">Item</th>--%>
                                 <th class="product-name">Product Name</th>
-                                <th class="product-quantity">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+                                <th class="product-quantity">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                                 <th class="product-unit-price">Unit Price</th>
                                 <th class="product-subtotal">Total</th>
                                 <th class="product-remove">保存</th>
@@ -247,76 +236,47 @@
                                 <%--</tr>--%>
                             <%--</c:forEach>--%>
 
-                            <c:forEach var="x" begin="1" end="5">
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>
-                                <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Quantity" class="product-quantity">
-                                <div class="prd-quantity" data-title="Quantity">
-                                <input value="-" class="qtyminus btn" data-field="quantity1" type="button">
-                                <input id="quantity1" name="quantity1" value="0" class="qty" type="text">
-                                <input value="+" class="qtyplus btn" data-field="quantity1" type="button">
-                                </div>
-                                </td>
-                                <td data-title="Unit Price" class="product-unit-price">$550</td>
-                                <td data-title="Total" class="product-subtotal">$550</td>
-                                <%--<td>--%>
-                                    <%--<button type="button" class="btn_mod" >保存</button>--%>
-                                    <%--<button type="button" class="btn_del" >删除</button>--%>
+                            <%--<c:forEach var="x" begin="1" end="5">--%>
+                            <%--<tr class="cart_item">--%>
+                                <%--<td><input type="checkbox"></td>--%>
+                                <%--<td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>--%>
+                                <%--<td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>--%>
+                                <%--<td data-title="Quantity" class="product-quantity">--%>
+                                <%--<div class="prd-quantity" data-title="Quantity">--%>
+                                <%--<input value="-" class="qtyminus btn" data-field="quantity1" type="button">--%>
+                                <%--<input id="quantity1" name="quantity1" value="0" class="qty" type="text">--%>
+                                <%--<input value="+" class="qtyplus btn" data-field="quantity1" type="button">--%>
+                                <%--</div>--%>
                                 <%--</td>--%>
-                                    <td><a id="a1" class="btn btn-xs btn-info btn_mod" >保存</a></td>
-                                    <td><a id="a2" class="btn btn-xs btn-danger btn_del" >删除</a></td>
-                            </tr>
-                            </c:forEach>
-                            <tr>
+                                <%--<td data-title="Unit Price" class="product-unit-price">$550</td>--%>
+                                <%--<td data-title="Total" class="product-subtotal">$550</td>--%>
+                                <%--&lt;%&ndash;<td>&ndash;%&gt;--%>
+                                    <%--&lt;%&ndash;<button type="button" class="btn_mod" >保存</button>&ndash;%&gt;--%>
+                                    <%--&lt;%&ndash;<button type="button" class="btn_del" >删除</button>&ndash;%&gt;--%>
+                                <%--&lt;%&ndash;</td>&ndash;%&gt;--%>
+                                    <%--<td><a id="a1" class="btn btn-xs btn-info btn_mod" >保存</a></td>--%>
+                                    <%--<td><a id="a2" class="btn btn-xs btn-danger btn_del" >删除</a></td>--%>
+                            <%--</tr>--%>
+                            <%--</c:forEach>--%>
+                            <tr id="trbig" >
                                 <td class="action" colspan="6">
                                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                                    <a href="javascript:void(0);"  title="Continue shopping" onclick="toMain()">Continue shopping</a>
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    <a href="${pageContext.request.contextPath}/front/home"  title="Continue shopping" >Continue shopping</a>
+
+                                    <a href="javascript:void(0);"  title="Submit Order" onclick="submitOrder()">Submit Order</a>
                                 </td>
-                                <td></td>
+
                             </tr>
                             <%--</c:if>--%>
-                            <c:if test="${empty(list)}">
-                                对不起，您还没有购买任何商品！
-                            </c:if>
+
 
                             </tbody>
                         </table>
                     </form>
                 </div><!-- Cart Table /- -->
                 <!-- Coupon -->
-                <div class="col-md-offset-4 col-md-4 col-sm-6 col-xs-6 coupon">
-                    <div class="coupon-box">
-                        <h4>coupon code</h4>
-                        <h6>If You Have A Coupon Code Enter Here</h6>
-                        <form>
-                            <input type="text" class="form-control" placeholder="Coupon Code" />
-                            <input type="submit" value="apply code" />
-                        </form>
-                    </div>
-                </div><!-- Coupon /- -->
-                <div class="col-md-4 col-sm-6 col-xs-6 cart-collaterals">
-                    <div class="cart_totals">
-                        <h3>cart totals</h3>
-                        <table>
-                            <tr>
-                                <th>Sub Total</th>
-                                <td>$550</td>
-                            </tr>
-                            <tr>
-                                <th>Shipping</th>
-                                <td>Free</td>
-                            </tr>
-                            <tr>
-                                <th>Grand Total</th>
-                                <td>$550</td>
-                            </tr>
-                        </table>
-                        <div class="wc-proceed-to-checkout">
-                            <a href="#" class="checkout-button button alt wc-forward">Proceed to Checkout</a>
-                        </div>
-                    </div>
-                </div>
+
             </div><!-- Container /- -->
         </div><!-- Cart /- -->
 
@@ -373,66 +333,87 @@
 
 <script>
     $(function(){
-        var dataSend = {
-            user_id:"111111"
-        };
-
+        var user_id="111111";
+        var urlSend="http://localhost:8080/shoppingCart/?user_id="+user_id;
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/order/",//请求controller方法   
-            data: JSON.stringify(dataSend),//发送的数据  
-            contentType: "application/json; charset=utf-8",
+            url:urlSend,//请求controller方法
             dataType: "json",
-            async: false, //同步请求，注意此字段    
+            async: false, //同步请求，注意此字段
             success: function (data) {
+                console.log(data);
                 if(data.success == true){
 
                     var $tbody = $("#tbodyId");
-                    var gl = data.cartList;
+                    var gl = data.result;
                     $.each(gl,function (i,e) {
-                        var $tr = $("<tr>")
-                            .append($("<td>").html(e["goods_id"]))
-                            .append($("<td>").html(e["product_name"]))
-                            .append($("<td>").html(e["quantity"]))
-                            .append($("<td>").html(e["price"]))
-                            .append($("<td>").html(e["total"]));
+                        if(gl.length == 0){
+                            var $trError = $("<tr>").append('<input value="您还没有加入任何商品">');
+                            $tbody.prepend($trError);
+                        }else{
+
+                        }
+                        var $tda = $("<td >").append('<input type="checkbox" name="ID">');
+                        var $tdc = $("<td class=\"item-id\">").append('<input>').html(e["relationId"]);
+                        var $tdProductName = $("<td data-title=\"Product Name\" class=\"product-name\">").append("<a>").html(e["name"]);
+                        // var url = e["pictureUrl"];
+                        // var $tdUrl = $("<td >").append('<a href=url>');
+                        var $input = $("<input name=\"quantity1\" class=\"qty\" type=\"text\">");
+                        $input.attr("value",e["quantity"]);
+                        var $div = $("<div class=\"prd-quantity\" data-title=\"Quantity\">")
+                            .append("<input value=\"-\" class=\"qtyminus btn\" data-field=\"quantity1\" type=\"button\">")
+                            .append($input)
+                            .append("<input value=\"+\" class=\"qtyplus btn\" data-field=\"quantity1\" type=\"button\">");
+                        var $tdQuantity = $("<td data-title=\"Quantity\" class=\"product-quantity\">").append($div);
+                        var $tr = $("<tr class=\"cart_item\">")
+                            .append($tdc)
+                            .append($tda)
+                            // .append($("<td>").html("a"))
+                            .append($tdProductName)
+                            // .append($("<td>").html("Mens Causual Shoe"))
+                            .append($tdQuantity)
+                            // .append($("<td>").html("a"))
+                            .append($("<td data-title=\"Unit Price\" class=\"product-unit-price\">").html(e["unitPrice"]))
+                            .append($("<td data-title=\"Total\" class=\"product-subtotal\">").html(e["totalPrice"]));
                         var $button_1 = document.createElement("a");
-                        $button_1.text = "修改";
-                        $button_1.className = "btn_mod";
+                        $button_1.text = "保存";
+                        $button_1.className = "btn btn-xs btn-info btn_mod";
                         var $button_2 = document.createElement("a");
                         $button_2.text = "删除";
-                        $button_2.className = "btn_del";
-                        $button_2.style = "margin-left:10px";
-                        var $td = $("<td>").append($button_1).append($button_2);
-                        $tr.append($td);
-                        $tbody.append($tr);
+                        $button_2.className = "btn btn-xs btn-danger btn_del";
+                        var $td1 = $("<td>").append($button_1);
+                        var $td2 = $("<td>").append($button_2)
+                        $tr.append($td1).append($td2);
+                        $tbody.prepend($tr);
                     });
                 }else{
                     layer.alert("数据请求失败！");
                 }
             }
         });
-    })
+    });
 </script>
 <script>
     $(function(){
         $(".main-container").on("click", ".btn_del", function() {
             var $tr = $(this).parents("tr");
             var goods_id = $tr.find("td:eq(0)").html();
-            var goods_name = $tr.find("td:eq(1)").html();
+            var goods_name = $tr.find("td:eq(2)").html();
             var dataSend = {
                 id: goods_id
             };
-
+            var relation_id = $tr.find('td').eq(0).html();
+            var urlSend = "http://localhost:8080/shoppingCart/"+relation_id;
             layer.confirm('确定删除: ' + goods_name + "?", {icon: 3, title: '提示'}, function (index) {
+
                 $.ajax({
                     type: "DELETE",
-                    url: "http://localhost:8080//shoppingcarts/",
-                    data: JSON.stringify(dataSend),
+                    url: urlSend,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: false,
                     success: function (data) {
+                        console.log(data);
                         if (data.success == true) {
                             layer.alert('删除成功！', {icon: 1, closeBtn: 0}, function (index) {
                                 window.location.reload();
@@ -443,6 +424,7 @@
                         }
                     }
                 });
+                layer.close(index);
             });
         });
         $(".main-container").on("click", ".btn_mod", function(){
@@ -450,35 +432,85 @@
             var $tr = $(this).parents("tr");
             var goods_id = "1";
             var goods_name = $tr.find("td:eq(1)").html();
-            // var quantity = $tr.find("td:eq(2)").html();
-            var quantity = document.getElementById("quantity1").value;
-            var dataSend = {
-                goods_id:goods_id,
-                goods_name:goods_name,
-                quantity:quantity
-            };
+            var quantity = $tr.find('td').eq(3).find('div').eq(0).find('input').eq(1).val();
+            // var id = $tr.find('td').eq(0).find('input').eq(0).val();
+            // var quantity = document.getElementById("quantity1").value;
+
             // console.log(dataSend);
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/shoppingcarts/",
-                data: JSON.stringify(dataSend),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: function (data) {
-                    if(data.success == true){
-                        layer.alert('保存成功！', { icon: 1, closeBtn: 0 }, function (index) {
-                            window.location.reload();
-                        });
-                    }else{
-                        layer.alert('保存失败！', { icon: 2, closeBtn: 0 });
+            layer.confirm('是否保存 ', function (index) {
+                layer.close(index);
+                var relation_id = $tr.find('td').eq(0).html();
+                console.log(relation_id);
+                var dataSend = {
+                    new_quantity:quantity
+                };
+                var urlSend="http://localhost:8080/shoppingCart/"+relation_id;
+                $.ajax({
+                    type: "PUT",
+                    url: urlSend,
+                    data: JSON.stringify(dataSend),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        console.log(data);
+                        if (data.success == true) {
+                            layer.alert('保存成功！', {icon: 1, closeBtn: 0}, function (index) {
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.alert('保存失败！', {icon: 2, closeBtn: 0});
+                        }
                     }
-                }
+                });
+
             });
         });
     })
 </script>
+<script type="text/javascript">
+    function submitOrder(){
+        layer.confirm('确定购买选中的商品?', function(index){
+            var ID = document.getElementsByName("ID");
+            for (var i = 0; i < ID.length; i++) {
+                var array = new Array();
+                if(ID[i].checked){
+                    var $tr = $(ID[i]).parents("tr");                     //
+                    var id = $tr.find('td').eq(0).find('input').eq(0).val();
+                    console.log(id);
+                    array.push(id);
+                    console.log(array);
+                }
+            }
+            layer.close(index);
+            var oUser_id = document.getElementById(user_id);
+            var dataSend={
+                user_id:oUser_id,
+                array:array
+            };
+            $.ajax({
+                type:"POST",
+                url:"http://localhost:8080/??",
+                data: JSON.stringify(dataSend),//放置数据的字段    
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false, //同步请求，注意此字段    
+                success: function (data) {
+                    console.log(data);
+                    if(data["success"]){
+                        layer.alert("提交成功");
+                        window.location.reload();
+                    }
+                    else if(!data["success"]){
+                        layer.alert("提交失败");
+                    }
+                }
+            })
 
+        });
+
+    }
+</script>
 
 </body>
 </html>

@@ -26,8 +26,32 @@ public class GoodsController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/getAllGoodsSelled")
+    @ResponseBody
+    public Object goodsFrontQuery(@RequestBody GoodsQueryVO goodsQueryVO){
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        ArrayList goodsList=new ArrayList();
+        Map<String,Object> rsService=null;
+        rsService=goodsService.getAllGoodsSelled(goodsQueryVO.getStore(),goodsList);
+        if(!rsService.containsKey("rootClassList") && rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        //处理返回页面的需要填写的值
+        //code here
+        //---
+        if(!rsService.containsKey("rootClassList") && rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.put("goodsList",goodsList);
+        rs.putAll(rsService);
+        return rs;
+    }
+
     //查询商品
-    //按分类查询
+    //按最小的分类查询
     //获取一个classify的所有商品，即list
     @RequestMapping("/getByClassify")
     @ResponseBody

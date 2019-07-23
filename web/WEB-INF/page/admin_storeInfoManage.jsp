@@ -136,11 +136,14 @@
 
                                     <h3 id="store_id" class="profile-username text-center">{{store_id}}</h3>
                     
-                                    <p id="store_note" class="text-muted text-center">{{note}}</p>
+                                    <p id="store_name" class="text-muted text-center">{{store_name}}</p>
                     
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
                                             <b>Pic Url</b> <a class="pull-right" id="store_pic" v-bind:href="store_pic_url">{{store_pic_url}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>note</b> <a id="store_note" class="pull-right">{{note}}</a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Classify</b> <a id="store_classify" class="pull-right">{{store_classify}}</a>
@@ -181,6 +184,12 @@
         <form class="form-horizontal">
             <div class="box-body">
     
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">store_name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="mod_name">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Note</label>
                     <div class="col-sm-10">
@@ -249,6 +258,7 @@
             el: '#store_info',
             data: {
                 store_id: "",
+                store_name: "",
                 note: "",
                 store_pic_url: "",
                 store_classify: "",
@@ -273,6 +283,7 @@
 
                     vm.store_id = info.store_id;
                     vm.note = info.note;
+                    vm.store_name=info.store_name,
                     vm.store_pic_url = info.store_pic_url;
                     vm.store_classify = info.store_classify;
                     vm.level = info.level;
@@ -291,6 +302,7 @@
 
         $(".content-wrapper").on("click", ".btn-block", function(){
             $("#mod_note").attr("value", vm.note);
+            $("#mod_name").attr("value", vm.store_name);
             $("#mod_classify").attr("value", vm.store_classify);
             $("#mod_level").attr("value", vm.level);
             $("#mod_certification").attr("value", vm.certification);
@@ -313,6 +325,7 @@
                     },
                     newStore: {
                         note: $("#mod_note").val(),
+                        store_name: $("#mod_name").val(),
                         store_pic_url: $("#mod_picurl").val(),
                         store_classify: $("#mod_classify").val(),
                         level: $("#mod_level").val(),
