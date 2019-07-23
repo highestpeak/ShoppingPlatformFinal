@@ -6,6 +6,7 @@ import com.demo.mms.common.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Map;
 
 public interface UserService {
@@ -34,4 +35,8 @@ public interface UserService {
     Map<String,Object> getViewHistory(Store store, GoodsClassify goodsClassify);
 
     Map<String,Object> getUserStar(String user_id);
+
+    Map<String,Object> delUserStar(String user_id,String goodsStar_id);
+
+    Map<String,Object> getUserNewWithTime(String goodsStar_id,Map<String,ArrayList<String>> uerOnTimeVOS) throws Exception;
 }

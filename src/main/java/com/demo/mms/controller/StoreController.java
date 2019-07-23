@@ -1,9 +1,12 @@
 package com.demo.mms.controller;
 
+import com.demo.mms.common.domain.OnSale;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
 import com.demo.mms.common.utils.ProjectFactory;
+import com.demo.mms.common.vo.OnSaleGoodsVO;
 import com.demo.mms.common.vo.StoreCrudVO;
+import com.demo.mms.common.vo.UpdateOnSaleVO;
 import com.demo.mms.common.vo.ViewHistoryGetVO;
 import com.demo.mms.service.GoodsService;
 import com.demo.mms.service.StoreService;
@@ -79,7 +82,7 @@ public class StoreController {
     //分类+数量
     @RequestMapping("/getChartOfClassify")
     @ResponseBody
-    public Object chartClassifyGet(Store store){
+    public Object chartClassifyGet(@RequestBody Store store){
         System.out.println("in chartClassifyGet store");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
@@ -134,11 +137,94 @@ public class StoreController {
         return rs;
     }
 
-    //进行商品促销---增删查改
-    @RequestMapping("/onSale")
+    //商品上架进行促销
+    @RequestMapping("/addOnSale")
     @ResponseBody
-    public Object modifyOnSale(@RequestBody Store store){
-        return null;
+    public Object addOnSale(@RequestBody OnSale onSale){
+        System.out.println("in addOnSale store");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=
+                storeService.setOnSale(onSale);
+//        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //修改商品促销信息
+    @RequestMapping("/updateOnSale")
+    @ResponseBody
+    public Object updateOnSale(@RequestBody UpdateOnSaleVO updateOnSaleVO){
+        System.out.println("in updateOnSale store");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=
+                storeService.updateOnSaleGoods(
+                        updateOnSaleVO.getOn_sale_id(),
+                        updateOnSaleVO.getDiscount(),
+                        updateOnSaleVO.getDue_time(),
+                        updateOnSaleVO.getNote());
+//        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //删除商品促销信息
+    @RequestMapping("/delOnSale")
+    @ResponseBody
+    public Object delOnSale(@RequestBody String on_sale_id){
+        System.out.println("in delOnSale store");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        Map<String,Object> rsService=
+                storeService.delOnSale(on_sale_id);
+//        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        return rs;
+    }
+
+    //删除商品促销信息
+    @RequestMapping("/getOnSale")
+    @ResponseBody
+    public Object getOnSale(@RequestBody String store_id){
+        System.out.println("in getOnSale store");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        ArrayList<OnSaleGoodsVO> onSaleGoodsVOs=new ArrayList<>();
+        Map<String,Object> rsService=
+                storeService.getOnSaleGoods(store_id,onSaleGoodsVOs);
+//        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.put("OnSaleGoods List",onSaleGoodsVOs);
+        return rs;
     }
 
     //获取商店某天发生的事情的info json
@@ -169,4 +255,5 @@ public class StoreController {
         rs.put("userList",users);
         return rs;
     }
+
 }

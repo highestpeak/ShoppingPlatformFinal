@@ -4,6 +4,9 @@ import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
+import com.demo.mms.common.vo.GoodsAddWithClassifyVO;
+import com.demo.mms.common.vo.GoodsOnTimeVO;
+import com.demo.mms.common.vo.StarGoodsGetVO;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -44,7 +47,7 @@ public interface GoodsService {
 
     Map<String,Object> delStoreGoods(Store store, ArrayList<Goods> goodsToDel);
 
-    Map<String,Object> addStoreGoods(Store store, ArrayList<Goods> goodsToAdd);
+    Map<String,Object> addStoreGoods(Store store, ArrayList<GoodsAddWithClassifyVO> goodsToAdd);
 
     /*
     根据商品id，寻找一个商品的信息并返回
@@ -54,4 +57,8 @@ public interface GoodsService {
     Map<String,Object> starGoods(User user, Store store, Goods goods);
 
     Map<String,Object> starClassify(User user, GoodsClassify goodsClassify);
+
+    Map<String,Object> getStarGoods(String user_id, ArrayList<StarGoodsGetVO> starGoodsVOs);
+
+    Map<String,Object> getGoodsOnWithTime(String store_id,Map<String,ArrayList<String>> goodsOnTimeVOS) throws Exception;
 }

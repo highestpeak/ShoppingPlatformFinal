@@ -3,6 +3,7 @@ package com.demo.mms.dao;
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.vo.GoodsViewedQueryTestVO;
 import com.demo.mms.common.vo.GoodsViewedQueryVO;
+import com.demo.mms.common.vo.StarGoodsGetVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
@@ -41,4 +42,14 @@ public interface UserOperateMapper {
     void insertInterestedClassify(ClassifyStar classifyStar);
 
     ArrayList<User> queryAllUser();
+
+    ArrayList<StarGoodsGetVO> getStarGoods(String user_id, String user_id1);
+
+    @Select("select * from interested_goods where ${columnKey} = #{valueKey}")
+    GoodsStar queryStar(@Param("columnKey") String columnKey,
+                        @Param("valueKey") String valueKey);
+
+    @Delete("DELETE FROM interested_goods WHERE ${columnKey} = #{valueKey}")
+    void delStar(@Param("columnKey") String columnKey,
+                 @Param("valueKey") String valueKey);
 }

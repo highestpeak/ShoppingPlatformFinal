@@ -2,8 +2,8 @@ package com.demo.mms.common.domain;
 
 public class InCartOf {
     private String id;
-    private String user;
-    private String good;
+    private String userId;
+    private String goodsId;
     private Integer number;
 
     public String getId() {
@@ -14,20 +14,20 @@ public class InCartOf {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getGood() {
-        return good;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setGood(String good) {
-        this.good = good;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public Integer getNumber() {

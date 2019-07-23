@@ -1,6 +1,4 @@
-drop database if EXISTS  shopping_platform;
-CREATE database shopping_platform;
-use shopping_platform;
+
 
 create table admin
 (
@@ -177,7 +175,7 @@ foreign key (classify_selled_id) references store_sell_classify (id)
   on update cascade on delete cascade
 ;
 
-create table user
+create table userId
 (
   user_id varchar(36) not null
     primary key,
@@ -197,19 +195,19 @@ create table user
 
 alter table admin
   add constraint admin_user_user_id_fk
-foreign key (user_id) references user (user_id)
+foreign key (user_id) references userId (user_id)
   on update cascade on delete cascade
 ;
 
 alter table buyer
   add constraint buyer_user_user_id_fk
-foreign key (user_id) references user (user_id)
+foreign key (user_id) references userId (user_id)
   on update cascade on delete cascade
 ;
 
 alter table seller
   add constraint seller_user_user_id_fk
-foreign key (user_id) references user (user_id)
+foreign key (user_id) references userId (user_id)
   on update cascade on delete cascade
 ;
 
