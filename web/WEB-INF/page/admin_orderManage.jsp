@@ -167,6 +167,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="example"
                                                 aria-label="更新时间: activate to sort column ascending">更新时间
                                             </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example"
+                                                aria-label="评论: activate to sort column ascending">评论
+                                            </th>
                                             <th width="120px">操作</th>
                                         </tr>
                                         </thead>
@@ -262,6 +265,12 @@
                     <input type="text" class="form-control" id="update_time">
                 </div>
             </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">评论</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="comment">
+                </div>
+            </div>
         </div>
 
 
@@ -308,7 +317,8 @@
                             .append($("<td>").html(e["express_id"]))
                             .append($("<td>").html(e["status"]))
                             .append($("<td>").html(e["create_time"]))
-                            .append($("<td>").html(e["update_time"]));
+                            .append($("<td>").html(e["update_time"]))
+                            .append($("<td>").html(e["comment"]));
                         var $button_1 = document.createElement("a");
                         $button_1.text = "修改";
                         $button_1.className = "btn_mod";
@@ -376,6 +386,7 @@
             $("#express_id").attr("value", $tr.find("td:eq(5)").html());
             $("#status").attr("value", $tr.find("td:eq(6)").html());
             $("#create_time").attr("value", $tr.find("td:eq(7)").html());
+            $("#comment").attr("value", $tr.find("td:eq(8)").html());
         });
 
         $("#order_info_mod_sumbit").click(function(){
@@ -388,7 +399,8 @@
                 express_id:$("#express_id").val(),
                 status:$("#status").val(),
                 create_tiem:$("#create_time").val(),
-                update_time:$("#update_time").val()
+                update_time:$("#update_time").val(),
+                comment:$("#comment").val()
             };
 
             console.log(dataSend);

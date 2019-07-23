@@ -308,6 +308,50 @@
 
 </div>
 
+<div class="box box-info" id="order_submit_table" style="display: none">
+    <div class="box-header with-border">
+        <h3 class="box-title">填写收货地址</h3>
+    </div>
+
+    <!-- 提交表单 -->
+    <form class="form-horizontal">
+        <div class="box-body">
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">consignee</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="consignee">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">phone</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="phone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">address</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">post_code</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="post_code">
+                </div>
+            </div>
+
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default pull-left" id="good_info_mod_cancel" onclick="submit_cancel()">取消</button>
+            <button type="button" class="btn btn-info pull-right" id="good_info_mod_sumbit" onclick="submit_next()">提交</button>
+        </div>
+    </form>
+</div>
 <!-- JQuery v1.12.4 -->
 <script src="${pageContext.request.contextPath}/localLib/js/jquery.min.js"></script>
 
@@ -374,7 +418,9 @@
 
                         }
                         var $tda = $("<td >").append('<input type="checkbox" name="ID">');
-                        var $tdc = $("<td class=\"item-id\">").append('<input>').html(e["relationId"]);
+                        var $input2 = $("<input>");
+                        $input2.attr("value",e["relationId"]);
+                        var $tdc = $("<td class=\"item-id\">").append($input2);
                         var $tdProductName = $("<td data-title=\"Product Name\" class=\"product-name\">").append("<a>").html(e["name"]);
                         // var url = e["pictureUrl"];
                         // var $tdUrl = $("<td >").append('<a href=url>');
@@ -489,46 +535,61 @@
     })
 </script>
 <script type="text/javascript">
+
     function submitOrder(){
-        layer.confirm('确定购买选中的商品?', function(index){
-            var ID = document.getElementsByName("ID");
-            for (var i = 0; i < ID.length; i++) {
-                var array = new Array();
-                if(ID[i].checked){
-                    var $tr = $(ID[i]).parents("tr");                     //
-                    var id = $tr.find('td').eq(0).find('input').eq(0).val();
-                    console.log(id);
-                    array.push(id);
-                    console.log(array);
+        layer.open({
+            type: 1,
+            title: "",
+            shadeClose: true,
+            shade: 0.5,
+            area: ["500px", "500px"],
+            content: $("#order_submit_table")
+        });
+    }
+    function submit_next(){
+        var ID = document.getElementsByName("ID");
+        console.log(ID);
+        for (var i = 0; i < ID.length; i++) {
+            var array = new Array();
+            if(ID[i].checked){
+                var $tr = $(ID[i]).parents("tr");                     //
+                var id = $tr.find('td').eq(0).find('input').eq(0).val();
+                console.log(id);
+                array.push(id);
+                console.log(array);
+            }
+        }
+
+        var oUser_id = document.getElementById(user_id);
+        var dataSend={
+            relation_id_list:array,
+            consignee:$("#consignee").val(),
+            phone:$("#phone").val(),
+            address:$("#address").val(),
+            post_code:$("#post_code").val()
+        };
+        console.log(dataSend);
+        $.ajax({
+            type:"POST",
+            url:"http://localhost:8080/??",
+            data: JSON.stringify(dataSend),//放置数据的字段    
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false, //同步请求，注意此字段    
+            success: function (data) {
+                console.log(data);
+                if(data["success"]){
+                    layer.alert("提交成功");
+                    window.location.reload();
+                }
+                else if(!data["success"]){
+                    layer.alert("提交失败");
                 }
             }
-            layer.close(index);
-            var oUser_id = document.getElementById(user_id);
-            var dataSend={
-                user_id:oUser_id,
-                array:array
-            };
-            $.ajax({
-                type:"POST",
-                url:"http://localhost:8080/??",
-                data: JSON.stringify(dataSend),//放置数据的字段    
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false, //同步请求，注意此字段    
-                success: function (data) {
-                    console.log(data);
-                    if(data["success"]){
-                        layer.alert("提交成功");
-                        window.location.reload();
-                    }
-                    else if(!data["success"]){
-                        layer.alert("提交失败");
-                    }
-                }
-            })
-
         });
-
+    }
+    function submit_cancel(){
+        layer.closeAll();
     }
 </script>
 
