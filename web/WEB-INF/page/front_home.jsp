@@ -360,11 +360,7 @@
                                 <h5>Stylish Chair</h5>
                                 <span class="price"><del>$200</del>$139</span>
                             </a>
-                            <div class="wishlist-box">
-                            <a href="#"><i class="fa fa-arrows-alt"></i></a>
-                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
+
                             <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
                         </li><!-- Product /- -->
 

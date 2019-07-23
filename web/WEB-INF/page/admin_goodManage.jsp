@@ -133,8 +133,8 @@
                                     <table id="goodTable" class="table">
                                         <thead>
                                             <tr>
-                                                <th style="width: 10%">ID</th>
-                                                <th>Store ID</th>
+                                                <%--<th style="width: 10%">ID</th>--%>
+                                                <%--<th>Store ID</th>--%>
                                                 <th>Name</th>
                                                 <th>classify name</th>
                                                 <th>price</th>
@@ -314,7 +314,6 @@
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/adminlte.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -345,8 +344,8 @@
                     var gl = data.goodsList;
                     $.each(gl,function (i,e) {
                         var $tr = $("<tr>")
-                            .append($("<td>").html(e["goods_id"]))
-                            .append($("<td>").html(e["store_id"]))
+                            // .append($("<td>").html(e["goods_id"]))
+                            // .append($("<td>").html(e["store_id"]))
                             .append($("<td>").html(e["goods_name"]))
                             .append($("<td>").html(e["classify_name"]))
                             .append($("<td>").html(e["price"]))

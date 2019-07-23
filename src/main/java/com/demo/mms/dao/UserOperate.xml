@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mms.dao.UserOperateMapper">
   <insert id="insertUser" parameterType="com.demo.mms.common.domain.User">
-    insert into user (user_id,verify,sex,realname,email,identity,create_time,update_time)
+    insert into userId (user_id,verify,sex,realname,email,identity,create_time,update_time)
     values   (#{user_id}, #{verify}, #{sex}, #{realname},#{email},#{identity},#{create_time},#{update_time})
   </insert>
 
@@ -69,7 +69,7 @@
     </select>
 
     <resultMap id="tempQueryGoodsViewedTest" type="com.demo.mms.common.vo.GoodsViewedQueryTestVO">
-        <association property="user" javaType="com.demo.mms.common.domain.User">
+        <association property="userId" javaType="com.demo.mms.common.domain.User">
             <id property="user_id" column="user_id"/>
             <result property="realname" column="realname"/>
             <result property="nickname" column="nickname"/>
@@ -93,12 +93,12 @@
     </resultMap>
     <select id="queryGoodsViewedByStore" parameterType="String" resultMap="tempQueryGoodsViewedTest" >
         SELECT
-          user.user_id as user_id,
-          user.realname as realname,
-          user.nickname as nickname,
-          user.avator_url as avator_url,
-          user.sex as sex,
-          user.email as email,
+          userId.user_id as user_id,
+          userId.realname as realname,
+          userId.nickname as nickname,
+          userId.avator_url as avator_url,
+          userId.sex as sex,
+          userId.email as email,
           A.view_id as view_id,
           A.view_time as view_time,
           B.goods_name as goods_name,
@@ -106,9 +106,9 @@
           B.goods_id as goods_id,
           A.classify_id as classify_id,
           A.classify_name as classify_name
-        FROM user,(goods_viewed LEFT JOIN goods_classify ON goods_viewed.classify_id = goods_classify.classify_id) as A,
+        FROM userId,(goods_viewed LEFT JOIN goods_classify ON goods_viewed.classify_id = goods_classify.classify_id) as A,
           (goods LEFT JOIN store ON goods.store_id = store.store_id) as B
-        WHERE user.user_id=A.buyer_id AND
+        WHERE userId.user_id=A.buyer_id AND
             A.goods_id=B.goods_id
     </select>
 </mapper>

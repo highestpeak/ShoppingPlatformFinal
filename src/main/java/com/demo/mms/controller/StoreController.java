@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestMapping("store")
+@RequestMapping("/store")
 @Controller
 public class StoreController {
     @Autowired
@@ -236,6 +236,7 @@ public class StoreController {
 
     //获取所有的注册用户
     @RequestMapping("/getUser")
+    @ResponseBody
     public Object getUserAll(){
         System.out.println("in getViewedHistory store");
         Map<String,Object> rs = new HashMap<>();

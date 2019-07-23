@@ -6,10 +6,12 @@ import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.*;
 import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.UserOperateMapper;
-import org.openxmlformats.schemas.drawingml.x2006.main.STAdjAngle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.print.DocFlavor;
+import javax.swing.text.Style;
+import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -217,7 +219,7 @@ public class GoodsServiceImpl implements GoodsService{
             return rs;
         }
         //store 存在
-//        ArrayList<Goods> goodsInStore=null;
+//        ArrayList<Goods> goodsInStore=goodsOperateMapper.queryAllGoodsOfStore(store.getStore_id());
         //查找classify是否存在
         //获取所有商品
         if(classifyToGet.getClassify_name().equals("all")){
@@ -408,6 +410,30 @@ public class GoodsServiceImpl implements GoodsService{
         starGoodsTemp=userOperateMapper.getStarGoods("user_id",user_id);
         starGoodsVOs.addAll(starGoodsTemp);
         return rs   ;
+    }
+
+    @Override
+    public Map<String, Object> getGoodsOnWithTime(String store_id, Map<String,ArrayList<String>> goodsOnTimeVOS) throws Exception{
+        if (goodsOnTimeVOS==null){
+            throw new Exception("goodsOnTimeVOS can not be null");
+        }
+        Map<String,Object> rs=new HashMap<>();
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store_id);
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        ArrayList<Goods> goodsInStore=goodsOperateMapper.queryAllGoodsOfStore(store_id);
+        for (Goods goods:goodsInStore){
+            String createTime=goods.getCreate_time();
+            if(goodsOnTimeVOS.containsKey(createTime)){
+                goodsOnTimeVOS.get(createTime).add(goods.getGoods_name());
+            }else {
+                goodsOnTimeVOS.put(createTime,new ArrayList<>(Arrays.asList(goods.getGoods_name())));
+            }
+        }
+        return rs;
     }
 
     @Override

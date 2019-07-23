@@ -16,7 +16,7 @@ public interface GoodsOperateMapper {
                      @Param("column") String column,
                      @Param("value") String value);
 
-    @Select("SELECT * FROM GOODS WHERE GOODS.goods_id = #{id}")
+    @Select("SELECT * FROM goods WHERE goods.goods_id = #{id};")
     Goods getGoodById(@Param("id") String goodsId);
 
     ArrayList<StoreSelledClassifyVO> queryGoodsWithClassify(String store_id);
@@ -130,4 +130,6 @@ public interface GoodsOperateMapper {
                                   @Param("goods_id") String goods_id);
 
     ArrayList<GoodsWithClassifyVO> queryAllGoodsOfStoreWithClassifySend(String store_id);
+
+    ArrayList<Goods> queryStoreTopTenNewGoods(String store_id);
 }
