@@ -199,6 +199,9 @@
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                             <button title="Submit" type="button" id="mybtn_submit" name="submit">保存</button>
                         </div>
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <button title="Submit" type="button" id="mybtn_exit" name="exit">退出</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -252,115 +255,153 @@
 <script src="${pageContext.request.contextPath}/localLib/js/vue.min.js"></script>
 
 <script>
-        $(function(){
-
-            var dataSend = {
-                user_id: "654321"
-
-            };
-            var old=null;
-
-            $.ajax({
-                type: "post",
-                url: "http://localhost:8080/user/getInfo",//请求controller方法   
-                data: JSON.stringify(dataSend),//发送的数据  
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false, //同步请求，注意此字le段    
-                success: function (data) {
-                    if(data.success == true){
-                        var obj= data["userFind"];
-                        old=obj;
-                        var input_ID = obj["user_id"];
-                        var input_nickname = obj["nickname"];
-                        var input_realname = obj["realname"];
-                        var sex = obj["sex"];
-                        var input_password = obj["verify"];
-                        var input_email = obj["email"];
-                        var textarea_message = obj["note"];
-                        console.log(data);
-                        $("#sexID option").eq( (sex?0:1) ).attr("selected","selected");//
-                        $("#input_ID").val(input_ID);
-                        $("#input_nickname").val(input_nickname);
-                        $("#input_realname").val(input_realname);
-                        $("#input_password").val(input_password);
-                        $("#input_email").val(input_email);
-                        $("#textarea_message").val(textarea_message);
-                    }else{
-                        layer.alert("数据请求失败！");
+$(function(){
+    var user_id;
+    $.ajax({
+        type: "POST",    
+        url: "http://localhost:8080/user/checkIfLogin",
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){ 
+                if(data.Login == true){//已经登陆
+                    user_id=data.user_id;
+                }else{//没有登录
+                    // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                    if (confirm("没有登录")) { 
+                        window.location.href= "http://localhost:8080/user/toLogin";
                     }
-
-
-
                 }
-            });
+            }else{
+                layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
 
-            $(".main-container").on("click", "#mybtn_submit", function(){
+    var dataSend = {
+        user_id: user_id
+    };
+    var old=null;
 
-                var input_ID = old["user_id"];
-                var input_nickname = old["nickname"];
-                var input_realname = old["realname"];
-                var sex = old["sex"];
-                var input_password = old["verify"];
-                var input_email = old["email"];
-                var textarea_message = old["note"];
-                var ninput_ID = $("#input_ID").val();
-                var ninput_nickname = $("#input_nickname").val();
-                var ninput_realname = $("#input_realname").val();
-                var nsex = $("#sexID").val();
-                var ninput_password = $("#input_password").val();
-                var ninput_email = $("#input_email").val();
-                var ntextarea_message = $("#textarea_message").val();
-                var dataSend =
-                    [
-                        {
-                            user_type:"userOld",
-                            user_id:input_ID,
-                            nickname:input_nickname,
-                            realname:input_realname,
-                            sex:sex,
-                            verify:input_password,
-                            email:input_email,
-                            note:textarea_message
-
-                        },
-                        {
-                            user_type:"userNew",
-                            user_id:input_ID,
-                            nickname:ninput_nickname,
-                            realname:ninput_realname,
-                            sex:nsex,
-                            verify:ninput_password,
-                            email:ninput_email,
-                            note:ntextarea_message
-                        }
-                    ];
-                console.log(dataSend);
-                $.ajax({
-                    type: "post",
-                    url: "http://localhost:8080/user/modify",//请求controller方法   
-                    data: JSON.stringify(dataSend),//发送的数据  
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    async: false, //同步请求，注意此字le段    
-                    success: function (data) {
-                        if(data.success == true){
-                            layer.alert('保存成功！', { icon: 1, closeBtn: 0 }, function (index) {
-                                window.location.reload();
-                            });
-
-                        }else{
-                            layer.alert('保存失败！', { icon: 2, closeBtn: 0 });
-                        }
+    $.ajax({
+        type: "post",
+        url: "http://localhost:8080/user/getInfo",//请求controller方法   
+        data: JSON.stringify(dataSend),//发送的数据  
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false, //同步请求，注意此字le段    
+        success: function (data) {
+            if(data.success == true){
+                var obj= data["userFind"];
+                old=obj;
+                var input_ID = obj["user_id"];
+                var input_nickname = obj["nickname"];
+                var input_realname = obj["realname"];
+                var sex = obj["sex"];
+                var input_password = obj["verify"];
+                var input_email = obj["email"];
+                var textarea_message = obj["note"];
+                console.log(data);
+                $("#sexID option").eq( (sex?0:1) ).attr("selected","selected");//
+                $("#input_ID").val(input_ID);
+                $("#input_nickname").val(input_nickname);
+                $("#input_realname").val(input_realname);
+                $("#input_password").val(input_password);
+                $("#input_email").val(input_email);
+                $("#textarea_message").val(textarea_message);
+            }else{
+                layer.alert("数据请求失败！");
+            }
 
 
 
-                    }
-                });
+        }
+    });
 
-            });
+    $(".main-container").on("click", "#mybtn_submit", function(){
 
+        var input_ID = old["user_id"];
+        var input_nickname = old["nickname"];
+        var input_realname = old["realname"];
+        var sex = old["sex"];
+        var input_password = old["verify"];
+        var input_email = old["email"];
+        var textarea_message = old["note"];
+        var ninput_ID = $("#input_ID").val();
+        var ninput_nickname = $("#input_nickname").val();
+        var ninput_realname = $("#input_realname").val();
+        var nsex = $("#sexID").val();
+        var ninput_password = $("#input_password").val();
+        var ninput_email = $("#input_email").val();
+        var ntextarea_message = $("#textarea_message").val();
+        var dataSend =
+            [
+                {
+                    user_type:"userOld",
+                    user_id:input_ID,
+                    nickname:input_nickname,
+                    realname:input_realname,
+                    sex:sex,
+                    verify:input_password,
+                    email:input_email,
+                    note:textarea_message
+
+                },
+                {
+                    user_type:"userNew",
+                    user_id:input_ID,
+                    nickname:ninput_nickname,
+                    realname:ninput_realname,
+                    sex:nsex,
+                    verify:ninput_password,
+                    email:ninput_email,
+                    note:ntextarea_message
+                }
+            ];
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8080/user/modify",//请求controller方法   
+            data: JSON.stringify(dataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false, //同步请求，注意此字le段    
+            success: function (data) {
+                if(data.success == true){
+                    layer.alert('保存成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                        window.location.reload();
+                    });
+
+                }else{
+                    layer.alert('保存失败！', { icon: 2, closeBtn: 0 });
+                }
+            }
         });
+
+    });
+
+    $(".main-container").on("click", "#mybtn_exit", function(){
+        dataSend = {
+            user_id: user_id
+        };
+        $.ajax({
+            type: "POST",    
+            url: "http://localhost:8080/user/logout",
+            data: JSON.stringify(dataSend),
+            contentType: "application/json; charset=utf-8",    
+            dataType: "json",    
+            async: false,   
+            success: function (data) {        
+                if(data.success == true){ 
+                    if(confirm("退出成功！")) { 
+                        window.location.href= "http://localhost:8080/front/home";
+                    }
+                }else{
+                    layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+                }
+            } 
+        });
+    });
+});
 </script>
 </div>
 </body>

@@ -346,6 +346,8 @@ $(function(){
                         .append($("<td>").html(e["update_time"]));
                     var $img = document.createElement("img");
                     $img.src = e["pic_url"];
+                    $img.style.height = "50px";
+                    $img.style.width = "50px";
                     $tr.find("td:eq(4)").append($img);
                     var $button_1 = document.createElement("a");
                     $button_1.text = "修改";

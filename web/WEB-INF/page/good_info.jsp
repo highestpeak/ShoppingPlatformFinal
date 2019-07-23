@@ -400,14 +400,40 @@ $(function(){
     // 添加至购物车按钮
     $("#btn_cart").click(function(){
 
+        var user_id;
+        $.ajax({
+            type: "POST",    
+            url: "http://localhost:8080/user/checkIfLogin",
+            dataType: "json",    
+            async: false,   
+            success: function (data) {        
+                if(data.success == true){ 
+                    if(data.Login == true){//已经登陆
+                        user_id=data.user_id;
+                    }else{//没有登录
+                        // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                        if (confirm("没有登录")) { 
+                            window.location.href= "http://localhost:8080/user/toLogin";
+                        }
+                    }
+                }else{
+                    layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+                }
+            } 
+        });
+
         var dataSend = {
+            user_id: user_id,
             goods_id: vm.goods_id,
-            quantity: $("#input-num").attr("value")
+            quantity: parseInt($("#input-num").val())
         }
   
         $.ajax({    
-            type: "POST",    
-            url: "http://localhost:8080/ShoppingCart/",
+            type: "POST", 
+            // xhrFields: {
+            //     withCredentials: true
+            // },   
+            url: "http://localhost:8080/shoppingCart/",
             data: JSON.stringify(dataSend),
             contentType: "application/json; charset=utf-8",    
             dataType: "json",    
