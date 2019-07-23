@@ -6,6 +6,7 @@ import com.demo.mms.common.utils.ProjectFactory;
 import com.demo.mms.common.vo.*;
 import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.UserOperateMapper;
+import com.google.protobuf.MapEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -144,17 +145,24 @@ public class GoodsServiceImpl implements GoodsService{
                 try {
                     goodsClassify.setClassify_id(IDGenerator.getId());
                     //需要插入的level是0级
-                    if(Integer.parseInt(goodsClassify.getParent_id())==0){
-                        //直接插入
-                        goodsOperateMapper.insertNewClassify(
-                                goodsClassify.getClassify_id(),
-                               "0",
-                                goodsClassify.getParent_id(),
-                                goodsClassify.getClassify_name(),
-                                ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
-                        goodsOperateMapper.insertNewClassifyOfStore(IDGenerator.getId(),store.getStore_id(),goodsClassify.getClassify_id());
-                        continue;
+                    Integer parentIdCheck=null;
+                    try {
+                        parentIdCheck=Integer.parseInt(goodsClassify.getParent_id());
+                        if(Integer.parseInt(goodsClassify.getParent_id())==0){
+                            //直接插入
+                            goodsOperateMapper.insertNewClassify(
+                                    goodsClassify.getClassify_id(),
+                                    "0",
+                                    goodsClassify.getParent_id(),
+                                    goodsClassify.getClassify_name(),
+                                    ProjectFactory.getPorjectStrDate(new Date()),ProjectFactory.getPorjectStrDate(new Date()));
+                            goodsOperateMapper.insertNewClassifyOfStore(IDGenerator.getId(),store.getStore_id(),goodsClassify.getClassify_id());
+                            continue;
+                        }
+                    }catch (Exception e){
+
                     }
+
                     //top_level应该比parent的top level大1
                     GoodsClassify parentClassify=goodsOperateMapper.queryClassifyOfStore(store.getStore_id(),"classify_id",goodsClassify.getParent_id());
                     //可以执行插入
@@ -192,18 +200,22 @@ public class GoodsServiceImpl implements GoodsService{
         }
         //分类存在
         GoodsClassify findNewClassifyParent=null;
-        if(Integer.parseInt(newClassify.getParent_id())==0){
-            newClassify.setParent_id("0");
-            newClassify.setTop_level_classify_id("0");
-        }else {
-            findNewClassifyParent=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",newClassify.getParent_id());
-            if(findNewClassifyParent==null){
-                rs.put("parent of "+newClassify.getClassify_name()+" not find",true);
-                return rs;
+        try {
+            if(Integer.parseInt(newClassify.getParent_id())==0){
+                newClassify.setParent_id("0");
+                newClassify.setTop_level_classify_id("0");
             }
-            newClassify.setParent_id(findNewClassifyParent.getClassify_id());
-            newClassify.setTop_level_classify_id(Integer.toString(Integer.valueOf(findNewClassifyParent.getTop_level_classify_id())+1));
+        }catch (Exception e){
+
         }
+        findNewClassifyParent=goodsOperateMapper.queryClassifyOfStore(storeCheck.getStore_id(),"classify_id",newClassify.getParent_id());
+        if(findNewClassifyParent==null){
+            rs.put("parent of "+newClassify.getClassify_name()+" not find",true);
+            return rs;
+        }
+        newClassify.setParent_id(findNewClassifyParent.getClassify_id());
+        newClassify.setTop_level_classify_id(Integer.toString(Integer.valueOf(findNewClassifyParent.getTop_level_classify_id())+1));
+
         //新分类父级分类存在
         rs.putAll(modifyClassifyHelp(store,nameCheck,newClassify));
         return rs;
@@ -266,7 +278,7 @@ public class GoodsServiceImpl implements GoodsService{
             if (idCheck!=null){
                 rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_id",idCheck.getGoods_id()));
             }else {//nameCheck!=null
-                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_name",idCheck.getGoods_name()));
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_name",nameCheck.getGoods_name()));
             }
         }
         return rs;
@@ -434,6 +446,67 @@ public class GoodsServiceImpl implements GoodsService{
             }
         }
         return rs;
+    }
+
+    @Override
+    public Map<String, Object> getAllGoodsSelled(Store store,ArrayList<GoodsWithClassifyVO> goodsList) {
+        Map<String,Object> rs=new HashMap<>();
+        //查找store是否存在
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        if(storeCheck==null){
+            rs.put("store exist",false);
+            return rs;
+        }
+        ArrayList<GoodsWithClassifyVO> goodsInStoreWithClassify=goodsOperateMapper.queryAllGoodsOfStoreWithClassifySend(store.getStore_id());
+        //设置所有分类名称 更改为根类名称
+        ArrayList<String > allClassifyNameReturn=new ArrayList<>();
+        ArrayList classifyList=new ArrayList();
+        rs.putAll(this.getStoreGoodsClassify(store,classifyList));
+        Map<String,ArrayList<String >> classifyTempMapKeyId=new HashMap<>();//key为id value为name 和 parent id
+        Map<String,String> classifyToRoot=new HashMap<>();//id 为classify name value为parent name
+        for (Object object:classifyList){
+            ArrayList<String> classifyArray=(ArrayList<String>)(object);
+            classifyTempMapKeyId.put(
+                    classifyArray.get(0),
+                    new ArrayList<>(Arrays.asList(classifyArray.get(1),classifyArray.get(2)))
+            );
+
+        }//所有的分类映射成了一个map
+        for (Map.Entry<String,ArrayList<String >> entry:classifyTempMapKeyId.entrySet()){
+            classifyToRoot.put(entry.getValue().get(0),getParentClassifyName(classifyTempMapKeyId,entry.getValue()));
+        }//classifyToRoot id 为classify name value为parent name
+        for (GoodsWithClassifyVO goodsWithClassifyVO:goodsInStoreWithClassify){
+            goodsWithClassifyVO.setClassify_name(classifyToRoot.get(goodsWithClassifyVO.getClassify_name()));
+        }//修改分类名称为root类的名称
+        Map<String ,String> rootClassify=new HashMap<>();
+        for (Map.Entry<String ,String > entry:classifyToRoot.entrySet()){
+            rootClassify.put(entry.getValue(),"");
+        }
+        ArrayList<String> rootClassifyNameList=new ArrayList<>(rootClassify.keySet());
+        goodsList.addAll(goodsInStoreWithClassify);
+        rs.put("rootClassList",rootClassifyNameList);
+//        for (Object object:classifyList){
+//            ArrayList<String> classifyArray=(ArrayList<String>)(object);
+//            String parent_id=classifyArray.get(2);
+//            if(parent_id.equals("0")){//
+//                allClassifyNameReturn.add(classifyArray.get(1));
+//            }else {
+//                allClassifyNameReturn.add(getParentClassifyName(classifyList,classifyArray));
+//            }
+//        }
+        goodsList.addAll(goodsInStoreWithClassify);
+        return rs;
+    }
+
+    private String getParentClassifyName(final Map<String,ArrayList<String >> classifyTempMap,
+                                         ArrayList<String > currClassify) {
+        String parentName=null;
+        if(currClassify.get(1).equals("0")){//parent id
+            parentName= currClassify.get(0);
+        }else {
+            parentName= getParentClassifyName(classifyTempMap,classifyTempMap.get(currClassify.get(1)));
+        }
+        return parentName;
     }
 
     @Override

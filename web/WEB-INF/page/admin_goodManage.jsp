@@ -133,13 +133,11 @@
                                     <table id="goodTable" class="table">
                                         <thead>
                                             <tr>
-                                                <%--<th style="width: 10%">ID</th>--%>
-                                                <%--<th>Store ID</th>--%>
                                                 <th>Name</th>
                                                 <th>classify name</th>
                                                 <th>price</th>
                                                 <th>Description</th>
-                                                <th>Pic</th>
+                                                <th>Picture</th>
                                                 <th>Status</th>
                                                 <th>Old Level</th>
                                                 <th>Create Time</th>
@@ -216,9 +214,9 @@
 
 
             <div class="form-group">
-                <label for="exampleInputFile"  class="col-sm-2 control-label">picture</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">picture</label>
                 <div class="col-sm-10">
-                    <input type="file" id="mod_pic">
+                    <input type="text" class="form-control" id="mod_picture">
                 </div>
             </div>
 
@@ -241,13 +239,6 @@
     <!-- 提交表单 -->
     <form class="form-horizontal">
         <div class="box-body">
-
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">store id</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="add_store_id"">
-                </div>
-            </div>
 
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">good name</label>
@@ -293,9 +284,9 @@
 
 
             <div class="form-group">
-                <label for="exampleInputFile"  class="col-sm-2 control-label">picture</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">picture</label>
                 <div class="col-sm-10">
-                    <input type="file" id="add_pic">
+                    <input type="text" class="form-control" id="add_picture">
                 </div>
             </div>
 
@@ -320,258 +311,256 @@
 
 <!-- 添加数据 -->
 <script>
-    $(function(){
-        var dataSend = {
-            store:{
-                store_id: "0000"
-            },
-            goodsClassify:{
-                classify_name: "all"
+$(function(){
+    var dataSend = {
+        store:{
+            store_id: "0000"
+        },
+        goodsClassify:{
+            classify_name: "all"
+        }
+    }
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/goods/getByClassify",//请求controller方法   
+        data: JSON.stringify(dataSend),//发送的数据  
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false, //同步请求，注意此字段    
+        success: function (data) {        
+            if(data.success == true){
+
+                var $tbody = $("#tbodyId");
+                var gl = data.goodsList;
+                $.each(gl,function (i,e) {
+                    var $tr = $("<tr>")
+                        .append($("<td>").html(e["goods_name"]))
+                        .append($("<td>").html(e["classify_name"]))
+                        .append($("<td>").html(e["price"]))
+                        .append($("<td>").html(e["description"]))
+                        .append($("<td>"))
+                        .append($("<td>").html(e["status"]))
+                        .append($("<td>").html(e["old_level"]))
+                        .append($("<td>").html(e["create_time"]))
+                        .append($("<td>").html(e["update_time"]));
+                    var $img = document.createElement("img");
+                    $img.src = e["pic_url"];
+                    $tr.find("td:eq(4)").append($img);
+                    var $button_1 = document.createElement("a");
+                    $button_1.text = "修改";
+                    $button_1.className = "btn btn-xs btn-info btn_mod";
+                    var $button_2 = document.createElement("a");
+                    $button_2.text = "删除";
+                    $button_2.className = "btn btn-xs btn-danger btn_del";
+                    $button_2.style = "margin-left:10px";
+                    var $td = $("<td>").append($button_1).append($button_2);
+                    $tr.append($td);
+                    $tbody.append($tr);
+                });
+            }else{
+                layer.alert("数据请求失败！");
             }
         }
+    });
 
-        $.ajax({    
-            type: "POST",    
-            url: "http://localhost:8080/goods/getByClassify",//请求controller方法   
-            data: JSON.stringify(dataSend),//发送的数据  
-            contentType: "application/json; charset=utf-8",    
-            dataType: "json",    
-            async: false, //同步请求，注意此字段    
-            success: function (data) {        
-                if(data.success == true){
+    // 删除商品按钮
+    $(".content-wrapper").on("click", ".btn_del", function(){
+        var $tr = $(this).parents("tr");
+        var goods_name = $tr.find("td:eq(0)").html();
+        var store_id = "0000";
 
-                    var $tbody = $("#tbodyId");
-                    var gl = data.goodsList;
-                    $.each(gl,function (i,e) {
-                        var $tr = $("<tr>")
-                            // .append($("<td>").html(e["goods_id"]))
-                            // .append($("<td>").html(e["store_id"]))
-                            .append($("<td>").html(e["goods_name"]))
-                            .append($("<td>").html(e["classify_name"]))
-                            .append($("<td>").html(e["price"]))
-                            .append($("<td>").html(e["description"]))
-                            .append($("<td>").html(e["pic_url"]))
-                            .append($("<td>").html(e["status"]))
-                            .append($("<td>").html(e["old_level"]))
-                            .append($("<td>").html(e["create_time"]))
-                            .append($("<td>").html(e["update_time"]));
-                        var $button_1 = document.createElement("a");
-                        $button_1.text = "修改";
-                        $button_1.className = "btn btn-xs btn-info btn_mod";
-                        var $button_2 = document.createElement("a");
-                        $button_2.text = "删除";
-                        $button_2.className = "btn btn-xs btn-danger btn_del";
-                        $button_2.style = "margin-left:10px";
-                        var $td = $("<td>").append($button_1).append($button_2);
-                        $tr.append($td);
-                        $tbody.append($tr);
-                    });
-                }else{
-                    layer.alert("数据请求失败！");
+        var dataSend = {
+            store: {
+                store_id: store_id
+            },
+            goodsToDel: [
+                {
+                    // goods_id: goods_id,
+                    goods_name: goods_name
                 }
-            }
+            ]
+        };
+
+        layer.confirm('确定删除: '+goods_name+"?", {icon: 3, title:'提示'}, function(index){
+            $.ajax({    
+                type: "POST",    
+                url: "http://localhost:8080/goods/del",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",    
+                async: false,   
+                success: function (data) {        
+                    if(data.success == true){                            
+                        layer.alert('删除成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('删除失败！', { icon: 2, closeBtn: 0 });
+                    }
+                } 
+            });
         });
-    })
-</script>
+    });
 
-<script>
-    $(function(){
-
-        $("#goodTable").DataTable({
-            'paging'      : true,
-            'lengthChange': true,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : true,
-            'stateSave':true,
-            "language": {
-                "paginate": {
-                    "next": "下一页",
-                    "previous":"上一页"
-
-                },
-                "search":"快速搜索",
-                "info": "第_PAGE_页(共_PAGES_页)",
-                "emptyTable":"无可用数据",
-                "lengthMenu": "_MENU_ 条/页"
-            }
+    // 修改商品按钮
+    $(".content-wrapper").on("click", ".btn_mod", function(){
+        layer.open({
+            type: 1,
+            title: "",
+            shadeClose: true,
+            shade: 0.5,
+            area: ["500px","550px"],
+            content: $("#good_info_modify_table")
         });
 
+        var $tr = $(this).parents("tr");
+        var store_id = "0000";
+        var old_goods_name = $tr.find("td:eq(0)").html();
 
-        // 删除商品按钮
-        $(".content-wrapper").on("click", ".btn_del", function(){
-            var $tr = $(this).parents("tr");
-            var goods_id = $tr.find("td:eq(0)").html();
-            var goods_name = $tr.find("td:eq(2)").html();
-            var store_id = $tr.find("td:eq(1)").html();
+        $("#mod_name").val($tr.find("td:eq(0)").html());
+        $("#mod_classify").val($tr.find("td:eq(1)").html());
+        $("#mod_price").val($tr.find("td:eq(2)").html());
+        $("#mod_description").val($tr.find("td:eq(3)").html());
+        $("#mod_status").val($tr.find("td:eq(5)").html());
+        $("#mod_oldlevel").val($tr.find("td:eq(6)").html());
+        $("#mod_picture").val($tr.find("td:eq(4)").find("img:eq(0)").attr("src"));
 
+        $("#good_info_mod_sumbit").click(function(){
             var dataSend = {
                 store: {
                     store_id: store_id
                 },
-                goodsToDel: [
-                    {
-                        goods_id: goods_id,
-                        goods_name: goods_name
-                    }
-                ]
-            };
-
-            layer.confirm('确定删除: '+goods_name+"?", {icon: 3, title:'提示'}, function(index){
-                $.ajax({    
-                    type: "POST",    
-                    url: "http://localhost:8080/goods/del",
-                    data: JSON.stringify(dataSend),
-                    contentType: "application/json; charset=utf-8",    
-                    dataType: "json",    
-                    async: false,   
-                    success: function (data) {        
-                        if(data.success == true){                            
-                            layer.alert('删除成功！', { icon: 1, closeBtn: 0 }, function (index) {
-                                window.location.reload();
-                            });
-
-                        }else{
-                            layer.alert('删除失败！', { icon: 2, closeBtn: 0 });
-                        }
-                    } 
-                });
-            });
-        });
-
-        // 修改商品按钮
-        $(".content-wrapper").on("click", ".btn_mod", function(){
-            layer.open({
-                type: 1,
-                title: "",
-                shadeClose: true,
-                shade: 0.5,
-                area: ["500px","500px"],
-                content: $("#good_info_modify_table")
-            });
-
-            var $tr = $(this).parents("tr");
-            var store_id = $tr.find("td:eq(1)").html();
-            var old_goods_id = $tr.find("td:eq(0)").html();
-            var old_goods_name = $tr.find("td:eq(2)").html();
-
-            $("#mod_name").attr("value", $tr.find("td:eq(2)").html());
-            $("#mod_classify").attr("value", $tr.find("td:eq(3)").html());
-            $("#mod_price").attr("value", $tr.find("td:eq(4)").html());
-            $("#mod_description").attr("value", $tr.find("td:eq(5)").html());
-            $("#mod_status").attr("value", $tr.find("td:eq(7)").html());
-            $("#mod_oldlevel").attr("value", $tr.find("td:eq(8)").html());
-
-            $("#good_info_mod_sumbit").click(function(){
-                var dataSend = {
-                    store: {
-                        store_id: store_id
-                    },
-                    oldGoods: {
-                        goods_id: old_goods_id,
-                        goods_name: old_goods_name
-                    },
-                    newGoods: {
-                        goods_id: old_goods_id,
-                        goods_name: $("#mod_name").val(),
-                        classify_name:$("#mod_classify").val(),
-                        price:$("#mod_price").val(),
-                        description: $("#mod_description").val(),
-                        status: $("#mod_status").val(),
-                        old_level: $("#mod_oldlevel").val()
-                    }
-                };
-
-                console.log(dataSend);
-
-                $.ajax({    
-                    type: "POST",    
-                    url: "http://localhost:8080/goods/modify",
-                    data: JSON.stringify(dataSend),
-                    contentType: "application/json; charset=utf-8",    
-                    dataType: "json",    
-                    async: false,   
-                    success: function (data) {        
-                        if(data.success == true){                            
-                            layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
-                                window.location.reload();
-                            });
-
-                        }else{
-                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
-                        }
-                    } 
-                });
-
-            });
-
-        });
-
-        $("#good_info_mod_cancel").click(function(){
-            layer.closeAll();
-        });
-
-        // 添加商品按钮
-        $(".content-wrapper").on("click", ".btn_add", function(){
-
-            layer.open({
-                type: 1,
-                title: "",
-                shadeClose: true,
-                shade: 0.5,
-                area: ["500px","500px"],
-                content: $("#good_info_add_table")
-            });
-
-        });
-
-        $("#good_info_add_cancel").click(function(){
-            layer.closeAll();
-        });
-
-        $("#good_info_add_sumbit").click(function(){
-            var dataSend = {
-                store: {
-                    store_id: $("#add_store_id").val()
+                oldGoods: {
+                    // goods_id: old_goods_id,
+                    goods_name: old_goods_name
                 },
-                goodsToAdd: [
-                    {
-                        goods_name:$("#add_name").val(),
-                        description:$("#add_description").val(),
-                        classify_name:$("#add_classify").val(),
-                        price:$("#add_price").val(),
-                        status:$("#add_status").val(),
-                        old_level:$("#add_oldlevel").val(),
-                    }
-                ]
+                newGoods: {
+                    goods_name: $("#mod_name").val(),
+                    classify_name:$("#mod_classify").val(),
+                    price:$("#mod_price").val(),
+                    description: $("#mod_description").val(),
+                    status: $("#mod_status").val(),
+                    old_level: $("#mod_oldlevel").val(),
+                    pic_url: $("#mod_picture").val()
+                }
             };
-            if(dataSend.store.store_id == '' || dataSend.goodsToAdd[0].goods_name == '')
-            {
-                layer.alert("请填入必要内容！");
-            }else{
-                $.ajax({    
-                    type: "POST",    
-                    url: "http://localhost:8080/goods/add",
-                    data: JSON.stringify(dataSend),
-                    contentType: "application/json; charset=utf-8",    
-                    dataType: "json",    
-                    async: false,   
-                    success: function (data) {        
-                        if(data.success == true){                            
-                            layer.alert('添加成功！', { icon: 1, closeBtn: 0 }, function (index) {
-                                window.location.reload();
-                            });
 
-                        }else{
-                            layer.alert('添加失败！', { icon: 2, closeBtn: 0 });
-                        }
-                    } 
-                });
-            }
+            $.ajax({    
+                type: "POST",    
+                url: "http://localhost:8080/goods/modify",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",    
+                async: false,   
+                success: function (data) {        
+                    if(data.success == true){                            
+                        layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
+                    }
+                } 
+            });
+
         });
 
-    })
+    });
+
+    $("#good_info_mod_cancel").click(function(){
+        layer.closeAll();
+    });
+
+    // 添加商品按钮
+    $(".content-wrapper").on("click", ".btn_add", function(){
+
+        layer.open({
+            type: 1,
+            title: "",
+            shadeClose: true,
+            shade: 0.5,
+            area: ["500px","550px"],
+            content: $("#good_info_add_table")
+        });
+
+    });
+
+    $("#good_info_add_cancel").click(function(){
+        layer.closeAll();
+    });
+
+    $("#good_info_add_sumbit").click(function(){
+        var dataSend = {
+            store: {
+                store_id: "0000"
+            },
+            goodsToAdd: [
+                {
+                    goods_name:$("#add_name").val(),
+                    description:$("#add_description").val(),
+                    classify_name:$("#add_classify").val(),
+                    price:$("#add_price").val(),
+                    status:$("#add_status").val(),
+                    old_level:$("#add_oldlevel").val(),
+                    pic_url:$("#add_picture").val(),
+                }
+            ]
+        };
+        
+        if(dataSend.goodsToAdd[0].goods_name == '')
+        {
+            layer.alert("请填入必要内容！");
+        }else{
+            $.ajax({    
+                type: "POST",    
+                url: "http://localhost:8080/goods/add",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",    
+                async: false,   
+                success: function (data) {        
+                    if(data.success == true){                            
+                        layer.alert('添加成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('添加失败！', { icon: 2, closeBtn: 0 });
+                    }
+                } 
+            });
+        }
+    });
+})
+</script>
+
+<script>
+$(function(){
+
+    $("#goodTable").DataTable({
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : true,
+        'stateSave':true,
+        "language": {
+            "paginate": {
+                "next": "下一页",
+                "previous":"上一页"
+
+            },
+            "search":"快速搜索",
+            "info": "第_PAGE_页(共_PAGES_页)",
+            "emptyTable":"无可用数据",
+            "lengthMenu": "_MENU_ 条/页"
+        }
+    });
+})
 </script>
 
 </body>

@@ -86,8 +86,6 @@
         }
     </style>
 
-
-
     <title>商品详情</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/settings.css">
@@ -218,7 +216,7 @@
             <br>
             <h1 id="goodName">{{goods_name}}</h1>
             <br>
-            <a href="#">{{goods_classify}}</a>
+            <a>{{oldlevel}}</a>
             <br>
             <h3 style="display: inline;">￥: </h3><h3 style="display: inline;">{{goods_price}}</h3>
             <HR align=left width=300 color=#987cb9 SIZE=1>
@@ -352,95 +350,107 @@
 </script>
 
 <script>
-    $(function(){
-        // 页面加载
-        var url = window.location.pathname;
-        var store_id = (url.split("/"))[3];
-        var goods_id = (url.split("/"))[4];
+$(function(){
+    // 页面加载
+    var url = window.location.pathname;
+    var store_id = (url.split("/"))[3];
+    var goods_id = (url.split("/"))[4];
 
-        var urlSend = "http://localhost:8080/goods/getGoodsInfo?store_id=" + store_id + "&goods_id="+ goods_id;
+    var urlSend = "http://localhost:8080/goods/getGoodsInfo?store_id=" + store_id + "&goods_id="+ goods_id;
 
-        var vm = new Vue({
-            el: '#container',
-            data: {
-                goods_id: goods_id,
-                goods_name: "",
-                goods_price: "",
-                goods_classify: "",
-                description: "",
-                pic_url: "",
+    var vm = new Vue({
+        el: '#container',
+        data: {
+            goods_id: goods_id,
+            goods_name: "",
+            goods_price: "",
+            oldlevel: "",
+            description: "",
+            pic_url: "",
+            
+            info:[] //触发更新用
+        }
+    });
+
+    $.ajax({    
+        type: "POST",    
+        url: urlSend,
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false, //同步请求，注意此字段    
+        success: function (data) {        
+            if(data.success == true){
+                var info = data.goodsGet;
+
+                vm.goods_name = info.goods_name;
+                vm.goods_price = info.price;
+                vm.description = info.description;
+                vm.pic_url = info.pic_url;                    
+
+                vm.info.push({
+                    a:"a"
+                });
                 
-                info:[] //触发更新用
+            }else{
+                layer.alert("数据请求失败！");
             }
-        });
+        } 
+    });
 
+    // 添加至购物车按钮
+    $("#btn_cart").click(function(){
+
+        var dataSend = {
+            goods_id: vm.goods_id,
+            quantity: $("#input-num").attr("value")
+        }
+  
         $.ajax({    
             type: "POST",    
-            url: urlSend,
+            url: "http://localhost:8080/ShoppingCart/",
+            data: JSON.stringify(dataSend),
             contentType: "application/json; charset=utf-8",    
             dataType: "json",    
-            async: false, //同步请求，注意此字段    
+            async: false,   
             success: function (data) {        
-                if(data.success == true){
-                    var info = data.goodsGet;
-
-                    console.log(info);
-
-                    vm.goods_name = info.goods_name;
-                    // vm.goods_price = info.goods_price;
-                    vm.goods_classify = info.goods_classify;
-                    vm.description = info.description;
-                    vm.pic_url = info.pic_url;                    
-
-                    vm.info.push({
-                        a:"a"
-                    });
-                    
+                if(data.success == true){                            
+                    layer.alert('添加成功！', { icon: 1, closeBtn: 0 });
                 }else{
-                    layer.alert("数据请求失败！");
+                    layer.alert('添加失败！', { icon: 2, closeBtn: 0 });
                 }
             } 
         });
-
-        // 添加至购物车按钮
-        $("#btn_cart").click(function(){
-            var number = $("#input-num").attr("value");
-            var id = vm.goods_id;
-            var temp = {
-                id: id,
-                number: number
-            };
-            $.ajax({
-                type: "post",
-                url: "/addToCart",
-                data: temp,
-                success: function(status){
-                    layer.alert("Add Success！(status:"+status+".)");
-                }
-            });
-        });
-
-
-        // 添加至收藏按钮
-        $("#btn_collection").click(function(){
-            var number = $("#input-num").attr("value");
-            var id = $(".good").attr("id");
-            var temp = {
-                id: id,
-                number: number
-            };
-            $.ajax({
-                type: "post",
-                url: "/addToCollection",
-                data: temp,
-                success: function(status){
-                    layer.alert("Add Success！(status:"+status+".)");
-                }
-            });
-        });
-
     });
+
+
+    // 添加至收藏按钮
+    $("#btn_collection").click(function(){
+        var number = $("#input-num").attr("value");
+        var id = $(".good").attr("id");
+        var dataSend = {
+            id: id,
+            number: number
+        };
+
+        $.ajax({    
+            type: "POST",    
+            url: "http://localhost:8080/star/set",
+            data: JSON.stringify(dataSend),
+            contentType: "application/json; charset=utf-8",    
+            dataType: "json",    
+            async: false,   
+            success: function (data) {        
+                if(data.success == true){                            
+                    layer.alert('添加成功！', { icon: 1, closeBtn: 0 });
+                }else{
+                    layer.alert('添加失败！', { icon: 2, closeBtn: 0 });
+                }
+            } 
+        });
+    });
+});
 </script>
+
 
 </body>
 </html>

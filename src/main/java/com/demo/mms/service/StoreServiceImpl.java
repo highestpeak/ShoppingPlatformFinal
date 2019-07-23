@@ -142,6 +142,9 @@ public class StoreServiceImpl implements StoreService{
         if(newStore.getStore_classify()!=null && !newStore.getStore_classify().equals(oldStore.getStore_classify())){
             modifyList.put("store_classify",newStore.getStore_classify());
         }
+        if(newStore.getStore_name()!=null && !newStore.getStore_name().equals(oldStore.getStore_name())){
+            modifyList.put("store_name",newStore.getStore_name());
+        }
         if(newStore.getCertification()!=null && !newStore.getCertification().equals(oldStore.getCertification())){
             modifyList.put("certification",newStore.getCertification());
         }
