@@ -84,7 +84,8 @@
 
                         <c:if test="${isLogin==false}">
                             <div>
-                                <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a>
+                                <!-- <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a> -->
+                                <a href="javascript:judgeIsLogin()" title="User"><i class="icon icon-User"></i></a>
                             </div>
                         </c:if>
 
@@ -314,8 +315,8 @@
 
                         <li><a data-filter="*" class="active" href="#">全部</a></li>
                         <!-- 循环 -->
-                        <li v-for="class in classify">
-                            <a v-bind:data-filter="class" href="#">{{class}}</a>
+                        <li v-for="className in classify">
+                            <a v-bind:data-filter="'.'+className" href="#">{{className}}</a>
                         </li>
 
                     </ul>
@@ -327,19 +328,6 @@
                     </div>
                     <!-- Products -->
                     <ul class="products">
-<<<<<<< Updated upstream
-                        <!-- Product -->
-                        <li class="product design">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-1.jpg" alt="Product" />
-                                <h5>Stylish Chair</h5>
-                                <span class="price"><del>$200</del>$139</span>
-                            </a>
-
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
-=======
->>>>>>> Stashed changes
 
                         <!-- Product -->
                         <!-- 循环 -->                      
@@ -412,60 +400,41 @@
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
-<!-- 请求分类 -->
-<script>
-$(function(){
 
-});
+<!-- 寻找分类的函数 -->
+<script>
+function findRootId(list, id){
+    var index = list.findIndex((v)=>{return v.id == id});
+    if(index == -1 || list[index].pid == 0){
+        return id;
+    }else{
+        return findRootId(list, list[index].pid);
+    }
+}
+
+function findRootName(list, name){
+    var index = list.findIndex((v)=>{return v.text == name});
+    var id = list[index].id;
+    var pid = findRootId(list, id);
+    var p_index = list.findIndex((v)=>{return v.id == pid});
+    if(p_index == -1){
+        return name;
+    }
+    return list[p_index].text;
+}
+
+function unique(array){
+    var n = [];//临时数组
+    for(var i = 0;i < array.length; i++){
+        if(n.indexOf(array[i]) == -1) n.push(array[i]);
+    }
+    return n;
+}
 </script>
 
 <!-- 请求商品列表 -->
 <script>
 $(function(){
-    var dataSend = {
-        store: {
-            store_id: "0000"
-        },
-        goodsClassify: {
-            classify_name: "all"
-        }
-    };
-
-    var vm = new Vue({
-        el: '#product_info',
-        data: {
-            goods: [],
-            info:[] //触发更新用
-        }
-    });
-
-    $.ajax({    
-        type: "POST",    
-        url: "http://localhost:8080/goods/getByClassify",
-        data: JSON.stringify(dataSend),
-        contentType: "application/json; charset=utf-8",    
-        dataType: "json",    
-        async: false,   
-        success: function (data) {        
-            if(data.success == true){                            
-                vm.goods = data.goodsList;
-
-                var root = "http://localhost:8080/front/goodsInfoById/";
-                for(var i=0; i<vm.goods.length; i++){
-                    href = root + vm.goods[i].store_id + "/" + vm.goods[i].goods_id; //进入商品详情页
-                    vm.goods[i].classify_name = "product " + vm.goods[i].classify_name; //分类名
-                    vm.goods[i].href = href; //图片链接
-                    vm.goods[i].cartHref = "javascript:addToCart(\"" + vm.goods[i].goods_id +"\")"; //添加至购物车
-                }
-
-                vm.info.push({
-                    a:"a"
-                });
-            }else{
-                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
-            }
-        } 
-    });
 
     var dataSend = {
         store_id: "0000"
@@ -491,49 +460,100 @@ $(function(){
         }
     });
 
-    function findRootClass(list, id){
-        var index = list.findIndex((v)=>{return v.id == id});
-        if(list[index].pid == "0"){
-            return id;
-        }else{
-            return findRootClass(list, list[index].pid);
+
+    dataSend = {
+        store: {
+            store_id: "0000"
+        },
+        goodsClassify: {
+            classify_name: "all"
         }
-    }
+    };
+
+    var vm = new Vue({
+        el: '#product_info',
+        data: {
+            goods: [],
+            classify: [],
+            info:[] //触发更新用
+        }
+    });
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/goods/getByClassify",
+        data: JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){                            
+                vm.goods = data.goodsList;
+
+                var root = "http://localhost:8080/front/goodsInfoById/";
+                for(var i=0; i<vm.goods.length; i++){
+                    href = root + vm.goods[i].store_id + "/" + vm.goods[i].goods_id; //进入商品详情页 ok
+                    //分类
+                    var classifyName = findRootName(classList, vm.goods[i].classify_name);
+                    if(classifyName == null){
+                        vm.classify.push("更多")
+                        vm.goods[i].classify_name = "product 更多";
+                    }else{
+                        vm.classify.push(classifyName);
+                        vm.goods[i].classify_name = "product " + classifyName;
+                    }
+                    vm.classify = unique(vm.classify);
+
+                    vm.goods[i].href = href; //图片链接
+                    vm.goods[i].cartHref = "javascript:addToCart(\"" + vm.goods[i].goods_id +"\")"; //添加至购物车
+                }
+
+                vm.info.push({
+                    a:"a"
+                });
+            }else{
+                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
 
 });
 
-// good
-// {
-//     "classify_name": 
-//     "create_time": "20190718-134040", 
-//     "description": "修改描述测试", 
-//     "goods_id": "003", 
-//     "goods_name": "github文化衫", 
-//     "old_level": "", 
-//     "pic_url": "https://www.google.com/", 
-//     "price": 0, 
-//     "href": 
-//     "cartHref":
-//     "status": "", 
-//     "store_id": null, 
-//     "update_time": "20190721-222604"
-// }, 
-
-// classify [
-//     "食品","",""
-// ]
 </script>
 
 <script>
 function addToCart(good_id){
+    var user_id;
+    $.ajax({
+        type: "POST",    
+        url: "http://localhost:8080/user/checkIfLogin",
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){ 
+                if(data.Login == true){//已经登陆
+                    user_id=data.user_id;
+                }else{//没有登录
+                    // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                   if (confirm("没有登录")) {
+                        window.location.href= "http://localhost:8080/user/toLogin";
+                    }
+                }
+            }else{
+                layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+
     var dataSend = {
+        user_id:user_id,
         goods_id: good_id,
         quantity: 1
     }
 
     $.ajax({    
-        type: "POST",    
-        url: "http://localhost:8080/ShoppingCart/",
+        type: "POST",   
+        url: "http://localhost:8080/shoppingCart/",
         data: JSON.stringify(dataSend),
         contentType: "application/json; charset=utf-8",    
         dataType: "json",    
@@ -547,6 +567,26 @@ function addToCart(good_id){
         } 
     });
 }
+function judgeIsLogin(){
+    $.ajax({
+        type: "POST",    
+        url: "http://localhost:8080/user/checkIfLogin",
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){ 
+                if(data.Login == true){//已经登陆
+                    window.location.href="http://localhost:8080"+data.urlTo;
+                }else{//没有登录
+                    window.location.href= "http://localhost:8080/user/toLogin";
+                }
+            }else{
+                layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+}
+
 </script>
 
 </body>

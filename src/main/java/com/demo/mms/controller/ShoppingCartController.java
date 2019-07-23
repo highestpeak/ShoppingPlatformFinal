@@ -41,6 +41,9 @@ public class ShoppingCartController {
     @ResponseBody
     public Object getUserShoppingCart(String user_id) {
         Map<String, Object> result = new HashMap<>();
+        if (user_id == null) {
+            ControllerUtility.insertErrorMessageAndFailFlag(result, "empty user_id received.");
+        }
         Collection<ShoppingCartDTO> relations;
         try {
             relations = shoppingCartService.getShoppingCartGoodsOfUserByUserId(user_id);
@@ -52,20 +55,6 @@ public class ShoppingCartController {
         return result;
     }
 
-
-//    @PostMapping("/")
-//    @ResponseBody
-//    public Object insertGoods(@RequestBody String goods_id, @RequestBody String user_id, @RequestBody Integer quantity) {
-//        Map<String, Object> result = new HashMap<>();
-//        try {
-//            shoppingCartService.insertGoodsToShoppingCartOfUser(goods_id, user_id, quantity);
-//        } catch (Exception e) {
-//            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
-//            return result;
-//        }
-//        ControllerUtility.insertSuccessFlag(result);
-//        return result;
-//    }
 
     @PostMapping("/")
     @ResponseBody
@@ -80,6 +69,7 @@ public class ShoppingCartController {
         ControllerUtility.insertSuccessFlag(result);
         return result;
     }
+
 
     @PutMapping("/{relation_id}")
     @ResponseBody

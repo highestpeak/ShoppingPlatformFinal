@@ -2,134 +2,140 @@ package com.demo.mms.controller;
 
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.ControllerUtility;
+import com.demo.mms.dto.CreateOrderFromCartDTO;
+import com.demo.mms.dto.UpdateExpressInfoDTO;
 import com.demo.mms.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-@RequestMapping("/order")
+@RequestMapping("/orders")
+@RestController
 public class OrderController {
 
     final private OrderService orderService;
+
+    /*
+     TODO:
+        前台请求接口：
+        获取一个商店 订单类型比例的chart图 返回 订单状态+相应订单数量
+        获取一个商店 订单变化的chart图 几种订单状态就有几个调用的接口
+        未付款订单的调用 返回 日期+数量
+        已付款未发货订单的调用 返回 日期+数量
+        正在快递的订单的调用 返回 日期+数量
+        已完成订单的调用 返回 日期+数量
+        获取各种订单数量相对于前一天的变化：  返回  订单类型 变化--上升or下降  百分比  今日订单总量  今日订单总额
+        获取所有订单信息：  返回： 所有订单数目 未付款数目  正在快递数目  已完成数目
+        x 获取最新十条用户评价  返回：用户名 用户头像url 用户评价内容 用户评价星级 评价时间
+        后端请求接口：
+        每日新下单的数量
+        每日完成订单的数量
+        每日创建好评数目
+        每日创建差评数目
+     */
 
     public OrderController(OrderService service) {
         orderService = service;
     }
 
-    private static Map<String, Object> getAllOf(OrderService orderService, String ofWhat, Object object) {
-        Map<String, Object> result = new HashMap<>();
-        Collection<Object> orders;
+    @PostMapping("/") @ResponseBody
+    public Map<String, Object> CreateOrderFromCart(CreateOrderFromCartDTO args) {
+        Map<String, Object> ret = new HashMap<>();
+        Collection<Order> result;
         try {
-            if (ofWhat.isEmpty()) {
-                orders = orderService.getAll();
-            } else {
-                Method method = OrderService.class.getMethod("getAllOf" + ofWhat);
-                orders = (Collection<Object>) method.invoke(orderService, object);
-            }
+            result = orderService.createOrderFromShoppingCart(
+                    args.getRelation_id_list(),
+                    args.getConsignee(),
+                    args.getPhone(),
+                    args.getAddress(),
+                    args.getPost_code()
+            );
+        } catch (Exception e) {
+            ControllerUtility.insertErrorMessageAndFailFlag(ret, e);
+            return ret;
+        }
+        ControllerUtility.insertQueryResultAndSuccessFlag(ret, result);
+        return ret;
+    }
+
+    @GetMapping("/stat/recent/{storeId}")
+    @ResponseBody
+    public Map<String, Object> getRecentTenOrder(@PathVariable String storeId) {
+        Map<String, Object> ret = new HashMap<>();
+        Order[] result;
+        try {
+            result = orderService.getMostRecentTenOrder(storeId);
+        } catch (Exception e) {
+            ControllerUtility.insertErrorMessageAndFailFlag(ret, e);
+            return ret;
+        }
+        ControllerUtility.insertQueryResultAndSuccessFlag(ret, result);
+        return ret;
+    }
+
+    @GetMapping("/stat/total/{storeId}")
+    @ResponseBody
+    public Map<String, Object> getOrderStatTotal(@PathVariable String storeId) {
+        Map<String, Object> ret = new HashMap<>();
+        Map<String, Integer> result;
+        try {
+            result = orderService.getOrderStatTotal(storeId);
+        } catch (Exception e) {
+            ControllerUtility.insertErrorMessageAndFailFlag(ret, e);
+            return ret;
+        }
+        ControllerUtility.insertQueryResultAndSuccessFlag(ret, result);
+        return ret;
+    }
+
+
+    @GetMapping("/")
+    @ResponseBody
+    public Map<String, Object> getAll(String user_id, String store_id) {
+        Map<String, Object> result = new HashMap<>();
+        Collection<Order> orders;
+        try {
+            orders = orderService.getAll();
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
         }
+        orders = orders.stream().
+                filter(order -> user_id == null || order.getUserId().equals(user_id)).
+                filter(order -> store_id == null || order.getStoreId().equals(store_id)).
+                collect(Collectors.toList());
         ControllerUtility.insertQueryResultAndSuccessFlag(result, orders);
         return result;
     }
 
-    private static Map<String, Object> invoke(OrderService orderService, String methodName, Object... args) {
+    @PostMapping("/{orderId}/proceed")
+    @ResponseBody
+    public Map<String, Object> proceed(@PathVariable String orderId) {
         Map<String, Object> result = new HashMap<>();
-        Object serviceResult;
-        Method method;
         try {
-            method = OrderService.class.getMethod(methodName);
+            orderService.proceed(orderId);
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        if (method.getReturnType() == Void.class) {
-            try {
-                method.invoke(orderService, args);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IllegalArgumentException e) {
-                ControllerUtility.insertErrorMessageAndFailFlag(result, e);
-                return result;
-            }
-            ControllerUtility.insertSuccessFlag(result);
-            return result;
-        } else {
-            try {
-                serviceResult = method.invoke(orderService, args);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IllegalArgumentException e) {
-                ControllerUtility.insertErrorMessageAndFailFlag(result, e);
-                return result;
-            }
-            ControllerUtility.insertQueryResultAndSuccessFlag(result, serviceResult);
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
         }
-    }
-
-    @GetMapping("/")
-    @ResponseBody
-    public Map<String, Object> getAll() {
-        return getAllOf(orderService, "", null);
-    }
-
-    @GetMapping("/buyer")
-    @ResponseBody
-    public Map<String, Object> getAllOfBuyer(Buyer buyer) {
-        return getAllOf(orderService, "Buyer", buyer);
-    }
-
-    @GetMapping("/store")
-    @ResponseBody
-    public Map<String, Object> getAllOfStore(Store store) {
-        return getAllOf(orderService, "Store", store);
-    }
-
-    @PostMapping("/")
-    @ResponseBody
-    public Map<String, Object> insertOrder(String buyerId, Map<String, Integer> entries, MailingInfo mailingInfo, String note) {
-        Map<String, Object> result = invoke(orderService, "createOrder", buyerId, entries, mailingInfo, note);
-        if (result == null) {
-            System.exit(1);
-        }
+        ControllerUtility.insertSuccessFlag(result);
         return result;
     }
 
-    @PutMapping("/entry/pay")
+    @PutMapping("/{orderId}/express/")
     @ResponseBody
-    public Map<String, Object> payForOrder(String orderEntryId) {
-        Map<String, Object> result = invoke(orderService, "makePaid", orderEntryId);
-        if (result == null) {
-            System.exit(1);
+    public Map<String, Object> updateExpressCode(@PathVariable String orderId, @RequestBody UpdateExpressInfoDTO args) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            orderService.updateExpressInfo(orderId, args.getExpress_code(), args.getExpress_company_id());
+        } catch (Exception e) {
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
+            return result;
         }
-        return result;
-    }
-
-    @PutMapping("/entry/express")
-    @ResponseBody
-    public Map<String, Object> updateExpressInfo(String orderEntryId, String expressCompanyId, String expressCode) {
-        Map<String, Object> result = invoke(orderService, "setExpressCompany", expressCompanyId, expressCode);
-        if (result == null) {
-            System.exit(1);
-        }
-        return result;
-    }
-
-    @PutMapping("/entry/signed")
-    @ResponseBody
-    public Map<String, Object> sign(String orderEntryId) {
-        Map<String, Object> result = invoke(orderService, "makeSigned", orderEntryId);
-        if (result == null) {
-            System.exit(1);
-        }
+        ControllerUtility.insertSuccessFlag(result);
         return result;
     }
 }

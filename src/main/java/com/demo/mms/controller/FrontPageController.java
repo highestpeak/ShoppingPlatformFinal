@@ -1,11 +1,14 @@
 package com.demo.mms.controller;
 
+import com.demo.mms.common.vo.RedirectToCartVO;
 import com.demo.mms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +74,14 @@ public class FrontPageController {
     @RequestMapping("/goodsInfoByName/{store_id}/{goods_name}")
     public String goodsInfoByNameGet(@PathVariable String store_id,@PathVariable String goods_name){
         System.out.println("in goodsInfoByIdGet");
+        return "good_info";
+    }
+
+    @RequestMapping("/redirectToCart")
+    @ResponseBody
+    public String redirectToCart(@RequestBody RedirectToCartVO redirectToCartVO){
+        System.out.println("in goodsInfoByIdGet");
+
         return "good_info";
     }
 

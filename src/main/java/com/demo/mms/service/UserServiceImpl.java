@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
         Map<String,Object> rs = new HashMap<>();
         if(isAlreadyLogin(user_id,request)){//已经登录
             rs.put("already login",true);
+            rs.put("urlTo",ProjectFactory.getCookieByName(request,"urlTo").getValue());
             return rs;
         }
         //没有登陆
@@ -43,8 +44,19 @@ public class UserServiceImpl implements UserService {
 //
 //        }
         // 创建Cookie
+        int timeOut=60*60;// 1h
         Cookie cookie = new Cookie("user_id", user_id);
-        cookie.setMaxAge(60);// 有效期,秒为单位
+        cookie.setMaxAge(timeOut);// 有效期,秒为单位
+        response.addCookie(cookie);// 设置cookie
+        //查询admin或buyer
+        Buyer buyerFind= userOperateMapper.queryBuyer("buyer","user_id",user_id);
+        if(buyerFind!=null){//用户不存在
+            rs.put("urlTo","/front/personalCenter");//购买者
+        }else {
+            rs.put("urlTo","/admin");//admin
+        }
+        cookie = new Cookie("urlTo", (String)rs.get("urlTo"));
+        cookie.setMaxAge(timeOut);// 有效期,秒为单位
         response.addCookie(cookie);// 设置cookie
         return rs;
     }
@@ -62,10 +74,12 @@ public class UserServiceImpl implements UserService {
             return rs;
         }
         //删除会话消息
-        Cookie cookie= ProjectFactory.getCookieByName(request,user_id);
-        cookie.setMaxAge(0);//立即销毁
-        System.out.println("被删除cookie:"+cookie.getName());
-        response.addCookie(cookie);
+        Cookie cookie= ProjectFactory.getCookieByName(request,"user_id");
+        if(cookie.getValue().equals(user_id)){
+            cookie.setMaxAge(0);//立即销毁
+            System.out.println("被删除cookie:"+cookie.getName());
+            response.addCookie(cookie);
+        }
         return rs;
     }
 

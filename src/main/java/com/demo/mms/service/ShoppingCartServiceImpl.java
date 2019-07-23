@@ -26,7 +26,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public Object getInCartOfRelationshipById(String id) throws Exception {
-        InCartOf relation = (InCartOf) mapper.selectById(id);
+        InCartOf relation = mapper.selectById(id);
         Goods goods = goodsOperateMapper.getGoodById(relation.getGoodsId());
         return new ShoppingCartDTO(relation, goods);
     }

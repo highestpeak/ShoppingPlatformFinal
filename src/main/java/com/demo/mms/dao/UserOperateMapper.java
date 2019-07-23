@@ -16,6 +16,11 @@ public interface UserOperateMapper {
                    @Param("column") String column,
                    @Param("value") String value);
 
+    @Select("select * from ${table} where ${column} = #{value}")
+    Buyer queryBuyer(@Param("table") String table,
+                   @Param("column") String column,
+                   @Param("value") String value);
+
     @Update("update user set ${columnNew} = #{valueNew} where ${columnKey} = #{valueKey}")
     void updateUser(@Param("columnKey") String columnKey,
                    @Param("valueKey") String valueKey,
