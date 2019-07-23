@@ -55,6 +55,16 @@
         .user-id{
             display:none;
         }
+        /*#a1*/
+        /*{*/
+            /*float:left;*/
+            /*width:50%;*/
+        /*}*/
+        /*#a2*/
+        /*{*/
+            /*float:right;*/
+            /*width:50%;*/
+        /*}*/
     </style>
 
     <script type="text/javascript">
@@ -197,7 +207,7 @@
                 <!-- Cart Table -->
                 <div class="col-md-12 col-sm-12 col-xs-12 cart-table">
                     <form name="form1">
-                        <c:if test="${!empty(list)}">
+                        <%--<c:if test="${!empty(list)}">--%>
                         <input name="user_id" value="2017" class="user-id" type="text" >
                         <input id="remove_id" name="remove_id" value="" class="item-id" type="text" >
                         <input id="update_id" name="update_id" value="" class="item-id" type="text" >
@@ -207,55 +217,65 @@
                             <tr>
                                 <th class="product-thumbnail">Item</th>
                                 <th class="product-name">Product Name</th>
-                                <th class="product-quantity">Quantity</th>
+                                <th class="product-quantity">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                                 <th class="product-unit-price">Unit Price</th>
                                 <th class="product-subtotal">Total</th>
-                                <th class="product-remove">Remove</th>
+                                <th class="product-remove">保存</th>
+                                <th class="product-remove">删除</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbodyId">
 
-                            <c:forEach var="me" items="${list}" varStatus="cou">
-                                <tr class="cart_item">
-                                    <input name="item${cou.count}" value="${cou.count}" class="item-id" type="text" id="item${cou.count}">
-                                    <td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>
-                                    <td data-title="Product Name" class="product-name"><a href="#">aaa</a></td>
-                                    <td data-title="Quantity" class="product-quantity">
-                                        <div class="prd-quantity" data-title="Quantity">
-                                            <input value="-" class="qtyminus btn" data-field="quantity1" type="button">
-                                            <input id="quantity${cou.count}" name="quantity${cou.count}" value="0" class="qty" type="text" >
-                                            <input value="+" class="qtyplus btn" data-field="quantity1" type="button">
-                                        </div>
-                                    </td>
-                                    <td data-title="Unit Price" class="product-unit-price">aaa</td>
-                                    <td data-title="Total" class="product-subtotal">aaa</td>
-                                    <td data-title="Remove" class="product-remove"><a href="javascript:void(0);" onclick="setRemoveId(${cou.count})"><i class="icon icon-Delete"></i></a></td>
-                                </tr>
-                            </c:forEach>
-
-                                <%--<c:forEach var="x" begin="1" end="5">--%>
+                            <%--<c:forEach var="me" items="${list}" varStatus="cou">--%>
                                 <%--<tr class="cart_item">--%>
-                                <%--<td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>--%>
-                                <%--<td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>--%>
-                                <%--<td data-title="Quantity" class="product-quantity">--%>
-                                <%--<div class="prd-quantity" data-title="Quantity">--%>
-                                <%--<input value="-" class="qtyminus btn" data-field="quantity1" type="button">--%>
-                                <%--<input name="quantity1" value="0" class="qty" type="text">--%>
-                                <%--<input value="+" class="qtyplus btn" data-field="quantity1" type="button">--%>
-                                <%--</div>--%>
-                                <%--</td>--%>
-                                <%--<td data-title="Unit Price" class="product-unit-price">$550</td>--%>
-                                <%--<td data-title="Total" class="product-subtotal">$550</td>--%>
-                                <%--<td data-title="Remove" class="product-remove"><a href="#"><i class="icon icon-Delete"></i></a></td>--%>
+                                    <%--<input name="item${cou.count}" value="${cou.count}" class="item-id" type="text" id="item${cou.count}">--%>
+                                    <%--<td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>--%>
+                                    <%--<td data-title="Product Name" class="product-name"><a href="#">aaa</a></td>--%>
+                                    <%--<td data-title="Quantity" class="product-quantity">--%>
+                                        <%--<div class="prd-quantity" data-title="Quantity">--%>
+                                            <%--<input value="-" class="qtyminus btn" data-field="quantity1" type="button">--%>
+                                            <%--<input id="quantity${cou.count}" name="quantity${cou.count}" value="0" class="qty" type="text" >--%>
+                                            <%--<input value="+" class="qtyplus btn" data-field="quantity1" type="button">--%>
+                                        <%--</div>--%>
+                                    <%--</td>--%>
+                                    <%--<td data-title="Unit Price" class="product-unit-price">aaa</td>--%>
+                                    <%--<td data-title="Total" class="product-subtotal">aaa</td>--%>
+                                    <%--<td>--%>
+                                        <%--<button type="button" class="btn_mod" >保存</button>--%>
+                                        <%--<button type="button" class="btn_del" >删除</button>--%>
+                                    <%--</td>--%>
                                 <%--</tr>--%>
-                                <%--</c:forEach>--%>
+                            <%--</c:forEach>--%>
+
+                            <c:forEach var="x" begin="1" end="5">
+                            <tr class="cart_item">
+                                <td data-title="Item" class="product-thumbnail"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product" /></a></td>
+                                <td data-title="Product Name" class="product-name"><a href="#">mens casual shoe</a></td>
+                                <td data-title="Quantity" class="product-quantity">
+                                <div class="prd-quantity" data-title="Quantity">
+                                <input value="-" class="qtyminus btn" data-field="quantity1" type="button">
+                                <input id="quantity1" name="quantity1" value="0" class="qty" type="text">
+                                <input value="+" class="qtyplus btn" data-field="quantity1" type="button">
+                                </div>
+                                </td>
+                                <td data-title="Unit Price" class="product-unit-price">$550</td>
+                                <td data-title="Total" class="product-subtotal">$550</td>
+                                <%--<td>--%>
+                                    <%--<button type="button" class="btn_mod" >保存</button>--%>
+                                    <%--<button type="button" class="btn_del" >删除</button>--%>
+                                <%--</td>--%>
+                                    <td><a id="a1" class="btn btn-xs btn-info btn_mod" >保存</a></td>
+                                    <td><a id="a2" class="btn btn-xs btn-danger btn_del" >删除</a></td>
+                            </tr>
+                            </c:forEach>
                             <tr>
                                 <td class="action" colspan="6">
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                     <a href="javascript:void(0);"  title="Continue shopping" onclick="toMain()">Continue shopping</a>
-                                    <a href="javascript:void(0);" title="Save" onclick="updateTrolley()">Save</a>
                                 </td>
+                                <td></td>
                             </tr>
-                            </c:if>
+                            <%--</c:if>--%>
                             <c:if test="${empty(list)}">
                                 对不起，您还没有购买任何商品！
                             </c:if>
@@ -349,6 +369,116 @@
 
 <!-- Library - Theme JS -->
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+
+<script>
+    $(function(){
+        var dataSend = {
+            user_id:"111111"
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/order/",//请求controller方法   
+            data: JSON.stringify(dataSend),//发送的数据  
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false, //同步请求，注意此字段    
+            success: function (data) {
+                if(data.success == true){
+
+                    var $tbody = $("#tbodyId");
+                    var gl = data.cartList;
+                    $.each(gl,function (i,e) {
+                        var $tr = $("<tr>")
+                            .append($("<td>").html(e["goods_id"]))
+                            .append($("<td>").html(e["product_name"]))
+                            .append($("<td>").html(e["quantity"]))
+                            .append($("<td>").html(e["price"]))
+                            .append($("<td>").html(e["total"]));
+                        var $button_1 = document.createElement("a");
+                        $button_1.text = "修改";
+                        $button_1.className = "btn_mod";
+                        var $button_2 = document.createElement("a");
+                        $button_2.text = "删除";
+                        $button_2.className = "btn_del";
+                        $button_2.style = "margin-left:10px";
+                        var $td = $("<td>").append($button_1).append($button_2);
+                        $tr.append($td);
+                        $tbody.append($tr);
+                    });
+                }else{
+                    layer.alert("数据请求失败！");
+                }
+            }
+        });
+    })
+</script>
+<script>
+    $(function(){
+        $(".main-container").on("click", ".btn_del", function() {
+            var $tr = $(this).parents("tr");
+            var goods_id = $tr.find("td:eq(0)").html();
+            var goods_name = $tr.find("td:eq(1)").html();
+            var dataSend = {
+                id: goods_id
+            };
+
+            layer.confirm('确定删除: ' + goods_name + "?", {icon: 3, title: '提示'}, function (index) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://localhost:8080//shoppingcarts/",
+                    data: JSON.stringify(dataSend),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        if (data.success == true) {
+                            layer.alert('删除成功！', {icon: 1, closeBtn: 0}, function (index) {
+                                window.location.reload();
+                            });
+
+                        } else {
+                            layer.alert('删除失败！', {icon: 2, closeBtn: 0});
+                        }
+                    }
+                });
+            });
+        });
+        $(".main-container").on("click", ".btn_mod", function(){
+
+            var $tr = $(this).parents("tr");
+            var goods_id = "1";
+            var goods_name = $tr.find("td:eq(1)").html();
+            // var quantity = $tr.find("td:eq(2)").html();
+            var quantity = document.getElementById("quantity1").value;
+            var dataSend = {
+                goods_id:goods_id,
+                goods_name:goods_name,
+                quantity:quantity
+            };
+            // console.log(dataSend);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/shoppingcarts/",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    if(data.success == true){
+                        layer.alert('保存成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.alert('保存失败！', { icon: 2, closeBtn: 0 });
+                    }
+                }
+            });
+        });
+    })
+</script>
+
 
 </body>
 </html>

@@ -93,6 +93,43 @@
                 return false;
             }
         }
+        function submitNewVerifyList() {
+            if(forgetPasswordCheck()){
+                var oUser_id =document.getElementById("user_id").value;
+                var oEmail =document.getElementById("verify").value;
+                var oNewVerify = document.getElementById("email").value;
+                var dataSend={
+                    user_id:oUser_id,
+                    email:oEmail,
+                    newVerify:oNewVerify
+                };
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/user/newVerify",
+                    data: JSON.stringify(dataSend),//放置数据的字段    
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false, //同步请求，注意此字段    
+                    success: function (data) {
+                        console.log(data);
+                        if(data["user existed"] == false){
+                            layer.alert("用户名不存在");
+                        }
+                        else if(data["already login"] == false){
+                            layer.alert("用户在线");
+                        }
+                        else if(data["success"] == false){
+                            layer.alert("找回失败");
+                        }
+                        else if(data["success"] == true){
+                            layer.alert("找回成功");
+                        }
+                        // 在这里取出数据  
+                    }
+                })
+            }
+
+        }
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -113,7 +150,7 @@
     <div class="login-box-body">
         <p class="login-box-msg" style="color:orangered">${msg}</p>
 
-        <form action="${pageContext.request.contextPath}/forgetPassword" method="post" onsubmit="return forgetPasswordCheck()">
+        <form >
             <div class="form-group has-feedback">
                 <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -139,7 +176,7 @@
 
                 <!-- /.col -->
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">找回密码</button>
+                    <button type="button" class="btn btn-primary btn-block btn-flat" onclick="submitNewVerifyList()">找回密码</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -148,7 +185,7 @@
         </form>
         <!-- /.social-auth-links -->
         <br>
-        <a href="${pageContext.request.contextPath}/page/login">返回登陆界面</a>
+        <a href="${pageContext.request.contextPath}/user/toLogin">返回登陆界面</a>
 
 
     </div>
@@ -162,6 +199,8 @@
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="${pageContext.request.contextPath}/adminlte/plugins/iCheck/icheck.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 <script>
     $(function () {
         $('input').iCheck({

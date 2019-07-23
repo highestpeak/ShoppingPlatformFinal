@@ -1,6 +1,4 @@
-drop database if EXISTS  shopping_platform;
-CREATE database shopping_platform;
-use shopping_platform;
+
 
 create table admin
 (

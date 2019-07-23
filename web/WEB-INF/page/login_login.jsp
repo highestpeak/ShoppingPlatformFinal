@@ -69,30 +69,43 @@
             return true;
         }
         function submitLoginList() {
-            var oUser_id =document.getElementById("user_id").value;
-            var oVerify = document.getElementById("verify").value;
-            var dataSend={
-                user_id:oUser_id,
-                verify:oVerify
-            };
-            $.ajax({
-                type:"POST",
-                url:"http://localhost:8080/user/login",
-                data: JSON.stringify(dataSend),//放置数据的字段    
-                contentType: "application/json; charset=utf-8",    
-                dataType: "json",
-                async: false, //同步请求，注意此字段    
-                success: function (data) {
-                    if(data.success == true){
-                        alert("登陆成功");
-                    }
-                    if(data.success == false){
-                        alert("登陆失败");
-                    }
+            if(loginCheck()){
+                var oUser_id =document.getElementById("user_id").value;
+                var oVerify = document.getElementById("verify").value;
+                var dataSend={
+                    user_id:oUser_id,
+                    verify:oVerify
+                };
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/user/login",
+                    data: JSON.stringify(dataSend),//放置数据的字段    
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false, //同步请求，注意此字段    
+                    success: function (data) {
+                        console.log(data);
+                        if(data["user existed"] == false){
+                            layer.alert("用户名不存在");
+                        }
+                        else if(data["password wrong"] == true){
+                            layer.alert("密码错误");
+                        }
+                        else if(data["already login"] == true){
+                            layer.alert("已经登陆");
+                        }
+                        else if(data["success"] == false){
+                            layer.alert("登陆失败");
+                        }
+                        else{
+                            layer.alert("登陆成功");
+                        }
 
-                    // 在这里取出数据  
-                }
-            })
+                        // 在这里取出数据  
+                    }
+                })
+            }
+
         }
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -135,7 +148,7 @@
 
                 <!-- /.col -->
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="submitLoginList()">登陆</button>
+                    <button type="button" class="btn btn-primary btn-block btn-flat" onclick="submitLoginList()">登陆</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -144,8 +157,8 @@
         <br>
         <div id="error_box"><br></div>
         <br>
-        <a href="${pageContext.request.contextPath}/page/forgetPassword">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="${pageContext.request.contextPath}/page/register" class="text-center">注册</a>
+        <a href="${pageContext.request.contextPath}/user/toNewPassword">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="${pageContext.request.contextPath}/user/toRegister" class="text-center">注册</a>
 
 
     </div>
@@ -159,6 +172,8 @@
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="${pageContext.request.contextPath}/adminlte/plugins/iCheck/icheck.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 <script>
     $(function () {
         $('input').iCheck({

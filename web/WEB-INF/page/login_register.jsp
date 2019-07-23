@@ -104,6 +104,45 @@
                 return false;
             }
         }
+        function submitRegisterList() {
+            if(registerCheck()){
+                var oUser_id =document.getElementById("user_id").value;
+                var oVerify = document.getElementById("verify").value;
+                var oEmail = document.getElementById("email").value;
+                var dataSend={
+                    user_id:oUser_id,
+                    verify:oVerify,
+                    email:oEmail
+                };
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/user/addBuyer",
+                    data: JSON.stringify(dataSend),//放置数据的字段    
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false, //同步请求，注意此字段    
+                    success: function (data) {
+                        if(!data["success"]){
+                            if(data["type not found"]){
+                                layer.alert("不可识别的用户名");
+                            }
+                            else if(data["user existed"] ){
+                                layer.alert("用户名已存在");
+                            }
+                            else{
+                                layer.alert("注册失败");
+                            }
+                        }
+                        else if(data["success"]){
+                            layer.alert("注册成功");
+                        }
+
+                        // 在这里取出数据  
+                    }
+                })
+            }
+
+        }
     </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -125,7 +164,7 @@
     <div class="login-box-body">
         <p class="login-box-msg" style="color:orangered">${msg}</p>
 
-        <form  action="${pageContext.request.contextPath}/register" method="post" onsubmit="return registerCheck()">
+        <form >
             <div class="form-group has-feedback">
                 <input id="user_id" type="text" class="form-control" maxlength=32 placeholder="用户名（必填）" name="user_id">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -168,7 +207,7 @@
 
                 <!-- /.col -->
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="return registerCheck" >注册</button>
+                    <button type="button" class="btn btn-primary btn-block btn-flat" onclick="submitRegisterList()" >注册</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -179,7 +218,7 @@
         </form>
         <!-- /.social-auth-links -->
         <br>
-        <a href="${pageContext.request.contextPath}/page/login">已有账号</a>
+        <a href="${pageContext.request.contextPath}/user/toLogin">已有账号</a>
 
 
     </div>
@@ -193,6 +232,8 @@
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="${pageContext.request.contextPath}/adminlte/plugins/iCheck/icheck.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 <script>
     $(function () {
         $('input').iCheck({
