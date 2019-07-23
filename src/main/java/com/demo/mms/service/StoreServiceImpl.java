@@ -123,16 +123,16 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public Map<String, Object> getTopTenNewGoods(Store store, ArrayList<Goods> topTenNewGoods) {
+    public Map<String, Object> getTopTenNewGoods(String store_id, ArrayList<Goods> topTenNewGoods) {
         Map<String ,Object> rs=new HashMap<>();
         //查找store是否存在
-        Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
+        Store storeCheck=goodsOperateMapper.queryStore("store_id",store_id);
         if(storeCheck==null){
             rs.put("store exist",false);
             return rs;
         }
         //store存在
-        topTenNewGoods.addAll(goodsOperateMapper.queryStoreTopTenNewGoods(store.getStore_id()));
+        topTenNewGoods.addAll(goodsOperateMapper.queryStoreTopTenNewGoods(store_id));
         return rs;
     }
 

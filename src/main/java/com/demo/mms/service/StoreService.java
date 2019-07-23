@@ -25,7 +25,7 @@ public interface StoreService {
 
     Map<String,Object> getAllUser(ArrayList<User> users);
 
-    Map<String ,Object> getTopTenNewGoods(Store store,ArrayList<Goods> topTenNewGoods);
+    Map<String ,Object> getTopTenNewGoods(String store_id,ArrayList<Goods> topTenNewGoods);
 
     Map<String ,Object> getStoreThingOfDay(Store store,String dateToGet);
 }

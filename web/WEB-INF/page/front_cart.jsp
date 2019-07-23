@@ -333,7 +333,27 @@
 
 <script>
     $(function(){
-        var user_id="111111";
+        var user_id;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/user/checkIfLogin",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                if(data.success == true){
+                    if(data.Login == true){//已经登陆
+                        user_id=data.user_id;
+                    }else{//没有登录
+                        // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                        if (confirm("没有登录")) {
+                            window.location.href= "http://localhost:8080/user/toLogin";
+                        }
+                    }
+                }else{
+                    layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+                }
+            }
+        });
         var urlSend="http://localhost:8080/shoppingCart/?user_id="+user_id;
         $.ajax({
             type: "GET",

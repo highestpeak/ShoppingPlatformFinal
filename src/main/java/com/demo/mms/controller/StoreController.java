@@ -1,5 +1,6 @@
 package com.demo.mms.controller;
 
+import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.OnSale;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
@@ -253,6 +254,28 @@ public class StoreController {
             return rs;
         }
         rs.put("userList",users);
+        return rs;
+    }
+
+    @RequestMapping("/getTopTenGoods")
+    @ResponseBody
+    public Object getTopTenGoods(@RequestBody Store store){
+        System.out.println("in getTopTenGoods");
+        Map<String,Object> rs = new HashMap<>();
+        rs.put("success",true);
+        ArrayList<Goods> topTenNewGoods=new ArrayList<>();
+        Map<String,Object> rsService=
+                storeService.getTopTenNewGoods(store.getStore_id(),topTenNewGoods);
+//        Map<String,Object> rsService= null;
+        if(rsService!=null && !rsService.isEmpty()){//含有错误信息
+            rs.putAll(rsService);
+            rs.put("success",false);
+            return rs;
+        }
+        if(rs.size()>1){
+            rs.put("success",false);
+        }
+        rs.put("goodsList",topTenNewGoods);
         return rs;
     }
 

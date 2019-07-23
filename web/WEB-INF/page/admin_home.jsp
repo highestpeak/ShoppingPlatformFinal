@@ -51,7 +51,7 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="${pageContext.request.contextPath}/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="${pageContext.request.contextPath}/localLib/images/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">User Name</span>
                         </a>
                     </li>
@@ -76,7 +76,7 @@
 
             <!-- 增加功能栏目 -->
             <ul class="sidebar-menu tree" data-widget="tree">
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/admin/">
                         <i class="fa fa-home"></i> <span><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">主页</font></font></span>
@@ -154,6 +154,7 @@
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/orderManage" class="small-box-footer">点击跳转 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
+
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-xs-6">
@@ -230,7 +231,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">新品上市</h3>
@@ -242,57 +243,34 @@
                             </div>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
+                        <div class="box-body" id="new_goods_box">
                             <ul class="products-list product-list-in-box">
-                                <li class="item">
+
+                                <!-- <div class="col-md-6" v-for="good in goods">
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img v-bind:src="good.pic_url" v-bind:style="{height:50 + 'px', width:50 + 'px'}" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <span class="product-description">{{good.goods_name}}</span>
+                                            <span class="label label-warning pull-right" id="good_price">{{good.price+' ￥'}}</span>
+                                            <span class="product-description">{{good.description}}</span>
+                                        </div>
+                                    </li>
+                                </div> -->
+
+                                <li class="col-md-6 item" v-for="good in goods">
                                     <div class="product-img">
-                                        <img src="dist/img/default-50x50.gif" alt="Product Image">
+                                        <img v-bind:src="good.pic_url" v-bind:style="{height:50 + 'px', width:50 + 'px'}" alt="Product Image">
                                     </div>
                                     <div class="product-info">
-                                        <span class="product-description">Samsung TV</span>
-                                        <span class="label label-warning pull-right" id="good_price">$1800</span>
-                                        <span class="product-description">Samsung 32" 1080p 60Hz LED Smart HDTV.</span>
+                                        <span class="product-description">{{good.goods_name}}</span>
+                                        <span class="label label-warning pull-right" style="margin-right: 50px" id="good_price">{{good.price+' ￥'}}</span>
+                                        <span class="product-description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+                                        <!-- <span class="product-description">{{good.description}}</span> -->
                                     </div>
                                 </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                    <div class="product-img">
-                                        <img src="dist/img/default-50x50.gif" alt="Product Image">
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">Bicycle
-                                            <span class="label label-info pull-right">$700</span></a>
-                                        <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                                    </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                    <div class="product-img">
-                                        <img src="dist/img/default-50x50.gif" alt="Product Image">
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
-                                        <span class="product-description">
-                          Xbox One Console Bundle with Halo Master Chief Collection.
-                        </span>
-                                    </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                    <div class="product-img">
-                                        <img src="dist/img/default-50x50.gif" alt="Product Image">
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">PlayStation 4
-                                            <span class="label label-success pull-right">$399</span></a>
-                                        <span class="product-description">
-                          PlayStation 4 500GB Console (PS4)
-                        </span>
-                                    </div>
-                                </li>
-                                <!-- /.item -->
+                               
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -314,7 +292,42 @@
 <script src="${pageContext.request.contextPath}/adminlte/dist/js/demo.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
+
+<script>
+$(function(){
+    var dataSend = {
+        store_id: "0000"
+    };
+    var vm = new Vue({
+        el: '#new_goods_box',
+        data: {
+            goods: [],
+            info:[] //触发更新用
+        }
+    });
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/store/getTopTenGoods",
+        data: JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){                            
+                vm.goods = data.goodsList;
+                vm.info.push({
+                    a:"a"
+                });
+            }else{
+                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+});
+</script>
 
 </body>
 </html>

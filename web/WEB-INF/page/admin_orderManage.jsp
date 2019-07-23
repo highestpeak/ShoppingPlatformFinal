@@ -79,7 +79,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/admin/orderManage">
                         <i class="fa fa-shopping-cart"></i> <span><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">订单管理</font></font></span>
