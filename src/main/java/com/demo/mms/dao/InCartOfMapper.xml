@@ -3,7 +3,7 @@
 <mapper namespace="com.demo.mms.dao.InCartOfMapper">
     <resultMap id="InCartOfModel" type="com.demo.mms.common.domain.InCartOf">
         <id property="id" column="id" javaType="java.lang.String"/>
-        <result property="buyerId" column="buyer_id" javaType="java.lang.String"/>
+        <result property="userId" column="buyer_id" javaType="java.lang.String"/>
         <result property="goodsId" column="good_id" javaType="java.lang.String"/>
         <result property="number" column="good_num" javaType="java.lang.Integer"/>
     </resultMap>
@@ -11,6 +11,8 @@
     <select id="selectAll" resultMap="InCartOfModel">SELECT * FROM in_cart_of;</select>
 
     <select id="selectAllOfUser" resultMap="InCartOfModel">SELECT * FROM in_cart_of WHERE buyer_id = #{buyer_id};</select>
+
+    <select id="selectById" resultMap="InCartOfModel">SELECT * FROM in_cart_of WHERE id = #{id}</select>
 
     <delete id="deleteEntryById">DELETE FROM in_cart_of WHERE id = #{id};</delete>
 

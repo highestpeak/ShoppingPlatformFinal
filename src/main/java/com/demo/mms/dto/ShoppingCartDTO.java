@@ -16,7 +16,12 @@ public class ShoppingCartDTO {
         this.pictureUrl = goods.getPic_url();
         this.name = goods.getGoods_name();
         this.quantity = relation.getNumber();
-        this.unitPrice = goods.getPrice() / 100.0;
+        Integer price = goods.getPrice();
+        if (price == null) {
+            this.unitPrice = 0.0;
+        } else {
+            this.unitPrice = price / 100.0;
+        }
         this.totalPrice = this.unitPrice * this.quantity;
     }
 

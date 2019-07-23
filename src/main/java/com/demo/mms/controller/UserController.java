@@ -283,7 +283,7 @@ public class UserController {
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         Map<String,Object> rsService=null;
-//        rsService=goodsService.starGoods(starGoodsVO.getUser(),starGoodsVO.getStore(),starGoodsVO.getGoods());
+//        rsService=goodsService.starGoods(starGoodsVO.getUserId(),starGoodsVO.getStore(),starGoodsVO.getGoods());
         if(rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
             rs.put("success",false);
