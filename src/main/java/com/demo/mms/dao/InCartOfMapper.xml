@@ -24,4 +24,3 @@
 
     <update id="updateEntryByUserAndGoodsId">UPDATE in_cart_of SET good_num = #{newNum} WHERE buyer_id = #{buyerId} AND good_id = #{goodsId};</update>
 </mapper>
-

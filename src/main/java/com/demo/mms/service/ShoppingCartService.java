@@ -4,6 +4,7 @@ import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.InCartOf;
 import com.demo.mms.common.domain.Buyer;
 import com.demo.mms.dto.ShoppingCartDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 

@@ -1,7 +1,6 @@
 package com.demo.mms.dao;
 
 import com.demo.mms.common.domain.InCartOf;
-import com.sun.istack.internal.NotNull;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public interface InCartOfMapper {
 
     void deleteEntryById(String id) throws Exception;
 
-    void insertEntry(@NotNull @Param("id") String id, @NotNull @Param("buyerId") String buyerId, @NotNull @Param("goodId") String goodsId, @NotNull @Param("num") Integer num) throws Exception;
+    void insertEntry(@Param("id") String id, @Param("buyerId") String buyerId, @Param("goodId") String goodsId, @Param("num") Integer num) throws Exception;
 
     void updateEntryByRelationId(@Param("id") String id, @Param("newNum") Integer newNum) throws Exception;
 
