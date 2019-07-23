@@ -278,7 +278,7 @@ public class GoodsServiceImpl implements GoodsService{
             if (idCheck!=null){
                 rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_id",idCheck.getGoods_id()));
             }else {//nameCheck!=null
-                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_name",idCheck.getGoods_name()));
+                rs.putAll(modifyGoodsHelp(store,oldGoods,newGoods,"goods_name",nameCheck.getGoods_name()));
             }
         }
         return rs;
