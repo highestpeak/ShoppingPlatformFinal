@@ -3,37 +3,21 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>汤达人</title>
 
-    <!-- Standard Favicon -->
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/localLib/images//favicon.ico" />
-
-    <!-- For iPhone 4 Retina display: -->
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-114x114-precomposed.png">
-
-    <!-- For iPad: -->
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-72x72-precomposed.png">
-
-    <!-- For iPhone: -->
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-57x57-precomposed.png">
-
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/settings.css">
-
-    <!-- RS5.0 Layers and Navigation Styles -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/layers.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/navigation.css">
-
-    <!-- Library - Bootstrap v3.3.5 -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/libraries/lib.css">
-
-    <!-- Custom - Common CSS -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/plugins.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
@@ -46,16 +30,7 @@
     <section class="content container-fluid">
     <!-- Header -->
     <header class="header-section container-fluid no-padding">
-        <!-- Top Header -->
-        <!--<div class="top-header top-header1 container-fluid no-padding">-->
-            <!--&lt;!&ndash; Container &ndash;&gt;-->
-            <!--<div class="container">-->
-                <!--<div class="col-md-7 col-sm-7 col-xs-7 dropdown-bar">-->
-                    <!--<h5>Welcome To Tang Shop</h5>-->
-                <!--</div>-->
-            <!--</div>&lt;!&ndash; Container /- &ndash;&gt;-->
-        <!--</div>&lt;!&ndash; Top Header /- &ndash;&gt;-->
-        <!-- Menu Block -->
+
         <div class="container-fluid no-padding menu-block">
             <!-- Container -->
             <div class="container">
@@ -326,7 +301,7 @@
         <div id="product-section" class="product-section container-fluid no-padding">
             <!-- Container -->
             <div class="container">
-                <div class="row">
+                <div class="row" id="product_info">
                     <!-- Section Header -->
                     <div class="section-header">
                             <br/>
@@ -336,14 +311,13 @@
                         <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
                     </div><!-- Section Header /- -->
                     <ul id="filters" class="products-categories no-left-padding">
+
                         <li><a data-filter="*" class="active" href="#">全部</a></li>
-                        <li><a data-filter=".design" href="#">美妆</a></li>
-                        <li><a data-filter=".video" href="#">书籍</a></li>
-                        <li><a data-filter=".photography" href="#">配饰</a></li>
-                        <li><a data-filter=".web" href="#">鞋类</a></li>
-                        <li><a data-filter=".design" href="#">服装</a></li>
-                        <li><a data-filter=".photography" href="#">数码</a></li>
-                        <li><a data-filter=".video" href="#">更多<i class="fa fa-angle-down"></i></a></li>
+                        <!-- 循环 -->
+                        <li v-for="class in classify">
+                            <a v-bind:data-filter="class" href="#">{{class}}</a>
+                        </li>
+
                     </ul>
                     <div class="input-group">
                         <input class="form-control" placeholder="搜索" type="text">
@@ -353,6 +327,7 @@
                     </div>
                     <!-- Products -->
                     <ul class="products">
+<<<<<<< Updated upstream
                         <!-- Product -->
                         <li class="product design">
                             <a href="#">
@@ -363,78 +338,25 @@
 
                             <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
                         </li><!-- Product /- -->
+=======
+>>>>>>> Stashed changes
 
                         <!-- Product -->
-                        <li class="product video">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-2.jpg" alt="Product" />
-                                <h5>men's casual shoes</h5>
-                                <span class="price"><del>$150</del>$85</span>
+                        <!-- 循环 -->                      
+                        <li v-bind:class="good.classify_name" v-for="good in goods">
+                            <a v-bind:href="good.href">
+                                <img src="${pageContext.request.contextPath}/localLib/images/blog-2.jpg" alt="product picture" height="300px" width="270px">
+                                <h5>{{good.goods_name}}</h5>
+                                <span>￥：</span>
+                                <span class="price">{{good.price}}</span>
                             </a>
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
+                            <a v-bind:href="good.cartHref" class="addto-cart" title="Add To Cart">加入购物车</a>
+                        </li>
 
-                        <!-- Product -->
-                        <li class="product photography">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-3.jpg" alt="Product" />
-                                <h5>Sun glass</h5>
-                                <span class="price"><del>$100</del>$35</span>
-                            </a>
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
+                    </ul>
+                </div>
 
-                        <!-- Product -->
-                        <li class="product web">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-4.jpg" alt="Product" />
-                                <h5>tourist bags</h5>
-                                <span class="price"><del>$350</del>$279</span>
-                            </a>
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product design">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-5.jpg" alt="Product" />
-                                <h5>mobile phone</h5>
-                                <span class="price"><del>$450</del>$359</span>
-                            </a>
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product video">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-6.jpg" alt="Product" />
-                                <h5>men's winter coat</h5>
-                                <span class="price"><del>$220</del>$129</span>
-                            </a>
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product photography">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-7.jpg" alt="Product" />
-                                <h5>Model x12 computer</h5>
-                                <span class="price"><del>$850</del>$550</span>
-                            </a>
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
-
-                        <!-- Product -->
-                        <li class="product web">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-8.jpg" alt="Product" />
-                                <h5>Stylish headset</h5>
-                                <span class="price"><del>$50</del>$29</span>
-                            </a>
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
-                    </ul><!-- Products /- -->
-                </div><!-- Row /- -->
+                
                 <nav class="ow-pagination">
                         <ul class="pager">
                         <li class="number"><a href="#">4</a></li>
@@ -443,6 +365,7 @@
                         <li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
                         </ul>
                 </nav>
+
             </div><!-- Container /- -->
         </div><!-- Product Section /- -->
     </main>
@@ -475,15 +398,9 @@
 </div>
 
 
-<!-- JQuery v1.12.4 -->
 <script src="${pageContext.request.contextPath}/localLib/js/jquery.min.js"></script>
-
-<!-- Library - Js -->
 <script src="${pageContext.request.contextPath}/localLib/libraries/lib.js"></script>
-
 <script src="${pageContext.request.contextPath}/localLib/libraries/jquery.countdown.min.js"></script>
-
-<!-- RS5.0 Core JS Files -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/jquery.themepunch.revolution.min.js?rev=5.0"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.video.min.js"></script>
@@ -491,69 +408,145 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-
-<!-- Library - Theme JS -->
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
-
-<!--layer 引入-->
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/js/vue.min.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
+
+<!-- 请求分类 -->
 <script>
-    $(function () {
-        $(".content").on("click", ".btn_login", function () {
-            layer.open({
-                type: 2,
-                title: '修改用户信息',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['500px', '600px'],
-                content:"${pageContext.request.contextPath}/toLogin"
-            })
-        });
+$(function(){
 
-        var productVue = new Vue({
-            el: '#product-section',
-            data: {
-                store_id:"",
-                info:[] //触发更新用
-            }
-        });
+});
+</script>
 
-        var productDataSend = {
-            store_id: "00020"
+<!-- 请求商品列表 -->
+<script>
+$(function(){
+    var dataSend = {
+        store: {
+            store_id: "0000"
+        },
+        goodsClassify: {
+            classify_name: "all"
         }
+    };
 
-        $.ajax({    
-            type: "POST",    
-            url: "http://localhost:8080/classify/classifyOfStore",//请求controller方法   
-            data: JSON.stringify(productDataSend),//发送的数据  
-            contentType: "application/json; charset=utf-8",    
-            dataType: "json",
-            async: false, //同步请求，注意此字段    
-            success: function (data) { 
-                console.log(data);
-                if(data.success == true){
-                    var classifyOfStore = data.classifyList;
-
-                    productVue.info.push({
-                        a:"a"
-                    });//触发更新用
-                    
-                }else{
-                    layer.alert("数据请求失败！");
-                    for(var i=0,l=data.length;i<l;i++){
-                        for(var key in data[i]){
-                            console.log( key+':'+data[i][key] );
-                        }
-                    }
-                    if(data["store exist"] == true){
-                        layer.alert("数据请求失败！--商店不存在");
-                    }
-                }
-            } 
-        });
+    var vm = new Vue({
+        el: '#product_info',
+        data: {
+            goods: [],
+            info:[] //触发更新用
+        }
     });
 
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/goods/getByClassify",
+        data: JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){                            
+                vm.goods = data.goodsList;
+
+                var root = "http://localhost:8080/front/goodsInfoById/";
+                for(var i=0; i<vm.goods.length; i++){
+                    href = root + vm.goods[i].store_id + "/" + vm.goods[i].goods_id; //进入商品详情页
+                    vm.goods[i].classify_name = "product " + vm.goods[i].classify_name; //分类名
+                    vm.goods[i].href = href; //图片链接
+                    vm.goods[i].cartHref = "javascript:addToCart(\"" + vm.goods[i].goods_id +"\")"; //添加至购物车
+                }
+
+                vm.info.push({
+                    a:"a"
+                });
+            }else{
+                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+
+    var dataSend = {
+        store_id: "0000"
+    };
+    var classList = [];
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/classify/classifyOfStore",
+        data:JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType:'json',
+        async: false,//禁止异步请求，变为同步请求
+        success:function(data) {
+            var list=data.classifyList;
+            for(var i=0; i<list.length; i++){
+                var item = {
+                    text: list[i][1],
+                    id: list[i][0],
+                    pid: list[i][2],
+                };
+                classList.push(item);
+            }
+        }
+    });
+
+    function findRootClass(list, id){
+        var index = list.findIndex((v)=>{return v.id == id});
+        if(list[index].pid == "0"){
+            return id;
+        }else{
+            return findRootClass(list, list[index].pid);
+        }
+    }
+
+});
+
+// good
+// {
+//     "classify_name": 
+//     "create_time": "20190718-134040", 
+//     "description": "修改描述测试", 
+//     "goods_id": "003", 
+//     "goods_name": "github文化衫", 
+//     "old_level": "", 
+//     "pic_url": "https://www.google.com/", 
+//     "price": 0, 
+//     "href": 
+//     "cartHref":
+//     "status": "", 
+//     "store_id": null, 
+//     "update_time": "20190721-222604"
+// }, 
+
+// classify [
+//     "食品","",""
+// ]
+</script>
+
+<script>
+function addToCart(good_id){
+    var dataSend = {
+        goods_id: good_id,
+        quantity: 1
+    }
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/ShoppingCart/",
+        data: JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){                            
+                layer.alert('添加成功！', { icon: 1, closeBtn: 0 });
+            }else{
+                layer.alert('添加失败！', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+}
 </script>
 
 </body>
