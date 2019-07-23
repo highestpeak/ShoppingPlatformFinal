@@ -5,6 +5,7 @@ import com.demo.mms.common.utils.ControllerUtility;
 import com.demo.mms.dto.CreateOrderFromCartDTO;
 import com.demo.mms.dto.UpdateExpressInfoDTO;
 import com.demo.mms.service.OrderService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -61,8 +62,7 @@ public class OrderController {
         return ret;
     }
 
-    @GetMapping("/stat/recent/{storeId}")
-    @ResponseBody
+    @GetMapping("/stat/recent/{storeId}") @ResponseBody
     public Map<String, Object> getRecentTenOrder(@PathVariable String storeId) {
         Map<String, Object> ret = new HashMap<>();
         Order[] result;
@@ -76,8 +76,7 @@ public class OrderController {
         return ret;
     }
 
-    @GetMapping("/stat/total/{storeId}")
-    @ResponseBody
+    @GetMapping("/stat/total/{storeId}") @ResponseBody
     public Map<String, Object> getOrderStatTotal(@PathVariable String storeId) {
         Map<String, Object> ret = new HashMap<>();
         Map<String, Integer> result;
@@ -92,8 +91,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/")
-    @ResponseBody
+    @GetMapping("/") @ResponseBody
     public Map<String, Object> getAll(String user_id, String store_id) {
         Map<String, Object> result = new HashMap<>();
         Collection<Order> orders;
@@ -111,8 +109,7 @@ public class OrderController {
         return result;
     }
 
-    @PostMapping("/{orderId}/proceed")
-    @ResponseBody
+    @PostMapping("/{orderId}/proceed") @ResponseBody
     public Map<String, Object> proceed(@PathVariable String orderId) {
         Map<String, Object> result = new HashMap<>();
         try {
@@ -125,8 +122,7 @@ public class OrderController {
         return result;
     }
 
-    @PutMapping("/{orderId}/express/")
-    @ResponseBody
+    @PutMapping("/{orderId}/express/") @ResponseBody
     public Map<String, Object> updateExpressCode(@PathVariable String orderId, @RequestBody UpdateExpressInfoDTO args) {
         Map<String, Object> result = new HashMap<>();
         try {
@@ -138,5 +134,17 @@ public class OrderController {
         ControllerUtility.insertSuccessFlag(result);
         return result;
     }
-}
 
+    @DeleteMapping("/{orderId}") @ResponseBody
+    public Map<String, Object> deleteOrder(@PathVariable String orderId) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            orderService.deleteOrder(orderId);
+        } catch (Exception e) {
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
+            return result;
+        }
+        ControllerUtility.insertSuccessFlag(result);
+        return result;
+    }
+}
