@@ -208,7 +208,7 @@
     <div class="main-container" id="container">
         <div class="col-md-6">
             <!-- 图片链接 -->
-            <img src="${pageContext.request.contextPath}/localLib/images/category-1.jpg" alt="商品" width="400px" style="float:left; margin-left: 50%; margin-top: 200px">
+            <img v-bind:src="pic_url" alt="商品" width="400px" style="float:left; margin-left: 50%; margin-top: 200px">
         </div>
 
         <div class="col-md-6 good" style="padding: 80px" v-bind:id="goods_id">
