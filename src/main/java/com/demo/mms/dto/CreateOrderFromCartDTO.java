@@ -9,6 +9,8 @@ public class CreateOrderFromCartDTO {
     private String address;
     private String post_code;
 
+    public CreateOrderFromCartDTO() {}
+
     public CreateOrderFromCartDTO(List<String> relation_id_list, String consignee, String phone, String address, String post_code) {
         this.relation_id_list = relation_id_list;
         this.consignee = consignee;

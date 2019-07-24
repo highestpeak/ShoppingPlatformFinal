@@ -20,7 +20,7 @@
     <select id="selectAll" resultMap="OrderModel"> SELECT * FROM `order`; </select>
     <select id="selectById" resultMap="OrderModel"> SELECT * FROM `order` WHERE id = #{id}; </select>
     <insert id="save">
-        INSERT INTO `order` (id, user_id, store_id, note, consignee, phone, address, postcode, express_id, create_time, update_time)
-        VALUES (#{id}, #{userId}, #{storeId}, #{note}, #{consignee}, #{phone}, #{address}, #{postcode}, #{step}, #{expressId}, #{createTime}. #{updateTime});
+        INSERT INTO `order` (id, user_id, store_id, note, consignee, phone, address, postcode, step, express_id, create_time, update_time)
+        VALUES (#{id}, #{userId}, #{storeId}, #{note}, #{consignee}, #{phone}, #{address}, #{postcode}, #{step}, #{expressId}, #{createTime}, #{updateTime});
     </insert>
 </mapper>

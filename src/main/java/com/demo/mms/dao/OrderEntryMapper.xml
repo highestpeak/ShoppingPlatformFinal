@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mms.dao.OrderEntryMapper">
+    <resultMap id="OrderEntryModel" type="com.demo.mms.common.domain.OrderEntry">
+    </resultMap>
+
+    <insert id="save">
+        INSERT INTO `order_entry` (id, order_id, goods_id, unit_price, quantity, review_id)
+        VALUES (#{id}, #{orderId}, #{goodsId}, #{unitPrice}, #{quantity}, #{reviewId})
+    </insert>
+</mapper>

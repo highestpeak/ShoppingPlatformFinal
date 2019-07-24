@@ -2,12 +2,16 @@ package com.demo.mms.controller;
 
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.ControllerUtility;
+import com.demo.mms.dao.OrderEntryMapper;
 import com.demo.mms.dto.CreateOrderFromCartDTO;
+import com.demo.mms.dto.OrderEntryInfoDTO;
+import com.demo.mms.dto.OrderInfoDTO;
 import com.demo.mms.dto.UpdateExpressInfoDTO;
 import com.demo.mms.service.OrderService;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
 public class OrderController {
 
     final private OrderService orderService;
+    final private OrderEntryMapper orderEntryMapper;
 
     /*
      TODO:
@@ -38,12 +43,13 @@ public class OrderController {
         每日创建差评数目
      */
 
-    public OrderController(OrderService service) {
+    public OrderController(OrderService service, OrderEntryMapper orderEntryMapper) {
         orderService = service;
+        this.orderEntryMapper = orderEntryMapper;
     }
 
     @PostMapping("/") @ResponseBody
-    public Map<String, Object> CreateOrderFromCart(CreateOrderFromCartDTO args) {
+    public Map<String, Object> CreateOrderFromCart(@RequestBody CreateOrderFromCartDTO args) {
         Map<String, Object> ret = new HashMap<>();
         Collection<Order> result;
         try {
@@ -96,16 +102,30 @@ public class OrderController {
         Map<String, Object> result = new HashMap<>();
         Collection<Order> orders;
         try {
-            orders = orderService.getAll();
+            orders = orderService.select(user_id, store_id);
         } catch (Exception e) {
             ControllerUtility.insertErrorMessageAndFailFlag(result, e);
             return result;
         }
-        orders = orders.stream().
-                filter(order -> user_id == null || order.getUserId().equals(user_id)).
-                filter(order -> store_id == null || order.getStoreId().equals(store_id)).
-                collect(Collectors.toList());
-        ControllerUtility.insertQueryResultAndSuccessFlag(result, orders);
+        Collection<OrderInfoDTO> ret = new ArrayList<>();
+        Collection<OrderEntry> orderEntries;
+        try {
+            orderEntries = orderEntryMapper.getAll();
+        } catch (Exception e) {
+            ControllerUtility.insertErrorMessageAndFailFlag(result, e);
+            return result;
+        }
+        for (Order order : orders) {
+            List<OrderEntry> entries = orderEntries.parallelStream().filter(entry -> entry.getOrderId().equals(order.getId())).collect(Collectors.toList());
+            List<OrderEntryInfoDTO> entryDTOs = new ArrayList<>();
+            double total_price = 0;
+            for (OrderEntry entry : entries) {
+                total_price += entry.getUnitPrice() * entry.getQuantity() / 100.0;
+                entryDTOs.add(new OrderEntryInfoDTO(entry.getUnitPrice() / 100.0, entry.getQuantity()));
+            }
+            ret.add(new OrderInfoDTO(order.getId(), total_price, order.getPhone(), order.getAddress(), order.getStep(), entryDTOs));
+        }
+        ControllerUtility.insertQueryResultAndSuccessFlag(result, ret);
         return result;
     }
 

@@ -13,31 +13,14 @@
 
     <title>Myorder</title>
 
-    <!-- Standard Favicon -->
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/localLib/images//favicon.ico" />
-
-    <!-- For iPhone 4 Retina display: -->
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-114x114-precomposed.png">
-
-    <!-- For iPad: -->
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-72x72-precomposed.png">
-
-    <!-- For iPhone: -->
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/localLib/images//apple-touch-icon-57x57-precomposed.png">
-
-    <!-- Library - Google Font Familys
-    <link href="https://fonts.googleapis.com/css?family=Arizonia|Crimson+Text:400,400i,600,600i,700,700i|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/settings.css">
-
-    <!-- RS5.0 Layers and Navigation Styles -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/layers.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/revolution/css/navigation.css">
-
-    <!-- Library - Bootstrap v3.3.5 -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/libraries/lib.css">
-
-    <!-- Custom - Common CSS -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/plugins.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
@@ -53,16 +36,7 @@
 
     <!-- Header -->
     <header class="header-section container-fluid no-padding">
-        <!-- Top Header -->
-        <!--<div class="top-header top-header1 container-fluid no-padding">-->
-        <!--&lt;!&ndash; Container &ndash;&gt;-->
-        <!--<div class="container">-->
-        <!--<div class="col-md-7 col-sm-7 col-xs-7 dropdown-bar">-->
-        <!--<h5>Welcome To Tang Shop</h5>-->
-        <!--</div>-->
-        <!--</div>&lt;!&ndash; Container /- &ndash;&gt;-->
-        <!--</div>&lt;!&ndash; Top Header /- &ndash;&gt;-->
-        <!-- Menu Block -->
+
         <div class="container-fluid no-padding menu-block">
             <!-- Container -->
             <div class="container">
@@ -83,35 +57,7 @@
                             <a href="#" id="search" title="Search"><i class="icon icon-Search"></i></a>
                         </div>
                         <ul class="cart">
-                            <%--<li>--%>
-                            <%--<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>--%>
-                            <%--<ul class="dropdown-menu no-padding">--%>
-                            <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
-                            <%--<li class="mini_cart_item">--%>
-                            <%--<a title="Remove this item" class="remove" href="#">&#215;</a>--%>
-                            <%--<a href="#" class="shop-thumbnail">--%>
-                            <%--<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-1.jpg">Flying Ninja--%>
-                            <%--</a>--%>
-                            <%--<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>--%>
-                            <%--</li>--%>
 
-                            <%--&lt;%&ndash;购物车一个商品项目&ndash;%&gt;--%>
-                            <%--<li class="mini_cart_item">--%>
-                            <%--<a title="Remove this item" class="remove" href="#">&#215;</a>--%>
-                            <%--<a href="#" class="shop-thumbnail">--%>
-                            <%--<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${pageContext.request.contextPath}/localLib/images/product-wishlist-2.jpg">Flying Ninja--%>
-                            <%--</a>--%>
-                            <%--<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>--%>
-                            <%--</li>--%>
-
-                            <%--&lt;%&ndash;购物车提交按钮&ndash;%&gt;--%>
-                            <%--<li class="button">--%>
-                            <%--<a href="#" title="View Cart">查看购物车</a>--%>
-                            <%--<a href="#" title="Check Out">刷新购物车</a>--%>
-                            <%--<a href="#" title="Check Out">购买</a>--%>
-                            <%--</li>--%>
-                            <%--</ul>--%>
-                            <%--</li>--%>
                         </ul>
                         <div>
                             <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a>
@@ -139,16 +85,16 @@
                             <li><a href="${pageContext.request.contextPath}/front/history"><i class="fa fa-vimeo"></i>游览历史</a></li>
                             <li><a href="${pageContext.request.contextPath}/front/sysNotice"><i class="fa fa-twitter"></i>系统通知</a></li>
                         </ul>
-                    </div><!--/.nav-collapse -->
-                </nav><!-- nav /- -->
-                <!-- Search Box -->
+                    </div>
+                </nav>
+               
                 <div class="search-box">
                     <span><i class="icon_close"></i></span>
                     <form><input type="text" class="form-control" placeholder="输入关键词……" /></form>
-                </div><!-- Search Box /- -->
-            </div><!-- Container /- -->
-        </div><!-- Menu Block /- -->
-    </header><!-- Header /- -->
+                </div>
+            </div>
+        </div>
+    </header>
     <main>
         <div class="page-banner container-fluid no-padding">
             <!-- Container -->
@@ -157,14 +103,13 @@
                     <h3>我的订单</h3>
                     <img src="/localLib/images/section-seprator.png" alt="section-seprator">
                 </div>
-            </div><!-- Container /- -->
+            </div>
         </div>
         <div id="product-section" class="product-section container-fluid no-padding">
-            <!-- Container -->
+
             <div class="container">
                 <div class="row">
-                    <!-- Section Header -->
-                    <!-- Section Header /- -->
+                  
                     <ul id="filters" class="products-categories no-left-padding">
                         <li><a data-filter="*" class="active" href="#">全部</a></li>
                         <li><a data-filter=".未付款" href="#" class="">未付款</a></li>
@@ -173,18 +118,20 @@
                         <li><a data-filter=".未评价" href="#" class="">未评价</a></li>
                         <li><a data-filter=".退款/售后" href="#" class="">退款/售后</a></li>
                     </ul>
-                </div><!-- Row /- -->
-            </div><!-- Container /- -->
+
+                </div>
+            </div>
+    
         </div>
         <div class="woocommerce-cart container-fluid no-left-padding no-right-padding">
             <!-- Container -->
-            <div class="container">
+            <div class="container" id="content">
                 <div class="row">
                     <!-- Products -->
                     <ul class="products" style="position: relative; height: auto;">
 
                         <!-- Product -->
-                        <li class="product 未付款" style="position: relative; left: 15px; width: 1200px;">
+                        <li v-bind:class="product +'order.status'" v-for="order in orders" style="position: relative; left: 15px; width: 1200px;">
                             <table class="table table-bordered table-responsive">
                                 <thead>
                                 <tr>
@@ -194,48 +141,35 @@
                                     <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
                                     <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
                                     <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
+                                    <th class="product-logistics-order" style="text-align:center;vertical-align:middle;width: 10%">订单状态</th>
+                                    <th class="product-logistics-address" style="text-align:center;vertical-align:middle;width: 10%">地址</th>
+                                    <th class="product-logistics-phone" style="text-align:center;vertical-align:middle;width: 10%">电话</th>
                                     <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="cart_item">
-                                    <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                    <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                    <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                    <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                    <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                    <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
+                                <tr class="cart_item" v-for="good in order.goodsList">
+                                    <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img v-bind:src="good.pic_url" alt="Product"></a></td>
+                                    <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">{{good.goods_name}}</a></td>
+                                    <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">{{good.price}}</td>
+                                    <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">{{good.number}}</td>
+                                    <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">{{￥ order.total_price}}</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.status}}</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.order}}</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.address}}</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.phone}}</td>
                                     <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
                                     <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                                </tr>
-                                <tr class="cart_item">
-                                    <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                    <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                    <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                    <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                    <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
-
-                                </tr>
-                                <tr class="cart_item">
-                                    <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                    <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                    <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                    <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                    <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
-
                                 </tr>
                                 </tbody>
                             </table>
 
-                        </li><!-- Product /- -->
+                        </li>
 
-                    </ul><!-- Products /- -->
+                    </ul>
                 </div>
 
-            </div><!-- Container /- -->
+            </div>
         </div>
     </main>
     <footer id="footer-main" class="footer-main container-fluid">
@@ -292,6 +226,58 @@
 <script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
 <script>
+$(function(){
+
+var user_id;
+var store_id = "0000";
+
+$.ajax({
+    type: "POST",    
+    url: "http://localhost:8080/user/checkIfLogin",
+    dataType: "json",    
+    async: false,   
+    success: function (data) {        
+        if(data.success == true){ 
+            if(data.Login == true){//已经登陆
+                user_id=data.user_id;
+            }else{//没有登录
+                // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                if (confirm("没有登录")) {
+                    window.location.href= "http://localhost:8080/user/toLogin";
+                }
+            }
+        }else{
+            layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+        }
+    } 
+});
+
+var vm = new Vue({
+    el: '#content',
+    data: {
+        orders: [],
+        info:[] //触发更新用
+    }
+});
+
+var dataSend = "http://localhost:8080/orders/";
+
+$.ajax({
+    type:"GET",
+    url:dataSend,
+    data:JSON.stringify(dataSend),
+    contentType: "application/json; charset=utf-8",    
+    dataType:'json',
+    async: false,//禁止异步请求，变为同步请求
+    success:function(data) {
+       vm.orders = data.orderList;
+       vm.info.push({a:"a"});
+    }
+});
+
+});
+</script>
+<script>
 $(function () {
     $(".container").on("click", ".btn_del_order", function () {
         var $table = $(this).parents("table");
@@ -314,7 +300,6 @@ $(function () {
             content: 'xxx.html'
         })
     });
-
 })
 </script>
 

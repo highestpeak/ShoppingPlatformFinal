@@ -7,6 +7,7 @@ import com.demo.mms.dao.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -40,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
             if (!orderMap.containsKey(storeId)) {
                 orderMap.put(storeId, new ArrayList<>());
             }
-            orderMap.get(storeId).add(goodsId);
+            orderMap.get(storeId).add(relation_id);
         }
 
         // 建立所有 Order
@@ -90,7 +91,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order[] getMostRecentTenOrder(String storeId) throws Exception {
-        // TODO: 检查一下能不能这么做类型转换。。
         return (Order[]) Arrays.copyOfRange(orderMapper.selectAll().
                 parallelStream().
                 sorted(Comparator.comparing(Order::getCreateTime)).toArray(), 0, 10);
@@ -139,5 +139,13 @@ public class OrderServiceImpl implements OrderService {
         }
         expressMapper.deleteExpress(order.getExpressId());
         orderMapper.deleteOrder(orderId);
+    }
+
+    @Override
+    public Collection<Order> select(String user_id, String store_id) throws Exception {
+        return this.getAll().stream().
+                filter(order -> user_id == null || order.getUserId().equals(user_id)).
+                filter(order -> store_id == null || order.getStoreId().equals(store_id)).
+                collect(Collectors.toList());
     }
 }

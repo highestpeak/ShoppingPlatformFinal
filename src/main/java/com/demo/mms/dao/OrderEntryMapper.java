@@ -11,6 +11,7 @@ import java.util.Collection;
 public interface OrderEntryMapper {
     @Select("SELECT * FROM order_entry;")
     Collection<OrderEntry> getAll() throws Exception;
+    
     void save(OrderEntry entry) throws Exception;
 
     @Update("UPDATE order_entry SET review_id = #{rid} WHERE id = #{oeid};")
