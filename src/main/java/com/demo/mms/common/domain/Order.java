@@ -29,13 +29,11 @@ public class Order {
 
     private String expressId;
 
-    private String reviewId;
-
     private Date createTime;
 
     private Date updateTime;
 
-    public Order(String id, String userId, String storeId, String note, int step, String consignee, String phone, String address, String postcode, String expressId, String reviewId, Date createTime, Date updateTime) {
+    public Order(String id, String userId, String storeId, String note, int step, String consignee, String phone, String address, String postcode, String expressId, Date createTime, Date updateTime) {
         this.id = id;
         this.userId = userId;
         this.storeId = storeId;
@@ -46,7 +44,6 @@ public class Order {
         this.address = address;
         this.postcode = postcode;
         this.expressId = expressId;
-        this.reviewId = reviewId;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
@@ -83,14 +80,17 @@ public class Order {
         this.postcode = postcode;
     }
 
-    public Order(String id, String userId, String storeId, String note, Integer step, String expressId, String reviewId, Timestamp createTime, Timestamp updateTime) {
+    public Order(String id, String userId, String storeId, String note, Integer step, String consignee, String phone, String address, String postcode, String expressId, Timestamp createTime, Timestamp updateTime) {
         this.id = id;
         this.userId = userId;
         this.storeId = storeId;
         this.note = note;
+        this.consignee = consignee;
+        this.phone = phone;
+        this.address = address;
+        this.postcode = postcode;
         this.step = step;
         this.expressId = expressId;
-        this.reviewId = reviewId;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
@@ -141,14 +141,6 @@ public class Order {
 
     public void setExpressId(String expressId) {
         this.expressId = expressId;
-    }
-
-    public String getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(String reviewId) {
-        this.reviewId = reviewId;
     }
 
     public Date getCreateTime() {

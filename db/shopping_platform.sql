@@ -342,27 +342,66 @@ INSERT INTO `store_sell_classify` VALUES ('sell_7', '0000', 'class_9');
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `user_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `verify` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `realname` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `nickname` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `avator_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `sex` tinyint(1) NULL DEFAULT NULL,
-  `email` varchar(320) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `identity` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `create_time` varchar(19) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `update_time` varchar(19) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `user` (
+  `user_id` varchar(36) NOT NULL,
+  `verify` varchar(16) NOT NULL,
+  `realname` varchar(36) DEFAULT NULL,
+  `nickname` varchar(36) DEFAULT NULL,
+  `avator_url` text,
+  `sex` tinyint(1) DEFAULT NULL,
+  `email` varchar(320) NOT NULL,
+  `note` text,
+  `identity` varchar(20) DEFAULT NULL,
+  `create_time` varchar(19) NOT NULL,
+  `update_time` varchar(19) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
--- Records of user
+-- Records of userId
 -- ----------------------------
-INSERT INTO `user` VALUES ('111111111', '123456', NULL, NULL, NULL, NULL, '123@126.com', NULL, NULL, '20190719-235233', '20190720-143032');
-INSERT INTO `user` VALUES ('123456', '000000', '快乐', NULL, NULL, 1, '123@163.com', NULL, 'admin', '20190718-134600', '20190724-011654');
-INSERT INTO `user` VALUES ('142536', '000000', 'hello', NULL, NULL, NULL, '321@163.com', NULL, 'seller', '20190718-134600', '20190718-134600');
-INSERT INTO `user` VALUES ('654321', '000000', '张三', '332', NULL, 0, '', NULL, 'buyer', '20190718-134600', '20190719-224928');
+INSERT INTO `user` VALUES ('111111111', '123456', null, null, null, null, '123@126.com', null, null, '20190719-235233', '20190720-143032');
+INSERT INTO `user` VALUES ('123456', '000000', null, null, null, '1', '123@163.com', null, 'admin', '20190718-134600', '20190718-134600');
+INSERT INTO `user` VALUES ('142536', '000000', 'hello', null, null, null, '321@163.com', null, 'seller', '20190718-134600', '20190718-134600');
+INSERT INTO `user` VALUES ('654321', '000000', '张三', '332', null, '0', '', null, 'buyer', '20190718-134600', '20190719-224928');
+INSERT INTO `user` VALUES ('654987321', '123456', null, null, null, null, '123@126.com', null, null, '20190718-164750', '20190718-164750');
 
-SET FOREIGN_KEY_CHECKS = 1;
+-- order
+create table `order`
+(
+    id          varchar(36)                          not null
+        primary key,
+    user_id     varchar(36)                          not null,
+    store_id    varchar(36)                          not null,
+    note        longtext                             null,
+    step        int(4)   default 0                   not null,
+    consignee   varchar(128)                         not null,
+    phone       varchar(128)                         not null,
+    address     varchar(128)                         not null,
+    postcode    varchar(128)                         not null,
+    express_id  varchar(36)                          null,
+    create_time datetime default current_timestamp() not null,
+    update_time datetime default current_timestamp() not null
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- order_entry
+create table order_entry
+(
+    id         varchar(36)   not null
+        primary key,
+    order_id   varchar(36)   not null,
+    goods_id   varchar(36)   not null,
+    unit_price int default 0 not null,
+    quantity   int default 1 not null,
+    review_id  varchar(36)   null
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- review
+create table review
+(
+    id          varchar(36)                          not null
+        primary key,
+    content     longtext                             not null,
+    rating      int(3)                               not null,
+    create_time datetime default current_timestamp() null
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

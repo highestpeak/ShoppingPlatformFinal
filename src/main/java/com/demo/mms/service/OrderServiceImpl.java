@@ -57,7 +57,6 @@ public class OrderServiceImpl implements OrderService {
                     address,
                     postcode,
                     "",
-                    "",
                     new Date(),
                     new Date()
             );
@@ -73,10 +72,11 @@ public class OrderServiceImpl implements OrderService {
                 InCartOf relation = inCartOfMapper.selectById(relationId);
                 OrderEntry entry = new OrderEntry(
                         UUID.randomUUID().toString().replace("-", ""),
+                        order.getId(),
                         relation.getGoodsId(),
                         relation.getNumber(),
-                        goodsOperateMapper.getGoodById(relation.getGoodsId()).getPrice()
-                );
+                        goodsOperateMapper.getGoodById(relation.getGoodsId()).getPrice(),
+                        "");
                 orderEntryMapper.save(entry);
             }
         }
