@@ -360,3 +360,43 @@ INSERT INTO `user` VALUES ('123456', '000000', null, null, null, '1', '123@163.c
 INSERT INTO `user` VALUES ('142536', '000000', 'hello', null, null, null, '321@163.com', null, 'seller', '20190718-134600', '20190718-134600');
 INSERT INTO `user` VALUES ('654321', '000000', '张三', '332', null, '0', '', null, 'buyer', '20190718-134600', '20190719-224928');
 INSERT INTO `user` VALUES ('654987321', '123456', null, null, null, null, '123@126.com', null, null, '20190718-164750', '20190718-164750');
+
+-- order
+create table `order`
+(
+    id          varchar(36)                          not null
+        primary key,
+    user_id     varchar(36)                          not null,
+    store_id    varchar(36)                          not null,
+    note        longtext                             null,
+    step        int(4)   default 0                   not null,
+    consignee   varchar(128)                         not null,
+    phone       varchar(128)                         not null,
+    address     varchar(128)                         not null,
+    postcode    varchar(128)                         not null,
+    express_id  varchar(36)                          null,
+    create_time datetime default current_timestamp() not null,
+    update_time datetime default current_timestamp() not null
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- order_entry
+create table order_entry
+(
+    id         varchar(36)   not null
+        primary key,
+    order_id   varchar(36)   not null,
+    goods_id   varchar(36)   not null,
+    unit_price int default 0 not null,
+    quantity   int default 1 not null,
+    review_id  varchar(36)   null
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- review
+create table review
+(
+    id          varchar(36)                          not null
+        primary key,
+    content     longtext                             not null,
+    rating      int(3)                               not null,
+    create_time datetime default current_timestamp() null
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

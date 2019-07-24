@@ -6,9 +6,12 @@
         <result property="userId" column="user_id" javaType="java.lang.String"/>
         <result property="storeId" column="store_id" javaType="java.lang.String"/>
         <result property="note" column="note" javaType="java.lang.String"/>
+        <result property="consignee" column="consignee" javaType="java.lang.String"/>
+        <result property="phone" column="phone" javaType="java.lang.String"/>
+        <result property="address" column="address" javaType="java.lang.String"/>
+        <result property="postcode" column="postcode" javaType="java.lang.String"/>
         <result property="step" column="step" javaType="java.lang.Integer"/>
         <result property="expressId" column="express_id" javaType="java.lang.String"/>
-        <result property="reviewId" column="review_id" javaType="java.lang.String"/>
         <result property="createTime" column="create_time" javaType="java.util.Date"/>
         <result property="updateTime" column="update_time" javaType="java.util.Date"/>
     </resultMap>
@@ -17,7 +20,7 @@
     <select id="selectAll" resultMap="OrderModel"> SELECT * FROM `order`; </select>
     <select id="selectById" resultMap="OrderModel"> SELECT * FROM `order` WHERE id = #{id}; </select>
     <insert id="save">
-        INSERT INTO `order` (id, user_id, store_id, note, consignee, phone, address, postcode, express_id, review_id, create_time, update_time)
-        VALUES (#{id}, #{userId}, #{storeId}, #{note}, #{consignee}, #{phone}, #{address}, #{postcode}, #{step}, #{expressId}, #{reviewId}, #{createTime}. #{updateTime});
+        INSERT INTO `order` (id, user_id, store_id, note, consignee, phone, address, postcode, express_id, create_time, update_time)
+        VALUES (#{id}, #{userId}, #{storeId}, #{note}, #{consignee}, #{phone}, #{address}, #{postcode}, #{step}, #{expressId}, #{createTime}. #{updateTime});
     </insert>
 </mapper>
