@@ -152,7 +152,11 @@ public class UserServiceImpl implements UserService {
         //user不存在，可以新建
         user.setCreate_time(ProjectFactory.getPorjectStrDate(new Date()));
         user.setUpdate_time(ProjectFactory.getPorjectStrDate(new Date()));
-        userOperateMapper.insertUser(user);
+        try {
+            userOperateMapper.insertUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return rs;
     }
 
