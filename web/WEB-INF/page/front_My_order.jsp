@@ -141,7 +141,10 @@
                                     <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
                                     <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
                                     <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                    <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="3">操作</th>
+                                    <th class="product-logistics-order" style="text-align:center;vertical-align:middle;width: 10%">订单状态</th>
+                                    <th class="product-logistics-address" style="text-align:center;vertical-align:middle;width: 10%">地址</th>
+                                    <th class="product-logistics-phone" style="text-align:center;vertical-align:middle;width: 10%">电话</th>
+                                    <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -152,6 +155,9 @@
                                     <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">{{good.number}}</td>
                                     <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">{{￥ order.total_price}}</td>
                                     <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.status}}</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.order}}</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.address}}</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">{{order.phone}}</td>
                                     <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
                                     <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
                                 </tr>
