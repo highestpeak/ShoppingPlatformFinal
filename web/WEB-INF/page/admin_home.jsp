@@ -246,19 +246,6 @@
                         <div class="box-body" id="new_goods_box">
                             <ul class="products-list product-list-in-box">
 
-                                <!-- <div class="col-md-6" v-for="good in goods">
-                                    <li class="item">
-                                        <div class="product-img">
-                                            <img v-bind:src="good.pic_url" v-bind:style="{height:50 + 'px', width:50 + 'px'}" alt="Product Image">
-                                        </div>
-                                        <div class="product-info">
-                                            <span class="product-description">{{good.goods_name}}</span>
-                                            <span class="label label-warning pull-right" id="good_price">{{good.price+' ￥'}}</span>
-                                            <span class="product-description">{{good.description}}</span>
-                                        </div>
-                                    </li>
-                                </div> -->
-
                                 <li class="col-md-6 item" v-for="good in goods">
                                     <div class="product-img">
                                         <img v-bind:src="good.pic_url" v-bind:style="{height:50 + 'px', width:50 + 'px'}" alt="Product Image">
@@ -266,15 +253,12 @@
                                     <div class="product-info">
                                         <span class="product-description">{{good.goods_name}}</span>
                                         <span class="label label-warning pull-right" style="margin-right: 50px" id="good_price">{{good.price+' ￥'}}</span>
-                                        <span class="product-description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
-                                        <!-- <span class="product-description">{{good.description}}</span> -->
+                                        <span class="product-description">{{good.description}}</span>
                                     </div>
                                 </li>
                                
                             </ul>
                         </div>
-                        <!-- /.box-body -->
-
                     </div>
                 </div>
 
