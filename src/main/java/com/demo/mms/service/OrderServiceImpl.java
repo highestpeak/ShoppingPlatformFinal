@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
             if (!orderMap.containsKey(storeId)) {
                 orderMap.put(storeId, new ArrayList<>());
             }
-            orderMap.get(storeId).add(goodsId);
+            orderMap.get(storeId).add(relation_id);
         }
 
         // 建立所有 Order
