@@ -54,7 +54,7 @@ public class ReviewController {
 
     @GetMapping("reviews/stat/recent/{goodsId}")
     @ResponseBody
-    public Map<String, Object> getMostRecentTenRecordOfGoods(@PathVariable String goodsId) {
+    public Map<String, Object> getMostRecentTenReviewsOfGoods(@PathVariable String goodsId) {
         Map<String, Object> result = new HashMap<>();
         Collection<Review> ret;
         try {

@@ -12,7 +12,7 @@
 
     <select id="selectAllOfUser" resultMap="InCartOfModel">SELECT * FROM in_cart_of WHERE buyer_id = #{buyer_id};</select>
 
-    <select id="selectById" resultMap="InCartOfModel">SELECT * FROM in_cart_of WHERE id = #{id}</select>
+    <select id="selectById" resultMap="InCartOfModel">SELECT * FROM in_cart_of WHERE id = #{id};</select>
 
     <delete id="deleteEntryById">DELETE FROM in_cart_of WHERE id = #{id};</delete>
 

@@ -43,7 +43,7 @@ public class OrderController {
     }
 
     @PostMapping("/") @ResponseBody
-    public Map<String, Object> CreateOrderFromCart(CreateOrderFromCartDTO args) {
+    public Map<String, Object> CreateOrderFromCart(@RequestBody CreateOrderFromCartDTO args) {
         Map<String, Object> ret = new HashMap<>();
         Collection<Order> result;
         try {
