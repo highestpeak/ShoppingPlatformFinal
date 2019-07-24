@@ -504,7 +504,7 @@ $(function(){
                     goods_name:$("#add_name").val(),
                     description:$("#add_description").val(),
                     classify_name:$("#add_classify").val(),
-                    price:$("#add_price").val(),
+                    price:parseInt($("#add_price").val()),
                     status:$("#add_status").val(),
                     old_level:$("#add_oldlevel").val(),
                     pic_url:$("#add_picture").val(),
