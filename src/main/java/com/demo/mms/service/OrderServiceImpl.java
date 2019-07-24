@@ -1,7 +1,6 @@
 package com.demo.mms.service;
 
 import com.demo.mms.common.domain.InCartOf;
-import com.demo.mms.common.domain.MailingInfo;
 import com.demo.mms.common.domain.Order;
 import com.demo.mms.common.domain.OrderEntry;
 import com.demo.mms.dao.*;
@@ -13,17 +12,17 @@ import java.util.*;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderMapper orderMapper;
-    private final MailingInfoMapper mailingInfoMapper;
     private final OrderEntryMapper orderEntryMapper;
     private final InCartOfMapper inCartOfMapper;
     private final GoodsOperateMapper goodsOperateMapper;
+    private final ExpressMapper expressMapper;
 
-    public OrderServiceImpl(OrderMapper orderMapper, MailingInfoMapper mailingInfoMapper, OrderEntryMapper orderEntryMapper, InCartOfMapper inCartOfMapper, GoodsOperateMapper goodsOperateMapper) {
+    public OrderServiceImpl(OrderMapper orderMapper, OrderEntryMapper orderEntryMapper, InCartOfMapper inCartOfMapper, GoodsOperateMapper goodsOperateMapper, ExpressMapper expressMapper) {
         this.orderMapper = orderMapper;
-        this.mailingInfoMapper = mailingInfoMapper;
         this.orderEntryMapper = orderEntryMapper;
         this.inCartOfMapper = inCartOfMapper;
         this.goodsOperateMapper = goodsOperateMapper;
+        this.expressMapper = expressMapper;
     }
 
     @Override
@@ -58,7 +57,6 @@ public class OrderServiceImpl implements OrderService {
                     address,
                     postcode,
                     "",
-                    "",
                     new Date(),
                     new Date()
             );
@@ -74,10 +72,11 @@ public class OrderServiceImpl implements OrderService {
                 InCartOf relation = inCartOfMapper.selectById(relationId);
                 OrderEntry entry = new OrderEntry(
                         UUID.randomUUID().toString().replace("-", ""),
+                        order.getId(),
                         relation.getGoodsId(),
                         relation.getNumber(),
-                        goodsOperateMapper.getGoodById(relation.getGoodsId()).getPrice()
-                );
+                        goodsOperateMapper.getGoodById(relation.getGoodsId()).getPrice(),
+                        "");
                 orderEntryMapper.save(entry);
             }
         }
@@ -90,40 +89,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Collection<Order> getAllOfBuyer(String buyerId) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Collection<Order> getAllOfStore(String storeId) throws Exception {
-        return null;
-    }
-
-    @Override
     public Order[] getMostRecentTenOrder(String storeId) throws Exception {
         // TODO: 检查一下能不能这么做类型转换。。
         return (Order[]) Arrays.copyOfRange(orderMapper.selectAll().
                 parallelStream().
                 sorted(Comparator.comparing(Order::getCreateTime)).toArray(), 0, 10);
-    }
-
-    @Override
-    public String createOrder(String buyerId, Map<String, Integer> goodsIdAndCorrespondingNumbers, MailingInfo mailingInfo, String note) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void makePaid(String orderEntryId) throws Exception {
-
-    }
-
-    @Override
-    public void setExpressCompany(String orderEntryId, String expressCompanyId) throws Exception {
-
-    }
-
-    @Override
-    public void makeSigned(String orderEntryId) throws Exception {
     }
 
     @Override
@@ -154,6 +124,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void updateExpressInfo(String orderId, String express_code, String express_company_id) throws Exception {
         Order order = orderMapper.selectById(orderId);
+        if (order == null) {
+            throw new Exception("invalid order id!");
+        }
+        String expressId = UUID.randomUUID().toString().replace("-", "");
+        expressMapper.insertExpress(expressId, express_company_id, express_code);
+        orderMapper.updateExpressId(orderId, expressId);
+    }
 
+    public void deleteOrder(String orderId) throws Exception {
+        Order order = orderMapper.selectById(orderId);
+        if (order == null) {
+            throw new Exception("invalid order id!");
+        }
+        expressMapper.deleteExpress(order.getExpressId());
+        orderMapper.deleteOrder(orderId);
     }
 }

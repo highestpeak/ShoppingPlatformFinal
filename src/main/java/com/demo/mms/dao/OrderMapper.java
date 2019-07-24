@@ -1,6 +1,7 @@
 package com.demo.mms.dao;
 
 import com.demo.mms.common.domain.Order;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
@@ -18,4 +19,7 @@ public interface OrderMapper {
     void updateExpressId(@Param("id") String id, @Param("eid") String expressId) throws Exception;
 
     void save(Order order) throws Exception;
+
+    @Delete("DELETE FROM `order` WHERE id = #{orderId}")
+    void deleteOrder(String orderId) throws Exception;
 }
