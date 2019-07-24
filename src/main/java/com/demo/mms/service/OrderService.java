@@ -15,4 +15,5 @@ public interface OrderService {
     void proceed(String orderId) throws Exception;
     void updateExpressInfo(String orderId, String express_code, String express_company_id) throws Exception;
     void deleteOrder(String orderId) throws Exception;
+    Collection<Order> select(String user_id, String store_id) throws Exception;
 }
