@@ -264,7 +264,12 @@ public class UserServiceImpl implements UserService {
         //查找全部游览的商品
         ArrayList<GoodsViewedQueryVO> goodsViewedQueryVOArrayList=null;
         if ("all".equals(goodsClassify.getClassify_name())){
-            goodsViewedQueryVOArrayList=userOperateMapper.queryGoodsViewedByGoods(user.getUser_id());
+            try{
+                goodsViewedQueryVOArrayList=userOperateMapper.queryGoodsViewedByGoods(user.getUser_id());
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             rs.putAll(QueryToReturnHelp(goodsViewedQueryVOArrayList,viewedHistoryReturnVOArrayList,"byGoods"));
             rs.put("view type","by Goods search all");
             rs.put("viewedHistoryReturn",viewedHistoryReturnVOArrayList);

@@ -434,8 +434,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/localLib/revolution/js/extensions/revolution.extension.actions.min.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
-<script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
 
 <!-- 寻找分类的函数 -->
