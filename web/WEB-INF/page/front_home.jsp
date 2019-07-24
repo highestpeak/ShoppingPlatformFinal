@@ -22,6 +22,9 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/HomeStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/AdminLTE.min.css">
+
+
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -211,7 +214,7 @@
                         </li>
 
                         <li data-transition="zoomout" data-slotamount="default"  data-easein="easeInOut" data-easeout="easeInOut" data-masterspeed="2000" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7">
-                            <img src="${pageContext.request.contextPath}/localLib/images/slider-1.jpg" alt="slider" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                            <img src="${pageContext.request.contextPath}/localLib/images/slider-2.jpg" alt="slider" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                             <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-5"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-200','-130','-110','-80']"
@@ -230,7 +233,7 @@
                                  data-splitout="none"
                                  data-responsive_offset="on"
                                  data-elementdelay="0.05"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing: 3.04px; color:#333; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">new way to purchase your products
+                                 style="z-index: 5; white-space: nowrap; letter-spacing: 3.04px; color:aliceblue; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">new way to purchase your products
                             </div>
                             <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-6"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -250,7 +253,7 @@
                                  data-splitout="none"
                                  data-responsive_offset="on"
                                  data-elementdelay="0.05"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">The weather started getting rough the tiny ship was tossed. If not for the courage of the fearless
+                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:whitesmoke; font-weight: normal; font-family: 'Lato', sans-serif;">The weather started getting rough the tiny ship was tossed. If not for the courage of the fearless
                             </div>
                             <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-7"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -269,7 +272,7 @@
                                  data-splitout="none"
                                  data-responsive_offset="on"
                                  data-elementdelay="0.05"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">crew the Minnow would be lost. our dreams come true for me and you.
+                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:whitesmoke; font-weight: normal; font-family: 'Lato', sans-serif;">crew the Minnow would be lost. our dreams come true for me and you.
                             </div>
                             <div class="tp-caption NotGeneric-Button rev-btn  rs-parallaxlevel-0" id="slide-layer-8"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -353,6 +356,40 @@
                         <li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
                         </ul>
                 </nav>
+
+                <!-- 最新上架 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-warning">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">新品上市</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body" id="new_goods_box">
+                                <ul class="products-list product-list-in-box">
+
+                                    <li class="col-md-6 item" v-for="good in goods">
+                                        <div class="product-img">
+                                            <img v-bind:src="good.pic_url" v-bind:style="{height:50 + 'px', width:50 + 'px'}" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <span class="product-description">{{good.goods_name}}</span>
+                                            <span class="label label-warning pull-right" style="margin-right: 50px" id="good_price">{{good.price+' ￥'}}</span>
+                                            <span class="product-description">{{good.description}}</span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div><!-- Container /- -->
         </div><!-- Product Section /- -->
@@ -587,6 +624,40 @@ function judgeIsLogin(){
     });
 }
 
+</script>
+
+<script>
+$(function(){
+    var dataSend = {
+        store_id: "0000"
+    };
+    var vm = new Vue({
+        el: '#new_goods_box',
+        data: {
+            goods: [],
+            info:[] //触发更新用
+        }
+    });
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/store/getTopTenGoods",
+        data: JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){                            
+                vm.goods = data.goodsList;
+                vm.info.push({
+                    a:"a"
+                });
+            }else{
+                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+});
 </script>
 
 </body>
