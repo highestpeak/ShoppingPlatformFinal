@@ -374,6 +374,7 @@ public class UserServiceImpl implements UserService {
             viewedHistoryReturnVO.setGoods_id(goodsViewedQueryVO.getGoods_id());
             viewedHistoryReturnVO.setGoods_name(goodsViewedQueryVO.getGoods_name());
             viewedHistoryReturnVO.setClassify_id(goodsViewedQueryVO.getClassify_id());
+            viewedHistoryReturnVO.setPic_url(goodsViewedQueryVO.getPic_url());
             viewedHistoryReturnVO.setClassify_name(goodsViewedQueryVO.getClassify_name());
             viewedHistoryReturnVOArrayList.add(viewedHistoryReturnVO);
             if(goodsViewedQueryVO.getGoods_id()!=null){

@@ -350,7 +350,7 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Override
-    public Map<String, Object> getStoreGoodsInfo(Store store, Goods goodsToGet) {
+    public Map<String, Object> getStoreGoodsInfo(Store store, Goods goodsToGet,User user) {
         Map<String,Object> rs=new HashMap<>();
         //查找store是否存在
         Store storeCheck=goodsOperateMapper.queryStore("store_id",store.getStore_id());
@@ -365,6 +365,16 @@ public class GoodsServiceImpl implements GoodsService{
         if((nameCheck==null)&&(idCheck==null)){//不存在
             rs.put("goods "+goodsToGet.getGoods_name()+" existed",false);
         }else {
+            try {
+                userOperateMapper.insertViewHistory(
+                        IDGenerator.getId(),
+                        user.getUser_id(),
+                        goodsToGet.getGoods_id(),
+                        ProjectFactory.getPorjectStrDate(new Date()),
+                        null);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if (idCheck!=null){
                 rs.put("goodsGet",idCheck);
             }else {//nameCheck!=null

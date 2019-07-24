@@ -355,6 +355,13 @@ public class UserController {
         return rs;
     }
 
+    @RequestMapping("/setNewViewed")
+    public Object setNewViewHistory(@RequestBody ViewHistoryGetVO viewHistoryGetVO,HttpServletRequest request){
+        
+        return null;
+    }
+
+
     @RequestMapping("/getUserId")
     @ResponseBody
     public Object getUserId(){

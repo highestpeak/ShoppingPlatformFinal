@@ -53,7 +53,7 @@ public interface GoodsService {
     /*
     根据商品id，寻找一个商品的信息并返回
      */
-    Map<String,Object> getStoreGoodsInfo(Store store, Goods goodsToGet);
+    Map<String,Object> getStoreGoodsInfo(Store store, Goods goodsToGet,User user);
 
     Map<String,Object> starGoods(User user, Store store, Goods goods);
 

@@ -1,5 +1,6 @@
 package com.demo.mms.common.vo;
 
+import com.demo.mms.common.domain.Goods;
 import com.demo.mms.common.domain.GoodsClassify;
 import com.demo.mms.common.domain.Store;
 import com.demo.mms.common.domain.User;
@@ -7,7 +8,16 @@ import com.demo.mms.common.domain.User;
 public class ViewHistoryGetVO {
     private User user;
     private Store store;
+    private Goods goods;
     private GoodsClassify goodsClassify;//如果为请求所有分类，则为all
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
 
     public Store getStore() {
         return store;
