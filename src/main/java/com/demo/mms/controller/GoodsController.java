@@ -117,12 +117,12 @@ public class GoodsController {
     //按商品信息查询
     @RequestMapping("/getGoodsInfo")
     @ResponseBody
-    public Object goodsInfoGet(Store store,Goods goodsToGet){
+    public Object goodsInfoGet(Store store,Goods goodsToGet,User user){
         System.out.println(ProjectFactory.getPorjectStrDate(new Date())+" in goodsQuery");
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         Map<String,Object> rsService=null;
-        rsService=goodsService.getStoreGoodsInfo(store,goodsToGet);
+        rsService=goodsService.getStoreGoodsInfo(store,goodsToGet,user);
         if(!rsService.containsKey("goodsGet") && rsService!=null && !rsService.isEmpty()){//含有错误信息
             rs.putAll(rsService);
             rs.put("success",false);

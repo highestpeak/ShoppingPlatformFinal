@@ -92,13 +92,17 @@
                             layer.alert("密码错误");
                         }
                         else if(data["already login"] == true){
-                            layer.alert("已经登陆");
+                            layer.confirm('已经登陆', {icon: 2, title:'提示'}, function(index){
+                                window.location.href= "http://localhost:8080"+data["urlTo"];
+                            });
                         }
                         else if(data["success"] == false){
                             layer.alert("登陆失败");
                         }
                         else{
-                            layer.alert("登陆成功");
+                            layer.confirm('登陆成功', {icon: 1, title:'提示'}, function(index){
+                                window.location.href= "http://localhost:8080"+data["urlTo"];
+                            });
                         }
 
                         // 在这里取出数据  

@@ -160,6 +160,7 @@
                                     </ul>
                     
                                     <button class="btn btn-primary btn-block" id="modify"><b>Modify</b></button>
+                                    <button class="btn btn-primary btn-block" id="exit" style="background: rgb(211, 83, 83)"><b>Exit</b></button>
                                 </div>
                             </div>       
                         </div>
@@ -249,111 +250,157 @@
 
 
 <script>
-    $(function(){
-        var dataSend = {
-            store_id: "0000"
-        }
+$(function(){
+    var dataSend = {
+        store_id: "0000"
+    }
 
-        var vm = new Vue({
-            el: '#store_info',
-            data: {
-                store_id: "",
-                store_name: "",
-                note: "",
-                store_pic_url: "",
-                store_classify: "",
-                level: "",
-                certification: "",
-                create_time:"",
+    var vm = new Vue({
+        el: '#store_info',
+        data: {
+            store_id: "",
+            store_name: "",
+            note: "",
+            store_pic_url: "",
+            store_classify: "",
+            level: "",
+            certification: "",
+            create_time:"",
+            
+            info:[] //触发更新用
+        }
+    });
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/store/getInfo",//请求controller方法   
+        data: JSON.stringify(dataSend),//发送的数据  
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false, //同步请求，注意此字段    
+        success: function (data) {        
+            if(data.success == true){
+                var info = data.store;
+
+                vm.store_id = info.store_id;
+                vm.note = info.note;
+                vm.store_name=info.store_name,
+                vm.store_pic_url = info.store_pic_url;
+                vm.store_classify = info.store_classify;
+                vm.level = info.level;
+                vm.certification = info.certification;
+                vm.create_time = info.create_time;
+
+                vm.info.push({
+                    a:"a"
+                });
                 
-                info:[] //触发更新用
+            }else{
+                layer.alert('数据请求失败！', { icon: 3, closeBtn: 0 });
             }
+        } 
+    });
+
+    $("#modify").click(function(){
+        $("#mod_note").attr("value", vm.note);
+        $("#mod_name").attr("value", vm.store_name);
+        $("#mod_classify").attr("value", vm.store_classify);
+        $("#mod_level").attr("value", vm.level);
+        $("#mod_certification").attr("value", vm.certification);
+        $("#mod_picurl").attr("value", vm.store_pic_url);
+
+        layer.open({
+            type: 1,
+            title: "",
+            shadeClose: true,
+            shade: 0.5,
+            area: ["500px","500px"],
+            content: $("#store_info_modify_table")
         });
 
-        $.ajax({    
+
+        $("#store_info_mod_sumbit").click(function(){
+            var dataSend = {
+                oldStore: {
+                    store_id: vm.store_id
+                },
+                newStore: {
+                    note: $("#mod_note").val(),
+                    store_name: $("#mod_name").val(),
+                    store_pic_url: $("#mod_picurl").val(),
+                    store_classify: $("#mod_classify").val(),
+                    level: $("#mod_level").val(),
+                    certification: $("#mod_certification").val()
+                }
+            };
+
+            $.ajax({    
+                type: "POST",    
+                url: "http://localhost:8080/store/modify",
+                data: JSON.stringify(dataSend),
+                contentType: "application/json; charset=utf-8",    
+                dataType: "json",    
+                async: false,   
+                success: function (data) {        
+                    if(data.success == true){                            
+                        layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
+                    }
+                } 
+            });
+        });
+    });
+
+    $("#exit").click(function(){
+        var user_id;
+        $.ajax({
             type: "POST",    
-            url: "http://localhost:8080/store/getInfo",//请求controller方法   
-            data: JSON.stringify(dataSend),//发送的数据  
-            contentType: "application/json; charset=utf-8",    
+            url: "http://localhost:8080/user/checkIfLogin",
             dataType: "json",    
-            async: false, //同步请求，注意此字段    
+            async: false,   
             success: function (data) {        
-                if(data.success == true){
-                    var info = data.store;
-
-                    vm.store_id = info.store_id;
-                    vm.note = info.note;
-                    vm.store_name=info.store_name,
-                    vm.store_pic_url = info.store_pic_url;
-                    vm.store_classify = info.store_classify;
-                    vm.level = info.level;
-                    vm.certification = info.certification;
-                    vm.create_time = info.create_time;
-
-                    vm.info.push({
-                        a:"a"
-                    });
-                    
+                if(data.success == true){ 
+                    if(data.Login == true){//已经登陆
+                        user_id=data.user_id;
+                    }else{//没有登录
+                        // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                    if (confirm("没有登录")) {
+                            window.location.href= "http://localhost:8080/user/toLogin";
+                        }
+                    }
                 }else{
-                    layer.alert('数据请求失败！', { icon: 3, closeBtn: 0 });
+                    layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
                 }
             } 
         });
 
-        $(".content-wrapper").on("click", ".btn-block", function(){
-            $("#mod_note").attr("value", vm.note);
-            $("#mod_name").attr("value", vm.store_name);
-            $("#mod_classify").attr("value", vm.store_classify);
-            $("#mod_level").attr("value", vm.level);
-            $("#mod_certification").attr("value", vm.certification);
-            $("#mod_picurl").attr("value", vm.store_pic_url);
-
-            layer.open({
-                type: 1,
-                title: "",
-                shadeClose: true,
-                shade: 0.5,
-                area: ["500px","500px"],
-                content: $("#store_info_modify_table")
-            });
-
-
-            $("#store_info_mod_sumbit").click(function(){
-                var dataSend = {
-                    oldStore: {
-                        store_id: vm.store_id
-                    },
-                    newStore: {
-                        note: $("#mod_note").val(),
-                        store_name: $("#mod_name").val(),
-                        store_pic_url: $("#mod_picurl").val(),
-                        store_classify: $("#mod_classify").val(),
-                        level: $("#mod_level").val(),
-                        certification: $("#mod_certification").val()
+        dataSend = {
+            user_id: user_id
+        };
+        $.ajax({
+            type: "POST",    
+            url: "http://localhost:8080/user/logout",
+            data: JSON.stringify(dataSend),
+            contentType: "application/json; charset=utf-8",    
+            dataType: "json",    
+            async: false,   
+            success: function (data) {        
+                if(data.success == true){ 
+                    if(confirm("退出成功！")) { 
+                        window.location.href= "http://localhost:8080/user/toLogin";
                     }
-                };
-
-                $.ajax({    
-                    type: "POST",    
-                    url: "http://localhost:8080/store/modify",
-                    data: JSON.stringify(dataSend),
-                    contentType: "application/json; charset=utf-8",    
-                    dataType: "json",    
-                    async: false,   
-                    success: function (data) {        
-                        if(data.success == true){                            
-                            layer.alert('修改成功！', { icon: 1, closeBtn: 0 }, function (index) {
-                                window.location.reload();
-                            });
-
-                        }else{
-                            layer.alert('修改失败！', { icon: 2, closeBtn: 0 });
-                        }
-                    } 
-                });
-            });
+                }else{
+                    layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+                }
+            } 
         });
+
     });
+});
 </script>
 
 

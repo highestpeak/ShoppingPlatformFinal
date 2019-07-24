@@ -86,7 +86,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/admin/userManage">
                         <i class="fa fa-user"></i> <span><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">用户管理</font></font></span>

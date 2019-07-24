@@ -159,433 +159,85 @@
                 </div>
             </div><!-- Container /- -->
         </div>
-    <div id="product-section" class="product-section container-fluid no-padding">
-        <!-- Container -->
-        <div class="container">
-            <div class="row">
-                <!-- Section Header -->
-                <!-- Section Header /- -->
-                <ul id="filters" class="products-categories no-left-padding">
-                    <li><a data-filter="*" class="active" href="#">全部</a></li>
-                    <li><a data-filter=".design" href="#" class="">未付款</a></li>
-                    <li><a data-filter=".video" href="#" class="">未发货</a></li>
-                    <li><a data-filter=".photography" href="#" class="">未收货</a></li>
-                    <li><a data-filter=".web" href="#" class="">未评价</a></li>
-                    <li><a data-filter=".design" href="#" class="">退款/售后</a></li>
-                </ul>
-            </div><!-- Row /- -->
-        </div><!-- Container /- -->
-    </div>
-    <div class="woocommerce-cart container-fluid no-left-padding no-right-padding">
-        <!-- Container -->
-        <div class="container">
-            <div class="row">
-                <!-- Products -->
-                <ul class="products" style="position: relative; height: auto;">
-                    <!-- Product -->
-                    <li class="product design" style="position: relative; left: 15px; top: 0px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
+        <div id="product-section" class="product-section container-fluid no-padding">
+            <!-- Container -->
+            <div class="container">
+                <div class="row">
+                    <!-- Section Header -->
+                    <!-- Section Header /- -->
+                    <ul id="filters" class="products-categories no-left-padding">
+                        <li><a data-filter="*" class="active" href="#">全部</a></li>
+                        <li><a data-filter=".未付款" href="#" class="">未付款</a></li>
+                        <li><a data-filter=".未发货" href="#" class="">未发货</a></li>
+                        <li><a data-filter=".未收货" href="#" class="">未收货</a></li>
+                        <li><a data-filter=".未评价" href="#" class="">未评价</a></li>
+                        <li><a data-filter=".退款/售后" href="#" class="">退款/售后</a></li>
+                    </ul>
+                </div><!-- Row /- -->
+            </div><!-- Container /- -->
+        </div>
+        <div class="woocommerce-cart container-fluid no-left-padding no-right-padding">
+            <!-- Container -->
+            <div class="container">
+                <div class="row">
+                    <!-- Products -->
+                    <ul class="products" style="position: relative; height: auto;">
 
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
+                        <!-- Product -->
+                        <li class="product 未付款" style="position: relative; left: 15px; width: 1200px;">
+                            <table class="table table-bordered table-responsive">
+                                <thead>
+                                <tr>
+                                    <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
+                                    <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
+                                    <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">单价</th>
+                                    <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
+                                    <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
+                                    <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
+                                    <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="cart_item">
+                                    <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
+                                    <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
+                                    <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
+                                    <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
+                                    <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
+                                    <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
+                                    <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
+                                    <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
+                                    <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
+                                    <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
+                                    <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
+                                    <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
 
-                            </tr>
-                            </tbody>
-                        </table>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
+                                    <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
+                                    <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
+                                    <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
+                                    <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
+                                    <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
 
-                    </li><!-- Product /- -->
+                                </tr>
+                                </tbody>
+                            </table>
 
-                    <!-- Product -->
-                    <li class="product video" style="position: absolute; left: 15px; top: 400px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
+                        </li><!-- Product /- -->
 
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
+                    </ul><!-- Products /- -->
+                </div>
 
-                            </tr>
-                            </tbody>
-                        </table>
-                    </li><!-- Product /- -->
-
-                    <!-- Product -->
-                    <li class="product photography" style="position: absolute; left: 15px; top: 800px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
-
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </li><!-- Product /- -->
-
-                    <!-- Product -->
-                    <li class="product web" style="position: absolute; left: 15px; top: 1600px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
-
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </li><!-- Product /- -->
-
-                    <!-- Product -->
-                    <li class="product design" style="position: absolute; left: 15px; top: 2000px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
-
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </li><!-- Product /- -->
-
-                    <!-- Product -->
-                    <li class="product video" style="position: absolute; left: 15px; top: 2400px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
-
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </li><!-- Product /- -->
-
-                    <!-- Product -->
-                    <li class="product photography" style="position: absolute; left: 15px; top: 2800px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
-
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </li><!-- Product /- -->
-
-                    <!-- Product -->
-                    <li class="product web" style="position: absolute; left: 15px; top: 3200px; width: 1200px;">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail" style="text-align:center;vertical-align:middle;width: 20%">商品实物图</th>
-                                <th class="product-name" style="text-align:center;vertical-align:middle;width: 20%">商品名称</th>
-                                <th class="product-pre-price" style="text-align:center;vertical-align:middle;width: 10%">原价</th>
-                                <th class="product-now-price" style="text-align:center;vertical-align:middle;width: 10%">现价</th>
-                                <th class="product-num" style="text-align:center;vertical-align:middle;width: 10%">数量</th>
-                                <th class="product-total-price" style="text-align:center;vertical-align:middle;width: 10%">总价</th>
-                                <th class="product-logistics-status" style="text-align:center;vertical-align:middle;width: 10%">物流状态</th>
-                                <th class="product-operate" style="text-align:center;vertical-align:middle;width: 10%" colspan="2">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Pre Price" class="product-total-price" rowspan="3" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">未收货</td>
-                                <td data-title="Operate" class="product-operate" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_operate"><i class="icon icon-Truck"></i></a></td>
-                                <td data-title="Remove" class="product-remove" rowspan="3" style="text-align:center;vertical-align:middle;"><a class="btn btn_del_order"><i class="icon icon-Delete"></i></a></td>
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流公司<br/>Xx快递</td>
-
-                            </tr>
-                            <tr class="cart_item">
-                                <td data-title="Item" class="product-thumbnail" style="text-align:center;vertical-align:middle;"><a href="#"><img src="${pageContext.request.contextPath}/localLib/images/product-item.jpg" alt="Product"></a></td>
-                                <td data-title="Product Name" class="product-name" style="text-align:center;vertical-align:middle;"><a href="#">mens casual shoe</a></td>
-                                <td data-title="Pre Price" class="product-pre-price" style="text-align:center;vertical-align:middle;">￥550</td>
-                                <td data-title="Now Price" class="product-now-price" style="text-align:center;vertical-align:middle;">￥350</td>
-                                <td data-title="Number" class="product-unit-num" style="text-align:center;vertical-align:middle;">1</td>
-                                <td data-title="Logistics Status" class="product-logistics-status" style="text-align:center;vertical-align:middle;">物流单号<br/>Xxxxxxxxx-</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </li><!-- Product /- -->
-                </ul><!-- Products /- -->
-            </div>
-
-        </div><!-- Container /- -->
-    </div>
- </main>
+            </div><!-- Container /- -->
+        </div>
+    </main>
     <footer id="footer-main" class="footer-main container-fluid">
         <!-- Container -->
         <div class="container">
@@ -637,35 +289,33 @@
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/adminlte/bower_components/layer/layer.js"></script>
+<script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
 <script>
-    $(function () {
-        $(".container").on("click", ".btn_del_order", function () {
-            var $table = $(this).parents("table");
-            //var name = $tr.find("td:eq(1)").html();
-            layer.confirm('是否删除该订单', {icon: 3, title: '提示'}, function (index) {
-                $table.remove();
-                layer.close(index);
-            })
-        });
+$(function () {
+    $(".container").on("click", ".btn_del_order", function () {
+        var $table = $(this).parents("table");
+        //var name = $tr.find("td:eq(1)").html();
+        layer.confirm('是否删除该订单', {icon: 3, title: '提示'}, function (index) {
+            $table.remove();
+            layer.close(index);
+        })
+    });
 
 
 
-        $(".container").on("click", ".btn_operate", function () {
-            layer.open({
-                type: 2,
-                title: '订单情况',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['500px', '600px'],
-                content: 'xxx.html'
-            })
+    $(".container").on("click", ".btn_operate", function () {
+        layer.open({
+            type: 2,
+            title: '订单情况',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['500px', '600px'],
+            content: 'xxx.html'
+        })
+    });
 
-        });
-
-
-    })
-
+})
 </script>
 
 </body>

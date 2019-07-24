@@ -5,8 +5,17 @@ public class ViewedHistoryReturnVO {
     private String view_time;
     private String goods_id;
     private String goods_name;
+    private String pic_url;
     private String classify_id;
     private String classify_name;
+
+    public String getPic_url() {
+        return pic_url;
+    }
+
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
+    }
 
     public String getViewType() {
         return viewType;

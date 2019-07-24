@@ -22,6 +22,9 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/navigation-menu.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/css/shortcode.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/localLib/HomeStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminlte/dist/css/AdminLTE.min.css">
+
+
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -84,7 +87,8 @@
 
                         <c:if test="${isLogin==false}">
                             <div>
-                                <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a>
+                                <!-- <a href="${pageContext.request.contextPath}/front/personalCenter" title="User"><i class="icon icon-User"></i></a> -->
+                                <a href="javascript:judgeIsLogin()" title="User"><i class="icon icon-User"></i></a>
                             </div>
                         </c:if>
 
@@ -210,7 +214,7 @@
                         </li>
 
                         <li data-transition="zoomout" data-slotamount="default"  data-easein="easeInOut" data-easeout="easeInOut" data-masterspeed="2000" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7">
-                            <img src="${pageContext.request.contextPath}/localLib/images/slider-1.jpg" alt="slider" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                            <img src="${pageContext.request.contextPath}/localLib/images/slider-2.jpg" alt="slider" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                             <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-5"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['-200','-130','-110','-80']"
@@ -229,7 +233,7 @@
                                  data-splitout="none"
                                  data-responsive_offset="on"
                                  data-elementdelay="0.05"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing: 3.04px; color:#333; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">new way to purchase your products
+                                 style="z-index: 5; white-space: nowrap; letter-spacing: 3.04px; color:aliceblue; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">new way to purchase your products
                             </div>
                             <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-6"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -249,7 +253,7 @@
                                  data-splitout="none"
                                  data-responsive_offset="on"
                                  data-elementdelay="0.05"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">The weather started getting rough the tiny ship was tossed. If not for the courage of the fearless
+                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:whitesmoke; font-weight: normal; font-family: 'Lato', sans-serif;">The weather started getting rough the tiny ship was tossed. If not for the courage of the fearless
                             </div>
                             <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" id="slide-layer-7"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -268,7 +272,7 @@
                                  data-splitout="none"
                                  data-responsive_offset="on"
                                  data-elementdelay="0.05"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:#777; font-weight: normal; font-family: 'Lato', sans-serif;">crew the Minnow would be lost. our dreams come true for me and you.
+                                 style="z-index: 5; white-space: nowrap; letter-spacing: 1.5px; color:whitesmoke; font-weight: normal; font-family: 'Lato', sans-serif;">crew the Minnow would be lost. our dreams come true for me and you.
                             </div>
                             <div class="tp-caption NotGeneric-Button rev-btn  rs-parallaxlevel-0" id="slide-layer-8"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -314,8 +318,8 @@
 
                         <li><a data-filter="*" class="active" href="#">全部</a></li>
                         <!-- 循环 -->
-                        <li v-for="class in classify">
-                            <a v-bind:data-filter="class" href="#">{{class}}</a>
+                        <li v-for="className in classify">
+                            <a v-bind:data-filter="'.'+className" href="#">{{className}}</a>
                         </li>
 
                     </ul>
@@ -327,25 +331,12 @@
                     </div>
                     <!-- Products -->
                     <ul class="products">
-<<<<<<< Updated upstream
-                        <!-- Product -->
-                        <li class="product design">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/localLib/images/product-1.jpg" alt="Product" />
-                                <h5>Stylish Chair</h5>
-                                <span class="price"><del>$200</del>$139</span>
-                            </a>
-
-                            <a href="#" class="addto-cart" title="Add To Cart">加入购物车</a>
-                        </li><!-- Product /- -->
-=======
->>>>>>> Stashed changes
 
                         <!-- Product -->
                         <!-- 循环 -->                      
-                        <li v-bind:class="good.classify_name" v-for="good in goods">
+                        <li v-bind:class="good.classify_name" v-for="good in goods" style="height: 446px; width: 300px">
                             <a v-bind:href="good.href">
-                                <img src="${pageContext.request.contextPath}/localLib/images/blog-2.jpg" alt="product picture" height="300px" width="270px">
+                                <img v-bind:src="good.pic_url" alt="product picture" style="height: 300px; width: 270px">
                                 <h5>{{good.goods_name}}</h5>
                                 <span>￥：</span>
                                 <span class="price">{{good.price}}</span>
@@ -365,6 +356,40 @@
                         <li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
                         </ul>
                 </nav>
+
+                <!-- 最新上架 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-warning">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">新品上市</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body" id="new_goods_box">
+                                <ul class="products-list product-list-in-box">
+
+                                    <li class="col-md-6 item" v-for="good in goods">
+                                        <div class="product-img">
+                                            <img v-bind:src="good.pic_url" v-bind:style="{height:50 + 'px', width:50 + 'px'}" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <span class="product-description">{{good.goods_name}}</span>
+                                            <span class="label label-warning pull-right" style="margin-right: 50px" id="good_price">{{good.price+' ￥'}}</span>
+                                            <span class="product-description">{{good.description}}</span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div><!-- Container /- -->
         </div><!-- Product Section /- -->
@@ -412,60 +437,41 @@
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/vue.js"></script>
 
-<!-- 请求分类 -->
-<script>
-$(function(){
 
-});
+<!-- 寻找分类的函数 -->
+<script>
+function findRootId(list, id){
+    var index = list.findIndex((v)=>{return v.id == id});
+    if(index == -1 || list[index].pid == 0){
+        return id;
+    }else{
+        return findRootId(list, list[index].pid);
+    }
+}
+
+function findRootName(list, name){
+    var index = list.findIndex((v)=>{return v.text == name});
+    var id = list[index].id;
+    var pid = findRootId(list, id);
+    var p_index = list.findIndex((v)=>{return v.id == pid});
+    if(p_index == -1){
+        return name;
+    }
+    return list[p_index].text;
+}
+
+function unique(array){
+    var n = [];//临时数组
+    for(var i = 0;i < array.length; i++){
+        if(n.indexOf(array[i]) == -1) n.push(array[i]);
+    }
+    return n;
+}
 </script>
 
 <!-- 请求商品列表 -->
 <script>
 $(function(){
-    var dataSend = {
-        store: {
-            store_id: "0000"
-        },
-        goodsClassify: {
-            classify_name: "all"
-        }
-    };
-
-    var vm = new Vue({
-        el: '#product_info',
-        data: {
-            goods: [],
-            info:[] //触发更新用
-        }
-    });
-
-    $.ajax({    
-        type: "POST",    
-        url: "http://localhost:8080/goods/getByClassify",
-        data: JSON.stringify(dataSend),
-        contentType: "application/json; charset=utf-8",    
-        dataType: "json",    
-        async: false,   
-        success: function (data) {        
-            if(data.success == true){                            
-                vm.goods = data.goodsList;
-
-                var root = "http://localhost:8080/front/goodsInfoById/";
-                for(var i=0; i<vm.goods.length; i++){
-                    href = root + vm.goods[i].store_id + "/" + vm.goods[i].goods_id; //进入商品详情页
-                    vm.goods[i].classify_name = "product " + vm.goods[i].classify_name; //分类名
-                    vm.goods[i].href = href; //图片链接
-                    vm.goods[i].cartHref = "javascript:addToCart(\"" + vm.goods[i].goods_id +"\")"; //添加至购物车
-                }
-
-                vm.info.push({
-                    a:"a"
-                });
-            }else{
-                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
-            }
-        } 
-    });
 
     var dataSend = {
         store_id: "0000"
@@ -491,49 +497,100 @@ $(function(){
         }
     });
 
-    function findRootClass(list, id){
-        var index = list.findIndex((v)=>{return v.id == id});
-        if(list[index].pid == "0"){
-            return id;
-        }else{
-            return findRootClass(list, list[index].pid);
+
+    dataSend = {
+        store: {
+            store_id: "0000"
+        },
+        goodsClassify: {
+            classify_name: "all"
         }
-    }
+    };
+
+    var vm = new Vue({
+        el: '#product_info',
+        data: {
+            goods: [],
+            classify: [],
+            info:[] //触发更新用
+        }
+    });
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/goods/getByClassify",
+        data: JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){                            
+                vm.goods = data.goodsList;
+
+                var root = "http://localhost:8080/front/goodsInfoById/";
+                for(var i=0; i<vm.goods.length; i++){
+                    href = root + vm.goods[i].store_id + "/" + vm.goods[i].goods_id; //进入商品详情页 ok
+                    //分类
+                    var classifyName = findRootName(classList, vm.goods[i].classify_name);
+                    if(classifyName == null){
+                        vm.classify.push("更多")
+                        vm.goods[i].classify_name = "product 更多";
+                    }else{
+                        vm.classify.push(classifyName);
+                        vm.goods[i].classify_name = "product " + classifyName;
+                    }
+                    vm.classify = unique(vm.classify);
+
+                    vm.goods[i].href = href; //图片链接
+                    vm.goods[i].cartHref = "javascript:addToCart(\"" + vm.goods[i].goods_id +"\")"; //添加至购物车
+                }
+
+                vm.info.push({
+                    a:"a"
+                });
+            }else{
+                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
 
 });
 
-// good
-// {
-//     "classify_name": 
-//     "create_time": "20190718-134040", 
-//     "description": "修改描述测试", 
-//     "goods_id": "003", 
-//     "goods_name": "github文化衫", 
-//     "old_level": "", 
-//     "pic_url": "https://www.google.com/", 
-//     "price": 0, 
-//     "href": 
-//     "cartHref":
-//     "status": "", 
-//     "store_id": null, 
-//     "update_time": "20190721-222604"
-// }, 
-
-// classify [
-//     "食品","",""
-// ]
 </script>
 
 <script>
 function addToCart(good_id){
+    var user_id;
+    $.ajax({
+        type: "POST",    
+        url: "http://localhost:8080/user/checkIfLogin",
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){ 
+                if(data.Login == true){//已经登陆
+                    user_id=data.user_id;
+                }else{//没有登录
+                    // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                   if (confirm("没有登录")) {
+                        window.location.href= "http://localhost:8080/user/toLogin";
+                    }
+                }
+            }else{
+                layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+
     var dataSend = {
+        user_id:user_id,
         goods_id: good_id,
         quantity: 1
     }
 
     $.ajax({    
-        type: "POST",    
-        url: "http://localhost:8080/ShoppingCart/",
+        type: "POST",   
+        url: "http://localhost:8080/shoppingCart/",
         data: JSON.stringify(dataSend),
         contentType: "application/json; charset=utf-8",    
         dataType: "json",    
@@ -547,6 +604,60 @@ function addToCart(good_id){
         } 
     });
 }
+function judgeIsLogin(){
+    $.ajax({
+        type: "POST",    
+        url: "http://localhost:8080/user/checkIfLogin",
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){ 
+                if(data.Login == true){//已经登陆
+                    window.location.href="http://localhost:8080"+data.urlTo;
+                }else{//没有登录
+                    window.location.href= "http://localhost:8080/user/toLogin";
+                }
+            }else{
+                layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+}
+
+</script>
+
+<script>
+$(function(){
+    var dataSend = {
+        store_id: "0000"
+    };
+    var vm = new Vue({
+        el: '#new_goods_box',
+        data: {
+            goods: [],
+            info:[] //触发更新用
+        }
+    });
+
+    $.ajax({    
+        type: "POST",    
+        url: "http://localhost:8080/store/getTopTenGoods",
+        data: JSON.stringify(dataSend),
+        contentType: "application/json; charset=utf-8",    
+        dataType: "json",    
+        async: false,   
+        success: function (data) {        
+            if(data.success == true){                            
+                vm.goods = data.goodsList;
+                vm.info.push({
+                    a:"a"
+                });
+            }else{
+                layer.alert('数据拉取失败！', { icon: 2, closeBtn: 0 });
+            }
+        } 
+    });
+});
 </script>
 
 </body>

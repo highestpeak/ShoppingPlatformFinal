@@ -42,17 +42,11 @@
   </resultMap>
 
   <select id="queryGoodsViewedByGoods" parameterType="String" resultMap="tempQueryGoodsViewed" >
-        select
-          view_id,
-          view_time,
-          goods_viewed.goods_id as goods_id,
-          goods.goods_name as goods_name,
-          goods_viewed.classify_id as classify_id,
-          goods_classify.classify_name as classify_name
-        FROM goods_viewed,goods,goods_classify
-        where buyer_id = #{buyer_id} AND
-          goods_viewed.goods_id=goods.goods_id AND
-          goods_viewed.classify_id=goods_classify.classify_id;
+        SELECT view_id,view_time,buyer_id as user_id,A.goods_id,goods_name,pic_url,goods_classify.classify_id,classify_name
+        FROM (SELECT view_id,buyer_id,goods_id,view_time,classify_id
+              FROM goods_viewed WHERE buyer_id=#{buyer_id}) as A LEFT JOIN goods_classify ON A.classify_id=goods_classify.classify_id,
+              goods
+        WHERE goods.goods_id=A.goods_id
   </select>
 
     <select id="queryGoodsViewedByClassify" parameterType="String" resultMap="tempQueryGoodsViewed" >

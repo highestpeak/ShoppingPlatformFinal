@@ -16,6 +16,11 @@ public interface UserOperateMapper {
                    @Param("column") String column,
                    @Param("value") String value);
 
+    @Select("select * from ${table} where ${column} = #{value}")
+    Buyer queryBuyer(@Param("table") String table,
+                   @Param("column") String column,
+                   @Param("value") String value);
+
     @Update("update user set ${columnNew} = #{valueNew} where ${columnKey} = #{valueKey}")
     void updateUser(@Param("columnKey") String columnKey,
                    @Param("valueKey") String valueKey,
@@ -52,4 +57,12 @@ public interface UserOperateMapper {
     @Delete("DELETE FROM interested_goods WHERE ${columnKey} = #{valueKey}")
     void delStar(@Param("columnKey") String columnKey,
                  @Param("valueKey") String valueKey);
+
+    @Insert("insert into goods_viewed (view_id,buyer_id,goods_id,view_time,classify_id) " +
+            "    values   (#{id}, #{user_id}, #{goods_id},#{view_time},#{classify_id})")
+    void insertViewHistory(@Param("id") String id,
+                           @Param("user_id") String user_id,
+                           @Param("goods_id") String goods_id,
+                           @Param("view_time") String view_time,
+                           @Param("classify_id") String classify_id);
 }

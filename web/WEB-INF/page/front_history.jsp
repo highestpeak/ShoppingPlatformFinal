@@ -247,14 +247,36 @@
 
 <script>
     $(function(){
+        var user_idGet;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/user/checkIfLogin",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                if(data.success == true){
+                    if(data.Login == true){//已经登陆
+                        user_idGet=data.user_id;
+                    }else{//没有登录
+                        // layer.alert('没有登录', {icon: 2, closeBtn: 0});
+                        if (confirm("没有登录")) {
+                            window.location.href= "http://localhost:8080/user/toLogin";
+                        }
+                    }
+                }else{
+                    layer.alert('查询登陆状态失败', { icon: 2, closeBtn: 0 });
+                }
+            }
+        });
         var dataSend={
             user:{
-                user_id:"654321"
+                user_id:user_idGet
             },
             goodsClassify:{
                 classify_name:"all"
             }
-        }
+        };
+        console.log(dataSend);
 
         $.ajax({
             type: "POST",
@@ -269,11 +291,16 @@
                     var uf = data.viewedHistoryReturn;
                     $.each(uf,function (i,e) {
                         var $tr = $("<tr>")
-                            .append($("<td>").html(e["pic_url"]))
+                            .append($("<td>"))
                             .append($("<td>").html(e["goods_name"]))
                             .append($("<td>").html(e["view_time"]))
                             .append($("<td>").html(e["price_before"]))
-                            .append($("<td>").html(e["price_now"]))
+                            .append($("<td>").html(e["price_now"]));
+                        var $img = document.createElement("img");
+                        $img.src = e["pic_url"];
+                        $img.style.height = "50px";
+                        $img.style.width = "50px";
+                        $tr.find("td:eq(0)").append($img);
                         $tbody.append($tr);
 
                     });

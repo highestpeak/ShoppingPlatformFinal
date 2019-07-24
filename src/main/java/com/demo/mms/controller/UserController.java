@@ -107,7 +107,7 @@ public class UserController {
         Map<String,Object> rs = new HashMap<>();
         rs.put("success",true);
         Map<String,Object> rsLogin= userService.login(user.getUser_id(),user.getVerify(),request,response);
-        if(rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
+        if(!rsLogin.containsKey("urlTo") && rsLogin!=null && !rsLogin.isEmpty()){//含有错误信息
             rs.putAll(rsLogin);
             rs.put("success",false);
             return rs;
@@ -115,6 +115,7 @@ public class UserController {
         if(rs.size()>1){
             rs.put("success",false);
         }
+        rs.putAll(rsLogin);
         return rs;
         //不返回列表，返回页面
         //buyer返回index
@@ -259,8 +260,20 @@ public class UserController {
     public Object checkIfLogin(User user,HttpServletRequest request){
         System.out.println("in checkIfLogin");
         Map<String,Object> rs = new HashMap<>();
-        rs.put("already login", userService.isAlreadyLogin(user.getUser_id(),request));
         rs.put("success",true);
+        if(user.getUser_id()==null){//没有传入user_id
+            Boolean isLogin=ProjectFactory.getCookieByName(request,"user_id")==null;
+            if(isLogin){
+                rs.put("Login",false);
+            }else {
+                rs.put("Login",true);
+                rs.put("already login", userService.isAlreadyLogin(user.getUser_id(),request));
+                rs.put("urlTo",ProjectFactory.getCookieByName(request,"urlTo").getValue());
+                rs.put("user_id",ProjectFactory.getCookieByName(request,"user_id").getValue());
+            }
+            return rs;
+        }
+        rs.put("already login", userService.isAlreadyLogin(user.getUser_id(),request));
         return rs;
     }
 
@@ -341,6 +354,21 @@ public class UserController {
         rs.putAll(rsService);
         return rs;
     }
+
+    @RequestMapping("/setNewViewed")
+    public Object setNewViewHistory(@RequestBody ViewHistoryGetVO viewHistoryGetVO,HttpServletRequest request){
+        
+        return null;
+    }
+
+
+    @RequestMapping("/getUserId")
+    @ResponseBody
+    public Object getUserId(){
+
+        return null;
+    }
+
 
     private static boolean isEmail(String string) {
         if (string == null)
