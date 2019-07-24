@@ -375,6 +375,7 @@
 <script src="${pageContext.request.contextPath}/localLib/js/functions.js"></script>
 <script src="${pageContext.request.contextPath}/localLib/layer/layer.js"></script>
 
+
 <script>
     $(function(){
         var user_id;
@@ -387,6 +388,9 @@
                 if(data.success == true){
                     if(data.Login == true){//已经登陆
                         user_id=data.user_id;
+                        var record = document.getElementById("user_id");
+                        record.value = user_id;
+                        console.log(user_id);
                     }else{//没有登录
                         // layer.alert('没有登录', {icon: 2, closeBtn: 0});
                         if (confirm("没有登录")) {
@@ -398,6 +402,7 @@
                 }
             }
         });
+        var user_id = document.getElementById("user_id").value;
         var urlSend="http://localhost:8080/shoppingCart/?user_id="+user_id;
         $.ajax({
             type: "GET",
@@ -427,9 +432,9 @@
                         var $input = $("<input name=\"quantity1\" class=\"qty\" type=\"text\">");
                         $input.attr("value",e["quantity"]);
                         var $div = $("<div class=\"prd-quantity\" data-title=\"Quantity\">")
-                            .append("<input value=\"-\" class=\"qtyminus btn\" data-field=\"quantity1\" type=\"button\">")
+                            .append("<input value=\"-\" class=\"qtyminus btn\" data-field=\"quantity1\" type=\"button\" >")
                             .append($input)
-                            .append("<input value=\"+\" class=\"qtyplus btn\" data-field=\"quantity1\" type=\"button\">");
+                            .append("<input value=\"+\" class=\"qtyplus btn\" data-field=\"quantity1\" type=\"button\" >");
                         var $tdQuantity = $("<td data-title=\"Quantity\" class=\"product-quantity\">").append($div);
                         var $tr = $("<tr class=\"cart_item\">")
                             .append($tdc)
@@ -461,6 +466,22 @@
 </script>
 <script>
     $(function(){
+        $(".main-container").on("click", ".qtyminus", function() {
+            var $tr = $(this).parents("tr");
+            var quantity = parseInt($tr.find('td').eq(3).find('div').eq(0).find('input').eq(1).val());
+            console.log(quantity);
+            var newQuantity = quantity - 1;
+            $tr.find('td').eq(3).find('div').eq(0).find('input').eq(1).attr("value",newQuantity);
+        });
+        $(".main-container").on("click", ".qtyplus", function() {
+            var $tr = $(this).parents("tr");
+            var quantity = parseInt($tr.find('td').eq(3).find('div').eq(0).find('input').eq(1).val());
+            console.log(quantity);
+            var newQuantity = quantity + 1;
+            console.log(newQuantity);
+            $tr.find('td').eq(3).find('div').eq(0).find('input').eq(1).attr("value",newQuantity);
+        });
+
         $(".main-container").on("click", ".btn_del", function() {
             var $tr = $(this).parents("tr");
             var goods_id = $tr.find("td:eq(0)").html();
@@ -468,7 +489,7 @@
             var dataSend = {
                 id: goods_id
             };
-            var relation_id = $tr.find('td').eq(0).html();
+            var relation_id = $tr.find('td').eq(0).find('input').eq(0).val();
             var urlSend = "http://localhost:8080/shoppingCart/"+relation_id;
             layer.confirm('确定删除: ' + goods_name + "?", {icon: 3, title: '提示'}, function (index) {
 
@@ -505,12 +526,13 @@
             // console.log(dataSend);
             layer.confirm('是否保存 ', function (index) {
                 layer.close(index);
-                var relation_id = $tr.find('td').eq(0).html();
+                var relation_id = $tr.find('td').eq(0).find('input').eq(0).val();
                 console.log(relation_id);
                 var dataSend = {
                     new_quantity:quantity
                 };
                 var urlSend="http://localhost:8080/shoppingCart/"+relation_id;
+                console.log(urlSend);
                 $.ajax({
                     type: "PUT",
                     url: urlSend,
@@ -591,6 +613,7 @@
     function submit_cancel(){
         layer.closeAll();
     }
+
 </script>
 
 </body>
