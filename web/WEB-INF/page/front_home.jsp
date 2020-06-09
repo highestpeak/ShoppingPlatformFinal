@@ -308,9 +308,6 @@
                 <div class="row" id="product_info">
                     <!-- Section Header -->
                     <div class="section-header">
-                            <br/>
-                            <br/>
-                            <br/>
                         <h3>商品</h3>
                         <img src="${pageContext.request.contextPath}/localLib/images/section-seprator.png" alt="section-seprator" />
                     </div><!-- Section Header /- -->

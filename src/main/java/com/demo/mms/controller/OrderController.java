@@ -2,6 +2,7 @@ package com.demo.mms.controller;
 
 import com.demo.mms.common.domain.*;
 import com.demo.mms.common.utils.ControllerUtility;
+import com.demo.mms.dao.GoodsOperateMapper;
 import com.demo.mms.dao.OrderEntryMapper;
 import com.demo.mms.dto.CreateOrderFromCartDTO;
 import com.demo.mms.dto.OrderEntryInfoDTO;
@@ -23,6 +24,7 @@ public class OrderController {
 
     final private OrderService orderService;
     final private OrderEntryMapper orderEntryMapper;
+    final private GoodsOperateMapper goodsOperateMapper;
 
     /*
      TODO:
@@ -43,9 +45,10 @@ public class OrderController {
         每日创建差评数目
      */
 
-    public OrderController(OrderService service, OrderEntryMapper orderEntryMapper) {
+    public OrderController(OrderService service, OrderEntryMapper orderEntryMapper, GoodsOperateMapper goodsOperateMapper) {
         orderService = service;
         this.orderEntryMapper = orderEntryMapper;
+        this.goodsOperateMapper = goodsOperateMapper;
     }
 
     @PostMapping("/") @ResponseBody
@@ -120,8 +123,9 @@ public class OrderController {
             List<OrderEntryInfoDTO> entryDTOs = new ArrayList<>();
             double total_price = 0;
             for (OrderEntry entry : entries) {
+                Goods goods = goodsOperateMapper.getGoodById(entry.getGoodsId());
                 total_price += entry.getUnitPrice() * entry.getQuantity() / 100.0;
-                entryDTOs.add(new OrderEntryInfoDTO(entry.getUnitPrice() / 100.0, entry.getQuantity()));
+                entryDTOs.add(new OrderEntryInfoDTO(goods.getPic_url(), goods.getGoods_name(), entry.getUnitPrice() / 100.0, entry.getQuantity()));
             }
             ret.add(new OrderInfoDTO(order.getId(), total_price, order.getPhone(), order.getAddress(), order.getStep(), entryDTOs));
         }

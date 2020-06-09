@@ -564,15 +564,15 @@
             title: "",
             shadeClose: true,
             shade: 0.5,
-            area: ["500px", "500px"],
+            area: ["550px", "300px"],
             content: $("#order_submit_table")
         });
     }
     function submit_next(){
         var ID = document.getElementsByName("ID");
         console.log(ID);
+        var array= new Array();
         for (var i = 0; i < ID.length; i++) {
-            var array = new Array();
             if(ID[i].checked){
                 var $tr = $(ID[i]).parents("tr");                     //
                 var id = $tr.find('td').eq(0).find('input').eq(0).val();
@@ -593,7 +593,7 @@
         console.log(dataSend);
         $.ajax({
             type:"POST",
-            url:"http://localhost:8080/??",
+            url:"http://localhost:8080/orders/",
             data: JSON.stringify(dataSend),//放置数据的字段    
             contentType: "application/json; charset=utf-8",
             dataType: "json",
